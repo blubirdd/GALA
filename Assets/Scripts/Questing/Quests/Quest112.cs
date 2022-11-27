@@ -20,6 +20,8 @@ public class Quest112 : QuestNew
         Goals.Add(new PictureGoal(this, "Deer", questDescription, false, 0, 2));
         Goals.Add(new CollectionGoal(this, "Barrel", questDescription, false, 0, 1));
 
+        Debug.Log(Goals[0]);
+        Debug.Log(Goals[1]);
         Goals.ForEach(g => g.InIt());
     }
 
