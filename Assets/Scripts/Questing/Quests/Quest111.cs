@@ -11,7 +11,7 @@ public class Quest111 : QuestNew
     void Start()
     {
         //event
-    
+        GameEvents.instance.onGoalValueChanged += GoalChanged;
 
         questName = "A new Beginning";
         questDescription = "Find 1 deer: ";
@@ -28,15 +28,20 @@ public class Quest111 : QuestNew
         Goals.ForEach(g => g.InIt());
 
         GetGoalsList();
-        GameEvents.QuestAccepted(Goals);
+        
 
 
     }
 
     private void GetGoalsList()
     {
-      //  UIManager.GetObjectives(Goals);
+        GameEvents.QuestAccepted(Goals);
 
+    }
+
+    public void GoalChanged()
+    {
+        GetGoalsList();
     }
     public void UpdateQuestUI()
     {
@@ -51,7 +56,7 @@ public class Quest111 : QuestNew
     {
         yield return new WaitUntil(() => questCompleted == true);
         Debug.Log(this + " is Completed");
-
+        
 
     }
 

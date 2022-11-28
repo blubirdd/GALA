@@ -28,7 +28,6 @@ public class CollectionGoal : Goal
     {
         base.InIt();
 
-        //  PictureEvents.onAnimalDiscovered += PictureTaken;
         Inventory.OnItemAddedCallback += ItemPickedUp;
     }
 

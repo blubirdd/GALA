@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Drawing;
+
 public class UIManager : MonoBehaviour
 {
     public GameObject objectiveListCanvas;
@@ -11,10 +13,17 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI objective2;
     public TextMeshProUGUI objective3;
 
-   // private static List<Goal> objectiveList = new List<Goal>();
+
+   private  List<Goal> objectiveList = new List<Goal>();
+
+   public Goal goal;
+
     private void Start()
     {
         GameEvents.onQuestAccepted += GetObjectives;
+
+        GameEvents.instance.onQuestCompleted += ClearObjectiveList;
+      
     }
     public void OpenObjectiveList()
     {
@@ -23,14 +32,34 @@ public class UIManager : MonoBehaviour
 
     void GetObjectives(List<Goal> list)
     {
-        objective1.SetText(list[0].description+" " + list[0].currentAmount + "/" + list[0].requiredAmount);
+        for(int i = 0; i < list.Count; i++)
+        {
+            if (i == 0)
+            {
+                objective1.SetText(list[i].description + ": " + "<color=#FAF84A> " + list[i].currentAmount + "/" + list[i].requiredAmount + "</color>");
+            }
 
-        
+            if (i == 1)
+            {
+                objective2.SetText(list[i].description + ": " + "<color=#FAF84A> " + list[i].currentAmount + "/" + list[i].requiredAmount + "</color>");
+            }
+
+            if (i == 2)
+            {
+                objective3.SetText(list[i].description + ": " + "<color=#FAF84A> " + list[i].currentAmount + "/" + list[i].requiredAmount + "</color>");
+            }
+
+        }
+
+
     }
 
-    public void UpdateObjectiveList()
+    public void ClearObjectiveList()
     {
-      //  objective1.SetText(objectiveList[0].description);
+        objective1.SetText("No Active Quest/Objective");
+        objective2.SetText("");
+        objective3.SetText("");
+
     }
 
 }

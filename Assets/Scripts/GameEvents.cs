@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 public class GameEvents : MonoBehaviour
 {
@@ -31,13 +32,16 @@ public class GameEvents : MonoBehaviour
 
     }
 
+    public event Action onGoalValueChanged;
+
     //Quest Events
 
-   // public event Action onQuestAccepted;
+
 
     public event Action onQuestCompleted;
     public event Action onGoalCompleted;
 
+   
    
 
     //Dialogue EVENTS
@@ -62,7 +66,10 @@ public class GameEvents : MonoBehaviour
     }
 
     //Goal UI Events
-
+    public void GoalValueChanged()
+    {
+        onGoalValueChanged?.Invoke();
+    }
 
     //Quest Events
 
