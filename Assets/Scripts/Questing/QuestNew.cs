@@ -23,6 +23,7 @@ public class QuestNew: MonoBehaviour
     private void Start()
     {
         GameEvents.instance.onQuestCompleted += QuestComplete;
+       
     }
 
     public void Initialize()
@@ -33,7 +34,7 @@ public class QuestNew: MonoBehaviour
     }
     public void CheckGoals()
     {
-        
+
         if (Goals.All(g => g.goalCompleted))
         {
             questCompleted = true;
@@ -52,6 +53,8 @@ public class QuestNew: MonoBehaviour
 
             QuestUI.instance.ClearQuestTitle();
             QuestUI.instance.ClearQuestDescription();
+
+            GameEvents.instance.QuestCompleted();
         }
 
     }

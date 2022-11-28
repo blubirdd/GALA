@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [System.Serializable]
@@ -13,15 +14,20 @@ public class Goal
 
     public virtual void InIt()
     {
-
+        
     }
+
 
     public void Evaluate()
     {
+        //event - Goal value changed
+        GameEvents.instance.GoalValueChanged();
+
         if (currentAmount >= requiredAmount)
         {
             Complete();
         }
+ 
     }
 
     public void Complete()

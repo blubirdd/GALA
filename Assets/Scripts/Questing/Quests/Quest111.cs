@@ -10,12 +10,8 @@ public class Quest111 : QuestNew
 
     void Start()
     {
-
-       //questTitle = GameObject.Find("QuestTitle").GetComponent<TextMeshProUGUI>();
-       // questDescriptionUI = GameObject.Find("QuestDescription").GetComponent<TextMeshProUGUI>();
-
-       // GameEvents.instance.onQuestCompleted += UpdateQuestUI;
-
+        //event
+        GameEvents.instance.onGoalValueChanged += GoalChanged;
 
         questName = "A new Beginning";
         questDescription = "Find 1 deer: ";
@@ -30,8 +26,23 @@ public class Quest111 : QuestNew
         Goals.Add(new PictureGoal(this, "Deer", questDescription, false, 0, 1));
      
         Goals.ForEach(g => g.InIt());
+
+        GetGoalsList();
+        
+
+
     }
 
+    private void GetGoalsList()
+    {
+        GameEvents.QuestAccepted(Goals);
+
+    }
+
+    public void GoalChanged()
+    {
+        GetGoalsList();
+    }
     public void UpdateQuestUI()
     {
         QuestUI.instance.UpdateQuestName(questName);
@@ -45,10 +56,9 @@ public class Quest111 : QuestNew
     {
         yield return new WaitUntil(() => questCompleted == true);
         Debug.Log(this + " is Completed");
-
-       
-
+        
 
     }
 
+   
 }
