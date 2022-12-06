@@ -5,18 +5,12 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEditor;
 using UnityEngine.InputSystem.HID;
+using TMPro;
 // using Cinemachine;
 
 public class PhotoCapture : MonoBehaviour
 { 
 
-    //camera ui buttons
-    public GameObject firstPersonCamera;
-    public GameObject thirdPersonCamera;
-    public GameObject inGameCameraCanvas;
-    public GameObject playerInputUI;
-    public GameObject playerModel;
-    //
     public GameObject okButton;
 
     [SerializeField] private GameObject CameraUIPack;
@@ -30,72 +24,39 @@ public class PhotoCapture : MonoBehaviour
 
 
     public ReticleScript reticleScript;
+    public UIManager uiManager;
 
-    [SerializeField] private bool cameraOpened;
+   
+    [SerializeField] private TextMeshProUGUI animalText;
 
 
     void Start()
     {
 
-        inGameCameraCanvas.SetActive(false);
         okButton.SetActive(false);
         screenCapture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
 
         reticleScript.GetComponent<ReticleScript>();
-       
+
+        //subscribe to picturetaken event
+        PictureEvents.onAnimalDiscovered += SetText;
+
     }
 
     void Update()
     {
-        if(cameraOpened == true)
+        if(uiManager.cameraOpened == true)
         {
             reticleScript.Ray();
         }
     }
 
-    public void OpenCamera()
+    void SetText(IAnimal animal)
     {
-        DisablePlayerMovement();
-        SwitchToFirstPerson();
-        cameraOpened = true;
-
+   
+        animalText.SetText(animal.animalName +" ("+ animal.animalGroup + ")");
     }
 
-    public void CloseCamera()
-    {
-       
-       EnablePlayerMovement();
-       SwitchToThirdPerson();
-       cameraOpened=false;
-       
-    }
-
-    public void DisablePlayerMovement()
-    {
-        inGameCameraCanvas.SetActive(true);
-        playerInputUI.SetActive(false);
-        playerModel.SetActive(false);
-    }
-
-    public void EnablePlayerMovement()
-    {
-        inGameCameraCanvas.SetActive(false);
-        playerInputUI.SetActive(true);
-        playerModel.SetActive(true);
-
-    }
-
-    public void SwitchToFirstPerson()
-    {
-        thirdPersonCamera.SetActive(false);
-        firstPersonCamera.SetActive(true);
-    }
-    public void SwitchToThirdPerson()
-    {
-        thirdPersonCamera.SetActive(true);
-        firstPersonCamera.SetActive(false);
-
-    }
 
     public void TakeSnapShot()
     {
@@ -118,13 +79,12 @@ public class PhotoCapture : MonoBehaviour
     {
         //set camera ui to false 
         CameraUIPack.SetActive(false);
-        
 
         viewingPhoto = true;
         yield return new WaitForEndOfFrame();
 
         Rect regionToRead = new Rect(0, 0, Screen.width, Screen.height);
-        //test
+        
 
         screenCapture.ReadPixels(regionToRead, 0, 0,false);
         screenCapture.Apply();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using static Inventory;
-using static UnityEditor.Progress;
+
 
 public class Inventory : MonoBehaviour
 {
