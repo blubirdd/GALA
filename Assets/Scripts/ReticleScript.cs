@@ -6,20 +6,12 @@ using UnityEngine.InputSystem.HID;
 using UnityEngine.UI;
 
 
-public class ReticleScript : MonoBehaviour, IAnimal
+public class ReticleScript : MonoBehaviour
 {
     [SerializeField] private Image reticle;
     [SerializeField] private LayerMask layerMask;
 
-
-
     RaycastHit hit;
-    public string animalName { get; set; }  
-    void Update()
-    {
-      
-        
-    }
 
     public void Discovered()
     {
@@ -27,7 +19,6 @@ public class ReticleScript : MonoBehaviour, IAnimal
         {
             hit.collider.gameObject.SendMessage("Discovered");
         }
-
     }
     public void Ray()
     {
@@ -37,14 +28,10 @@ public class ReticleScript : MonoBehaviour, IAnimal
         if (Physics.Raycast(transform.position, transform.forward, out hit, 50f, layerMask))// && hit.transform.gameObject.CompareTag("NPC"))
         {
             reticle.GetComponent<Image>().color = new Color32(255, 255, 60, 100);
-          
-
         }
         else
         {
             reticle.GetComponent<Image>().color = new Color32(255, 255, 255, 100);
-
-
         }
     }
 

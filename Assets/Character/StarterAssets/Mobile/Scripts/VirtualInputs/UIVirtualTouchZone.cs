@@ -13,10 +13,10 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
 
     [Header("Settings")]
     public bool clampToMagnitude;
-    public float magnitudeMultiplier = 1f;
+    public float magnitudeMultiplier;
     public bool invertXOutputValue;
     public bool invertYOutputValue;
-    public float sensitivity = 1f;
+    public float sensitivity;
 
     //Stored Pointer Values
     private Vector2 pointerDownPosition;
@@ -28,6 +28,7 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
     void Start()
     {
         SetupHandle();
+        Application.targetFrameRate = 60;
     }
 
     private void SetupHandle()
@@ -61,7 +62,8 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
         
         Vector2 outputPosition = ApplyInversionFilter(clampedPosition);
 
-        OutputPointerEventValue(outputPosition * magnitudeMultiplier * sensitivity);
+
+        OutputPointerEventValue(outputPosition * magnitudeMultiplier * sensitivity * Time.deltaTime);
 
 
     }

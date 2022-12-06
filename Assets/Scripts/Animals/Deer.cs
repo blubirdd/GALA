@@ -1,22 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class Deer : MonoBehaviour, IAnimal
 {
 
-    PictureGoal pictureGoal;
-    public string animalName { get; set; }
 
+    public string animalName { get; set; }
+    public string animalGroup { get; set; }
+    public Photograph photo;
     void Start()
     {
-        animalName = "Deer";
+        animalName = photo.name;
+        animalGroup = photo.animalGroup;
     }
 
     
     public void Discovered()
     {
         PictureEvents.AnimalDiscovered(this);
-       
+        Book.instance.AddAnimalPhoto(photo);
+
     }
 }
