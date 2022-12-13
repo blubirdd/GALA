@@ -12,7 +12,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
     [RequireComponent(typeof(PlayerInput))]
 #endif
-    public class ThirdPersonController : MonoBehaviour
+    public class ThirdPersonController : MonoBehaviour, IDataPersistence
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
@@ -387,6 +387,16 @@ namespace StarterAssets
             {
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
+        }
+
+        public void LoadData(GameData data)
+        {
+            this.transform.position = data.playerPosition;
+        }
+
+        public void SaveData(GameData data)
+        {
+            data.playerPosition = this.transform.position;
         }
     }
 }

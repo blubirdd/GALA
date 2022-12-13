@@ -28,8 +28,6 @@ public class GameEvents : MonoBehaviour
 
     //Quest Events
 
-
-
     public event Action onQuestCompleted;
     public event Action onGoalCompleted;
 
@@ -40,6 +38,19 @@ public class GameEvents : MonoBehaviour
 
     public event Action onDialogueStarted;
 
+    //Camera Events
+    public event Action onCameraOpened;
+    public event Action onCameraClosed;
+
+    public void CameraOpened()
+    {
+        onCameraOpened?.Invoke();
+    }
+    public void CameraClosed()
+    {
+        onCameraClosed?.Invoke();
+    }
+    //
 
     //Quest UI Events
     public void ChangeQuestTile()

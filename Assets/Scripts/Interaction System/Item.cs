@@ -10,6 +10,7 @@ public class Item : ScriptableObject
     public bool isDefaultItem = false;
     public int itemAmount = 1;
 
+    public int id;
   
 
     public virtual void Use()

@@ -12,6 +12,10 @@ public class BookContentScript : MonoBehaviour
     {
         index = 0;
         pages[0].gameObject.SetActive(true);
+        /*for(int i = 1; i < pages.Length; i++)
+        {
+            pages[i].SetActive(false);
+        }*/
     }
 
     public void ButtonNext()

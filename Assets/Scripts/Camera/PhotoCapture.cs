@@ -38,6 +38,9 @@ public class PhotoCapture : MonoBehaviour
 
         reticleScript.GetComponent<ReticleScript>();
 
+        //clear text
+        animalText.SetText("");
+
         //subscribe to picturetaken event
         PictureEvents.onAnimalDiscovered += SetText;
 
@@ -52,8 +55,7 @@ public class PhotoCapture : MonoBehaviour
     }
 
     void SetText(IAnimal animal)
-    {
-   
+    {   
         animalText.SetText(animal.animalName +" ("+ animal.animalGroup + ")");
     }
 
@@ -113,6 +115,9 @@ public class PhotoCapture : MonoBehaviour
         //cameraui SHOW
         CameraUIPack.SetActive(true);
         okButton.SetActive(false);
+
+        //clear text
+        animalText.SetText("");
     }
 
 

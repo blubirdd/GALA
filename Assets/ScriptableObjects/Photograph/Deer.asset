@@ -12,9 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c25f5515792a1d40b6d0101ce548f3b, type: 3}
   m_Name: Deer
   m_EditorClassIdentifier: 
-  name: Deer
+  name: Visayan Spotted Deer
   animalGroup: Terrestrial Mammal
   polaroidPhoto: {fileID: 21300000, guid: f1bc0d40ade953c4482ef59444aaacb9, type: 3}
-  lifeSpan: 15-20 years
-  height: 70-80 CM
-  width: 125-130 CM
+  lifeSpan: 'Life Span: 15-20 yrs'
+  weight: 'Weight: 25-80 KG'
+  height: 'Heigth: 70-80 CM'
+  length: 'Length: 125-130 CM'
+  diet: 'Diet: Herbivore'
+  biome: Forest
+  details: Visayan spotted deer are nocturnal and come out at dusk to feed. They
+    are very cryptic and cautious animals and will quickly hide into dense vegetation
+    when they sense any danger. They are usually seen singly and or in small groups
+    of up 3 individuals.

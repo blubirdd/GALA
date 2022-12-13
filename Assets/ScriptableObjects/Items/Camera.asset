@@ -15,4 +15,5 @@ MonoBehaviour:
   name: Camera
   icon: {fileID: 21300000, guid: b7d5252def7eb1a468e505e10150ea56, type: 3}
   isDefaultItem: 0
-  itemAmount: 5
+  itemAmount: 6
+  id: 1

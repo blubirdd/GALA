@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System.Drawing;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class UIManager : MonoBehaviour
     public GameObject playerInputUI;
 
     public GameObject playerModel;
+
+    public GameObject pauseMenu;
 
     [Header("Camera")]
     public bool cameraOpened;
@@ -35,6 +38,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         //camera 
+
         inGameCameraCanvas.SetActive(false);
 
         //events
@@ -42,7 +46,18 @@ public class UIManager : MonoBehaviour
 
         GameEvents.instance.onQuestCompleted += ClearObjectiveList;
 
+    }
 
+    public void ClosePauseMenu()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
+    }
+
+    public void OpenPauseMenu()
+    {
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     //controls
@@ -50,25 +65,30 @@ public class UIManager : MonoBehaviour
     {
         DisablePlayerMovement();
         SwitchToFirstPerson();
+
         cameraOpened = true;
+
+        GameEvents.instance.CameraOpened();
 
     }
     public void CloseCamera()
     {
         EnablePlayerMovement();
         SwitchToThirdPerson();
+
         cameraOpened = false;
+        GameEvents.instance.CameraClosed();
     }
     public void DisablePlayerMovement()
     {
-        inGameCameraCanvas.SetActive(true);
+
         playerInputUI.SetActive(false);
         playerModel.SetActive(false);
     }
 
     public void EnablePlayerMovement()
     {
-        inGameCameraCanvas.SetActive(false);
+        
         playerInputUI.SetActive(true);
         playerModel.SetActive(true);
 
@@ -76,11 +96,15 @@ public class UIManager : MonoBehaviour
 
     public void SwitchToFirstPerson()
     {
+        inGameCameraCanvas.SetActive(true);
+
         thirdPersonCamera.SetActive(false);
         firstPersonCamera.SetActive(true);
     }
     public void SwitchToThirdPerson()
     {
+        inGameCameraCanvas.SetActive(false);
+
         thirdPersonCamera.SetActive(true);
         firstPersonCamera.SetActive(false);
 
@@ -127,6 +151,18 @@ public class UIManager : MonoBehaviour
     {
         book.SetActive(!book.activeSelf);
 
+        DisablePlayerMovement();
+    }
+
+    public void CloseBook()
+    {
+        EnablePlayerMovement();
+        book.SetActive(!book.activeSelf);
+    }
+
+    public void ChangeSceneToForest()
+    {
+        SceneManager.LoadScene("Forest");
     }
 
 }

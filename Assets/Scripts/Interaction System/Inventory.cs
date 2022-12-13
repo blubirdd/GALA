@@ -5,7 +5,7 @@ using UnityEngine;
 using static Inventory;
 
 
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour, IDataPersistence
 {
 
     #region Singleton
@@ -34,6 +34,13 @@ public class Inventory : MonoBehaviour
 
     public List<Item> items = new List<Item> ();
 
+    public int naturePoints;
+
+    private void Start()
+    {
+        
+    }
+
 
     public void Add (Item item)
     {
@@ -58,8 +65,7 @@ public class Inventory : MonoBehaviour
             
         }
 
-  
-       
+
     }
 
     public void Remove (Item item)
@@ -81,5 +87,39 @@ public class Inventory : MonoBehaviour
         {
            OnItemAddedCallback(item);
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+        foreach (KeyValuePair<Item, bool> pair in data.itemsCollected)
+        {
+            if (pair.Value)
+            {
+                Debug.Log("item saved");
+            }
+        }
+        this.naturePoints = data.naturePoints; 
+
+    }
+
+    public void SaveData(GameData data)
+    {
+        foreach (Item item in items)
+        {
+            data.itemsCollected.Add(item, true);
+        }
+        data.naturePoints = this.naturePoints;
+
+
+    }
+
+    public void Test()
+    {
+
+        foreach (Item item in items)
+        {
+            Debug.Log(item.id);
+        }
+
     }
 }

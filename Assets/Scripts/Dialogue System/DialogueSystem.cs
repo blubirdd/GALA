@@ -19,6 +19,8 @@ public class DialogueSystem : MonoBehaviour
     public GameObject controlsCanvas;
     public GameObject dialogueCanvas;
 
+    [SerializeField] private float _textSpeed = 0.05f;
+
 
    
     // Start is called before the first frame update
@@ -77,7 +79,7 @@ public class DialogueSystem : MonoBehaviour
         {
             dialogueText.text += letter;
             //anim speed
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(_textSpeed);
             yield return null;
         }
     }
