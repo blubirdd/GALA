@@ -19,6 +19,8 @@ public class BookUI : MonoBehaviour
 
     private string _animalGroup;
 
+
+
     void Start()
     {
         book = Book.instance;

@@ -23,7 +23,7 @@ public class Quest111 : QuestNew
         UpdateQuestUI();
 
         //goal
-        Goals.Add(new PictureGoal(this, "Deer", questDescription, false, 0, 1));
+        Goals.Add(new PictureGoal(this, "Visayan Spotted Deer", questDescription, false, 0, 1));
      
         Goals.ForEach(g => g.InIt());
 

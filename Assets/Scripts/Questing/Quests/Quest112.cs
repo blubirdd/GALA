@@ -10,7 +10,7 @@ public class Quest112 : QuestNew
         GameEvents.instance.onGoalValueChanged += GoalChanged;
 
         questName = "A Second Beginning";
-        questDescription = "Deer and Barrel";
+        questDescription = "Tap for more info";
         reward = 10;
         questCompleted = false;
 
@@ -19,7 +19,8 @@ public class Quest112 : QuestNew
         UpdateQuestUI();
 
         //goal
-        Goals.Add(new PictureGoal(this, "Deer", "Take 2 pictures of Deer", false, 0, 2));
+        Goals.Add(new PictureGoal(this, "Philippine Eagle", "Take a picture of Philippine Eagle", false, 0, 1));
+        Goals.Add(new PictureGoal(this, "Tamaraw", "Take a picture of Tamaraw", false, 0, 1));
         Goals.Add(new CollectionGoal(this, "Barrel", "Collect 1 Barrel", false, 0, 1));
 
         Goals.ForEach(g => g.InIt());
