@@ -1,45 +1,98 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
+
+[System.Serializable]
 public class Quest112 : QuestNew
 {
+
+    static int numberOfGoals = 3;
+
+    private string[] goalDescription = new string[numberOfGoals];
+    private int[] currentProgress = new int[numberOfGoals];
+    private int[] requiredAmount = new int[numberOfGoals];
+    private string ID;
+
     void Start()
     {
-        //event
-        GameEvents.instance.onGoalValueChanged += GoalChanged;
 
-        questName = "A Second Beginning";
-        questDescription = "Tap for more info";
+
+        //setup
+        ID = "Quest112";
+        questName = "A second Beginning";
+        questDescription = "Tap for more info.";
+
+        goalDescription[0] = "Take a picture of Philippine Eagle";
+        goalDescription[1] = "Find 1 tamaraw";
+        goalDescription[2] = "Collect 1 barrel";
+
+        requiredAmount[0] = 2;
+        requiredAmount[1] = 2;
+        requiredAmount[2] = 2;
+
+
         reward = 10;
         questCompleted = false;
 
+        //pass the progress from task class to here
+        for (int i = 0; i < Task.instance.tasks.Count; i++)
+        {
+            if (Task.instance.tasks[i].ID == ID)
+            {
+                currentProgress = Task.instance.tasks[i].progress;
+            }
+
+        }
+
+        //add to task list
+        Task.instance.AddTask(ID, questName, goalDescription, currentProgress, requiredAmount);
+
+
+        //event
+        GameEvents.instance.onGoalValueChanged += GoalChanged;
+
+        //start coroutine
         StartCoroutine(IsQuestCompleted());
 
         UpdateQuestUI();
 
         //goal
-        Goals.Add(new PictureGoal(this, "Philippine Eagle", "Take a picture of Philippine Eagle", false, 0, 1));
-        Goals.Add(new PictureGoal(this, "Tamaraw", "Take a picture of Tamaraw", false, 0, 1));
-        Goals.Add(new CollectionGoal(this, "Barrel", "Collect 1 Barrel", false, 0, 1));
-
+        Goals.Add(new PictureGoal(this, "Philippine Eagle", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new PictureGoal(this, "Tamaraw", goalDescription[1], false, currentProgress[1], requiredAmount[1]));
+        Goals.Add(new CollectionGoal(this, "Barrel", goalDescription[2], false, currentProgress[2], requiredAmount[2]));
         Goals.ForEach(g => g.InIt());
 
-        //event trigger
         GetGoalsList();
+
+        //event trigger
+        //QuestEvents.instance.QuestAccepted2();
+
     }
 
     private void GetGoalsList()
     {
-        GameEvents.QuestAccepted(Goals);
-
+        GameEvents.QuestAccepted(ID, Goals);
     }
 
     public void GoalChanged()
     {
         GetGoalsList();
+
+        for (int i = 0; i < Goals.Count; i++)
+        {
+            currentProgress[i] = Goals[i].currentAmount;
+        }
+
+        SendProgress();
     }
 
+    public void SendProgress()
+    {
+        Task.instance.UpdateProgress(ID, currentProgress);
+    }
     public void UpdateQuestUI()
     {
         QuestUI.instance.UpdateQuestName(questName);
@@ -52,8 +105,13 @@ public class Quest112 : QuestNew
     IEnumerator IsQuestCompleted()
     {
         yield return new WaitUntil(() => questCompleted == true);
-        Debug.Log(this+ " is Completed");
 
+        //remove quest from task list
+        Task.instance.RemoveTask(ID);
+
+        //debug
+        Debug.Log(this + " is Completed");
 
     }
+
 }

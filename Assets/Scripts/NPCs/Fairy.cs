@@ -11,7 +11,7 @@ public class Fairy : MonoBehaviour,  IInteractable
     public string InteractionPrompt => _prompt;
 
     [SerializeField] private Quest11 quest;
-    [SerializeField] DialogueSystem dialogueSystem;
+
 
 
 
@@ -44,7 +44,8 @@ public class Fairy : MonoBehaviour,  IInteractable
     {
         // yield return new WaitUntil(() => dialogueSystem.dialogueEnded == true);
         yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
-        quest.AcceptQuest();
+
+        //quest.AcceptQuest();
         DisableQuestMarker();
         Debug.Log("Quest Accepted");
 

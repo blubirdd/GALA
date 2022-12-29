@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 
 
+[System.Serializable]
 public class QuestNew: MonoBehaviour
 {
 
@@ -15,15 +16,14 @@ public class QuestNew: MonoBehaviour
     public int reward { get; set; }
     public bool questCompleted { get; set; }
 
-    [SerializeField] private string _questName;
-    [SerializeField] private string _questDescription;
-    [SerializeField] private bool _questCompleted;
+    public string _questName;
+    public string _questDescription;
+    public bool _questCompleted;
 
 
     private void Start()
     {
         GameEvents.instance.onQuestCompleted += QuestComplete;
-       
     }
 
     public void Initialize()
@@ -34,15 +34,15 @@ public class QuestNew: MonoBehaviour
     }
     public void CheckGoals()
     {
-
         if (Goals.All(g => g.goalCompleted))
         {
             questCompleted = true;
-            QuestComplete();
+            QuestComplete(this.questName);
         }
+
     }
     
-    public void QuestComplete()
+    public void QuestComplete(string questName)
     {
         if (questCompleted == true)
         {
@@ -54,21 +54,9 @@ public class QuestNew: MonoBehaviour
             QuestUI.instance.ClearQuestTitle();
             QuestUI.instance.ClearQuestDescription();
 
-            GameEvents.instance.QuestCompleted();
+            GameEvents.instance.QuestCompleted(this.questName);
         }
 
     }
-
-    void ResetQuest()
-    {
-        
-    }
-
-    void GiveReward()
-    {
-        
-    }
-
-
 
 }

@@ -7,6 +7,7 @@ public class Bert : MonoBehaviour, IInteractable
 
     [SerializeField] private string _prompt;
     [SerializeField] private DialogueTrigger _dialogue;
+    [SerializeField] private DialogueTrigger _isTalkedDialogue;
 
     public string InteractionPrompt => _prompt;
 
@@ -16,18 +17,35 @@ public class Bert : MonoBehaviour, IInteractable
     [SerializeField] private string questType;
 
     [SerializeField] private bool isTalked = false;
+
+    
     private QuestNew quest { get; set; }
 
     void Start()
     {
-       
+       if(isTalked == true)
+        {
+            DisableQuestMarker();
+        }
     }
+
+    
     public bool Interact(Interactor interactor)
     {
         //trigger dialogue
-        _dialogue.TriggerDialogue();
+        if(isTalked == false)
+        {
+            _dialogue.TriggerDialogue();
 
-        StartCoroutine(AcceptQuest());
+            StartCoroutine(AcceptQuest());
+        }
+
+        else
+        {
+            _isTalkedDialogue.TriggerIsTalkedDialogue();
+            Debug.Log("Already talked to this NPC");
+        }
+
         return true;
     }
 
@@ -35,25 +53,23 @@ public class Bert : MonoBehaviour, IInteractable
     {
         yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
         AssignQuest();
-        
 
     }
 
     void AssignQuest()
     {
-        if(isTalked == false)
+        if (isTalked == false)
         {
-        quest = (QuestNew)quests.AddComponent(System.Type.GetType(questType));
-        Debug.Log(this + "Quest New Assigned");
-        transform.Find("questMarker").gameObject.SetActive(false);
-
+            quest = (QuestNew)quests.AddComponent(System.Type.GetType(questType));
+            Debug.Log(this + "Quest New Assigned");
             isTalked = true;
         }
+        DisableQuestMarker();
+    }
 
-        else
-        {
-            Debug.Log("Already talked to this NPC");
-        }
+    void DisableQuestMarker()
+    {
+        transform.Find("questMarker").gameObject.SetActive(false);
     }
 
 

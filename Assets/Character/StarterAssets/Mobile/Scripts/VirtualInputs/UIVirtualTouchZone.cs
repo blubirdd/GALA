@@ -83,6 +83,7 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
 
 
         OutputPointerEventValue(outputPosition * magnitudeMultiplier * sensitivity * Time.deltaTime);
+        //OutputPointerEventValue(outputPosition * magnitudeMultiplier * sensitivity);
 
 
     }
