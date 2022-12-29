@@ -6,7 +6,6 @@ public class PictureGoal : Goal
 {
     public string animalName { get; set; }
 
-
     public PictureGoal(QuestNew quest,string animalName, string description, bool completed, int currentAmount, int requiredAmount)
     {
         this.quest = quest;
@@ -22,6 +21,11 @@ public class PictureGoal : Goal
     {
         base.InIt();
         PictureEvents.onAnimalDiscovered += PictureTaken;
+
+        //to evaluate saved data
+        Debug.Log("Evaluating");
+        Evaluate();
+
     }
 
 
@@ -32,10 +36,7 @@ public class PictureGoal : Goal
             this.currentAmount++;
             Evaluate();
             
-            
         }    
     }
-
-
 
 }

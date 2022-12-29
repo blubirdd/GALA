@@ -41,7 +41,7 @@ public class FileDataHandler
                 // optionally decrypt the data
                 if (useEncryption)
                 {
-               //     dataToLoad = EncryptDecrypt(dataToLoad);
+               //   dataToLoad = EncryptDecrypt(dataToLoad);
                 }
 
                 // deserialize the data from Json back into the C# object
@@ -70,7 +70,7 @@ public class FileDataHandler
             // optionally encrypt the data
             if (useEncryption)
             {
-              //  dataToStore = EncryptDecrypt(dataToStore);
+                dataToStore = EncryptDecrypt(dataToStore);
             }
 
             // write the serialized data to the file
@@ -86,5 +86,15 @@ public class FileDataHandler
         {
             Debug.LogError("Error occured when trying to save data to file: " + fullPath + "\n" + e);
         }
+    }
+
+    private string EncryptDecrypt(string data)
+    {
+        string modifiedData = "";
+        for(int i = 0; i < data.Length; i++)
+        {
+            modifiedData += (char)(data[i] ^ encryptionCodeWord[i % encryptionCodeWord.Length]);
+        }
+        return modifiedData;
     }
 }

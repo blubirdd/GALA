@@ -115,8 +115,9 @@ public class UIManager : MonoBehaviour
         objectiveListCanvas.SetActive(!objectiveListCanvas.activeSelf);
     }
 
-    void GetObjectives(List<Goal> list)
+    void GetObjectives(string title, List<Goal> list)
     {
+
         for(int i = 0; i < list.Count; i++)
         {
             if (i == 0)
@@ -139,7 +140,7 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void ClearObjectiveList()
+    public void ClearObjectiveList(string questName)
     {
         objective1.SetText("No Active Quest/Objective");
         objective2.SetText("");

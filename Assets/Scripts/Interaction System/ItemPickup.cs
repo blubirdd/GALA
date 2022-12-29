@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class ItemPickup : MonoBehaviour, IInteractable
 {
-    [SerializeField] private string id;
+
+    //[SerializeField] private ItemDatabaseObject database;
+    /*[SerializeField] private string id;
 
     [ContextMenu("Generate guid for id")]
 
@@ -12,6 +15,17 @@ public class ItemPickup : MonoBehaviour, IInteractable
     {
         id = System.Guid.NewGuid().ToString();
     }
+    */
+
+//    private void OnEnable()
+//    {
+//#if UNITY_EDITOR
+//        database = (ItemDatabaseObject)AssetDatabase.LoadAssetAtPath("Assets/Resources/Database.asset", typeof(ItemDatabaseObject));
+
+//#else
+//        database = Resources.Load<ItemDatabaseObject>("Database");
+//#endif
+//    }
 
     private string _prompt = "Pick up ";
 
@@ -25,9 +39,8 @@ public class ItemPickup : MonoBehaviour, IInteractable
 
     void PickUp()
     {
-        
         Debug.Log("Picked up " + item.name);
-        Inventory.instance.Add(item);
+        Inventory.instance.Add(item, 1);
         Destroy(gameObject);
     }
      

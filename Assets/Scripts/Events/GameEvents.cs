@@ -20,6 +20,8 @@ public class GameEvents : MonoBehaviour
     public event Action onQuestTitleChange;
     public event Action onQuestDescriptionChange;
 
+    
+
 
     //Goal UI Events
 
@@ -28,7 +30,12 @@ public class GameEvents : MonoBehaviour
 
     //Quest Events
 
-    public event Action onQuestCompleted;
+    public event Action<string> onQuestCompleted;
+    public void QuestCompleted(string questName)
+    {
+        onQuestCompleted?.Invoke(questName);
+    }
+
     public event Action onGoalCompleted;
 
    
@@ -63,10 +70,7 @@ public class GameEvents : MonoBehaviour
         onQuestDescriptionChange?.Invoke();
     }
 
-    public void QuestCompleted()
-    {
-        onQuestCompleted?.Invoke();
-    }
+
 
     //Goal UI Events
     public void GoalValueChanged()
@@ -75,7 +79,6 @@ public class GameEvents : MonoBehaviour
     }
 
     //Quest Events
-
 
     public void GoalCompleted()
     {
@@ -89,15 +92,15 @@ public class GameEvents : MonoBehaviour
     }
 
     //Delegates
-    public delegate void ObjectiveUIEventHander(List<Goal> list);
+    public delegate void ObjectiveUIEventHander(string title, List<Goal> list);
 
     public static event ObjectiveUIEventHander onQuestAccepted;
 
-    public static void QuestAccepted(List<Goal> list)
+    public static void QuestAccepted(string title, List<Goal> list)
     {
         if (onQuestAccepted != null)
         {
-            onQuestAccepted(list);
+            onQuestAccepted(title ,list);
         }
 
     }

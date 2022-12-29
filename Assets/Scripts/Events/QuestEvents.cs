@@ -1,18 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestEvents : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //public static QuestEvents instance;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //private void Awake()
+    //{
+    //    instance = this;
+    //}
+
+    //public event Action onQuestAccepted2;
+
+
+    //public void QuestAccepted2()
+    //{
+    //    onQuestAccepted2?.Invoke();
+    //}
+
+
 }
