@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Fairy : MonoBehaviour,  IInteractable
 {
 
     [SerializeField] private string _prompt;
+    [SerializeField] private Sprite _icon;
+
     [SerializeField] private DialogueTrigger _dialogue;
 
     public string InteractionPrompt => _prompt;
+    public Sprite icon => _icon;
 
     [SerializeField] private Quest11 quest;
 
