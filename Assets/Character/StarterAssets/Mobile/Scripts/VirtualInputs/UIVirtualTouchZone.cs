@@ -26,17 +26,32 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
     private Vector2 pointerDownPosition;
     private Vector2 currentPointerPosition;
 
+    public bool limitFps = false;
     [Header("Output")]
     public Event touchZoneOutputEvent;
 
     void Start()
     {
         SetupHandle();
-        Application.targetFrameRate = 60;
+
+
 
         GameEvents.instance.onCameraOpened += SetSentivityToLow;
         GameEvents.instance.onCameraClosed += SetSentivityToNormal;
 
+    }
+
+    private void Update()
+    {
+        if (limitFps)
+        {
+            Application.targetFrameRate = 60;
+        }
+
+        else
+        {
+            Application.targetFrameRate = 500;
+        }
     }
 
     private void SetSentivityToLow()

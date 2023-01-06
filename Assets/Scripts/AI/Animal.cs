@@ -25,7 +25,7 @@ public class Animal : MonoBehaviour
     [SerializeField] private int _targetsFound;
 
     [Header("NavMesh")]
-    private NavMeshAgent _agent;
+    //private NavMeshAgent _agent;
     private readonly Collider[] _colliders = new Collider[3];
     //[Header("Predator")]
 
@@ -36,7 +36,7 @@ public class Animal : MonoBehaviour
 
         StartCoroutine("FindTargetWithDelay", 0.5f);
 
-        _agent = GetComponent<NavMeshAgent>();
+       // _agent = GetComponent<NavMeshAgent>();
 
     }
 
@@ -100,7 +100,7 @@ public class Animal : MonoBehaviour
                 //rotate on direction
                 Quaternion toRotation = Quaternion.LookRotation(newPosition, Vector3.up);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 10 * Time.deltaTime);
-                _agent.SetDestination(newPosition);
+               // _agent.SetDestination(newPosition);
 
             }
 

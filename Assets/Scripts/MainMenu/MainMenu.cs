@@ -28,7 +28,7 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Starting new Game");
         DataPersistenceManager.instance.SaveGame();
         //load the scene with the load game from DatapersistenceManager.
-        SceneManager.LoadSceneAsync("Introduction");
+        SceneManager.LoadSceneAsync("ForestStart");
     }
 
     public void OnContinueGame()

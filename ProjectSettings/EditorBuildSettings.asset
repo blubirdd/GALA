@@ -11,9 +11,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Introduction.unity
     guid: c850ee8c3b14cc8459e7e186857cf567
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Forest.unity
     guid: d6406991708f59643a858e5ea7ebb932
+  - enabled: 1
+    path: Assets/Scenes/ForestStart.unity
+    guid: 70f1974f011296c4c8727591ef93eb7e
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: b70fd9029e039b44d8d9deb549fe18d7,
       type: 2}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Grid : MonoBehaviour
 {
@@ -48,11 +49,17 @@ public class Grid : MonoBehaviour
             {
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
 
-                //height map
-                worldPoint.y = Terrain.activeTerrain.SampleHeight(worldPoint);
 
+
+                //height map
+                //worldPoint.y = Terrain.activeTerrain.SampleHeight(worldPoint);
+
+                //unwalkable mask
                 bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask));
 
+                //navmeesh
+                //NavMeshHit hit;
+                //bool walkable = NavMesh.SamplePosition(worldPoint, out hit, nodeRadius, NavMesh.AllAreas);
                 //raycast
 
                 grid[x, y] = new Node(walkable, worldPoint, x, y);

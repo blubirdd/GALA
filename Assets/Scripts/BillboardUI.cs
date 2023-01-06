@@ -10,8 +10,19 @@ public class BillboardUI : MonoBehaviour
     void Start()
     {
         _mainCam = Camera.main;
-
+        GameEvents.instance.onCameraOpened += ChangeCam;
+        GameEvents.instance.onCameraClosed += ChangeBackCam;
         
+    }
+
+    public void ChangeCam()
+    {
+        _mainCam = Camera.main;
+    }
+
+    public void ChangeBackCam()
+    {
+        _mainCam = Camera.main;
     }
 
     private void LateUpdate()
