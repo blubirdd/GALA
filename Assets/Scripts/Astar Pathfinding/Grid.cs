@@ -7,9 +7,7 @@ public class Grid : MonoBehaviour
 {
     public bool displayGridGizmoz;
 
-    public LayerMask interactable;
-    public LayerMask unwalkable;
-    private LayerMask unwalkableMask;
+    public LayerMask unwalkbleMask;
 
     public Vector2 gridWorldSize;
     public float nodeRadius;
@@ -20,9 +18,6 @@ public class Grid : MonoBehaviour
 
     void Awake()
     {
-
-        //combine both layers
-        unwalkableMask = interactable | unwalkable;
 
         nodeDiameter = nodeRadius * 2;
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
@@ -55,12 +50,22 @@ public class Grid : MonoBehaviour
                 //worldPoint.y = Terrain.activeTerrain.SampleHeight(worldPoint);
 
                 //unwalkable mask
-                bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask));
+                //bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask));
 
                 //navmeesh
-                //NavMeshHit hit;
-                //bool walkable = NavMesh.SamplePosition(worldPoint, out hit, nodeRadius, NavMesh.AllAreas);
+
                 //raycast
+
+                Ray ray = new Ray(worldPoint + Vector3.up * 50, Vector3.down);
+                RaycastHit rayhit;
+
+                if (Physics.Raycast(ray, out rayhit, 100, Physics.AllLayers))
+                {
+                    worldPoint = rayhit.point;
+                }
+
+                NavMeshHit navMeshHit;
+                bool walkable = NavMesh.SamplePosition(worldPoint, out navMeshHit, nodeRadius, NavMesh.AllAreas);
 
                 grid[x, y] = new Node(walkable, worldPoint, x, y);
             }

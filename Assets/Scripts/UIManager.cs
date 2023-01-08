@@ -8,6 +8,23 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    #region Singleton
+
+    public static UIManager instance;
+
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one instance of UIManager found");
+            return;
+        }
+
+        instance = this;
+    }
+    #endregion
+
+    //this is outdated
     public GameObject objectiveListCanvas;
 
      [Header("Controls")]
@@ -27,7 +44,15 @@ public class UIManager : MonoBehaviour
     [Header("Book")]
     public GameObject book;
 
+
+    [Header("BUTTONS PARENT")]
+    public GameObject buttonsUIPack;
+
     [Header("Quest Objective/Goal Texts")]
+    //task ui is on taskui script
+    // public TaskUI taskUI;
+
+    //THIS IS OUTDATED
     public TextMeshProUGUI objective1;
     public TextMeshProUGUI objective2;
     public TextMeshProUGUI objective3;
@@ -48,16 +73,33 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void DisableButtonsUIPACK()
+    {
+        buttonsUIPack.SetActive(false);
+    }
+
+    public void EnableButtonsUIPACK()
+    {
+        buttonsUIPack.SetActive(true);
+    }
+
     public void ClosePauseMenu()
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
+
+        EnableButtonsUIPACK();
+
     }
+
+
 
     public void OpenPauseMenu()
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
+
+        DisableButtonsUIPACK();
     }
 
     //controls
@@ -153,12 +195,16 @@ public class UIManager : MonoBehaviour
         book.SetActive(!book.activeSelf);
 
         DisablePlayerMovement();
+
+        DisableButtonsUIPACK();
     }
 
     public void CloseBook()
     {
         EnablePlayerMovement();
         book.SetActive(!book.activeSelf);
+
+        EnableButtonsUIPACK();
     }
 
     public void ChangeSceneToForest()

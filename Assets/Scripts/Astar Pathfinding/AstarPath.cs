@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AstarPath
@@ -44,18 +45,25 @@ public class AstarPath
 
     public void DrawWithGizmos()
     {
-
-        Gizmos.color = Color.black;
-        foreach (Vector3 p in lookPoints)
-        {
-            Gizmos.DrawCube(p + Vector3.up, Vector3.one);
-        }
-
         Gizmos.color = Color.white;
-        foreach (Line l in turnBoundaries)
+        for (int i = 0; i < lookPoints.Length; i++)
         {
-            l.DrawWithGizmos(10);
+            Vector3 p = lookPoints[i];
+            Gizmos.DrawCube(p + Vector3.up, Vector3.one);
+            // Check if there is a next point
+            if (i < lookPoints.Length - 1)
+            {
+                // Draw a line to the next point
+                Vector3 nextPoint = lookPoints[i + 1];
+                Gizmos.DrawLine(p + Vector3.up, nextPoint + Vector3.up);
+            }
         }
+
+        //Gizmos.color = Color.white;
+        //foreach (Line l in turnBoundaries)
+        //{
+        //    l.DrawWithGizmos(10);
+        //}
 
     }
 

@@ -45,9 +45,15 @@ public class InventoryUI : MonoBehaviour
 
     public void OpenInventory()
     {
-      
-        inventoryUI.SetActive(!inventoryUI.activeSelf);
-      
+        //inventoryUI.SetActive(!inventoryUI.activeSelf);
+        inventoryUI.SetActive(true);
+        UIManager.instance.DisableButtonsUIPACK();
+    }
+
+    public void CloseInventory()
+    {
+        inventoryUI.SetActive(false);
+        UIManager.instance.EnableButtonsUIPACK();
     }
 
 

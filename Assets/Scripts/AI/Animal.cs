@@ -29,6 +29,8 @@ public class Animal : MonoBehaviour
     private readonly Collider[] _colliders = new Collider[3];
     //[Header("Predator")]
 
+    Animator animator;
+
 
     private void Awake()
     {
@@ -36,14 +38,16 @@ public class Animal : MonoBehaviour
 
         StartCoroutine("FindTargetWithDelay", 0.5f);
 
+        animator = GetComponent<Animator>();
+
        // _agent = GetComponent<NavMeshAgent>();
 
     }
 
     private void Update()
     {
-      //  isHunting = false;
-
+        //  isHunting = false;
+        // Wander();
 
     }
 
@@ -58,6 +62,8 @@ public class Animal : MonoBehaviour
     }
     void FindTarget()
     {
+        //if bug/ clear all _colliders first
+
         _targetsFound = Physics.OverlapSphereNonAlloc(transform.position, _viewRadius, _colliders, targetMask);
 
         if(_targetsFound > 0)
@@ -85,6 +91,7 @@ public class Animal : MonoBehaviour
                 //if animalai pathfinding is attached
                 if (animalAI != null)
                 {   //move to target
+                    animator.SetBool("isWalking", true);
                     animalAI.TargetLocation(preyTransform);
                 }
             }
@@ -104,9 +111,6 @@ public class Animal : MonoBehaviour
 
             }
 
-
-
-
   
         }
 
@@ -119,6 +123,13 @@ public class Animal : MonoBehaviour
             predatorTransform = null;
         }
 
+    }
+
+    public void Wander()
+    {
+        Vector3 randomPoint = Random.insideUnitSphere * _viewRadius;
+        randomPoint -= transform.position;
+        Debug.Log(randomPoint);
     }
 
 

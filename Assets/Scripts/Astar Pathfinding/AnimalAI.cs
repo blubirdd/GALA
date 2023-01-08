@@ -6,7 +6,7 @@ using UnityEngine;
 public class AnimalAI : MonoBehaviour
 {
 
-    const float minPathUpdateTime = .2f;
+    const float minPathUpdateTime = 0.2f;
     const float pathUpdateMoveThreshold = .5f;
 
     //location of target
@@ -22,9 +22,12 @@ public class AnimalAI : MonoBehaviour
 
     Animal animal;
 
+
     void Start()
     {
         animal = GetComponent<Animal>();
+        StartCoroutine(UpdatePath());
+
     }
 
 
@@ -37,15 +40,6 @@ public class AnimalAI : MonoBehaviour
     {
         target = location;
 
-        if (target != null)
-        {
-            StartCoroutine(UpdatePath());
-        }
-
-        else
-        {
-            StopCoroutine(UpdatePath());
-        }
     }
 
 
@@ -63,13 +57,22 @@ public class AnimalAI : MonoBehaviour
     IEnumerator UpdatePath()
     {
 
-        if (target != null)
+        if (Time.timeSinceLevelLoad < .3f)
         {
-            if (Time.timeSinceLevelLoad < .3f)
+            yield return new WaitForSeconds(.3f);
+        }
+
+        // Keep running the enumerator until target is not null
+        while (true)
+        {
+            // Wait for target to initialize
+            if (target == null)
             {
-                yield return new WaitForSeconds(.3f);
+                yield return null;
+                continue;
             }
 
+            // Update the path
             PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
 
             float sqrMoveThreshold = pathUpdateMoveThreshold * pathUpdateMoveThreshold;
@@ -77,38 +80,33 @@ public class AnimalAI : MonoBehaviour
 
             while (true)
             {
+                var t = target ?? transform;
+
                 yield return new WaitForSeconds(minPathUpdateTime);
-                if (target != null)
+                if ((t.position - targetPosOld).sqrMagnitude > sqrMoveThreshold)
                 {
-                    if ((target.position - targetPosOld).sqrMagnitude > sqrMoveThreshold)
-                    {
-                        PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
-                        targetPosOld = target.position;
-
-                    }
+                    PathRequestManager.RequestPath(transform.position, t.position, OnPathFound);
+                    targetPosOld = t.position;
                 }
 
-                else
-                {
-                    yield break;
-                }
 
             }
-
         }
 
-        else
-        {
-            Debug.Log("No target found");
-        }
     }
-
     IEnumerator FollowPath()
     {
 
         bool followingPath = true;
         int pathIndex = 0;
-        transform.LookAt(path.lookPoints[0]);
+
+        //transform.LookAt(path.lookPoints[0]);
+
+        //smooth rotation
+        Vector3 direction = (path.lookPoints[0] - transform.position).normalized;
+        Quaternion tr = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, tr, Time.deltaTime * turnSpeed);
+
         float speedPercent = 1;
 
 
@@ -127,7 +125,7 @@ public class AnimalAI : MonoBehaviour
                 if(target == null)
                 {
                     //wait for 1 second before stopping the hunt
-                    // yield return new WaitForSeconds(1);
+                    //yield return new WaitForSeconds(1);
 
                     //stop following
                     followingPath = false;
@@ -158,6 +156,7 @@ public class AnimalAI : MonoBehaviour
                     Quaternion targetRotation = Quaternion.LookRotation(path.lookPoints[pathIndex] - transform.position);
                     transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * turnSpeed);
                     transform.Translate(Vector3.forward * Time.deltaTime * speed * speedPercent, Space.Self);
+                    
                 }
 
 

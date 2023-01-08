@@ -91,6 +91,7 @@ public class TaskUI : MonoBehaviour
     public void OpenTasks()
     {
         taskUI.SetActive(true);
+        UIManager.instance.DisableButtonsUIPACK();
         UpdateUI();
     }
 
@@ -101,7 +102,10 @@ public class TaskUI : MonoBehaviour
         {
             Destroy(this.transform.GetChild(i).gameObject);
         }
+
+
         taskUI.SetActive(false);
+        UIManager.instance.EnableButtonsUIPACK();
     }
 
 

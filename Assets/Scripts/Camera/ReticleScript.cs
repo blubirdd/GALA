@@ -47,7 +47,7 @@ public class ReticleScript : MonoBehaviour
        
         if (Physics.Raycast(transform.position, transform.forward, out hit, 50f, layerMask))// && hit.transform.gameObject.CompareTag("NPC"))
         {
-            reticle.GetComponent<Image>().color = new Color32(255, 255, 60, 100);
+            reticle.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
 
             //enable panel
             discoveryPanel.SetActive(true);
@@ -76,7 +76,7 @@ public class ReticleScript : MonoBehaviour
         }
         else
         {
-            reticle.GetComponent<Image>().color = new Color32(255, 255, 255, 100);
+            reticle.GetComponent<Image>().color = new Color32(255, 231, 217, 255);
             //reset discovery
             _isDiscovered = false;
 
