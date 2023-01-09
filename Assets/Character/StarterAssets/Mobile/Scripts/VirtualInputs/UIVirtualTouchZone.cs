@@ -18,8 +18,9 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
     public bool invertYOutputValue;
 
 
-    public static float sensitivity = 1.2f;
-    public float cameraMagnitudeMultiplier;
+
+    public static float sensitivity = 1f;
+    // public float cameraMagnitudeMultiplier;
 
 
     //Stored Pointer Values
@@ -36,26 +37,26 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
 
         Application.targetFrameRate = 60;
 
-        GameEvents.instance.onCameraOpened += SetSentivityToLow;
-        GameEvents.instance.onCameraClosed += SetSentivityToNormal;
-
     }
+
 
     private void Update()
     {
 
     }
 
-    private void SetSentivityToLow()
-    {
-        magnitudeMultiplier = 20;
-        Debug.Log("Set low");
-    }
 
-    private void SetSentivityToNormal()
-    {
-        magnitudeMultiplier = 60;
-    }
+
+    //private void SetSentivityToLow()
+    //{
+    //    magnitudeMultiplier = 20;
+    //    Debug.Log("Set low");
+    //}
+
+    //private void SetSentivityToNormal()
+    //{
+    //    magnitudeMultiplier = 60;
+    //}
 
     private void SetupHandle()
     {

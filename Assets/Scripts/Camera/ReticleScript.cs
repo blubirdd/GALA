@@ -21,7 +21,8 @@ public class ReticleScript : MonoBehaviour
 
     [Header("Discovery Status - Sprites")]
     [SerializeField] private Sprite undiscoveredSprite;
-
+    [SerializeField] private Sprite discoveredCrosshair;
+    [SerializeField] private Sprite normalCrosshair;
     private bool _isDiscovered;
 
     private IAnimal _animal;
@@ -48,6 +49,7 @@ public class ReticleScript : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out hit, 50f, layerMask))// && hit.transform.gameObject.CompareTag("NPC"))
         {
             reticle.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            reticle.sprite = discoveredCrosshair;
 
             //enable panel
             discoveryPanel.SetActive(true);
@@ -77,6 +79,7 @@ public class ReticleScript : MonoBehaviour
         else
         {
             reticle.GetComponent<Image>().color = new Color32(255, 231, 217, 255);
+            reticle.sprite = normalCrosshair;
             //reset discovery
             _isDiscovered = false;
 

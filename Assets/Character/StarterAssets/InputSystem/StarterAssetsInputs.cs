@@ -49,7 +49,8 @@ namespace StarterAssets
 
 		public void MoveInput(Vector2 newMoveDirection)
 		{
-			move = newMoveDirection;
+            sprint = newMoveDirection.sqrMagnitude > 1f;
+            move = newMoveDirection;
 		} 
 
 		public void LookInput(Vector2 newLookDirection)

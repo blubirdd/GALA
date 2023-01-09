@@ -140,15 +140,15 @@ public class UIManager : MonoBehaviour
     {
         inGameCameraCanvas.SetActive(true);
 
-        thirdPersonCamera.SetActive(false);
-        firstPersonCamera.SetActive(true);
+        //thirdPersonCamera.SetActive(false);
+        //firstPersonCamera.SetActive(true);
     }
     public void SwitchToThirdPerson()
     {
         inGameCameraCanvas.SetActive(false);
 
-        thirdPersonCamera.SetActive(true);
-        firstPersonCamera.SetActive(false);
+        //thirdPersonCamera.SetActive(true);
+        //firstPersonCamera.SetActive(false);
 
     }
 

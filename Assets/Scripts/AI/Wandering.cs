@@ -43,7 +43,7 @@ public class Wandering : MonoBehaviour
     {
         int rottime = Random.Range(1, 3);
         int rotwait = Random.Range(1, 3);
-        int rotatelorR = Random.Range(1, 3);
+        int rotatelorR = Random.Range(1, 2);
         int walkwait = Random.Range(1, 3);
         int walktime = Random.Range(1, 3);
 

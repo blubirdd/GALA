@@ -9,6 +9,8 @@ public class DialogueSystem : MonoBehaviour
 {
 
     public static bool dialogueEnded = false;
+
+
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
 
@@ -33,8 +35,11 @@ public class DialogueSystem : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-     
+
+
         dialogueEnded = false;
+
+        GameEvents.instance.DialogueStarted();
 
         //disable contrls
         controlsCanvas.SetActive(false);
@@ -91,7 +96,7 @@ public class DialogueSystem : MonoBehaviour
 
         //enable controls
         controlsCanvas.SetActive(true);
-        
+
         dialogueEnded = true;
 
      

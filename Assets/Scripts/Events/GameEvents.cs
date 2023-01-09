@@ -14,7 +14,9 @@ public class GameEvents : MonoBehaviour
     }
 
     //Camera Events
-    
+
+
+
 
     //Quest UI Events
     public event Action onQuestTitleChange;
@@ -44,6 +46,10 @@ public class GameEvents : MonoBehaviour
     //Dialogue EVENTS
 
     public event Action onDialogueStarted;
+    public void DialogueStarted()
+    {
+        onDialogueStarted?.Invoke();
+    }
 
     //Camera Events
     public event Action onCameraOpened;
@@ -85,11 +91,6 @@ public class GameEvents : MonoBehaviour
         onGoalCompleted?.Invoke();
     }
 
-    //Dialogue EVENTS
-    public void DialogueStart()
-    {
-        onDialogueStarted?.Invoke();
-    }
 
     //Delegates
     public delegate void ObjectiveUIEventHander(string title, List<Goal> list);

@@ -26,6 +26,7 @@ public class MainMenu : MonoBehaviour
         DataPersistenceManager.instance.NewGame();
 
         Debug.Log("Starting new Game");
+
         DataPersistenceManager.instance.SaveGame();
         //load the scene with the load game from DatapersistenceManager.
         SceneManager.LoadSceneAsync("ForestStart");
@@ -38,7 +39,7 @@ public class MainMenu : MonoBehaviour
         DataPersistenceManager.instance.SaveGame();
 
         //load the scene
-        SceneManager.LoadSceneAsync("Introduction");
+        SceneManager.LoadSceneAsync("ForestStart");
     }
 
     public void QuitGame()

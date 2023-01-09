@@ -1,3 +1,4 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ using static Task;
 public class GameData
 {
 
+    public bool triggerStartDialogue;
     public Vector3 playerPosition;
     public int naturePoints;
 
@@ -21,10 +23,16 @@ public class GameData
     // the game starts with when there's no data to load
     public GameData()
     {
+        //start game
+        triggerStartDialogue = true;
+
         this.naturePoints = 0;
 
+
         //to change
-        playerPosition = Vector3.zero;
+        playerPosition = new Vector3(-307.29f, 2, 353.81f);
+        //playerPosition = Vector3.zero;
+
 
         itemsCollected = new SerializableDictionary<int, InventorySave>();
         taskList = new SerializableDictionary<string, TaskSave>();

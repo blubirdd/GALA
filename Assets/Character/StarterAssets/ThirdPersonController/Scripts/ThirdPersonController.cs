@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -14,6 +15,8 @@ namespace StarterAssets
 #endif
     public class ThirdPersonController : MonoBehaviour, IDataPersistence
     {
+
+
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
@@ -98,6 +101,9 @@ namespace StarterAssets
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
 
+        //the character transform
+        //public Transform player;
+
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
 #endif
@@ -122,18 +128,24 @@ namespace StarterAssets
             }
         }
 
-
-        private void Awake()
+        public void LoadData(GameData data)
         {
-            // get a reference to our main camera
+            this.transform.position = data.playerPosition;
+        }
+
+        public void SaveData(GameData data)
+        {
+            data.playerPosition = this.transform.position;
+        }
+
+
+        private void Start()
+        {
             if (_mainCamera == null)
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
-        }
 
-        private void Start()
-        {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);
@@ -150,11 +162,17 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+
+            _hasAnimator = TryGetComponent(out _animator);
+
+
+            StartCoroutine(FallCheck());
         }
 
         private void Update()
         {
-            _hasAnimator = TryGetComponent(out _animator);
+           //moved to start for optimization
+           // _hasAnimator = TryGetComponent(out _animator);
 
             JumpAndGravity();
             GroundedCheck();
@@ -164,6 +182,22 @@ namespace StarterAssets
         private void LateUpdate()
         {
             CameraRotation();
+        }
+        //check if fell through the map
+
+        IEnumerator FallCheck()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(0.5f);
+
+                if(this.transform.position.y < -15)
+                {
+                  
+                }
+
+
+            }
         }
 
         private void AssignAnimationIDs()
@@ -188,6 +222,7 @@ namespace StarterAssets
             {
                 _animator.SetBool(_animIDGrounded, Grounded);
             }
+
         }
 
         private void CameraRotation()
@@ -389,14 +424,5 @@ namespace StarterAssets
             }
         }
 
-        public void LoadData(GameData data)
-        {
-            this.transform.position = data.playerPosition;
-        }
-
-        public void SaveData(GameData data)
-        {
-            data.playerPosition = this.transform.position;
-        }
     }
 }
