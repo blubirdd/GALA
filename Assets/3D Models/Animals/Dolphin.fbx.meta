@@ -1,19 +1,17 @@
 fileFormatVersion: 2
-guid: c3530370a4244bf4c82016484b31ac3e
+guid: 3465687d185eb91408d5456055950fa6
 ModelImporter:
   serializedVersion: 21202
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 1827226128182048838
+    second: Take 001
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Turtle_shell
-    second: {fileID: 2100000, guid: 6d19b416e26786146b550ea704413aea, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: turtle_skin
-    second: {fileID: 2100000, guid: c79ec9f45d181cf40bd965fdb32fd5d1, type: 2}
+      name: Dolphin
+    second: {fileID: 2100000, guid: b65bb1f38cc988c4a8d7b1f080b30362, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

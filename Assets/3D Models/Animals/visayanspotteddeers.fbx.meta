@@ -3,7 +3,22 @@ guid: c0ada4ca1bbdf604093f39668c4afde6
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Deer hooves
+    second: {fileID: 2100000, guid: fd8cde5cec3c0ac418ff821e1d15d822, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Deer horns
+    second: {fileID: 2100000, guid: f7573a5d314c8e64aac540c69bd8d0f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Deer skin
+    second: {fileID: 2100000, guid: 62841ca25c8a3bc4d82f5455602eb786, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -42,8 +57,8 @@ ModelImporter:
     sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
