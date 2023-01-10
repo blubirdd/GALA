@@ -13,8 +13,12 @@ public class GameEvents : MonoBehaviour
         instance = this;
     }
 
-    //Camera Events
-
+    //World Events
+    public event Action onCutSceneEnter;
+    public void CutscenePlay()
+    {
+        onCutSceneEnter?.Invoke();
+    }
 
 
 

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a34a3a46a495c42499b3200f67f5ee17, type: 3}
   m_Name: Backpack
   m_EditorClassIdentifier: 
-  name: New Item
+  name: Backpack
   icon: {fileID: 0}
-  isDefaultItem: 0
+  isDefaultItem: 1

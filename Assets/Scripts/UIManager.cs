@@ -48,10 +48,12 @@ public class UIManager : MonoBehaviour
     [Header("BUTTONS PARENT")]
     public GameObject buttonsUIPack;
 
-    [Header("Quest Objective/Goal Texts")]
+    [Header("Tutorial")]
+    public GameObject tutorialCanvas;
     //task ui is on taskui script
     // public TaskUI taskUI;
 
+    [Header("Outdated")]
     //THIS IS OUTDATED
     public TextMeshProUGUI objective1;
     public TextMeshProUGUI objective2;
@@ -71,6 +73,12 @@ public class UIManager : MonoBehaviour
 
         GameEvents.instance.onQuestCompleted += ClearObjectiveList;
 
+    }
+
+
+    public void OpenCloseTutorialPrompt()
+    {
+        tutorialCanvas.SetActive(!tutorialCanvas.activeSelf);
     }
 
     public void DisableButtonsUIPACK()

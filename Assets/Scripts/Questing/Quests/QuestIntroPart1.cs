@@ -19,9 +19,9 @@ public class QuestIntroPart1 : QuestNew
 
 
         //setup
-        ID = "questIntroPart1";
-        questName = "Where am I?";
-        questDescription = "Approach the mysterious \nperson";
+        ID = "QuestIntroPart1";
+        questName = "The mysterious person";
+        questDescription = "Approach the mysterious\nperson";
         goalDescription[0] = "Talk to the mysterious person";
         requiredAmount[0] = 1;
 

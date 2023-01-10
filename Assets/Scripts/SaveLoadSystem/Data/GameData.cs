@@ -17,6 +17,7 @@ public class GameData
     public SerializableDictionary<int, InventorySave> itemsCollected;
 
     // tasks or objectives
+    public List<string> tasksCompeleted;
     public SerializableDictionary<string, TaskSave> taskList;
 
     // the values defined in this constructor will be the default values
@@ -35,6 +36,8 @@ public class GameData
 
 
         itemsCollected = new SerializableDictionary<int, InventorySave>();
+
+        tasksCompeleted = new List<string>();
         taskList = new SerializableDictionary<string, TaskSave>();
     }
 }

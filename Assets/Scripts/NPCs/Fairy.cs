@@ -52,11 +52,6 @@ public class Fairy : MonoBehaviour,  IInteractable, ICharacter
             StartCoroutine(AcceptQuest());
         }
 
-        else
-        {
-            _isTalkedDialogue.TriggerIsTalkedDialogue();
-            Debug.Log("Already talked to this NPC");
-        }
 
         return true;
     }
@@ -86,8 +81,29 @@ public class Fairy : MonoBehaviour,  IInteractable, ICharacter
         StartCoroutine(FadeOut());
     }
 
+    private bool flyaway = false;
+    void Update()
+    {
+        if(flyaway == true)
+        {
+            Vector3 currentPosition = transform.position;
+            Vector3 newPosition = currentPosition + Vector3.up * Time.deltaTime * 3f;
+            transform.position = newPosition;
+        }
+
+    }
+
     IEnumerator FadeOut()
     {
-        yield return null;
+        yield return new WaitForSeconds(1f);
+
+        flyaway = true;
+        yield return new WaitForSeconds(1f);
+
+        _isTalkedDialogue.TriggerIsTalkedDialogue();
+
+        yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
+
+        Destroy(this.gameObject);
     }
 }

@@ -18,8 +18,11 @@ public class Bed : MonoBehaviour, IDataPersistence
     // Start is called before the first frame update
     void Start()
     {
-       if(triggerStartDialogue)
-       StartCoroutine(WaitForDialogueToTrigger());
+        if (triggerStartDialogue)
+        {
+            StartCoroutine(WaitForDialogueToTrigger());
+        }
+
 
     }
 
@@ -35,16 +38,18 @@ public class Bed : MonoBehaviour, IDataPersistence
 
     IEnumerator AcceptQuest()
     {
-      
         yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
         AssignQuest();
-
+        yield return new WaitForSeconds(1f);
+        UIManager.instance.OpenCloseTutorialPrompt();
     }
 
     void AssignQuest()
     {
-            quest = (QuestNew)quests.AddComponent(System.Type.GetType(questType));
-            Debug.Log(this + "Quest New Assigned");
+        Debug.Log("Assigning first quest...");
+        quest = (QuestNew)quests.AddComponent(System.Type.GetType(questType));
+        Debug.Log(this + "Quest New Assigned");
+
     }
 
     // Update is called once per frame

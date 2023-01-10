@@ -93,10 +93,10 @@ public class Inventory : MonoBehaviour, IDataPersistence
 
     public void Add(Item item, int _amount)
     {
-
+        
         if (!item.isDefaultItem)
         {
-            ItemPickedUp(item);
+            
             for(int i = 0; i < container.Count; i++)
             {
                 if (container[i].item == item)
@@ -120,6 +120,8 @@ public class Inventory : MonoBehaviour, IDataPersistence
             }
 
         }
+
+        ItemPickedUp(item);
 
 
     }
