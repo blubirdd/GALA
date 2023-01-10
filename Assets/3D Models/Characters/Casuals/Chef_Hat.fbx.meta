@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6ec6fc6abe3607543b17306924d2d70a
+guid: 2009f5069c8e8414180e33eedc4b5b9d
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
@@ -59,7 +59,7 @@ ModelImporter:
     materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -139,7 +139,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.0069999998
+    globalScale: 0.7
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

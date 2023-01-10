@@ -35,7 +35,7 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
     {
         SetupHandle();
 
-        Application.targetFrameRate = 60;
+       // Application.targetFrameRate = 60;
 
     }
 

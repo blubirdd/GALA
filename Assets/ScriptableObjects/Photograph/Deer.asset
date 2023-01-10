@@ -19,8 +19,12 @@ MonoBehaviour:
   weight: 'Weight: 25-80 KG'
   height: 'Heigth: 70-80 CM'
   length: 'Length: 125-130 CM'
-  diet: 'Diet: Herbivore'
+  biomeImage: {fileID: 21300000, guid: 0740f7efe904acc49a4f6590e2809922, type: 3}
   biome: Forest
+  diet: 'Diet: Herbivore'
+  food: 'Food: Grasses, Leaves'
+  appearance: Large ears, short tails, and long, slender legs. A pattern of beige
+    spots is visible from the back and sides
   details: Visayan spotted deer are nocturnal and come out at dusk to feed. They
     are very cryptic and cautious animals and will quickly hide into dense vegetation
     when they sense any danger. They are usually seen singly and or in small groups

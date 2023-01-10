@@ -121,6 +121,8 @@ public class Animal : MonoBehaviour
 
             preyTransform = null;
             predatorTransform = null;
+
+            animator.SetBool("isWalking", false);
         }
 
     }
