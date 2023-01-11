@@ -23,6 +23,7 @@ public class Wandering : MonoBehaviour
     }
     private void Update()
     {
+        if(animator != null)
         if (isWandering == false)
         {
             animator.SetBool("isWalking", false);

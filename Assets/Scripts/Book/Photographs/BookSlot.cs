@@ -27,26 +27,28 @@ public class BookSlot : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _details;
     [SerializeField] private TextMeshProUGUI _appearance;
 
+//    TextMeshProUGUI[] allTexts = new TextMeshProUGUI[10];
+
     Photograph photo;
 
-    private void Start()
+    private void Awake()
     {
-        TextMeshProUGUI[] allTexts = { _animalName, _lifeSpan, _weight, _height, _length, _biome, _diet, _food, _details, _appearance };
-        for (int i = 0; i < allTexts.Length; i++)
-        {
-            allTexts[i].gameObject.SetActive(false);
-        }
+        //TextMeshProUGUI[] allTexts = { _animalName, _lifeSpan, _weight, _height, _length, _biome, _diet, _food, _details, _appearance };
+        //for (int i = 0; i < allTexts.Length; i++)
+        //{
+        //    allTexts[i].gameObject.SetActive(false);
+        //}
 
     }
     public void AddPhoto(Photograph newPhoto)
     {
         photo = newPhoto;
 
-        TextMeshProUGUI[] allTexts = { _animalName, _lifeSpan, _weight, _height, _length, _biome, _diet, _food, _details, _appearance };
-        for (int i = 0; i < allTexts.Length; i++)
-        {
-            allTexts[i].gameObject.SetActive(true);
-        }
+        //TextMeshProUGUI[] allTexts = { _animalName, _lifeSpan, _weight, _height, _length, _biome, _diet, _food, _details, _appearance };
+        //for (int i = 0; i < allTexts.Length; i++)
+        //{
+        //    allTexts[i].gameObject.SetActive(true);
+        //}
 
         polaroidPhoto.sprite = photo.polaroidPhoto;
         polaroidPhoto.enabled = true;

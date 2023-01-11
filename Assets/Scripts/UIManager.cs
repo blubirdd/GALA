@@ -120,6 +120,9 @@ public class UIManager : MonoBehaviour
 
         GameEvents.instance.CameraOpened();
 
+
+        //debug purpose
+        Application.targetFrameRate = 60;
     }
     public void CloseCamera()
     {
@@ -128,6 +131,8 @@ public class UIManager : MonoBehaviour
 
         cameraOpened = false;
         GameEvents.instance.CameraClosed();
+        //debug purpose
+        Application.targetFrameRate = -1;
     }
     public void DisablePlayerMovement()
     {

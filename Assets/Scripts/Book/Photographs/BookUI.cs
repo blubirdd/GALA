@@ -54,6 +54,11 @@ public class BookUI : MonoBehaviour
             UpdateBirds();
         }
 
+        if (_animalGroup == "Reptile")
+        {
+            UpdateReptiles();
+        }
+
     }
 
     void UpdateMammals()
@@ -75,6 +80,20 @@ public class BookUI : MonoBehaviour
             if (i < book.photosBird.Count)
             {
                 slotsBirds[i].AddPhoto(book.photosBird[i]);
+
+            }
+        }
+
+    }
+
+
+    void UpdateReptiles()
+    {
+        for (int i = 0; i < slotsReptiles.Length; i++)
+        {
+            if (i < book.photosReptile.Count)
+            {
+                slotsReptiles[i].AddPhoto(book.photosReptile[i]);
 
             }
         }

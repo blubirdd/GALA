@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c0ada4ca1bbdf604093f39668c4afde6
+guid: 844457ea6063e9e4dbb379d1d5b94fde
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
@@ -7,18 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Deer hooves
-    second: {fileID: 2100000, guid: fd8cde5cec3c0ac418ff821e1d15d822, type: 2}
+      name: Crocodile Skin
+    second: {fileID: 2100000, guid: 1422ab91ce1af674ca3771430606e880, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Deer horns
-    second: {fileID: 2100000, guid: f7573a5d314c8e64aac540c69bd8d0f4, type: 2}
+      name: Crocodile small details
+    second: {fileID: 2100000, guid: a8a0674dbe774f84ab38bba61f721367, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Deer skin
-    second: {fileID: 2100000, guid: 62841ca25c8a3bc4d82f5455602eb786, type: 2}
+      name: Crocodile stripes
+    second: {fileID: 2100000, guid: ed6cbabc7e322ba41aa5378d1590dd61, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -50,7 +50,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.5
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -103,7 +103,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.005
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
