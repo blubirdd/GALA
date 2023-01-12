@@ -21,7 +21,7 @@ MonoBehaviour:
   length: 'Length: 2 M'
   biomeImage: {fileID: 0}
   biome: Grassland, Forest
-  diet: 'Diet: '
+  diet: 'Diet: Herbivore'
   food: 'Food: Grasses, Young bamboo shoots, and wild Sugarcane.'
   appearance: Dark brown to grayish in color small hoofed with short and stocky limbs.
     The horns are V-shaped manner and are triangular at their base.

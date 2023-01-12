@@ -20,6 +20,7 @@ public class UIVirtualJoystick : MonoBehaviour, IPointerDownHandler, IDragHandle
     [Header("Output")]
     public Event joystickOutputEvent;
 
+
     void Start()
     {
         SetupHandle();

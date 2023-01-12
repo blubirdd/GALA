@@ -38,7 +38,7 @@ public class Animal : MonoBehaviour
 
         StartCoroutine("FindTargetWithDelay", 0.5f);
 
-        animator = GetComponent<Animator>();
+       // animator = GetComponent<Animator>();
 
        // _agent = GetComponent<NavMeshAgent>();
 
@@ -91,7 +91,7 @@ public class Animal : MonoBehaviour
                 //if animalai pathfinding is attached
                 if (animalAI != null)
                 {   //move to target
-                    animator.SetBool("isWalking", true);
+                 //   animator.SetBool("isWalking", true);
                     animalAI.TargetLocation(preyTransform);
                 }
             }
@@ -122,7 +122,7 @@ public class Animal : MonoBehaviour
             preyTransform = null;
             predatorTransform = null;
 
-            animator.SetBool("isWalking", false);
+           // animator.SetBool("isWalking", false);
         }
 
     }

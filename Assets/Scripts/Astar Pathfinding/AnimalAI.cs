@@ -72,6 +72,7 @@ public class AnimalAI : MonoBehaviour
                 continue;
             }
 
+            Debug.Log("Animal found");
             // Update the path
             PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
 

@@ -5,16 +5,20 @@ using UnityEngine;
 public class Cutscene : MonoBehaviour
 {
 
-
     public string locationName;
     public GameObject discoveryUI;
     bool isDone = false;
+
+    private QuestNew quest { get; set; }
+    [SerializeField] private GameObject quests;
+    [SerializeField] private string questType;
 
 
     void SpawnDiscoveryUI()
     {
         GameObject go = Instantiate(discoveryUI);
         go.GetComponent<Discovery>().SetName(locationName);
+
         isDone = true;
     }
     void OnTriggerEnter(Collider collision)
@@ -28,17 +32,19 @@ public class Cutscene : MonoBehaviour
             UIManager.instance.DisablePlayerMovement();
 
             SpawnDiscoveryUI();
-
+            quest = (QuestNew)quests.AddComponent(System.Type.GetType(questType));
             Debug.Log("Cutscene playing");
+
             //StartCoroutine(WaitForSecondsThenDestroy());
         }
     }
+
     //IEnumerator WaitForSecondsThenDestroy()
     //{
     //    yield return new WaitForSeconds(3f);
 
     //    GameEvents.instance.CameraClosed();
-        
+
     //    //ui
     //    UIManager.instance.EnablePlayerMovement();
 
