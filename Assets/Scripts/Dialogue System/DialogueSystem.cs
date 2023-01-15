@@ -84,7 +84,7 @@ public class DialogueSystem : MonoBehaviour
         {
             dialogueText.text += letter;
             //anim speed
-            yield return new WaitForSeconds(_textSpeed);
+           // yield return new WaitForSeconds(_textSpeed);
             yield return null;
         }
     }

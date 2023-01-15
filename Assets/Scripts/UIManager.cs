@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
 
     void Awake()
     {
+
         if (instance != null)
         {
             Debug.LogWarning("More than one instance of UIManager found");
@@ -37,8 +38,13 @@ public class UIManager : MonoBehaviour
 
     public GameObject pauseMenu;
 
+    public UIVirtualJoystick uiVirtualJoystick;
+
     [Header("Camera")]
     public bool cameraOpened;
+
+   //[Header("Inventory")]
+   // public GameObject inventoryPanel;
 
 
     [Header("Book")]
@@ -53,15 +59,19 @@ public class UIManager : MonoBehaviour
     //task ui is on taskui script
     // public TaskUI taskUI;
 
+    //[Header("NEW INPUT SYSTEM")]
+    //public InputAction playerControl;
+
     [Header("Outdated")]
     //THIS IS OUTDATED
     public TextMeshProUGUI objective1;
     public TextMeshProUGUI objective2;
     public TextMeshProUGUI objective3;
 
-
+    public GameObject analytics;
     public Goal goal;
 
+    public bool disableFpsLimit = false;
     private void Start()
     {
         //camera 
@@ -75,6 +85,41 @@ public class UIManager : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+
+    }
+
+
+    public void ToggleFPS()
+    {
+
+        disableFpsLimit = !disableFpsLimit;
+
+        if (disableFpsLimit == true)
+        {
+            Application.targetFrameRate = 60;
+            Debug.Log("Increase limit to 60");
+        }
+
+        else
+        {
+            Application.targetFrameRate = -1;
+            Debug.Log("Decrease limit to 30");
+        }
+
+
+    }
+
+    public void AnalyticsToggle()
+    {
+        analytics.SetActive(!analytics.activeSelf);
+    }
+    //public void CloseInventory()
+    //{
+    //    inventoryPanel.SetActive(false);
+    //    Debug.Log("Working close inventory");
+    //}
 
     public void OpenCloseTutorialPrompt()
     {
@@ -122,7 +167,7 @@ public class UIManager : MonoBehaviour
 
 
         //debug purpose
-        Application.targetFrameRate = 60;
+       // Application.targetFrameRate = 60;
     }
     public void CloseCamera()
     {
@@ -132,19 +177,19 @@ public class UIManager : MonoBehaviour
         cameraOpened = false;
         GameEvents.instance.CameraClosed();
         //debug purpose
-        Application.targetFrameRate = -1;
+       // Application.targetFrameRate = -1;
     }
     public void DisablePlayerMovement()
     {
-
+        uiVirtualJoystick.ResetJoyStick();
         playerInputUI.SetActive(false);
         playerModel.SetActive(false);
     }
 
     public void EnablePlayerMovement()
     {
-        
         playerInputUI.SetActive(true);
+        uiVirtualJoystick.ResetJoyStick();
         playerModel.SetActive(true);
 
     }
@@ -220,9 +265,12 @@ public class UIManager : MonoBehaviour
         EnableButtonsUIPACK();
     }
 
-    public void ChangeSceneToForest()
+
+    public void GoToMainMenu()
     {
-        SceneManager.LoadScene("Forest");
+        Time.timeScale = 1f;
+        DataPersistenceManager.instance.SaveGame();
+        SceneManager.LoadScene("MainMenu");
     }
 
 }

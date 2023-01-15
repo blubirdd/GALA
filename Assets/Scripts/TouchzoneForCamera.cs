@@ -18,7 +18,7 @@ public class TouchzoneForCamera : MonoBehaviour, IPointerDownHandler, IDragHandl
     public bool invertXOutputValue;
     public bool invertYOutputValue;
 
-
+    public bool onEditor = true;
 
     public static float sensitivity = 1f;
     // public float cameraMagnitudeMultiplier;
@@ -62,18 +62,6 @@ public class TouchzoneForCamera : MonoBehaviour, IPointerDownHandler, IDragHandl
     }
 
 
-
-    //private void SetSentivityToLow()
-    //{
-    //    magnitudeMultiplier = 20;
-    //    Debug.Log("Set low");
-    //}
-
-    //private void SetSentivityToNormal()
-    //{
-    //    magnitudeMultiplier = 60;
-    //}
-
     private void SetupHandle()
     {
         if (handleRect)
@@ -106,9 +94,15 @@ public class TouchzoneForCamera : MonoBehaviour, IPointerDownHandler, IDragHandl
         Vector2 outputPosition = ApplyInversionFilter(clampedPosition);
 
 
-        OutputPointerEventValue(outputPosition * magnitudeMultiplier * sensitivity * Time.deltaTime);
-        //OutputPointerEventValue(outputPosition * magnitudeMultiplier * sensitivity);
-
+        //on pc
+        if (onEditor)
+        {
+            OutputPointerEventValue(outputPosition * magnitudeMultiplier * sensitivity * Time.deltaTime);
+        }
+        else
+        {
+            OutputPointerEventValue(outputPosition * magnitudeMultiplier * sensitivity);
+        }
 
     }
 

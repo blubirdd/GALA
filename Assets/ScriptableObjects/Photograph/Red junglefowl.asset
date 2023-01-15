@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c25f5515792a1d40b6d0101ce548f3b, type: 3}
+  m_Name: Red junglefowl
+  m_EditorClassIdentifier: 
+  name: Red junglefowl
+  animalGroup: Bird
+  polaroidPhoto: {fileID: 21300000, guid: e2d5ea2467ed2804a83069cf8fe11b0a, type: 3}
+  lifeSpan: 'Life Span: 10-30 YRS'
+  weight: 'Weight: 485-1,450 G'
+  height: 'Height: Unknown'
+  length: 'Length: 42-75 CM'
+  biomeImage: {fileID: 0}
+  biome: Anthrophogenic, Forest
+  diet: 'Diet: Omnivore'
+  food: 'Food: Seeds, Crops, Fruits and small lizards'
+  appearance: Looks like a mcchicken.  Topped with shredded lettuce and just the
+    right amount of creamy mayonnaise, all served on a perfectly toasted bun.
+  details: Social and typically live in flocks of one to a few males and several
+    females. They are active during the day and usually feed in the early morning
+    and late afternoon.

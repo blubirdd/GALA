@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1229972321345737880}
   - component: {fileID: 2791781905629911869}
   - component: {fileID: 97550406472691703}
-  - component: {fileID: -5787671215719585101}
+  - component: {fileID: 2668543263938145327}
   m_Layer: 0
   m_Name: WoodLog
   m_TagString: Untagged
@@ -86,8 +86,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &-5787671215719585101
-MeshCollider:
+--- !u!65 &2668543263938145327
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -96,7 +96,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1441757293723600657, guid: 331c80685596de24bbe0126444d9e307, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.0063293716, y: 0.026703764, z: 0.006146894}
+  m_Center: {x: -0.00013895798, y: 0.0016305017, z: 0.0030592175}

@@ -1,3 +1,4 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -33,6 +34,12 @@ public class ItemPickup : MonoBehaviour, IInteractable
 
     public Item item;
     public string InteractionPrompt => _prompt + item.name;
+
+    ThirdPersonController instance;
+    void Start()
+    {
+        instance = ThirdPersonController.instance;
+    }
     public bool Interact(Interactor interactor)
     {
         PickUp();
@@ -42,6 +49,8 @@ public class ItemPickup : MonoBehaviour, IInteractable
     void PickUp()
     {
         Debug.Log("Picked up " + item.name);
+
+        instance.ItemPickupAnim();
         Inventory.instance.Add(item, 1);
         Destroy(gameObject);
     }

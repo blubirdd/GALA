@@ -44,9 +44,7 @@ public class Grid : MonoBehaviour
             {
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
 
-
-
-                //height map
+                //height map terrain
                 //worldPoint.y = Terrain.activeTerrain.SampleHeight(worldPoint);
 
                 //unwalkable mask
@@ -59,7 +57,7 @@ public class Grid : MonoBehaviour
                 Ray ray = new Ray(worldPoint + Vector3.up * 50, Vector3.down);
                 RaycastHit rayhit;
 
-                if (Physics.Raycast(ray, out rayhit, 100, Physics.AllLayers))
+                if (Physics.Raycast(ray, out rayhit, 100, unwalkbleMask))
                 {
                     worldPoint = rayhit.point;
                 }

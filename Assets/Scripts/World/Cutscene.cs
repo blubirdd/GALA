@@ -29,11 +29,12 @@ public class Cutscene : MonoBehaviour
             GameEvents.instance.CutscenePlay();
 
             //ui
-            UIManager.instance.DisablePlayerMovement();
-
             SpawnDiscoveryUI();
             quest = (QuestNew)quests.AddComponent(System.Type.GetType(questType));
             Debug.Log("Cutscene playing");
+
+            //turn off joystick
+            UIManager.instance.DisablePlayerMovement();
 
             //StartCoroutine(WaitForSecondsThenDestroy());
         }

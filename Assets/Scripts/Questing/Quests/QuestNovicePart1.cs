@@ -24,7 +24,7 @@ public class QuestNovicePart1 : QuestNew
         goalDescription[0] = "Photograph a Tamaraw ";
         requiredAmount[0] = 1;
 
-        goalDescription[1] = "Photograph a Philippine Crococile";
+        goalDescription[1] = "Photograph a Philippine Crocodile";
         requiredAmount[1] = 1;
 
 
@@ -55,8 +55,8 @@ public class QuestNovicePart1 : QuestNew
         UpdateQuestUI();
 
         //goals
-        Goals.Add(new PictureGoal(this, "Visayan Spotted Deer", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
-        Goals.Add(new PictureGoal(this, "Tamaraw", goalDescription[1], false, currentProgress[1], requiredAmount[1]));
+        Goals.Add(new PictureGoal(this, "Tamaraw", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new PictureGoal(this, "Philippine Crocodile", goalDescription[1], false, currentProgress[1], requiredAmount[1]));
 
         Goals.ForEach(g => g.InIt());
 

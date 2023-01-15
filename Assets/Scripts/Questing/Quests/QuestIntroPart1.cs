@@ -7,11 +7,10 @@ using UnityEngine;
 public class QuestIntroPart1 : QuestNew
 {
 
-    static int numberOfGoals = 1;
 
-    private string[] goalDescription = new string[numberOfGoals];
-    private int[] currentProgress = new int[numberOfGoals];
-    private int[] requiredAmount = new int[numberOfGoals];
+    private string[] goalDescription = new string[] { "Talk to the mysterious person" };
+    private int[] currentProgress = new int[] {0};
+    private int[] requiredAmount = new int[] {1};
     private string ID;
 
     void Start()
@@ -22,8 +21,7 @@ public class QuestIntroPart1 : QuestNew
         ID = "QuestIntroPart1";
         questName = "The mysterious person";
         questDescription = "Approach the mysterious\nperson";
-        goalDescription[0] = "Talk to the mysterious person";
-        requiredAmount[0] = 1;
+
 
         reward = 10;
 
@@ -51,7 +49,7 @@ public class QuestIntroPart1 : QuestNew
 
         UpdateQuestUI();
 
-        //goal
+        //goal (this, name of target, goaldescription, iscompleted bool, current progress, required amount)
         Goals.Add(new TalkGoal(this, "Fairy", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
         Goals.ForEach(g => g.InIt());
 

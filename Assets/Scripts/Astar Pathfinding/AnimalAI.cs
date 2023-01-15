@@ -1,7 +1,10 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class AnimalAI : MonoBehaviour
 {
@@ -28,8 +31,18 @@ public class AnimalAI : MonoBehaviour
         animal = GetComponent<Animal>();
         StartCoroutine(UpdatePath());
 
+        //StartCoroutine(WanderAround());
+
+       
+       // StartCoroutine(TestPlayer());
     }
 
+    IEnumerator TestPlayer()
+    {
+        target = ThirdPersonController.instance.transform;
+        yield return new WaitForSeconds(5f);
+        target = null;
+    }
 
     public void Update()
     {
@@ -72,13 +85,13 @@ public class AnimalAI : MonoBehaviour
                 continue;
             }
 
-            Debug.Log("Animal found");
+            
             // Update the path
             PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
 
             float sqrMoveThreshold = pathUpdateMoveThreshold * pathUpdateMoveThreshold;
             Vector3 targetPosOld = target.position;
-
+            Debug.Log("Animal found");
             while (true)
             {
                 var t = target ?? transform;
@@ -95,6 +108,8 @@ public class AnimalAI : MonoBehaviour
         }
 
     }
+
+
     IEnumerator FollowPath()
     {
 
@@ -168,6 +183,8 @@ public class AnimalAI : MonoBehaviour
               
         }
     }
+
+
 
     public void OnDrawGizmos()
     {
