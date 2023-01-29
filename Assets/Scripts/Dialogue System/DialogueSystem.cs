@@ -21,7 +21,7 @@ public class DialogueSystem : MonoBehaviour
     public GameObject controlsCanvas;
     public GameObject dialogueCanvas;
 
-    [SerializeField] private float _textSpeed;
+    //[SerializeField] private float _textSpeed;
 
 
    

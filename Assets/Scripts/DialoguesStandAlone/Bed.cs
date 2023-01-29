@@ -8,6 +8,7 @@ public class Bed : MonoBehaviour, IDataPersistence
     public bool triggerStartDialogue;
 
 
+
     //yes this is a quest giver
     private QuestNew quest { get; set; }
 
@@ -16,6 +17,9 @@ public class Bed : MonoBehaviour, IDataPersistence
     [SerializeField] private string questType;
 
     // Start is called before the first frame update
+
+    // waypoint
+    WaypointMarker waypointMarker;
     void Start()
     {
         if (triggerStartDialogue)
@@ -23,6 +27,7 @@ public class Bed : MonoBehaviour, IDataPersistence
             StartCoroutine(WaitForDialogueToTrigger());
         }
 
+        waypointMarker = GetComponent<WaypointMarker>();
 
     }
 
@@ -49,6 +54,8 @@ public class Bed : MonoBehaviour, IDataPersistence
         Debug.Log("Assigning first quest...");
         quest = (QuestNew)quests.AddComponent(System.Type.GetType(questType));
         Debug.Log(this + "Quest New Assigned");
+
+        waypointMarker.SpawnWaypointMarker();
 
     }
 

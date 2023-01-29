@@ -33,16 +33,9 @@ public class AnimalAI : MonoBehaviour
 
         //StartCoroutine(WanderAround());
 
-       
-       // StartCoroutine(TestPlayer());
     }
 
-    IEnumerator TestPlayer()
-    {
-        target = ThirdPersonController.instance.transform;
-        yield return new WaitForSeconds(5f);
-        target = null;
-    }
+
 
     public void Update()
     {
@@ -58,7 +51,8 @@ public class AnimalAI : MonoBehaviour
 
     public void OnPathFound(Vector3[] waypoints, bool pathSuccessful)
     {
-        if (pathSuccessful && target!=null)
+        //if (pathSuccessful && target!=null)
+        if (pathSuccessful)
         {
             path = new AstarPath(waypoints, transform.position, turnDst, stoppingDst);
 
@@ -91,7 +85,7 @@ public class AnimalAI : MonoBehaviour
 
             float sqrMoveThreshold = pathUpdateMoveThreshold * pathUpdateMoveThreshold;
             Vector3 targetPosOld = target.position;
-            Debug.Log("Animal found");
+
             while (true)
             {
                 var t = target ?? transform;
@@ -134,6 +128,8 @@ public class AnimalAI : MonoBehaviour
 
                 if (pathIndex == path.finishLineIndex)
                 {
+                    //seeker finsihed the path
+
                     followingPath = false;
                     break;
                 }
@@ -141,7 +137,8 @@ public class AnimalAI : MonoBehaviour
                 if(target == null)
                 {
                     //wait for 1 second before stopping the hunt
-                    //yield return new WaitForSeconds(1);
+                    //currently not working
+                    ///yield return new WaitForSeconds(5);
 
                     //stop following
                     followingPath = false;
@@ -161,11 +158,14 @@ public class AnimalAI : MonoBehaviour
                     speedPercent = Mathf.Clamp01(path.turnBoundaries[path.finishLineIndex].DistanceFromPoint(pos2D) / stoppingDst);
                     if (speedPercent < 0.01f)
                     {
+                        //reach destination
                         followingPath = false;
+                        Debug.Log("Target reached");
                     }
                 }
 
-
+                //stop emmediately after loosing sight
+                //remove checking for null to stop after reaching a waypoint
                 if (target != null)
                 {
                     //rotate the unit to waypoint
@@ -174,7 +174,6 @@ public class AnimalAI : MonoBehaviour
                     transform.Translate(Vector3.forward * Time.deltaTime * speed * speedPercent, Space.Self);
                     
                 }
-
 
             }
 

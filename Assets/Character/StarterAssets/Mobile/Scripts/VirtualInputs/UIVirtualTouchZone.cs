@@ -17,7 +17,7 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
     public bool invertXOutputValue;
     public bool invertYOutputValue;
 
-    public bool onEditor = true;
+    private bool onEditor;
 
     public static float sensitivity = 1f;
     // public float cameraMagnitudeMultiplier;
@@ -33,6 +33,11 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
 
     void Start()
     {
+        #if UNITY_EDITOR
+                onEditor = true;
+        #else
+                onEditor = false;
+        #endif
         SetupHandle();
 
        // Application.targetFrameRate = 60;

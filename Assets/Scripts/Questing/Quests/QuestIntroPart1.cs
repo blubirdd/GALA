@@ -16,7 +16,6 @@ public class QuestIntroPart1 : QuestNew
     void Start()
     {
 
-
         //setup
         ID = "QuestIntroPart1";
         questName = "The mysterious person";
@@ -57,6 +56,9 @@ public class QuestIntroPart1 : QuestNew
 
         //event trigger
         //QuestEvents.instance.QuestAccepted2();
+
+
+        //marker
 
     }
 
@@ -100,6 +102,8 @@ public class QuestIntroPart1 : QuestNew
         //debug
         Debug.Log(this + " is Completed");
 
+        //disable marker
+        Destroy(GameObject.Find("FairyWaypoint").gameObject);
     }
 
 }

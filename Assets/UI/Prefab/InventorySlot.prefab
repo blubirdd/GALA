@@ -53,6 +53,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 7744017919614371112}
   textAmount: {fileID: 4726885622060112178}
+  itemDetails: {fileID: 0}
+  itemName: {fileID: 0}
+  itemDescription: {fileID: 0}
+  useButton: {fileID: 0}
 --- !u!1 &7192612732701522566
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,7 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7169812, g: 0.6858669, b: 0.6858669, a: 1}
+  m_Color: {r: 0.9433962, g: 0.9433962, b: 0.9433962, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

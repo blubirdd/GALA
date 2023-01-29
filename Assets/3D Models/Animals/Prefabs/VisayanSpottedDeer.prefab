@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0.8, y: 0.8}
+  m_SizeDelta: {x: 0.6, y: 0.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1924007791
 CanvasRenderer:
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bf3f4fe090364a7479c6a4498d48d014, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1b9bf63cb17911442a6fe4bbe94af693, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -204,8 +204,8 @@ GameObject:
   - component: {fileID: 5129397729922373331}
   - component: {fileID: 5129397729922373328}
   - component: {fileID: 2364080099743082984}
-  - component: {fileID: 400271613}
   - component: {fileID: 1832935317}
+  - component: {fileID: 5129397731068775479}
   m_Layer: 7
   m_Name: VisayanSpottedDeer
   m_TagString: Untagged
@@ -276,18 +276,26 @@ MonoBehaviour:
   isPassive: 0
   isAggro: 0
   isHunting: 0
+  isHungry: 0
+  isThirsty: 0
+  hunger: 0
+  thirst: 0
   showSphere: 1
   preyTransform: {fileID: 0}
   predatorTransform: {fileID: 0}
   targetMask:
     serializedVersion: 2
-    m_Bits: 1544
-  _viewRadius: 21.3
+    m_Bits: 5640
+  _viewRadius: 15
   _targetsFound: 0
-  _agent: {fileID: 2364080099743082984}
+  _animal: {fileID: 2364080099743082984}
   floorMask:
     serializedVersion: 2
     m_Bits: 1
+  minWaitTime: 0
+  maxWaitTime: 0
+  statusImage: {fileID: 1924007792}
+  animalState: {fileID: 11400000, guid: 10727ab5296951d419402a5cb287ec3d, type: 2}
 --- !u!114 &5129397729922373328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,7 +326,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 360
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
@@ -327,24 +335,6 @@ NavMeshAgent:
   m_BaseOffset: 1.65
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 2
---- !u!143 &400271613
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7485455766058247478}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Height: 3.82
-  m_Radius: 1.45
-  m_SlopeLimit: 30
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: -0.2, z: 0}
 --- !u!114 &1832935317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,6 +348,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   photo: {fileID: 11400000, guid: 3a00ce5c632a4e4459fd1c37a10c6a7a, type: 2}
+--- !u!135 &5129397731068775479
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7485455766058247478}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.01
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7797137450440946171
 GameObject:
   m_ObjectHideFlags: 0

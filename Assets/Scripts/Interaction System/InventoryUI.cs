@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class InventoryUI : MonoBehaviour
 {
     public Transform itemsParent;
     public GameObject inventoryUI;
+    public GameObject itemContents;
+    public GameObject itemDetailsParent;
+    public Image itemDetailsBackgroundImage;
 
     Inventory inventory;
     
@@ -47,11 +50,15 @@ public class InventoryUI : MonoBehaviour
     {
         //inventoryUI.SetActive(!inventoryUI.activeSelf);
         inventoryUI.SetActive(true);
+        itemDetailsParent.SetActive(true);
+        itemContents.SetActive(false);
         UIManager.instance.DisableButtonsUIPACK();
     }
 
     public void CloseInventory()
     {
+        itemDetailsBackgroundImage.color = new Color32(116, 91, 91, 255);
+        itemDetailsParent.SetActive(false);
         inventoryUI.SetActive(false);
         UIManager.instance.EnableButtonsUIPACK();
     }

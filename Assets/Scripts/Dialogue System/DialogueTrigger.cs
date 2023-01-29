@@ -8,6 +8,7 @@ public class DialogueTrigger : MonoBehaviour
     public Dialogue dialogue;
     public Dialogue isTalkedDialogue;
 
+   // public DialogueSO dialogueSO;
 
     public void TriggerDialogue()
     {

@@ -81,7 +81,7 @@ namespace StarterAssets
         [Header("Player Standing/Crouching")]
         public bool crouching = false;
 
-        public Transform cameraRoot;
+        //public Transform cameraRoot;
         // public bool crouchWalk = false;
 
         [Header("Cinemachine")]
@@ -420,8 +420,6 @@ namespace StarterAssets
         {
             MoveSpeed = MoveSpeed * 0.5f;
             SprintSpeed = SprintSpeed * 0.5f;
-            //move root down
-            cameraRoot.transform.position = new Vector3(transform.position.x, 1.3f, transform.position.z);
             _animator.SetBool(_animIDCrouch, true);
             this.gameObject.layer = LayerMask.NameToLayer("Stealth");
         }
@@ -431,8 +429,6 @@ namespace StarterAssets
             _animator.SetBool(_animIDCrouch, false);
             MoveSpeed = MoveSpeed * 2f;
             SprintSpeed = SprintSpeed * 2f;
-            //move root up
-            cameraRoot.transform.position = new Vector3(transform.position.x, 1.836f, transform.position.z);
             this.gameObject.layer = LayerMask.NameToLayer("Player");
         }
 

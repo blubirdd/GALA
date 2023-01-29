@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialDiscovery : MonoBehaviour
+[CreateAssetMenu(fileName = "New Equipment", menuName = "Inventory/Equipment")]
+public class Equipment : Item
 {
     // Start is called before the first frame update
     void Start()

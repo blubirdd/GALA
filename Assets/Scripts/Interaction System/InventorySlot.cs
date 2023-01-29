@@ -8,6 +8,14 @@ public class InventorySlot : MonoBehaviour
     public Image icon;
     public TextMeshProUGUI textAmount;
 
+    [Header("Item Details Content")]
+    public GameObject itemDetails;
+    public Image itemDetailsBackgroundImage;
+    public TextMeshProUGUI itemName;
+    public TextMeshProUGUI itemDescription;
+    public Button useButton;
+    
+
     Item item;
 
 
@@ -50,8 +58,22 @@ public class InventorySlot : MonoBehaviour
     {
         if(item != null)
         {
-            item.Use();
-            Inventory.instance.Remove(item);
+            itemDetails.SetActive(true);
+            itemDetailsBackgroundImage.color =  new Color32(255, 255, 255, 255);
+
+            itemName.text = item.name;
+            
+           
         }
+    }
+
+    public void ConsumeItem()
+    {
+        //use the item
+        item.Use();
+
+        itemDetailsBackgroundImage.color = new Color32(116, 91, 91, 255);
+        itemDetails.SetActive(false);
+        // Inventory.instance.Remove(item);
     }
 }

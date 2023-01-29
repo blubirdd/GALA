@@ -34,13 +34,7 @@ public class GameEvents : MonoBehaviour
 
     public event Action onGoalValueChanged;
 
-    //Quest Events
 
-    public event Action<string> onQuestCompleted;
-    public void QuestCompleted(string questName)
-    {
-        onQuestCompleted?.Invoke(questName);
-    }
 
     public event Action onGoalCompleted;
 
@@ -95,6 +89,13 @@ public class GameEvents : MonoBehaviour
         onGoalCompleted?.Invoke();
     }
 
+    //Quest Events
+
+    public event Action<string> onQuestCompleted;
+    public void QuestCompleted(string questName)
+    {
+        onQuestCompleted?.Invoke(questName);
+    }
 
     //Delegates
     public delegate void ObjectiveUIEventHander(string title, List<Goal> list);
