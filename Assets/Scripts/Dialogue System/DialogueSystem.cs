@@ -14,6 +14,7 @@ public class DialogueSystem : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
 
+
     public Animator animator;
 
     private Queue<string> sentences;
@@ -21,6 +22,9 @@ public class DialogueSystem : MonoBehaviour
     public GameObject controlsCanvas;
     public GameObject dialogueCanvas;
 
+    [Header("Subtle Dialogue")]
+    public GameObject subtleDialogueCanvas;
+    public TextMeshProUGUI subtleDialogueText;
     //[SerializeField] private float _textSpeed;
 
 
@@ -64,6 +68,7 @@ public class DialogueSystem : MonoBehaviour
 
     }
 
+
     public void DisplayNextSentence()
     {
         if (sentences.Count == 0)
@@ -76,6 +81,7 @@ public class DialogueSystem : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
     }
+
 
     IEnumerator TypeSentence(string sentence)
     {
@@ -98,8 +104,61 @@ public class DialogueSystem : MonoBehaviour
         controlsCanvas.SetActive(true);
 
         dialogueEnded = true;
-
      
+    }
+
+    //////////////SUBTLE DIALOGUE
+    public void StartSubtleDialogue(Dialogue dialogue)
+    {
+        subtleDialogueCanvas.SetActive(true);
+
+        sentences.Clear();
+
+        foreach (string sentence in dialogue.sentences)
+        {
+            sentences.Enqueue(sentence);
+        }
+
+        StartCoroutine(EnumDisplaySubtleNextSentence());
+    }
+
+    public void DisplaySubtleNextSentence()
+    {
+        if (sentences.Count == 0)
+        {
+            StopCoroutine(EnumDisplaySubtleNextSentence());
+            EndSubtleDialogue();
+            return;
+        }
+
+        string sentence = sentences.Dequeue();
+        StopCoroutine(TypeSubtleSentence(sentence));
+        StartCoroutine(TypeSubtleSentence(sentence));
+    }
+
+    IEnumerator EnumDisplaySubtleNextSentence()
+    {
+        while(true)
+        {
+            DisplaySubtleNextSentence();
+            yield return new WaitForSeconds(5);
+        }
+    }
+
+    IEnumerator TypeSubtleSentence(string sentence)
+    {
+        subtleDialogueText.text = "";
+        foreach (char letter in sentence.ToCharArray())
+        {
+            subtleDialogueText.text += letter;
+
+            yield return null;
+        }
+    }
+    public void EndSubtleDialogue()
+    {
+        Debug.Log("Subtle Dialogue End");
+        subtleDialogueCanvas.SetActive(false);
     }
      
 

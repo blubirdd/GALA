@@ -54,9 +54,12 @@ MonoBehaviour:
   icon: {fileID: 7744017919614371112}
   textAmount: {fileID: 4726885622060112178}
   itemDetails: {fileID: 0}
+  itemDetailsBackgroundImage: {fileID: 0}
   itemName: {fileID: 0}
   itemDescription: {fileID: 0}
   useButton: {fileID: 0}
+  throwButton: {fileID: 0}
+  inventoryUI: {fileID: 0}
 --- !u!1 &7192612732701522566
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +136,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

@@ -14,11 +14,11 @@ public class InventorySlot : MonoBehaviour
     public TextMeshProUGUI itemName;
     public TextMeshProUGUI itemDescription;
     public Button useButton;
-    
+    public Button throwButton;
 
     Item item;
 
-
+    public InventoryUI inventoryUI;
 
 
     //public void AddItem(Item newItem)
@@ -61,19 +61,40 @@ public class InventorySlot : MonoBehaviour
             itemDetails.SetActive(true);
             itemDetailsBackgroundImage.color =  new Color32(255, 255, 255, 255);
 
+            //setup
             itemName.text = item.name;
-            
-           
+
+            inventoryUI.currentItem = item;
+
+            //buttons
+            if (item.isUsable)
+            {
+                useButton.gameObject.SetActive(true);
+            }
+
+            else
+            {
+                useButton.gameObject.SetActive(false);
+            }
+
+            if (item.isThrowable)
+            {
+                throwButton.gameObject.SetActive(true);
+            }
+
+            else
+            {
+                throwButton.gameObject.SetActive(false);
+            }
         }
     }
 
-    public void ConsumeItem()
-    {
-        //use the item
-        item.Use();
+    //public void ConsumeItem()
+    //{
+    //    use the item
 
-        itemDetailsBackgroundImage.color = new Color32(116, 91, 91, 255);
-        itemDetails.SetActive(false);
-        // Inventory.instance.Remove(item);
-    }
+    //    itemDetailsBackgroundImage.color = new Color32(116, 91, 91, 255);
+    //    itemDetails.SetActive(false);
+    //     Inventory.instance.Remove(item);
+    //}
 }

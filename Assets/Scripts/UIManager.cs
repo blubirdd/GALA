@@ -40,6 +40,8 @@ public class UIManager : MonoBehaviour
 
     public UIVirtualJoystick uiVirtualJoystick;
 
+    public GameObject throwButtonsParent;
+
     [Header("Camera")]
     public bool cameraOpened;
 
@@ -129,11 +131,13 @@ public class UIManager : MonoBehaviour
     public void DisableButtonsUIPACK()
     {
         buttonsUIPack.SetActive(false);
+        DisablePlayerMovement();
     }
 
     public void EnableButtonsUIPACK()
     {
         buttonsUIPack.SetActive(true);
+        EnablePlayerMovement();
     }
 
     public void ClosePauseMenu()
@@ -254,7 +258,7 @@ public class UIManager : MonoBehaviour
 
         DisablePlayerMovement();
 
-        DisableButtonsUIPACK();
+        //DisableButtonsUIPACK();
     }
 
     public void CloseBook()
@@ -262,7 +266,7 @@ public class UIManager : MonoBehaviour
         EnablePlayerMovement();
         book.SetActive(!book.activeSelf);
 
-        EnableButtonsUIPACK();
+       // EnableButtonsUIPACK();
     }
 
 
@@ -273,4 +277,14 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    //THROWING
+    public void EnableThrowUI()
+    {
+        throwButtonsParent.SetActive(true);
+    }
+
+    public void DisableThrowUI()
+    {
+        throwButtonsParent.SetActive(false);
+    }
 }

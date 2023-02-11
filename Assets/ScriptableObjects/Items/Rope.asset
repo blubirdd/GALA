@@ -15,3 +15,6 @@ MonoBehaviour:
   name: Rope
   icon: {fileID: 0}
   isDefaultItem: 0
+  isUsable: 1
+  isThrowable: 0
+  itemDescription: 

@@ -122,10 +122,12 @@ namespace StarterAssets
         private int _animIDJump;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
-        private int _animIDItemPickup;
+        
         //custom anim
         private int _animIDCrouch;
         private int _animIDCrouchWalking;
+        private int _animIDItemPickup;
+        private int _animIDItemThrow;
 
         //the character transform
         //public Transform player;
@@ -144,6 +146,8 @@ namespace StarterAssets
 
         //my script
         public bool canMove = true;
+
+        
 
         private bool IsCurrentDeviceMouse
         {
@@ -209,6 +213,7 @@ namespace StarterAssets
         public void DisableMovementOnCamera()
         {
             canMove = false;
+  
         }
 
         public void EnableMovementOnThirdP()
@@ -267,6 +272,7 @@ namespace StarterAssets
             _animIDCrouchWalking = Animator.StringToHash("CrouchWalking");
 
             _animIDItemPickup = Animator.StringToHash("ItemPickup");
+            _animIDItemThrow = Animator.StringToHash("ItemThrow");
         }
 
         private void GroundedCheck()
@@ -440,6 +446,15 @@ namespace StarterAssets
             }
         }
 
+        public void ThrowItem()
+        {
+            ItemThrowAnim();
+            
+
+            //Debug.Log("Threw" + item);
+        }
+
+
         private void JumpAndGravity()
         {
             if (Grounded)
@@ -514,6 +529,10 @@ namespace StarterAssets
             _animator.SetTrigger(_animIDItemPickup);
         }
 
+        public void ItemThrowAnim()
+        {
+            _animator.SetTrigger(_animIDItemThrow);
+        }
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
         {
             if (lfAngle < -360f) lfAngle += 360f;

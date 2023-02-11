@@ -32,12 +32,16 @@ public class ItemPickup : MonoBehaviour, IInteractable
     [SerializeField] private Sprite _icon;
     public Sprite icon => _icon;
 
+   
     public Item item;
+
+    
     public string InteractionPrompt => _prompt + item.name;
 
     ThirdPersonController instance;
     void Start()
     {
+        _icon = item.icon;
         instance = ThirdPersonController.instance;
     }
     public bool Interact(Interactor interactor)

@@ -14,6 +14,7 @@ public class InventoryUI : MonoBehaviour
     
     InventorySlot[] slots;
 
+    public Item currentItem;
     void Start()
     {
         inventory = Inventory.instance;
@@ -61,6 +62,13 @@ public class InventoryUI : MonoBehaviour
         itemDetailsParent.SetActive(false);
         inventoryUI.SetActive(false);
         UIManager.instance.EnableButtonsUIPACK();
+    }
+
+    public void ConsumeItem()
+    {
+        currentItem.Use();
+
+        CloseInventory();
     }
 
 
