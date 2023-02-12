@@ -27,6 +27,7 @@ public class Book : MonoBehaviour
     public List<Photograph> photosInventory = new List<Photograph>();
     public List<Photograph> photosMammal = new List<Photograph>();
     public List<Photograph> photosBird = new List<Photograph>();
+    public List<Photograph> photosReptile = new List<Photograph>();
 
 
     public string recentAnimalDiscovered;
@@ -45,6 +46,13 @@ public class Book : MonoBehaviour
             {
                 photosBird.Add(photo);
             }
+
+            if (photo.animalGroup == "Reptile")
+            {
+                photosReptile.Add(photo);
+            }
+
+
             Debug.Log("Took a picture of " + photo.name);
 
             recentAnimalDiscovered = photo.name;

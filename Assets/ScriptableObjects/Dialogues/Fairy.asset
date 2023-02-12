@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 817552e3400626641a1e25f55b940eba, type: 3}
+  m_Name: Fairy
+  m_EditorClassIdentifier: 
+  name: Fairy
+  sentences:
+  - 'Oh. You''re Finally awake...
+
+'
+  - You must be wondering why you're here..
+  - "You have a special gift Francis, you have the ability to understand and connect
+    to animals.\t"
+  - You have always had a strong desire to protect and help animals, and that is
+    exactly what this place needs.
+  - Before you set out on your journey, I have something for you. It's a special
+    camera that can help you.
+  - This camera is unlike any other. It has the ability to identify any animal that
+    you photograph. It will be a valuable tool in your journey.
+  - I'll let your journey explain your purpose..Good luck on your adventure.

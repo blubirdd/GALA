@@ -5,7 +5,10 @@ using UnityEngine;
 public class Chest : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
+    [SerializeField] private Sprite _icon;
     public string InteractionPrompt => _prompt;
+    public Sprite icon => _icon;
+
 
     public Animator animator;
 

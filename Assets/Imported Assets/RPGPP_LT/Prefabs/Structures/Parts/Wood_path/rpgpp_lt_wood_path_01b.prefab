@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4702229198241056}
   - component: {fileID: 33165811430778684}
   - component: {fileID: 23241138478753752}
+  - component: {fileID: 5986462020920205849}
   m_Layer: 0
   m_Name: rpgpp_lt_wood_path_01b
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5986462020920205849
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498041528017854}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.4693756, y: 0.16497868, z: 2.8147523}
+  m_Center: {x: 2.236941, y: 0.024717106, z: -0.8892678}

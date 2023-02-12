@@ -13,8 +13,14 @@ public class GameEvents : MonoBehaviour
         instance = this;
     }
 
-    //Camera Events
-    
+    //World Events
+    public event Action onCutSceneEnter;
+    public void CutscenePlay()
+    {
+        onCutSceneEnter?.Invoke();
+    }
+
+
 
     //Quest UI Events
     public event Action onQuestTitleChange;
@@ -28,13 +34,7 @@ public class GameEvents : MonoBehaviour
 
     public event Action onGoalValueChanged;
 
-    //Quest Events
 
-    public event Action<string> onQuestCompleted;
-    public void QuestCompleted(string questName)
-    {
-        onQuestCompleted?.Invoke(questName);
-    }
 
     public event Action onGoalCompleted;
 
@@ -44,6 +44,10 @@ public class GameEvents : MonoBehaviour
     //Dialogue EVENTS
 
     public event Action onDialogueStarted;
+    public void DialogueStarted()
+    {
+        onDialogueStarted?.Invoke();
+    }
 
     //Camera Events
     public event Action onCameraOpened;
@@ -85,10 +89,12 @@ public class GameEvents : MonoBehaviour
         onGoalCompleted?.Invoke();
     }
 
-    //Dialogue EVENTS
-    public void DialogueStart()
+    //Quest Events
+
+    public event Action<string> onQuestCompleted;
+    public void QuestCompleted(string questName)
     {
-        onDialogueStarted?.Invoke();
+        onQuestCompleted?.Invoke(questName);
     }
 
     //Delegates

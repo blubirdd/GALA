@@ -8,6 +8,7 @@ public class DialogueTrigger : MonoBehaviour
     public Dialogue dialogue;
     public Dialogue isTalkedDialogue;
 
+   // public DialogueSO dialogueSO;
 
     public void TriggerDialogue()
     {
@@ -16,7 +17,11 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerIsTalkedDialogue()
     {
-        FindObjectOfType<DialogueSystem>().StartDialogue(isTalkedDialogue);
+        if (isTalkedDialogue != null)
+        {
+            FindObjectOfType<DialogueSystem>().StartDialogue(isTalkedDialogue);
+        }
+
     }
 
 

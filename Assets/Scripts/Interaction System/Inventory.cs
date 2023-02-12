@@ -93,10 +93,10 @@ public class Inventory : MonoBehaviour, IDataPersistence
 
     public void Add(Item item, int _amount)
     {
-
+        
         if (!item.isDefaultItem)
         {
-            ItemPickedUp(item);
+            
             for(int i = 0; i < container.Count; i++)
             {
                 if (container[i].item == item)
@@ -121,6 +121,8 @@ public class Inventory : MonoBehaviour, IDataPersistence
 
         }
 
+        ItemPickedUp(item);
+
 
     }
     //public void Remove(Item item)
@@ -138,11 +140,30 @@ public class Inventory : MonoBehaviour, IDataPersistence
     public void Remove(Item item)
     {
 
-        container.RemoveAll(container => item ==container.item);
+        container.RemoveAll(container => item == container.item);
 
         if (OnItemChangedCallback != null)
         {
             OnItemChangedCallback.Invoke();
+        }
+    }
+
+    public void DecreaseItemAmountByOne(Item item)
+    {
+        for (int i = 0; i < container.Count; i++)
+        {
+            if (container[i].item == item)
+            {
+                container[i].amount -= 1;
+
+                Debug.Log(container[i].amount);
+                if (OnItemChangedCallback != null)
+                {
+                    OnItemChangedCallback.Invoke();
+                }
+
+                return;
+            }
         }
     }
 

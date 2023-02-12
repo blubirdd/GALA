@@ -7,31 +7,25 @@ public class ZoomInOut : MonoBehaviour
 {
 
 
-    public float zoomAmount = 50f;
+    public float zoomAmount;
     CinemachineVirtualCamera mainCamera;
-
 
 
 // Start is called before the first frame update
     private void Awake()
     {
         mainCamera = GetComponent<CinemachineVirtualCamera>();
-
-       
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
        mainCamera.m_Lens.FieldOfView = zoomAmount;
-        
-
     }
 
     public void Slider(float zoom)
     {
         zoomAmount = zoom; 
+
     }
 }

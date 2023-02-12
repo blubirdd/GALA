@@ -17,38 +17,51 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
     public bool invertXOutputValue;
     public bool invertYOutputValue;
 
+    private bool onEditor;
 
-    public static float sensitivity = 1.2f;
-    public float cameraMagnitudeMultiplier;
+    public static float sensitivity = 1f;
+    // public float cameraMagnitudeMultiplier;
 
 
     //Stored Pointer Values
     private Vector2 pointerDownPosition;
     private Vector2 currentPointerPosition;
 
+    
     [Header("Output")]
     public Event touchZoneOutputEvent;
 
     void Start()
     {
+        #if UNITY_EDITOR
+                onEditor = true;
+        #else
+                onEditor = false;
+        #endif
         SetupHandle();
-        Application.targetFrameRate = 60;
 
-        GameEvents.instance.onCameraOpened += SetSentivityToLow;
-        GameEvents.instance.onCameraClosed += SetSentivityToNormal;
+       // Application.targetFrameRate = 60;
 
     }
 
-    private void SetSentivityToLow()
+
+    private void Update()
     {
-        magnitudeMultiplier = 20;
-        Debug.Log("Set low");
+
     }
 
-    private void SetSentivityToNormal()
-    {
-        magnitudeMultiplier = 60;
-    }
+
+
+    //private void SetSentivityToLow()
+    //{
+    //    magnitudeMultiplier = 20;
+    //    Debug.Log("Set low");
+    //}
+
+    //private void SetSentivityToNormal()
+    //{
+    //    magnitudeMultiplier = 60;
+    //}
 
     private void SetupHandle()
     {
@@ -82,8 +95,16 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
         Vector2 outputPosition = ApplyInversionFilter(clampedPosition);
 
 
-        OutputPointerEventValue(outputPosition * magnitudeMultiplier * sensitivity * Time.deltaTime);
-        //OutputPointerEventValue(outputPosition * magnitudeMultiplier * sensitivity);
+        //on pc
+        if (onEditor)
+        {
+            OutputPointerEventValue(outputPosition * magnitudeMultiplier * sensitivity * Time.deltaTime);
+        }
+        else
+        {
+            OutputPointerEventValue(outputPosition * magnitudeMultiplier * sensitivity);
+        }
+       
 
 
     }

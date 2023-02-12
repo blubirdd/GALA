@@ -15,6 +15,16 @@ MonoBehaviour:
   name: Tamaraw
   animalGroup: Terrestrial Mammal
   polaroidPhoto: {fileID: 21300000, guid: da6aa52791865ac40a742abd7d65c9f7, type: 3}
-  lifeSpan: Unknown
-  height: Unknown
-  width: Unknown
+  lifeSpan: 'Life Span: 20-25 YRS'
+  weight: 'Weight: 180-300 KG'
+  height: 'Height: 100-105 CM'
+  length: 'Length: 2 M'
+  biomeImage: {fileID: 0}
+  biome: Grassland, Forest
+  diet: 'Diet: Herbivore'
+  food: 'Food: Grasses, Young bamboo shoots, and wild Sugarcane.'
+  appearance: Dark brown to grayish in color small hoofed with short and stocky limbs.
+    The horns are V-shaped manner and are triangular at their base.
+  details: They are generally solitary and do not occur in herds or smaller packs
+    and are often found alone. When threatened they lower the head and shake their
+    horns. They may also chase one another.

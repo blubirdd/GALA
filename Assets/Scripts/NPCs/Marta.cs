@@ -6,10 +6,12 @@ public class Marta : MonoBehaviour, IInteractable
 {
 
     [SerializeField] private string _prompt;
+    [SerializeField] private Sprite _icon;
+
     [SerializeField] private DialogueTrigger _dialogue;
     [SerializeField] private DialogueTrigger _isTalkedDialogue;
     public string InteractionPrompt => _prompt;
-
+    public Sprite icon => _icon;
 
     [SerializeField] private GameObject quests;
 

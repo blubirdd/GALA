@@ -8,20 +8,22 @@ TagManager:
   - Fairy
   - NPC
   - Mammal
+  - Prey
+  - Water
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Interactable
   - Animal
   - Unwalkable
-  - 
-  - 
-  - 
-  - 
+  - Prey
+  - GrassFood
+  - Stealth
+  - WaterFood
   - 
   - 
   - 

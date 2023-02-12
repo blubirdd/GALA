@@ -26,8 +26,8 @@ public class PhotoCapture : MonoBehaviour
     public ReticleScript reticleScript;
     public UIManager uiManager;
 
-   
     [SerializeField] private TextMeshProUGUI animalText;
+
 
 
     void Start()
@@ -36,6 +36,7 @@ public class PhotoCapture : MonoBehaviour
         okButton.SetActive(false);
         screenCapture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
 
+        //to test
         reticleScript.GetComponent<ReticleScript>();
 
         //clear text
@@ -43,6 +44,7 @@ public class PhotoCapture : MonoBehaviour
 
         //subscribe to picturetaken event
         PictureEvents.onAnimalDiscovered += SetText;
+
 
     }
 
@@ -120,7 +122,10 @@ public class PhotoCapture : MonoBehaviour
         animalText.SetText("");
     }
 
+    public void DiscoveryCheck()
+    {
 
+    }
 
 
 }

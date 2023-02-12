@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Grid : MonoBehaviour
 {
+    public bool displayGridGizmoz;
 
-    public bool onlyDisplayPathGizmos;
-    public LayerMask unwalkableMask;
+    public LayerMask unwalkbleMask;
+
     public Vector2 gridWorldSize;
     public float nodeRadius;
     Node[,] grid;
@@ -14,8 +16,9 @@ public class Grid : MonoBehaviour
     float nodeDiameter;
     int gridSizeX, gridSizeY;
 
-    void Start()
+    void Awake()
     {
+
         nodeDiameter = nodeRadius * 2;
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
         gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
@@ -40,7 +43,28 @@ public class Grid : MonoBehaviour
             for (int y = 0; y < gridSizeY; y++)
             {
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
-                bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask));
+
+                //height map terrain
+                //worldPoint.y = Terrain.activeTerrain.SampleHeight(worldPoint);
+
+                //unwalkable mask
+                //bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask));
+
+                //navmeesh
+
+                //raycast
+
+                Ray ray = new Ray(worldPoint + Vector3.up * 50, Vector3.down);
+                RaycastHit rayhit;
+
+                if (Physics.Raycast(ray, out rayhit, 100, unwalkbleMask))
+                {
+                    worldPoint = rayhit.point;
+                }
+
+                NavMeshHit navMeshHit;
+                bool walkable = NavMesh.SamplePosition(worldPoint, out navMeshHit, nodeRadius, NavMesh.AllAreas);
+
                 grid[x, y] = new Node(walkable, worldPoint, x, y);
             }
         }
@@ -83,36 +107,18 @@ public class Grid : MonoBehaviour
         return grid[x, y];
     }
 
-    public List<Node> path;
+
     void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
-
-        if (onlyDisplayPathGizmos)
+        if (grid != null && displayGridGizmoz)
         {
-            if (path != null)
+            foreach (Node n in grid)
             {
-                foreach (Node n in path)
-                {
-                    Gizmos.color = Color.black;
-                    Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - .1f));
-                }
-            }
-        }
-        else
-        {
-
-            if (grid != null)
-            {
-                foreach (Node n in grid)
-                {
-                    Gizmos.color = (n.walkable) ? Color.white : Color.red;
-                    if (path != null)
-                        if (path.Contains(n))
-                            Gizmos.color = Color.black;
-                    Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - .1f));
-                }
+                Gizmos.color = (n.walkable) ? Color.white : Color.red;
+                Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - .1f));
             }
         }
     }
+
 }

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Interactor : MonoBehaviour
 {
     [SerializeField] private Transform _interactionPoint;
-    [SerializeField] private float _interactionPointRadius = 0.5f;
+    [SerializeField] private float _interactionPointRadius = 1f;
     [SerializeField] private LayerMask _interactableMask;
     [SerializeField] private InteractionPromptUI _interactionPromptUI;
 
@@ -37,7 +37,7 @@ public class Interactor : MonoBehaviour
 
             if(_interactable!=null)
             {
-                if (!_interactionPromptUI.isDisplayed) _interactionPromptUI.Setup(_interactable.InteractionPrompt);
+                if (!_interactionPromptUI.isDisplayed) _interactionPromptUI.Setup(_interactable.InteractionPrompt, _interactable.icon);
 
                 if (Keyboard.current.eKey.wasPressedThisFrame)
                 {

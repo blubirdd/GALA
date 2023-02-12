@@ -10067,7 +10067,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9074367929105157595
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17137,7 +17137,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9074367929888425111}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f910667c8d05624f96c3fe4b459b222, type: 3}
   m_Name: 
@@ -20909,6 +20909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionButton: {fileID: 9074367930270246628}
   _prompText: {fileID: 9074367929768446558}
+  _icon: {fileID: 0}
   isDisplayed: 0
 --- !u!1 &9074367930279978821
 GameObject:
@@ -24292,7 +24293,7 @@ PrefabInstance:
     - target: {fileID: 2070925441746177913, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 2.1666667
+      value: 1.8944823
       objectReference: {fileID: 0}
     - target: {fileID: 2070925442191277752, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
@@ -25960,6 +25961,10 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 128
+  discoveryPanel: {fileID: 0}
+  discoveryStatus: {fileID: 0}
+  discoveryStatusImage: {fileID: 0}
+  undiscoveredSprite: {fileID: 0}
 --- !u!4 &130053814199342294 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,

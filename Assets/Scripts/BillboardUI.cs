@@ -10,9 +10,9 @@ public class BillboardUI : MonoBehaviour
     void Start()
     {
         _mainCam = Camera.main;
-
         
     }
+
 
     private void LateUpdate()
     {

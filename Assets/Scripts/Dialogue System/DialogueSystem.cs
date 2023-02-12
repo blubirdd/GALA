@@ -9,8 +9,11 @@ public class DialogueSystem : MonoBehaviour
 {
 
     public static bool dialogueEnded = false;
+
+
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
+
 
     public Animator animator;
 
@@ -19,7 +22,10 @@ public class DialogueSystem : MonoBehaviour
     public GameObject controlsCanvas;
     public GameObject dialogueCanvas;
 
-    [SerializeField] private float _textSpeed = 0.05f;
+    [Header("Subtle Dialogue")]
+    public GameObject subtleDialogueCanvas;
+    public TextMeshProUGUI subtleDialogueText;
+    //[SerializeField] private float _textSpeed;
 
 
    
@@ -33,8 +39,11 @@ public class DialogueSystem : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-     
+
+
         dialogueEnded = false;
+
+        GameEvents.instance.DialogueStarted();
 
         //disable contrls
         controlsCanvas.SetActive(false);
@@ -59,6 +68,7 @@ public class DialogueSystem : MonoBehaviour
 
     }
 
+
     public void DisplayNextSentence()
     {
         if (sentences.Count == 0)
@@ -72,6 +82,7 @@ public class DialogueSystem : MonoBehaviour
         StartCoroutine(TypeSentence(sentence));
     }
 
+
     IEnumerator TypeSentence(string sentence)
     {
         dialogueText.text = "";
@@ -79,7 +90,7 @@ public class DialogueSystem : MonoBehaviour
         {
             dialogueText.text += letter;
             //anim speed
-            yield return new WaitForSeconds(_textSpeed);
+           // yield return new WaitForSeconds(_textSpeed);
             yield return null;
         }
     }
@@ -91,10 +102,63 @@ public class DialogueSystem : MonoBehaviour
 
         //enable controls
         controlsCanvas.SetActive(true);
-        
-        dialogueEnded = true;
 
+        dialogueEnded = true;
      
+    }
+
+    //////////////SUBTLE DIALOGUE
+    public void StartSubtleDialogue(Dialogue dialogue)
+    {
+        subtleDialogueCanvas.SetActive(true);
+
+        sentences.Clear();
+
+        foreach (string sentence in dialogue.sentences)
+        {
+            sentences.Enqueue(sentence);
+        }
+
+        StartCoroutine(EnumDisplaySubtleNextSentence());
+    }
+
+    public void DisplaySubtleNextSentence()
+    {
+        if (sentences.Count == 0)
+        {
+            StopCoroutine(EnumDisplaySubtleNextSentence());
+            EndSubtleDialogue();
+            return;
+        }
+
+        string sentence = sentences.Dequeue();
+        StopCoroutine(TypeSubtleSentence(sentence));
+        StartCoroutine(TypeSubtleSentence(sentence));
+    }
+
+    IEnumerator EnumDisplaySubtleNextSentence()
+    {
+        while(true)
+        {
+            DisplaySubtleNextSentence();
+            yield return new WaitForSeconds(5);
+        }
+    }
+
+    IEnumerator TypeSubtleSentence(string sentence)
+    {
+        subtleDialogueText.text = "";
+        foreach (char letter in sentence.ToCharArray())
+        {
+            subtleDialogueText.text += letter;
+
+            yield return null;
+        }
+    }
+    public void EndSubtleDialogue()
+    {
+        Debug.Log("Subtle Dialogue End");
+        subtleDialogueCanvas.SetActive(false);
     }
      
 

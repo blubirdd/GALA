@@ -8,6 +8,24 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    #region Singleton
+
+    public static UIManager instance;
+
+    void Awake()
+    {
+
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one instance of UIManager found");
+            return;
+        }
+
+        instance = this;
+    }
+    #endregion
+
+    //this is outdated
     public GameObject objectiveListCanvas;
 
      [Header("Controls")]
@@ -20,21 +38,42 @@ public class UIManager : MonoBehaviour
 
     public GameObject pauseMenu;
 
+    public UIVirtualJoystick uiVirtualJoystick;
+
+    public GameObject throwButtonsParent;
+
     [Header("Camera")]
     public bool cameraOpened;
+
+   //[Header("Inventory")]
+   // public GameObject inventoryPanel;
 
 
     [Header("Book")]
     public GameObject book;
 
-    [Header("Quest Objective/Goal Texts")]
+
+    [Header("BUTTONS PARENT")]
+    public GameObject buttonsUIPack;
+
+    [Header("Tutorial")]
+    public GameObject tutorialCanvas;
+    //task ui is on taskui script
+    // public TaskUI taskUI;
+
+    //[Header("NEW INPUT SYSTEM")]
+    //public InputAction playerControl;
+
+    [Header("Outdated")]
+    //THIS IS OUTDATED
     public TextMeshProUGUI objective1;
     public TextMeshProUGUI objective2;
     public TextMeshProUGUI objective3;
 
-
+    public GameObject analytics;
     public Goal goal;
 
+    public bool disableFpsLimit = false;
     private void Start()
     {
         //camera 
@@ -48,16 +87,76 @@ public class UIManager : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+
+    }
+
+
+    public void ToggleFPS()
+    {
+
+        disableFpsLimit = !disableFpsLimit;
+
+        if (disableFpsLimit == true)
+        {
+            Application.targetFrameRate = 60;
+            Debug.Log("Increase limit to 60");
+        }
+
+        else
+        {
+            Application.targetFrameRate = -1;
+            Debug.Log("Decrease limit to 30");
+        }
+
+
+    }
+
+    public void AnalyticsToggle()
+    {
+        analytics.SetActive(!analytics.activeSelf);
+    }
+    //public void CloseInventory()
+    //{
+    //    inventoryPanel.SetActive(false);
+    //    Debug.Log("Working close inventory");
+    //}
+
+    public void OpenCloseTutorialPrompt()
+    {
+        tutorialCanvas.SetActive(!tutorialCanvas.activeSelf);
+    }
+
+    public void DisableButtonsUIPACK()
+    {
+        buttonsUIPack.SetActive(false);
+        DisablePlayerMovement();
+    }
+
+    public void EnableButtonsUIPACK()
+    {
+        buttonsUIPack.SetActive(true);
+        EnablePlayerMovement();
+    }
+
     public void ClosePauseMenu()
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
+
+        EnableButtonsUIPACK();
+
     }
+
+
 
     public void OpenPauseMenu()
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
+
+        DisableButtonsUIPACK();
     }
 
     //controls
@@ -70,6 +169,9 @@ public class UIManager : MonoBehaviour
 
         GameEvents.instance.CameraOpened();
 
+
+        //debug purpose
+       // Application.targetFrameRate = 60;
     }
     public void CloseCamera()
     {
@@ -78,18 +180,20 @@ public class UIManager : MonoBehaviour
 
         cameraOpened = false;
         GameEvents.instance.CameraClosed();
+        //debug purpose
+       // Application.targetFrameRate = -1;
     }
     public void DisablePlayerMovement()
     {
-
+        uiVirtualJoystick.ResetJoyStick();
         playerInputUI.SetActive(false);
         playerModel.SetActive(false);
     }
 
     public void EnablePlayerMovement()
     {
-        
         playerInputUI.SetActive(true);
+        uiVirtualJoystick.ResetJoyStick();
         playerModel.SetActive(true);
 
     }
@@ -98,15 +202,15 @@ public class UIManager : MonoBehaviour
     {
         inGameCameraCanvas.SetActive(true);
 
-        thirdPersonCamera.SetActive(false);
-        firstPersonCamera.SetActive(true);
+        //thirdPersonCamera.SetActive(false);
+        //firstPersonCamera.SetActive(true);
     }
     public void SwitchToThirdPerson()
     {
         inGameCameraCanvas.SetActive(false);
 
-        thirdPersonCamera.SetActive(true);
-        firstPersonCamera.SetActive(false);
+        //thirdPersonCamera.SetActive(true);
+        //firstPersonCamera.SetActive(false);
 
     }
 
@@ -153,17 +257,34 @@ public class UIManager : MonoBehaviour
         book.SetActive(!book.activeSelf);
 
         DisablePlayerMovement();
+
+        //DisableButtonsUIPACK();
     }
 
     public void CloseBook()
     {
         EnablePlayerMovement();
         book.SetActive(!book.activeSelf);
+
+       // EnableButtonsUIPACK();
     }
 
-    public void ChangeSceneToForest()
+
+    public void GoToMainMenu()
     {
-        SceneManager.LoadScene("Forest");
+        Time.timeScale = 1f;
+        DataPersistenceManager.instance.SaveGame();
+        SceneManager.LoadScene("MainMenu");
     }
 
+    //THROWING
+    public void EnableThrowUI()
+    {
+        throwButtonsParent.SetActive(true);
+    }
+
+    public void DisableThrowUI()
+    {
+        throwButtonsParent.SetActive(false);
+    }
 }
