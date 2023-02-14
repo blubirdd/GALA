@@ -20,6 +20,8 @@ public class Cutscene : MonoBehaviour
         go.GetComponent<Discovery>().SetName(locationName);
 
         isDone = true;
+
+
     }
     void OnTriggerEnter(Collider collision)
     {
@@ -30,7 +32,13 @@ public class Cutscene : MonoBehaviour
 
             //ui
             SpawnDiscoveryUI();
-            quest = (QuestNew)quests.AddComponent(System.Type.GetType(questType));
+
+            if(questType != null)
+            {
+                //Assign Quest
+                quest = (QuestNew)quests.AddComponent(System.Type.GetType(questType));
+            }
+
             Debug.Log("Cutscene playing");
 
             //turn off joystick
@@ -39,6 +47,7 @@ public class Cutscene : MonoBehaviour
             //StartCoroutine(WaitForSecondsThenDestroy());
         }
     }
+
 
     //IEnumerator WaitForSecondsThenDestroy()
     //{
