@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Animal : MonoBehaviour
 {
-    AnimalAI animalAI;
+    AnimalNav animalNav;
 
 
     [Header("States")]
@@ -18,7 +18,9 @@ public class Animal : MonoBehaviour
     public bool isThirsty;
 
     [Header("State floats")]
+    [Range(1, 100)]
     public float hunger;
+    [Range(1, 100)]
     public float thirst;
 
     [Header("Tranforms")]
@@ -33,7 +35,7 @@ public class Animal : MonoBehaviour
     [SerializeField] private int _targetsFound;
 
     [Header("NavMesh")]
-    //private NavMeshAgent _agent;
+    
     private readonly Collider[] _colliders = new Collider[3];
     //[Header("Predator")]
 
@@ -73,7 +75,7 @@ public class Animal : MonoBehaviour
 
     private void Awake()
     {
-        animalAI = GetComponent<AnimalAI>();
+        animalNav = GetComponent<AnimalNav>();
 
         StartCoroutine(FindTargetWithDelay(0.5f));
         StartCoroutine(RoamAround(0.5f));
@@ -252,9 +254,9 @@ public class Animal : MonoBehaviour
 
         if(_targetsFound <= 0)
         {
-            if (animalAI != null)
+            if (animalNav != null)
             {
-                animalAI.TargetLocation(null);
+                animalNav.TargetLocation(null);
             }
 
             preyTransform = null;
@@ -346,13 +348,13 @@ public class Animal : MonoBehaviour
             //if thirsty look for water
             if (isThirsty)
             {
-                 animalAI.TargetLocation(FindTheClosestTarget());
+                animalNav.TargetLocation(FindTheClosestTarget());
             }
 
             //if hungry look for food
             if (isHungry)
             {
-                animalAI.TargetLocation(FindTheClosestTarget());
+                animalNav.TargetLocation(FindTheClosestTarget());
             }
 
             
