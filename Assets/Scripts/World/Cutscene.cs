@@ -13,7 +13,6 @@ public class Cutscene : MonoBehaviour
     [SerializeField] private GameObject quests;
     [SerializeField] private string questType;
 
-
     void SpawnDiscoveryUI()
     {
         GameObject go = Instantiate(discoveryUI);

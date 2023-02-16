@@ -20,6 +20,9 @@ public class GameData
     public List<string> tasksCompeleted;
     public SerializableDictionary<string, TaskSave> taskList;
 
+    //NPC's talked to
+    public SerializableDictionary<string, bool> NPCsTalked;
+
     // the values defined in this constructor will be the default values
     // the game starts with when there's no data to load
     public GameData()
@@ -39,5 +42,8 @@ public class GameData
 
         tasksCompeleted = new List<string>();
         taskList = new SerializableDictionary<string, TaskSave>();
+
+        //NPCs
+        NPCsTalked = new SerializableDictionary<string, bool>();
     }
 }

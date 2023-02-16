@@ -11,6 +11,7 @@ public class QuestTalkVillageChief : QuestNew
     private int[] requiredAmount = new int[] { 1 };
     private string ID;
 
+    public GameObject waypoint;
     void Start()
     {
      
@@ -92,9 +93,9 @@ public class QuestTalkVillageChief : QuestNew
 
     public void SpawnWaypointMarker()
     {
-        GameObject go = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
-        go.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[0]);
-        go.name = WaypointManager.instance.waypointTransforms[0].name + "Waypoint";
+        waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
+        waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[0]);
+       // waypoint.name = WaypointManager.instance.waypointTransforms[0].name + "Waypoint";
     }
 
     IEnumerator IsQuestCompleted()
@@ -108,6 +109,7 @@ public class QuestTalkVillageChief : QuestNew
         Debug.Log(this + " is Completed");
 
         //disable marker
-        Destroy(GameObject.Find("Village ChiefWaypoint").gameObject);
+        //Destroy(GameObject.Find("Village ChiefWaypoint").gameObject);
+        Destroy(waypoint);
     }
 }

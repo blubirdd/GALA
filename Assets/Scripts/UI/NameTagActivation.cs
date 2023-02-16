@@ -7,7 +7,6 @@ public class NameTagActivation : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] private GameObject _nameUICanvas;
 
-  
     void Start()
     {
         _nameUICanvas.SetActive(false);

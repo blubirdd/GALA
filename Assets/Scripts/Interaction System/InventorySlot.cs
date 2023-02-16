@@ -63,7 +63,7 @@ public class InventorySlot : MonoBehaviour
 
             //setup
             itemName.text = item.name;
-
+            itemDescription.text = item.itemDescription;
             inventoryUI.currentItem = item;
 
             //buttons
