@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c25f5515792a1d40b6d0101ce548f3b, type: 3}
+  m_Name: Forest Turtle
+  m_EditorClassIdentifier: 
+  name: Forest Turtle
+  scientificName: Siebenrockiella leytensis
+  animalGroup: Reptile
+  polaroidPhoto: {fileID: 0}
+  lifeSpan: 'Life Span: Unkown'
+  weight: 'Weight: 0.37 - 0.59 KG'
+  height: 'Height: Unkown'
+  length: 'Length: 21-130 CM'
+  biomeImage: {fileID: 0}
+  biome: Wetlands
+  diet: 'Diet: Omnivore'
+  food: 'Food: Aquatic Plants, Small Fish'
+  appearance: Rough legs, body, and neck . The head is brown in color, sometimes
+    speckled at the temples with light brown, orange, or red spots.
+  details: Proved to be very shy and retiring, spending considerable time hiding
+    under rocks, both in and out of the water.

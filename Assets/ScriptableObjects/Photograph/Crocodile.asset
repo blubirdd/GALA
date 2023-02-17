@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Crocodile
   m_EditorClassIdentifier: 
   name: Philippine Crocodile
+  scientificName: Crocodylus mindorensis
   animalGroup: Reptile
   polaroidPhoto: {fileID: 21300000, guid: e84ffc411f44aa14aa201a4f3e1da5d4, type: 3}
   lifeSpan: Life Span 70-80 YRS

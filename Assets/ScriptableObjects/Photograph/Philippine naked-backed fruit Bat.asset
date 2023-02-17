@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c25f5515792a1d40b6d0101ce548f3b, type: 3}
+  m_Name: Philippine naked-backed fruit Bat
+  m_EditorClassIdentifier: 
+  name: Philippine naked-backed fruit Bat
+  scientificName: Dobsonia chapmani
+  animalGroup: Terrestrial Mammal
+  polaroidPhoto: {fileID: 0}
+  lifeSpan: 'Life Span: 5 - 30 YRS'
+  weight: 'Weight: 125-143 G'
+  height: 'Height: Unkown'
+  length: 'Length: 218-221 MM'
+  biomeImage: {fileID: 0}
+  biome: Anthropogenic, Forest
+  diet: 'Diet: Frugivore, Herbivore'
+  food: 'Food: Fruits, Seeds'
+  appearance: The wings of this bat connect to the midline of the back giving it
+    a naked/furless appearance.
+  details: The bat prefers limestone caves in the forest. The forest habitats, consist
+    of naturally open and shrubby native vegetation

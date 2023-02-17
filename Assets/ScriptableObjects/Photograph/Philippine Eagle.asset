@@ -13,8 +13,19 @@ MonoBehaviour:
   m_Name: Philippine Eagle
   m_EditorClassIdentifier: 
   name: Philippine Eagle
+  scientificName: Pithecophaga jefferyi
   animalGroup: Bird
   polaroidPhoto: {fileID: 21300000, guid: a6aef685172bdee48b238b705c6ebce6, type: 3}
-  lifeSpan: 
-  height: 
-  width: 
+  lifeSpan: 30-60 YRS
+  weight: 'Weight: 4-8 KG'
+  height: 'Height: 100 CM'
+  length: 'Length: 86 to 102 CM'
+  biomeImage: {fileID: 0}
+  biome: Forest
+  diet: 'Diet: Carnivore'
+  food: 'Food: Medium-Sized Mammals'
+  appearance: Dark face and a creamy-brown nape and crown. Its nape is adorned with
+    long, brown feathers that form a shaggy, manelike crest.
+  details: Are generally solitary and spend time singly on in breeding pairs. They
+    are active during the day and at night they rest. Philippine eagles primarily
+    use two hunting techniques.
