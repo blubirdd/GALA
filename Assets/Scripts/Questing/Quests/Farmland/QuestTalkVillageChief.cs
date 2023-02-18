@@ -10,7 +10,7 @@ public class QuestTalkVillageChief : QuestNew
     private int[] requiredAmount = new int[] { 1 };
     private string ID;
 
-    public GameObject waypoint;
+    private GameObject _waypoint;
     void Start()
     {
      
@@ -92,8 +92,8 @@ public class QuestTalkVillageChief : QuestNew
 
     public void SpawnWaypointMarker()
     {
-        waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
-        waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[0]);
+        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
+       _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[0]);
        // waypoint.name = WaypointManager.instance.waypointTransforms[0].name + "Waypoint";
     }
 
@@ -109,6 +109,6 @@ public class QuestTalkVillageChief : QuestNew
 
         //disable marker
         //Destroy(GameObject.Find("Village ChiefWaypoint").gameObject);
-        Destroy(waypoint);
+        Destroy(_waypoint);
     }
 }

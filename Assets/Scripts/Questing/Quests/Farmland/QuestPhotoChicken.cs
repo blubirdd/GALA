@@ -54,7 +54,7 @@ public class QuestPhotoChicken : QuestNew
         //QuestEvents.instance.QuestAccepted2();
 
         //waypoint
-        SpawnWaypointMarker();
+        //SpawnWaypointMarker();
 
     }
 
@@ -106,7 +106,10 @@ public class QuestPhotoChicken : QuestNew
         Debug.Log(this + " is Completed");
 
         //disable marker
-        //Destroy(GameObject.Find("Village ChiefWaypoint").gameObject);
-        Destroy(waypoint);
+        //Destroy(waypoint);
+
+        //Add another quest
+        AcceptQuest("QuestTalkVillageChief2");
     }
+
 }

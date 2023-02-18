@@ -22,6 +22,7 @@ public class GameData
 
     //NPC's talked to
     public SerializableDictionary<string, bool> NPCsTalked;
+    public SerializableDictionary<string, bool> NPCsCompleted;
 
     // the values defined in this constructor will be the default values
     // the game starts with when there's no data to load
@@ -45,5 +46,6 @@ public class GameData
 
         //NPCs
         NPCsTalked = new SerializableDictionary<string, bool>();
+        NPCsCompleted = new SerializableDictionary<string, bool>();
     }
 }

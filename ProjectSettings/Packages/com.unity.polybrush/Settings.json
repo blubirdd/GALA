@@ -49,7 +49,7 @@
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "Scattering.ParentObjectsWithSurface",
-                "value": "{\"m_Value\":true}"
+                "value": "{\"m_Value\":false}"
             },
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
@@ -79,7 +79,7 @@
             {
                 "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "RaiseLowerBrush.Strength",
-                "value": "{\"m_Value\":5.0}"
+                "value": "{\"m_Value\":100.0}"
             },
             {
                 "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
@@ -104,12 +104,12 @@
             {
                 "type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "ScatteringEditor.PreviewThumSize",
-                "value": "{\"m_Value\":90}"
+                "value": "{\"m_Value\":60}"
             },
             {
                 "type": "UnityEditor.Polybrush.PrefabLoadout, Unity.Polybrush.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ScatteringEditor.userLoadout",
-                "value": "{\"m_Value\":{\"infos\":[{\"palette\":{\"fileID\":11400000,\"guid\":\"034e6cea9b629a649ae432e955f43c06\",\"type\":2},\"prefab\":{\"fileID\":117604,\"guid\":\"9469bb1d3aa88ca40aa4079e96a27f8e\",\"type\":3}},{\"palette\":{\"fileID\":11400000,\"guid\":\"034e6cea9b629a649ae432e955f43c06\",\"type\":2},\"prefab\":{\"fileID\":151190,\"guid\":\"a9cc5585b9634a9449920c03ec6bc243\",\"type\":3}},{\"palette\":{\"fileID\":11400000,\"guid\":\"034e6cea9b629a649ae432e955f43c06\",\"type\":2},\"prefab\":{\"fileID\":188972,\"guid\":\"7641c7e8354e2c44cab6432d9d2c6d1b\",\"type\":3}}]}}"
+                "value": "{\"m_Value\":{\"infos\":[{\"palette\":{\"fileID\":11400000,\"guid\":\"034e6cea9b629a649ae432e955f43c06\",\"type\":2},\"prefab\":{\"fileID\":7796761227915873496,\"guid\":\"d0f9462fb567fd74ba953992ff797a81\",\"type\":3}}]}}"
             }
         ]
     }
