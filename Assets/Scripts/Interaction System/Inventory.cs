@@ -94,6 +94,9 @@ public class Inventory : MonoBehaviour, IDataPersistence
     public void Add(Item item, int _amount)
     {
         
+        //trigger the collectiongoal event
+        ItemPickedUp(item);
+        
         if (!item.isDefaultItem)
         {
             
@@ -120,8 +123,6 @@ public class Inventory : MonoBehaviour, IDataPersistence
             }
 
         }
-
-        ItemPickedUp(item);
 
 
     }
@@ -168,7 +169,7 @@ public class Inventory : MonoBehaviour, IDataPersistence
     }
 
 
-    public static void ItemPickedUp(Item item)
+    public void ItemPickedUp(Item item)
     {
         if(OnItemAddedCallback != null)
         {

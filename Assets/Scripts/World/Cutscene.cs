@@ -6,6 +6,7 @@ public class Cutscene : MonoBehaviour
 {
 
     public string locationName;
+    public string placeName;
     public GameObject discoveryUI;
     bool isDone = false;
 
@@ -17,6 +18,7 @@ public class Cutscene : MonoBehaviour
     {
         GameObject go = Instantiate(discoveryUI);
         go.GetComponent<Discovery>().SetName(locationName);
+        go.GetComponent<Discovery>().SetPlaceName(placeName);
 
         isDone = true;
 

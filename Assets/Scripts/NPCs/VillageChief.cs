@@ -25,13 +25,15 @@ public class VillageChief : MonoBehaviour, ICharacter, IDataPersistence, IIntera
     [SerializeField] private bool isCompleted = false;
 
     [Header("Second Quest")]
-    [SerializeField] private string preRequisite;
     [SerializeField] private string secondQuest;
 
     [Header("Quest Marker")]
     public GameObject questMarker;
     private QuestNew quest { get; set; }
     public string npcName { get; set; }
+
+    [Header("Subtle Dialogue")]
+    [SerializeField] private SubtleDialogueTrigger _subtleDialogue;
 
 //this is the closing quest if NPC is MAIN
     QuestTalkVillageChief2 closingQuest;
@@ -70,7 +72,7 @@ public class VillageChief : MonoBehaviour, ICharacter, IDataPersistence, IIntera
 
         else if (isCompleted == false)
         {
-            if(Task.instance.tasksCompeleted.Contains(preRequisite))
+            if(Task.instance.tasksCompeleted.Contains(questType))
             {
                 _dialogue.TriggerIsTalkedDialogue();
 
@@ -93,6 +95,7 @@ public class VillageChief : MonoBehaviour, ICharacter, IDataPersistence, IIntera
                 isCompleted = true;
 
                 this.gameObject.layer = LayerMask.NameToLayer("Default");
+                _subtleDialogue.TriggerDialogue();
             }
         }
 
@@ -117,7 +120,7 @@ public class VillageChief : MonoBehaviour, ICharacter, IDataPersistence, IIntera
             return;
         }
 
-        if(isTalked == true && preRequisite != null && secondQuest != null)
+        if(isTalked == true && secondQuest != null)
         {
             quest = (QuestNew)quests.AddComponent(System.Type.GetType(secondQuest));
 

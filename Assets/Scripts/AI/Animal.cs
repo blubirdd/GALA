@@ -3,10 +3,14 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Animal : MonoBehaviour
+public class Animal : MonoBehaviour, IAnimal
 {
     AnimalNav animalNav;
 
+    public string animalName { get; set; }
+    public string animalGroup { get; set; }
+    [Header("Animal SO")]
+    public Photograph photo;
 
     [Header("States")]
     public bool isPassive;
@@ -22,6 +26,10 @@ public class Animal : MonoBehaviour
     public float hunger;
     [Range(1, 100)]
     public float thirst;
+
+    [SerializeField] private float _speed;
+
+    [SerializeField] private float _runSpeed;
 
     [Header("Tranforms")]
     [SerializeField] private bool showSphere = true;
@@ -72,13 +80,19 @@ public class Animal : MonoBehaviour
 
     Animator animator;
 
+    void Start()
+    {
+        animalName = photo.name;
+        animalGroup = photo.animalGroup;
+    }
 
     private void Awake()
     {
         animalNav = GetComponent<AnimalNav>();
+        statusImage.gameObject.SetActive(false);
 
-        StartCoroutine(FindTargetWithDelay(0.5f));
-        StartCoroutine(RoamAround(0.5f));
+        // StartCoroutine(FindTargetWithDelay(0.5f));
+        // StartCoroutine(RoamAround(0.5f));
 
         // animator = GetComponent<Animator>();
 
@@ -87,10 +101,31 @@ public class Animal : MonoBehaviour
         //StartCoroutine(Testing());
 
         //states 
+        // hunger = 50f;
+        // thirst = 100f;
+
+
+    }
+
+
+
+
+
+
+    void OnEnable()
+    {
+        StartCoroutine(FindTargetWithDelay(0.5f));
+        StartCoroutine(RoamAround(0.5f));
+
+        //states 
         hunger = 50f;
         thirst = 100f;
 
+    }
 
+    void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     private void Update()
@@ -100,7 +135,7 @@ public class Animal : MonoBehaviour
 
         if (hunger <= 0)
         {
-            _viewRadius = 30f;
+          //  _viewRadius = 30f;
             isHungry = true;
             hunger = 0;
         }
@@ -112,7 +147,7 @@ public class Animal : MonoBehaviour
 
         if (thirst <= 0)
         {
-            _viewRadius = 30f;
+           //9 _viewRadius = 30f;
             isThirsty = true;
            thirst = 0;
         }
@@ -146,6 +181,14 @@ public class Animal : MonoBehaviour
     //    }
     //}
 
+    public void Discovered()
+    {
+        PictureEvents.AnimalDiscovered(this);
+        Book.instance.AddAnimalPhoto(photo);
+
+        Debug.Log("NEWLY ISCOVERED ADDED TO DATABASE: " + animalName);
+    }
+
     public void Roam()
     {
         switch (curState)
@@ -174,7 +217,8 @@ public class Animal : MonoBehaviour
         while (true)
         {
             //if there is no current target
-            if (preyTransform == null)
+            // if (preyTransform == null)
+            if (animalNav.target == null)
             {
                 Roam();
             }
@@ -199,7 +243,7 @@ public class Animal : MonoBehaviour
             waitTimer -= Time.deltaTime;
             return;
         }
-        Debug.Log(this + " is Wandering");
+        //Debug.Log(this + " is Wandering");
         _animal.SetDestination(RandomNavSphere(transform.position, _viewRadius, floorMask));
         curState = AIStates.Wandering;
 
@@ -212,7 +256,7 @@ public class Animal : MonoBehaviour
             return;
         }
 
-        waitTimer = Random.Range(5.0f, 10.0f);
+        waitTimer = Random.Range(minWaitTime, maxWaitTime);
         //Debug.Log("Waiting for " + waitTimer);
 
         curState = AIStates.Idle;
@@ -254,16 +298,19 @@ public class Animal : MonoBehaviour
 
         if(_targetsFound <= 0)
         {
-            if (animalNav != null)
-            {
-                animalNav.TargetLocation(null);
-            }
+            //check if animalnav is with component
+            // if (animalNav != null)
+            // {
+            //     animalNav.TargetLocation(null);
+            // }
 
-            preyTransform = null;
-            predatorTransform = null;
+           // preyTransform = null;
+           animalNav.target = null;
+
+           predatorTransform = null;
 
             //set the speed back to roaming speed
-            _animal.speed = 3.5f;
+            _animal.speed = _speed;
 
             //disable status image
             statusImage.gameObject.SetActive(false);
@@ -294,13 +341,14 @@ public class Animal : MonoBehaviour
                     Quaternion toRotation = Quaternion.LookRotation(newPosition, Vector3.up);
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 1 * Time.deltaTime);
 
-                    _animal.speed = 10f;
+                    _animal.speed = _runSpeed;
                     _animal.SetDestination(newPosition);
                 }
 
                 else
                 {
                     predatorTransform = null;
+                    statusImage.gameObject.SetActive(false);
                 }
 
             }
@@ -323,8 +371,9 @@ public class Animal : MonoBehaviour
                             closestDistance = distance;
                             closestTarget = _colliders[i].transform;
                         }
-
-                        preyTransform = closestTarget;
+                        animalNav.target = closestTarget;
+                        // preyTransform = closestTarget;
+                        // break;
                     }
 
                     else if (_colliders[i].CompareTag("Prey") && isHungry)
@@ -335,7 +384,16 @@ public class Animal : MonoBehaviour
                             closestDistance = distance;
                             closestTarget = _colliders[i].transform;
                         }
-                        preyTransform = closestTarget;
+                        animalNav.target = closestTarget;
+
+                        // preyTransform = _colliders[i].transform;
+                        // animalNav.target = _colliders[i].transform;
+
+                        Debug.Log(this +" is hunting");
+
+                        statusImage.gameObject.SetActive(true);
+                        statusImage.sprite = animalState.eating;
+                        // break;
                     }
 
                 }
@@ -346,17 +404,12 @@ public class Animal : MonoBehaviour
             
 
             //if thirsty look for water
-            if (isThirsty)
+             //if hungry look for food
+            if (isThirsty == true || isHungry == true)
             {
-                animalNav.TargetLocation(FindTheClosestTarget());
+               // animalNav.TargetLocation(FindTheClosestTarget());
+               FindTheClosestTarget();
             }
-
-            //if hungry look for food
-            if (isHungry)
-            {
-                animalNav.TargetLocation(FindTheClosestTarget());
-            }
-
             
             //if (isThirsty)
             //{
@@ -448,16 +501,35 @@ public class Animal : MonoBehaviour
     //animal is eating
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Prey"))
+        if (other.gameObject.CompareTag("Prey"))
         {
             if (isHungry)
             {
                 //set view radius to normal
                 _viewRadius = 15f;
                 //do something
-                other.gameObject.SetActive(false);
-                preyTransform = null;
-                hunger = 100f;
+
+                StartCoroutine(EatDelayFood());
+                IEnumerator EatDelayFood() 
+                {
+
+                    //trigger the quest event
+                    FeedEvents.AnimalFed(this);
+                    Debug.Log(this + "just ate");
+
+                    yield return new WaitForSeconds(5);
+                    other.gameObject.SetActive(false);
+
+                    //preyTransform = null;
+                    animalNav.target = null;
+
+                    hunger = 100f;
+                    
+                    yield return new WaitForSeconds(10);
+                    other.gameObject.SetActive(true);
+                }
+                
+
             }
         }
 
@@ -466,10 +538,24 @@ public class Animal : MonoBehaviour
             if (isThirsty)
             {   //set view radius to normal
                 _viewRadius = 15f;
+
                 //do something
-                other.gameObject.SetActive(false);
-                preyTransform = null;
-                thirst = 150f;
+                StartCoroutine(EatDelayWater());
+                IEnumerator EatDelayWater()
+                {
+                    yield return new WaitForSeconds(5);
+                    other.gameObject.SetActive(false);
+
+                    //preyTransform = null;
+                    animalNav.target = null;
+
+                    thirst = 150f;
+
+                    yield return new WaitForSeconds(10);
+                    other.gameObject.SetActive(true);
+                }
+
+
             }
         }
     }
