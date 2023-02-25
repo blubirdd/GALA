@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class QuizManager : MonoBehaviour
 {
+    [NonReorderable]
     public List<QuestionAndAnswers> QnA;
     public GameObject[] options;
     public int CurrentQuestion;
@@ -22,7 +23,9 @@ public class QuizManager : MonoBehaviour
     int totalQuestions = 0;
     public int score;
 
+    [SerializeField] private int currentNumber =1;
 
+    [SerializeField] TextMeshProUGUI numberUI;
     private void Start()
     {
         totalQuestions = QnA.Count;
@@ -46,6 +49,8 @@ public class QuizManager : MonoBehaviour
     {
         // When answer right
         score += 1;
+        currentNumber +=1;
+        UpdateNumberUI();
         QnA.RemoveAt(CurrentQuestion);
         generateQuestion();
     }
@@ -55,7 +60,14 @@ public class QuizManager : MonoBehaviour
         // When answer wrong
         QnA.RemoveAt(CurrentQuestion);
         generateQuestion();
+        currentNumber +=1;
+        UpdateNumberUI();
 
+    }
+
+    public void UpdateNumberUI()
+    {
+        numberUI.text = currentNumber.ToString();
     }
 
     void SetAnswers()
@@ -74,6 +86,12 @@ public class QuizManager : MonoBehaviour
 
     void generateQuestion()
     {
+        Debug.Log(currentNumber);
+
+        // for(int i =1; i<QnA.Count; i++)
+        // {
+        //     Debug.Log(i);
+        // }
         if(QnA.Count > 0)
         {
             CurrentQuestion = Random.Range(0, QnA.Count);

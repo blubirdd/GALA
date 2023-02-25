@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7181853779653811108}
   - component: {fileID: 4955687726252351963}
   - component: {fileID: 8277798622336934090}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Bag of Seeds
   m_TagString: HerbivoreFood
   m_Icon: {fileID: 0}

@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Forest Turtle
   scientificName: Siebenrockiella leytensis
   animalGroup: Reptile
-  polaroidPhoto: {fileID: 0}
+  polaroidPhoto: {fileID: 21300000, guid: c5dad4a52e25f18479cfe370c9fecf5a, type: 3}
   lifeSpan: 'Life Span: Unkown'
   weight: 'Weight: 0.37 - 0.59 KG'
   height: 'Height: Unkown'

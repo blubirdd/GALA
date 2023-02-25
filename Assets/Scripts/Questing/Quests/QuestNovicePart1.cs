@@ -18,7 +18,7 @@ public class QuestNovicePart1 : QuestNew
 
         //setup
         ID = "QuestNovicePart1";
-        questName = "Animals of the Anthropogenic biome";
+        questName = "Photography Collection";
         questDescription = "Example quest";
 
         goalDescription[0] = "Photograph a Tamaraw ";

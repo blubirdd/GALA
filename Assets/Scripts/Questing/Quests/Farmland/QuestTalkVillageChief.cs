@@ -16,7 +16,7 @@ public class QuestTalkVillageChief : QuestNew
      
         //setup
         ID = "QuestTalkVillageChief"; ;
-        questName = "The AlGames Village";
+        questName = "Barrio Luntian Village";
         questDescription = "Talk to the Village Chief";
 
 

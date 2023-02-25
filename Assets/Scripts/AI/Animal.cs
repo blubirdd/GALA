@@ -27,6 +27,8 @@ public class Animal : MonoBehaviour, IAnimal
     [Range(1, 100)]
     public float thirst;
 
+    public string playerFoodTag;
+
     [SerializeField] private float _speed;
 
     [SerializeField] private float _runSpeed;
@@ -396,6 +398,14 @@ public class Animal : MonoBehaviour, IAnimal
                         // break;
                     }
 
+                    else if(_colliders[i].CompareTag("HerbivoreFood"))
+                    {
+                        Debug.Log("FOUND FOOD FROM PLAYER");
+                        animalNav.target = _colliders[i].transform;
+                        statusImage.gameObject.SetActive(true);
+                        statusImage.sprite = animalState.eating;
+                    }
+
                 }
 
                 return closestTarget;
@@ -506,7 +516,32 @@ public class Animal : MonoBehaviour, IAnimal
             if (isHungry)
             {
                 //set view radius to normal
-                _viewRadius = 15f;
+                //_viewRadius = 15f;
+                //do something
+
+                StartCoroutine(EatDelayFood());
+                IEnumerator EatDelayFood() 
+                {
+
+                    yield return new WaitForSeconds(5);
+                    other.gameObject.SetActive(false);
+
+                    //preyTransform = null;
+                    animalNav.target = null;
+
+                    hunger = 100f;
+                    
+                    yield return new WaitForSeconds(10);
+                    other.gameObject.SetActive(true);
+                }
+            }
+        }
+
+        if (other.gameObject.CompareTag("HerbivoreFood"))
+        {
+
+                //set view radius to normal
+                //_viewRadius = 15f;
                 //do something
 
                 StartCoroutine(EatDelayFood());
@@ -525,19 +560,16 @@ public class Animal : MonoBehaviour, IAnimal
 
                     hunger = 100f;
                     
-                    yield return new WaitForSeconds(10);
-                    other.gameObject.SetActive(true);
+                    // yield return new WaitForSeconds(10);
+                    // other.gameObject.SetActive(true);
                 }
-                
-
-            }
         }
 
         if (other.gameObject.CompareTag("Water"))
         {
             if (isThirsty)
             {   //set view radius to normal
-                _viewRadius = 15f;
+                //_viewRadius = 15f;
 
                 //do something
                 StartCoroutine(EatDelayWater());
