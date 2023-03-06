@@ -33,7 +33,7 @@ public class Bed : MonoBehaviour, IDataPersistence
 
     IEnumerator WaitForDialogueToTrigger()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
         _dialogue.TriggerDialogue();
         triggerStartDialogue = false;
 
@@ -44,9 +44,10 @@ public class Bed : MonoBehaviour, IDataPersistence
     IEnumerator AcceptQuest()
     {
         yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
-        AssignQuest();
-        yield return new WaitForSeconds(1f);
+
         UIManager.instance.OpenCloseTutorialPrompt();
+
+        AssignQuest();
     }
 
     void AssignQuest()

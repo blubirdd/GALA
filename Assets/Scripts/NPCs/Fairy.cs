@@ -74,8 +74,6 @@ public class Fairy : MonoBehaviour,  IInteractable, ICharacter, IDataPersistence
     {
         if (isTalked == false)
         {
-            quest = (QuestNew)quests.AddComponent(System.Type.GetType(questType));
-            Debug.Log(this + "Quest New Assigned");
             isTalked = true;
         }
         DisableQuestMarker();
@@ -102,14 +100,17 @@ public class Fairy : MonoBehaviour,  IInteractable, ICharacter, IDataPersistence
 
     IEnumerator FadeOut()
     {
-        yield return new WaitForSeconds(1f);
 
         flyaway = true;
         yield return new WaitForSeconds(1f);
 
         _isTalkedDialogue.TriggerIsTalkedDialogue();
 
+
         yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
+        quest = (QuestNew)quests.AddComponent(System.Type.GetType(questType));
+        Debug.Log(this + "Quest New Assigned");
+
 
         Destroy(this.gameObject);
     }

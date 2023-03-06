@@ -33,6 +33,26 @@ namespace StarterAssets
             starterAssetsInputs.CrouchInput(virtualCrouchState);
         }
 
+        public void VirtualAimInput(bool virtualAimState)
+        {
+            starterAssetsInputs.AimInput(virtualAimState);
+        }
+
+        public void AimActiveSelf()
+        {
+            starterAssetsInputs.aim = !starterAssetsInputs.aim;
+
+            if (starterAssetsInputs.aim)
+            {
+                starterAssetsInputs.AimInput(true);
+            }
+
+            else
+            {
+                starterAssetsInputs.AimInput(false);
+            }
+        }
+
     }
 
 }

@@ -34,19 +34,22 @@ public class Cutscene : MonoBehaviour
             //ui
             SpawnDiscoveryUI();
 
-            if(questType != null)
-            {
-                //Assign Quest
-                quest = (QuestNew)quests.AddComponent(System.Type.GetType(questType));
-            }
-
-            Debug.Log("Cutscene playing");
-
             //turn off joystick
             UIManager.instance.DisablePlayerMovement();
 
-            //StartCoroutine(WaitForSecondsThenDestroy());
+            StartCoroutine(WaitToAssignQuest());
         }
+    }
+
+    IEnumerator WaitToAssignQuest()
+    {
+        yield return new WaitForSeconds(7f);
+        if (questType != null)
+        {
+            //Assign Quest
+            quest = (QuestNew)quests.AddComponent(System.Type.GetType(questType));
+        }
+
     }
 
 

@@ -21,7 +21,8 @@ public class UIVirtualTouchZone : MonoBehaviour, IPointerDownHandler, IDragHandl
 
     public static float sensitivity = 1f;
     // public float cameraMagnitudeMultiplier;
-
+    [Header("PLAYER REFERENCE")]
+    public GameObject player;
 
     //Stored Pointer Values
     private Vector2 pointerDownPosition;

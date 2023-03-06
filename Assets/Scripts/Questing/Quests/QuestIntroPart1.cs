@@ -56,9 +56,6 @@ public class QuestIntroPart1 : QuestNew
 
         GetGoalsList();
 
-        //event trigger
-        //QuestEvents.instance.QuestAccepted2();
-
 
         //marker
         SpawnWaypointMarker();

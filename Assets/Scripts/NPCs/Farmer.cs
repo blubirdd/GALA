@@ -33,7 +33,7 @@ public class Farmer : MonoBehaviour, ICharacter, IDataPersistence, IInteractable
 //this is the closing quest if NPC is MAIN
 
     QuestTalkFarmer closingQuest;
-    Rigidbody rb;
+
     void Start()
     {
         npcName = _dialogue.name;
@@ -42,7 +42,7 @@ public class Farmer : MonoBehaviour, ICharacter, IDataPersistence, IInteractable
         {
             DisableQuestMarker();
         }
-        rb = GetComponent<Rigidbody>();
+    
 
         
         if(isCompleted == true)

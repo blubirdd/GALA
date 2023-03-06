@@ -129,6 +129,8 @@ namespace StarterAssets
         private int _animIDItemPickup;
         private int _animIDItemThrow;
 
+        private int _animIDPhotograph;
+
         //the character transform
         //public Transform player;
 
@@ -145,7 +147,7 @@ namespace StarterAssets
         private bool _hasAnimator;
 
         //my script
-        public bool canMove = true;
+        public static bool canMove = true;
 
         
 
@@ -213,12 +215,14 @@ namespace StarterAssets
         public void DisableMovementOnCamera()
         {
             canMove = false;
+            TakePhotograph();
   
         }
 
         public void EnableMovementOnThirdP()
         {
            canMove = true;
+           StashPhotograph();
         }
 
 
@@ -270,6 +274,8 @@ namespace StarterAssets
             //custom
             _animIDCrouch = Animator.StringToHash("Crouch");
             _animIDCrouchWalking = Animator.StringToHash("CrouchWalking");
+            _animIDPhotograph = Animator.StringToHash("Photograph");
+            
 
             _animIDItemPickup = Animator.StringToHash("ItemPickup");
             _animIDItemThrow = Animator.StringToHash("ItemThrow");
@@ -454,6 +460,14 @@ namespace StarterAssets
             //Debug.Log("Threw" + item);
         }
 
+        public void TakePhotograph()
+        {
+            _animator.SetBool(_animIDPhotograph, true);
+        }
+        public void StashPhotograph()
+        {
+            _animator.SetBool(_animIDPhotograph, false);
+        }
 
         private void JumpAndGravity()
         {
