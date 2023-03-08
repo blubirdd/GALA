@@ -28,7 +28,7 @@ public class ItemPickup : MonoBehaviour, IInteractable
 //#endif
 //    }
 
-    private string _prompt = "Pick up ";
+    [SerializeField] private string _prompt = "Pick up ";
     [SerializeField] private Sprite _icon;
     public Sprite icon => _icon;
 

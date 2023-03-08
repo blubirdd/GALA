@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1078894676}
   m_Layer: 6
   m_Name: HunterTrap
-  m_TagString: Untagged
+  m_TagString: Fixable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

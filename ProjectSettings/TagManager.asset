@@ -11,6 +11,7 @@ TagManager:
   - Prey
   - Water
   - HerbivoreFood
+  - Fixable
   layers:
   - Default
   - TransparentFX
@@ -26,8 +27,8 @@ TagManager:
   - Stealth
   - WaterFood
   - PlayerChickenFood
-  - 
-  - 
+  - Grass
+  - Ground
   - 
   - 
   - 
