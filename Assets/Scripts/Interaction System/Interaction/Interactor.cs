@@ -37,7 +37,10 @@ public class Interactor : MonoBehaviour
 
             if(_interactable!=null)
             {
-                if (!_interactionPromptUI.isDisplayed) _interactionPromptUI.Setup(_interactable.InteractionPrompt, _interactable.icon);
+                if (!_interactionPromptUI.isDisplayed)
+                {
+                    _interactionPromptUI.Setup(_interactable.InteractionPrompt, _interactable.icon);
+                }
 
                 if (Keyboard.current.eKey.wasPressedThisFrame)
                 {
@@ -49,7 +52,6 @@ public class Interactor : MonoBehaviour
                 {
                     _interactable.Interact(this);
                     _buttonWasPressed=false;
-
                 }
 
 

@@ -1,6 +1,5 @@
 using StarterAssets;
 using System.Collections;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 public class EquipmentManager : MonoBehaviour
@@ -33,7 +32,7 @@ public class EquipmentManager : MonoBehaviour
     [SerializeField] [Range(0.01f, 0.25f)] private float TimeBetweenPoints = 0.1f;
 
 
-    Equipment[] currentEquipment;
+    public Equipment[] currentEquipment;
 
     public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem);
     public OnEquipmentChanged onEquipmentChanged;

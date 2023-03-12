@@ -10,8 +10,8 @@ public class BillboardUI : MonoBehaviour
 
     [SerializeField] private bool bounce;
 
-    [SerializeField] private float duration = 0.5f;
-    [SerializeField] private float jumpHeight = 10f;
+    [SerializeField] private float duration = 2f;
+    [SerializeField] private float jumpHeight = 0.2f;
     [SerializeField] private int jumpCount = 1;
 
     [SerializeField]private Transform transformOfImage;

@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -40,7 +41,7 @@ public class Fairy : MonoBehaviour,  IInteractable, ICharacter, IDataPersistence
 
         if (isTalked == true)
         {
-            DisableQuestMarker();
+            Destroy(gameObject);
         }
         rb = GetComponent<Rigidbody>();
     }
@@ -102,10 +103,8 @@ public class Fairy : MonoBehaviour,  IInteractable, ICharacter, IDataPersistence
     {
 
         flyaway = true;
-        yield return new WaitForSeconds(1f);
 
         _isTalkedDialogue.TriggerIsTalkedDialogue();
-
 
         yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
         quest = (QuestNew)quests.AddComponent(System.Type.GetType(questType));

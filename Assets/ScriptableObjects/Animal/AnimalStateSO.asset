@@ -17,3 +17,4 @@ MonoBehaviour:
   eating: {fileID: 21300000, guid: 68b153f016d8ebe43b7e7c9e0e3920b9, type: 3}
   drinking: {fileID: 21300000, guid: 0c45b4d2a9976f44fbaf3851b233e5f9, type: 3}
   hunting: {fileID: 21300000, guid: 40ab40fbc5d26b7468d61312380e08fa, type: 3}
+  injured: {fileID: 21300000, guid: da0e523ec0c333d46a2439592ef0c297, type: 3}

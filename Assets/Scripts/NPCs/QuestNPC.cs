@@ -37,7 +37,7 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
 
     void Start()
     {
-        npcName = _dialogue.name;
+        npcName = id;
 
         if (isTalked == true)
         {
@@ -49,6 +49,11 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
         if (isCompleted == true)
         {
             this.gameObject.layer = LayerMask.NameToLayer("Default");
+        }
+
+        else
+        {
+            this.gameObject.layer = LayerMask.NameToLayer("Interactable");
         }
 
 
@@ -112,13 +117,12 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
 
                 this.gameObject.layer = LayerMask.NameToLayer("Default");
             }
-        } 
+        }
 
         if (isCompleted == false)
         {
             AssignQuest();
         }
-
     }
 
     void AssignQuest()
@@ -133,6 +137,16 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
             isTalked = true;
 
             return;
+        }
+
+        if(isTalked == true)
+        {
+            quest = (QuestNew)questManager.AddComponent(System.Type.GetType(closingQuestID));
+            Debug.Log(this + "Quest New Assigned");
+    
+
+            isCompleted = true;
+            this.gameObject.layer = LayerMask.NameToLayer("Default");
         }
 
     }

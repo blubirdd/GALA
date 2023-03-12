@@ -209,10 +209,9 @@ public class UIManager : MonoBehaviour
 
     public void EnablePlayerMovement()
     {
-        playerInputUI.SetActive(true);
         uiVirtualJoystick.ResetJoyStick();
-        playerModel.SetActive(true);
-
+        playerInputUI.SetActive(true);
+        //playerModel.SetActive(true);
     }
 
     public void SwitchToFirstPerson()

@@ -128,7 +128,7 @@ namespace StarterAssets
         private int _animIDCrouchWalking;
         private int _animIDItemPickup;
         private int _animIDItemThrow;
-
+        private int _animIDInspect;
         private int _animIDPhotograph;
 
         //the character transform
@@ -279,6 +279,8 @@ namespace StarterAssets
 
             _animIDItemPickup = Animator.StringToHash("ItemPickup");
             _animIDItemThrow = Animator.StringToHash("ItemThrow");
+            _animIDInspect = Animator.StringToHash("Inspect");
+            
         }
 
         private void GroundedCheck()
@@ -547,6 +549,12 @@ namespace StarterAssets
         {
             _animator.SetTrigger(_animIDItemThrow);
         }
+
+        public void InspectAnim()
+        {
+            _animator.SetTrigger(_animIDInspect);
+        }
+
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
         {
             if (lfAngle < -360f) lfAngle += 360f;
