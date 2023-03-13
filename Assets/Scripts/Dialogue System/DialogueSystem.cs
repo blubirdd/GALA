@@ -54,7 +54,7 @@ public class DialogueSystem : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-        CinemachineTargetGroup.instance.m_Targets[1].target = null;
+        //CinemachineTargetGroup.instance.m_Targets[1].target = null;
 
         dialogueEnded = false;
 
