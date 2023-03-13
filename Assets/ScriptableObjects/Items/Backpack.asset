@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Backpack
   m_EditorClassIdentifier: 
   name: Backpack
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 1648f9002d4185a428f1bd2b620885ff, type: 3}
   isDefaultItem: 1
+  isUsable: 0
+  isThrowable: 0
+  itemDescription: 

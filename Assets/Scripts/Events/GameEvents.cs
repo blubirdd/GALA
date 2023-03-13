@@ -91,11 +91,21 @@ public class GameEvents : MonoBehaviour
 
     //Quest Events
 
+    public event Action<string> onQuestAcceptedNotification;
+    public void QuestAcceptedNotification(string questName)
+    {
+        onQuestAcceptedNotification?.Invoke(questName);
+    }
+
     public event Action<string> onQuestCompleted;
+
+
     public void QuestCompleted(string questName)
     {
         onQuestCompleted?.Invoke(questName);
     }
+
+
 
     //Delegates
     public delegate void ObjectiveUIEventHander(string title, List<Goal> list);

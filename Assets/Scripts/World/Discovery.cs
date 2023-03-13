@@ -6,10 +6,15 @@ using UnityEngine.UI;
 public class Discovery : MonoBehaviour
 {
     public TextMeshProUGUI locationName;
-
+    public TextMeshProUGUI placeName;
     public void SetName(string text)
     {
         locationName.SetText(text);
+    }
+
+    public void SetPlaceName(string text)
+    {
+        placeName.SetText(text);
     }
 
     public void DestroyUI()

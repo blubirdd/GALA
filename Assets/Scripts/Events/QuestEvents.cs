@@ -5,20 +5,47 @@ using UnityEngine;
 
 public class QuestEvents : MonoBehaviour
 {
-    //public static QuestEvents instance;
+    [Header("References")]
+    [SerializeField] private Task task;
 
-    //private void Awake()
-    //{
-    //    instance = this;
-    //}
+    [Header("Grasslands")]
+    [SerializeField] private GameObject injuredTamaraw;
+    [SerializeField] private GameObject curableTamaraw;
 
-    //public event Action onQuestAccepted2;
+    private void Start()
+    {
+        GameEvents.instance.onQuestAcceptedNotification += QuestCheck;
+        GameEvents.instance.onQuestCompleted += QuestCompleteCheck;
 
+        for (int i = 0; i < task.tasksCompeleted.Count; i++)
+        {
+            //scene setup
+            if(task.tasksCompeleted[i] == "QuestTalkWildlifeSpecialist2")
+            {
+                Destroy(injuredTamaraw);
+            }
+        }
+    }
 
-    //public void QuestAccepted2()
-    //{
-    //    onQuestAccepted2?.Invoke();
-    //}
+    public void QuestCheck(string quest)
+    {
+        
+    }
+
+    public void QuestCompleteCheck(string quest)
+    {
+
+        if(quest == "QuestCollectTamarawTracks")
+        {
+            injuredTamaraw.SetActive(true);
+        }
+
+        if(quest == "QuestTalkWildlifeSpecialist2")
+        {
+            injuredTamaraw.SetActive(false);
+            curableTamaraw.SetActive(true);
+        }
+    }
 
 
 }

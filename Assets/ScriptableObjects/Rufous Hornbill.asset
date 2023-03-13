@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c25f5515792a1d40b6d0101ce548f3b, type: 3}
+  m_Name: Rufous Hornbill
+  m_EditorClassIdentifier: 
+  name: Rufous Hornbill
+  scientificName: Buceros hydrocorax
+  animalGroup: Bird
+  polaroidPhoto: {fileID: 0}
+  lifeSpan: 'Life Span: 35-40'
+  weight: 'Weight: 1,823 G'
+  height: 'Height: Unkown'
+  length: 'Length: 60-65 CM'
+  biomeImage: {fileID: 0}
+  biome: Forest
+  diet: 'Diet: Omnivore'
+  food: 'Food: Fruits, Insects'
+  appearance: Dark body, with rufous thighs, chest, and neck, a whitish tail, a red
+    casque, a long red bill, and a black face bordered behind with yellow.
+  details: It is sometimes called "the clock of the mountains" because of its periodic
+    noontime call. It has been recorded to have been preyed upon by the Philippine
+    eagle.

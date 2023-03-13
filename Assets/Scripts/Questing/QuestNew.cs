@@ -59,4 +59,9 @@ public class QuestNew: MonoBehaviour
 
     }
 
+    public void AcceptQuest(string questName)
+    {
+        this.gameObject.AddComponent(System.Type.GetType(questName));
+    }
+
 }

@@ -12,5 +12,6 @@ public class AnimalState : ScriptableObject
     public Sprite eating;
     public Sprite drinking;
     public Sprite hunting;
+    public Sprite injured;
 
 }

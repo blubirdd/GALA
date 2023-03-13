@@ -61,10 +61,10 @@ public class QuestIntroPart2 : QuestNew
         UpdateQuestUI();
 
         //goals
-        Goals.Add(new CollectionGoal(this, "Camera", goalDescription[0], false, currentProgress[0], requiredAmount[1]));
-        Goals.Add(new CollectionGoal(this, "Book", goalDescription[0], false, currentProgress[0], requiredAmount[1]));
-        Goals.Add(new CollectionGoal(this, "Backpack", goalDescription[0], false, currentProgress[0], requiredAmount[1]));
-        Goals.Add(new CollectionGoal(this, "Key", goalDescription[0], false, currentProgress[0], requiredAmount[1]));
+        Goals.Add(new CollectionGoal(this, "Camera", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new CollectionGoal(this, "Book", goalDescription[1], false, currentProgress[1], requiredAmount[1]));
+        Goals.Add(new CollectionGoal(this, "Backpack", goalDescription[2], false, currentProgress[2], requiredAmount[2]));
+        Goals.Add(new CollectionGoal(this, "Key", goalDescription[3], false, currentProgress[3], requiredAmount[3]));
 
         Goals.ForEach(g => g.InIt());
 

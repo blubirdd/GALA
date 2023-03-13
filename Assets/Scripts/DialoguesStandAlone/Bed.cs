@@ -19,7 +19,7 @@ public class Bed : MonoBehaviour, IDataPersistence
     // Start is called before the first frame update
 
     // waypoint
-    WaypointMarker waypointMarker;
+    //WaypointMarker waypointMarker;
     void Start()
     {
         if (triggerStartDialogue)
@@ -27,13 +27,13 @@ public class Bed : MonoBehaviour, IDataPersistence
             StartCoroutine(WaitForDialogueToTrigger());
         }
 
-        waypointMarker = GetComponent<WaypointMarker>();
+       // waypointMarker = GetComponent<WaypointMarker>();
 
     }
 
     IEnumerator WaitForDialogueToTrigger()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
         _dialogue.TriggerDialogue();
         triggerStartDialogue = false;
 
@@ -44,9 +44,10 @@ public class Bed : MonoBehaviour, IDataPersistence
     IEnumerator AcceptQuest()
     {
         yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
-        AssignQuest();
-        yield return new WaitForSeconds(1f);
+
         UIManager.instance.OpenCloseTutorialPrompt();
+
+        AssignQuest();
     }
 
     void AssignQuest()
@@ -55,7 +56,7 @@ public class Bed : MonoBehaviour, IDataPersistence
         quest = (QuestNew)quests.AddComponent(System.Type.GetType(questType));
         Debug.Log(this + "Quest New Assigned");
 
-        waypointMarker.SpawnWaypointMarker();
+        //waypointMarker.SpawnWaypointMarker();
 
     }
 

@@ -206,6 +206,8 @@ GameObject:
   - component: {fileID: 2364080099743082984}
   - component: {fileID: 1832935317}
   - component: {fileID: 5129397731068775479}
+  - component: {fileID: 5129397731068775470}
+  - component: {fileID: 768960726}
   m_Layer: 7
   m_Name: VisayanSpottedDeer
   m_TagString: Untagged
@@ -273,6 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a16a8a44d5b916e418af14295925e6d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photo: {fileID: 11400000, guid: 3a00ce5c632a4e4459fd1c37a10c6a7a, type: 2}
   isPassive: 0
   isAggro: 0
   isHunting: 0
@@ -280,6 +283,9 @@ MonoBehaviour:
   isThirsty: 0
   hunger: 0
   thirst: 0
+  playerFoodTag: Hervibore
+  _speed: 3.5
+  _runSpeed: 7
   showSphere: 1
   preyTransform: {fileID: 0}
   predatorTransform: {fileID: 0}
@@ -292,8 +298,8 @@ MonoBehaviour:
   floorMask:
     serializedVersion: 2
     m_Bits: 1
-  minWaitTime: 0
-  maxWaitTime: 0
+  minWaitTime: 5
+  maxWaitTime: 10
   statusImage: {fileID: 1924007792}
   animalState: {fileID: 11400000, guid: 10727ab5296951d419402a5cb287ec3d, type: 2}
 --- !u!114 &5129397729922373328
@@ -361,6 +367,62 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2.01
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5129397731068775470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7485455766058247478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd5e5ddd242bd64581fb5ed9c0e0507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PolyMesh:
+    name: 
+    vertices: []
+    normals: []
+    colors: []
+    tangents: []
+    uv0: []
+    uv1: []
+    uv2: []
+    uv3: []
+    m_Triangles: 
+    m_SubMeshes: []
+    m_Mesh: {fileID: 0}
+  m_SkinMeshRef: {fileID: 0}
+  m_OriginalMeshObject: {fileID: 0}
+  m_Mode: 0
+--- !u!114 &768960726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7485455766058247478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd5e5ddd242bd64581fb5ed9c0e0507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PolyMesh:
+    name: 
+    vertices: []
+    normals: []
+    colors: []
+    tangents: []
+    uv0: []
+    uv1: []
+    uv2: []
+    uv3: []
+    m_Triangles: 
+    m_SubMeshes: []
+    m_Mesh: {fileID: 0}
+  m_SkinMeshRef: {fileID: 0}
+  m_OriginalMeshObject: {fileID: 0}
+  m_Mode: 0
 --- !u!1 &7797137450440946171
 GameObject:
   m_ObjectHideFlags: 0

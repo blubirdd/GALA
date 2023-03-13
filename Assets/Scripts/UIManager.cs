@@ -5,6 +5,7 @@ using TMPro;
 using System.Drawing;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
@@ -28,7 +29,12 @@ public class UIManager : MonoBehaviour
     //this is outdated
     public GameObject objectiveListCanvas;
 
-     [Header("Controls")]
+    [Header("Animations")]
+    // [SerializeField] private float fadeTime = 1f;
+    [Header("Player")]
+    public GameObject playerArmature;
+
+    [Header("Controls")]
     public GameObject firstPersonCamera;
     public GameObject thirdPersonCamera;
     public GameObject inGameCameraCanvas;
@@ -40,7 +46,11 @@ public class UIManager : MonoBehaviour
 
     public UIVirtualJoystick uiVirtualJoystick;
 
+    [Header("HAND EQUIPMENTS")]
     public GameObject throwButtonsParent;
+    public GameObject throwButton;
+    public GameObject unequipButton;
+    public GameObject aimButton;
 
     [Header("Camera")]
     public bool cameraOpened;
@@ -64,6 +74,10 @@ public class UIManager : MonoBehaviour
     //[Header("NEW INPUT SYSTEM")]
     //public InputAction playerControl;
 
+    [Header("Quest Notification")]
+    [SerializeField] private GameObject paperNotifCanvas;
+
+
     [Header("Outdated")]
     //THIS IS OUTDATED
     public TextMeshProUGUI objective1;
@@ -81,9 +95,10 @@ public class UIManager : MonoBehaviour
         inGameCameraCanvas.SetActive(false);
 
         //events
-        GameEvents.onQuestAccepted += GetObjectives;
+        // GameEvents.onQuestAccepted += GetObjectives;
 
         GameEvents.instance.onQuestCompleted += ClearObjectiveList;
+
 
     }
 
@@ -180,6 +195,8 @@ public class UIManager : MonoBehaviour
 
         cameraOpened = false;
         GameEvents.instance.CameraClosed();
+
+
         //debug purpose
        // Application.targetFrameRate = -1;
     }
@@ -187,20 +204,31 @@ public class UIManager : MonoBehaviour
     {
         uiVirtualJoystick.ResetJoyStick();
         playerInputUI.SetActive(false);
-        playerModel.SetActive(false);
+        // playerModel.SetActive(false);
     }
 
     public void EnablePlayerMovement()
     {
-        playerInputUI.SetActive(true);
         uiVirtualJoystick.ResetJoyStick();
-        playerModel.SetActive(true);
-
+        playerInputUI.SetActive(true);
+        //playerModel.SetActive(true);
     }
 
     public void SwitchToFirstPerson()
     {
-        inGameCameraCanvas.SetActive(true);
+        Quaternion cameraRotation = Camera.main.transform.rotation;
+
+        // Rotate the player with camera rotation
+        playerArmature.transform.rotation = Quaternion.Euler(0f, cameraRotation.eulerAngles.y, 0f);
+
+        StartCoroutine(WaitForSeconds());
+        
+        IEnumerator WaitForSeconds()
+        {
+            yield return new WaitForSeconds(1f);
+            inGameCameraCanvas.SetActive(true);
+
+        }
 
         //thirdPersonCamera.SetActive(false);
         //firstPersonCamera.SetActive(true);
@@ -219,30 +247,30 @@ public class UIManager : MonoBehaviour
         objectiveListCanvas.SetActive(!objectiveListCanvas.activeSelf);
     }
 
-    void GetObjectives(string title, List<Goal> list)
-    {
+    // void GetObjectives(string title, List<Goal> list)
+    // {
 
-        for(int i = 0; i < list.Count; i++)
-        {
-            if (i == 0)
-            {
-                objective1.SetText(list[i].description + ": " + "<color=#FAF84A> " + list[i].currentAmount + "/" + list[i].requiredAmount + "</color>");
-            }
+    //     for(int i = 0; i < list.Count; i++)
+    //     {
+    //         if (i == 0)
+    //         {
+    //             objective1.SetText(list[i].description + ": " + "<color=#FAF84A> " + list[i].currentAmount + "/" + list[i].requiredAmount + "</color>");
+    //         }
 
-            if (i == 1)
-            {
-                objective2.SetText(list[i].description + ": " + "<color=#FAF84A> " + list[i].currentAmount + "/" + list[i].requiredAmount + "</color>");
-            }
+    //         if (i == 1)
+    //         {
+    //             objective2.SetText(list[i].description + ": " + "<color=#FAF84A> " + list[i].currentAmount + "/" + list[i].requiredAmount + "</color>");
+    //         }
 
-            if (i == 2)
-            {
-                objective3.SetText(list[i].description + ": " + "<color=#FAF84A> " + list[i].currentAmount + "/" + list[i].requiredAmount + "</color>");
-            }
+    //         if (i == 2)
+    //         {
+    //             objective3.SetText(list[i].description + ": " + "<color=#FAF84A> " + list[i].currentAmount + "/" + list[i].requiredAmount + "</color>");
+    //         }
 
-        }
+    //     }
 
 
-    }
+    // }
 
     public void ClearObjectiveList(string questName)
     {
@@ -280,11 +308,38 @@ public class UIManager : MonoBehaviour
     //THROWING
     public void EnableThrowUI()
     {
-        throwButtonsParent.SetActive(true);
+        throwButton.SetActive(true);
+        EnableUnequipButton();
     }
 
     public void DisableThrowUI()
     {
-        throwButtonsParent.SetActive(false);
+        throwButton.SetActive(false);
+        DisableAimUI();
+        DisableUnequipButton();
     }
+
+    public void EnableAimUI()
+    {
+        aimButton.SetActive(true);
+    }
+
+    public void DisableAimUI()
+    {
+        aimButton.SetActive(false);
+    }
+
+    public void EnableUnequipButton()
+    {
+        unequipButton.SetActive(true);
+    }
+
+    public void DisableUnequipButton()
+    {
+        unequipButton.SetActive(false);
+    }
+
+    
+
+
 }

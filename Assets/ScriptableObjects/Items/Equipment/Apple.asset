@@ -17,6 +17,5 @@ MonoBehaviour:
   isDefaultItem: 0
   isUsable: 0
   isThrowable: 1
-  itemDescription: yummy
+  itemDescription: Apple fruit
   equipSlot: 0
-  prefab: {fileID: 8958741588038226752, guid: 09f83675e4423964daee032324dd9607, type: 3}

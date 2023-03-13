@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.XR;
+using DG.Tweening;
+using Cinemachine;
 
 public class DialogueSystem : MonoBehaviour
 {
@@ -25,21 +27,34 @@ public class DialogueSystem : MonoBehaviour
     [Header("Subtle Dialogue")]
     public GameObject subtleDialogueCanvas;
     public TextMeshProUGUI subtleDialogueText;
+
     //[SerializeField] private float _textSpeed;
+    [Header("UI")]
+    public Button nextSentenceButton;
+    public CanvasGroup continueButton;
+    public float fadeDuration = 5f; // The duration of the fade animation
+    public float pauseDuration = 0.5f;
 
-
-   
     // Start is called before the first frame update
     void Start()
     {
         sentences = new Queue<string>();
+        //continueButton.alpha = 0f;
+        //Sequence fadeInOut = DOTween.Sequence()
+        //    .Append(continueButton.DOFade(1f, fadeDuration).SetEase(Ease.InOutQuad))
+        //    .AppendInterval(pauseDuration) 
+        //    .Append(continueButton.DOFade(0f, fadeDuration).SetEase(Ease.InOutQuad))
+        //    .AppendInterval(pauseDuration) 
+        //    .SetLoops(-1, LoopType.Restart);
 
+        //// Start the fade in and out sequence
+        //fadeInOut.Play();
     }
 
 
     public void StartDialogue(Dialogue dialogue)
     {
-
+        //CinemachineTargetGroup.instance.m_Targets[1].target = null;
 
         dialogueEnded = false;
 
@@ -49,7 +64,8 @@ public class DialogueSystem : MonoBehaviour
         controlsCanvas.SetActive(false);
 
         dialogueCanvas.SetActive(true);
-
+        
+       
         //
         animator.SetBool("isOpen", true);
 
@@ -80,19 +96,34 @@ public class DialogueSystem : MonoBehaviour
         string sentence = sentences.Dequeue();
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
+
+        nextSentenceButton.gameObject.SetActive(false);
+
+        StartCoroutine(WaitForSecondsToDisplay());
+        IEnumerator WaitForSecondsToDisplay()
+        {
+            yield return new WaitForSeconds(1f);
+            nextSentenceButton.gameObject.SetActive(true);
+            continueButton.alpha = 0f;
+            continueButton.DOFade(1f, 1f);
+        }
     }
 
 
     IEnumerator TypeSentence(string sentence)
     {
         dialogueText.text = "";
-        foreach (char letter in sentence.ToCharArray())
+        for (int letterIndex = 0; letterIndex < sentence.Length; letterIndex += 2)
         {
-            dialogueText.text += letter;
-            //anim speed
-           // yield return new WaitForSeconds(_textSpeed);
+            dialogueText.text += sentence[letterIndex];
+            if (letterIndex + 1 < sentence.Length)
+            {
+                dialogueText.text += sentence[letterIndex + 1];
+            }
+            //  yield return new WaitForSeconds(0.01f);
             yield return null;
         }
+       
     }
 
     public void EndDialogue()
@@ -122,38 +153,43 @@ public class DialogueSystem : MonoBehaviour
         StartCoroutine(EnumDisplaySubtleNextSentence());
     }
 
+    IEnumerator EnumDisplaySubtleNextSentence()
+    {
+        while (true)
+        {
+            DisplaySubtleNextSentence();
+            Debug.Log("DISPLAY NEXT SENTENCE");
+            yield return new WaitForSeconds(3f);
+
+            if(sentences.Count == 0)
+            {
+                EndSubtleDialogue();
+                yield break;
+            }
+        }
+    }
+
     public void DisplaySubtleNextSentence()
     {
         if (sentences.Count == 0)
         {
-            StopCoroutine(EnumDisplaySubtleNextSentence());
-            EndSubtleDialogue();
             return;
         }
-
         string sentence = sentences.Dequeue();
         StopCoroutine(TypeSubtleSentence(sentence));
         StartCoroutine(TypeSubtleSentence(sentence));
     }
 
-    IEnumerator EnumDisplaySubtleNextSentence()
-    {
-        while(true)
-        {
-            DisplaySubtleNextSentence();
-            yield return new WaitForSeconds(5);
-        }
-    }
 
     IEnumerator TypeSubtleSentence(string sentence)
     {
         subtleDialogueText.text = "";
-        foreach (char letter in sentence.ToCharArray())
-        {
-            subtleDialogueText.text += letter;
+        subtleDialogueText.DOFade(0f, 0f); // set the initial alpha to 0
+        subtleDialogueText.text = sentence;
+        subtleDialogueText.DOFade(1f, 1.5f);
 
-            yield return null;
-        }
+       
+        yield return null;
     }
     public void EndSubtleDialogue()
     {

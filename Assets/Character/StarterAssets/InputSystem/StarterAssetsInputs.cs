@@ -13,6 +13,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
         public bool crouch;
+		public bool aim;
 
         [Header("Movement Settings")]
 		public bool analogMovement;
@@ -47,12 +48,18 @@ namespace StarterAssets
 			SprintInput(value.isPressed);
 		}
 
+        //currently using
+        public void OnAim(InputValue value)
+        {
+            AimInput(value.isPressed);
+        }
+
         //public void OnBack(InputValue value)
         //{
         //   PauseInput(value.isPressed);
         //}
 
-		//for pc add on crouch
+        //for pc add on crouch
 
 #endif
 
@@ -84,15 +91,20 @@ namespace StarterAssets
 			crouch = newCrouchstate;
 		}
 
-		//public void PauseInput(bool newPauseState)
-		//{
-		//	UIManager.instance.OpenPauseMenu();
-		//	Debug.Log("Opened Pause Menu through back button");
-		//}
+        public void AimInput(bool newAimstate)
+        {
+            aim = newAimstate;
+        }
+
+        //public void PauseInput(bool newPauseState)
+        //{
+        //	UIManager.instance.OpenPauseMenu();
+        //	Debug.Log("Opened Pause Menu through back button");
+        //}
 
 
 
-		private void OnApplicationFocus(bool hasFocus)
+        private void OnApplicationFocus(bool hasFocus)
 		{
 			SetCursorState(cursorLocked);
 		}

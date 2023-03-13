@@ -7,8 +7,8 @@ public class CinemachineManager : MonoBehaviour
 {
     //[SerializeField] private CinemachineVirtualCamera[] _vcams = new CinemachineVirtualCamera[3];
 
-    [SerializeField] private GameObject[] _cams;
-    // Start is called before the first frame update
+    public GameObject[] _cams;
+
     #region Singleton
 
     public static CinemachineManager instance;
@@ -27,6 +27,7 @@ public class CinemachineManager : MonoBehaviour
 
     void Start()
     {
+
         GameEvents.instance.onDialogueStarted += SwitchToDialogueCam;
 
         GameEvents.instance.onCameraOpened += SwitchToFirstPersonCam;
@@ -44,6 +45,7 @@ public class CinemachineManager : MonoBehaviour
         _cams[1].SetActive(false);
         _cams[2].SetActive(false);
         _cams[3].SetActive(true);
+
     }
 
 
@@ -77,12 +79,34 @@ public class CinemachineManager : MonoBehaviour
         _cams[3].SetActive(false);
     }
 
+    public void EnableInspectCam()
+    {
+        _cams[4].SetActive(true);
+    }
+
+    public void DisableInspectCam()
+    {
+        _cams[4].SetActive(false);
+    }
+
     IEnumerator WaitForDialogue()
     {
         yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
         SwitchToThirdPersonCam();
     }
 
+    public void SwitchToTargetFocusCam()
+    {
+        _cams[1].SetActive(true);
+        _cams[0].SetActive(false);
+        StartCoroutine(WaitForSecondsToSwitchToMain());
+    }
+
+    IEnumerator WaitForSecondsToSwitchToMain()
+    {
+        yield return new WaitForSeconds(2.5f);
+        SwitchToThirdPersonCam();
+    }
 
 
     // Update is called once per frame

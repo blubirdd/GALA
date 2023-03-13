@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using DG.Tweening;
 
 
 public class TaskUI : MonoBehaviour
@@ -12,9 +13,13 @@ public class TaskUI : MonoBehaviour
 
 
     public GameObject taskUI;
+    
 
     [SerializeField] private GameObject taskPrefab;
 
+    [Header("Tween Animations")]
+    [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private RectTransform rectTransform;
 
     
     //[SerializeField] private GameObject goalListPrefab;
@@ -92,21 +97,39 @@ public class TaskUI : MonoBehaviour
     {
         taskUI.SetActive(true);
         UIManager.instance.DisableButtonsUIPACK();
+
+        // Set initial position and alpha
+        taskUI.transform.localPosition = new Vector3(0, 200, 0);
+        // CanvasGroup canvasGroup = taskUI.GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 0;
+
+        // Animate position and alpha to final values
+        taskUI.transform.DOLocalMoveY(0, 0.5f).SetEase(Ease.OutBack);
+        canvasGroup.DOFade(1, 0.5f);
+        
         UpdateUI();
     }
 
     public void CloseTasks()
     {
-        //this removes the instantiated objects so it does not overlap 
+        // Animate position to initial value
+        
+        //Vector3 initialPos = rectTransform.anchoredPosition;
+        //rectTransform.DOAnchorPosY(initialPos.y - 200, 0.5f, false).SetEase(Ease.InBack).OnComplete(() =>
+        //{
+
+        //});
+
+
+        // Destroy children and disable task UI
         for (int i = 0; i < this.transform.childCount; i++)
         {
             Destroy(this.transform.GetChild(i).gameObject);
         }
-
-
         taskUI.SetActive(false);
         UIManager.instance.EnableButtonsUIPACK();
     }
+
 
 
 }

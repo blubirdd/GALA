@@ -6,6 +6,7 @@ using UnityEngine;
 public class Photograph : ScriptableObject
 {
     new public string name = "New Picture";
+    public string scientificName;
     public string animalGroup;
     public Sprite polaroidPhoto = null;
 

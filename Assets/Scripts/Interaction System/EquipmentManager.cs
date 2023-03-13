@@ -1,28 +1,12 @@
+using StarterAssets;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
-using static UnityEditor.Timeline.Actions.MenuPriority;
 
 public class EquipmentManager : MonoBehaviour
 {
     #region Singleton
 
     public static EquipmentManager instance;
-    public Transform playerArmature;
-
-    [Header("Throwing")]
-    public bool isReadyToThrow = false; 
-    [SerializeField] private LineRenderer _lineRenderer;
-    [SerializeField] private Transform _releasePosition;
-    public LayerMask collisionMask;
-
-    [Header("Throwing - Display Controls")]
-    [SerializeField][Range(10, 100)] private int LinePoints = 25;
-    [SerializeField] [Range(0.01f, 0.25f)] private float TimeBetweenPoints = 0.1f;
-
     void Awake()
     {
         if (instance != null)
@@ -34,8 +18,21 @@ public class EquipmentManager : MonoBehaviour
         instance = this;
     }
     #endregion
+    public Transform playerArmature;
 
-    Equipment[] currentEquipment;
+    [Header("Throwing")]
+    [SerializeField] private UICanvasControllerInput uICanvasControllerInput;
+    public bool isReadyToThrow = false; 
+    [SerializeField] private LineRenderer _lineRenderer;
+    [SerializeField] private Transform _releasePosition;
+    public LayerMask collisionMask;
+
+    [Header("Throwing - Display Controls")]
+    [SerializeField][Range(10, 100)] private int LinePoints = 25;
+    [SerializeField] [Range(0.01f, 0.25f)] private float TimeBetweenPoints = 0.1f;
+
+
+    public Equipment[] currentEquipment;
 
     public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem);
     public OnEquipmentChanged onEquipmentChanged;
@@ -90,9 +87,7 @@ public class EquipmentManager : MonoBehaviour
 
         //equip in 3D
         EquipItemIn3D(newItem);
-
-        //enable ui
-        uiManager.EnableThrowUI();
+        
 
     }
 
@@ -108,14 +103,13 @@ public class EquipmentManager : MonoBehaviour
             inventory.Add(oldItem, 1);
 
             currentEquipment[slotIndex] = null;
-
+            UnequipItemIn3D(oldItem);
             //invoke the event
             if (onEquipmentChanged != null)
             {
                 onEquipmentChanged.Invoke(null, oldItem);
             }
 
-            UnequipItemIn3D(oldItem);
         }
 
     }
@@ -138,7 +132,21 @@ public class EquipmentManager : MonoBehaviour
         if (item.isThrowable)
         {
             isReadyToThrow = true;
+
+            uiManager.EnableThrowUI();
+
+
             StartCoroutine(DrawProjection());
+        }
+
+        if (item.isUsable)
+        {
+            uiManager.EnableUnequipButton();
+        }
+
+        if(item.isAimable)
+        {
+            uiManager.EnableAimUI();
         }
     }
 
@@ -232,6 +240,8 @@ public class EquipmentManager : MonoBehaviour
             }
             
         }
+
+        uICanvasControllerInput.VirtualAimInput(false);
 
     }
 

@@ -55,7 +55,7 @@ public class BookSlot : MonoBehaviour
 
         dietImage.enabled = true;
         //set the book ui
-        _animalName.SetText(photo.name);
+        _animalName.SetText(photo.name + " (" + photo.scientificName + ")");
 
         _lifeSpan.SetText(photo.lifeSpan);
         _weight.SetText(photo.weight);

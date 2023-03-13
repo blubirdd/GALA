@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Red junglefowl
   m_EditorClassIdentifier: 
   name: Red junglefowl
+  scientificName: Gallus gallus
   animalGroup: Bird
   polaroidPhoto: {fileID: 21300000, guid: e2d5ea2467ed2804a83069cf8fe11b0a, type: 3}
   lifeSpan: 'Life Span: 10-30 YRS'
@@ -23,8 +24,8 @@ MonoBehaviour:
   biome: Anthrophogenic, Forest
   diet: 'Diet: Omnivore'
   food: 'Food: Seeds, Crops, Fruits and small lizards'
-  appearance: Looks like a mcchicken.  Topped with shredded lettuce and just the
-    right amount of creamy mayonnaise, all served on a perfectly toasted bun.
+  appearance: has a much smaller body mass and is brighter in coloration. Male junglefowl
+    are significantly larger than females and have brightly colored decorative feathers.
   details: Social and typically live in flocks of one to a few males and several
     females. They are active during the day and usually feed in the early morning
     and late afternoon.

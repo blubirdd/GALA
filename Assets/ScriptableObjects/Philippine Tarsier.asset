@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c25f5515792a1d40b6d0101ce548f3b, type: 3}
+  m_Name: Philippine Tarsier
+  m_EditorClassIdentifier: 
+  name: Philippine Tarsier
+  scientificName: Carlito syrichta
+  animalGroup: Terrestrial Mammal
+  polaroidPhoto: {fileID: 0}
+  lifeSpan: 'Life Span: 12-20 YRS'
+  weight: 'Weight: 85-165 G'
+  height: 'Height: 85-160 MM'
+  length: 'Length: 80-160 MM'
+  biomeImage: {fileID: 0}
+  biome: Forest
+  diet: 'Diet: Insectivores, Carnivore'
+  food: 'Food: Insects'
+  appearance: Its eyes are unique and are almost twice as big as those of humans.
+    Its head can rotate as much as 180 degrees.
+  details: Are nocturnal but are also active at dawn and dusk. During the day they
+    sleep in dense vegetation or sometimes in a hollow tree. At sunset, they begin
+    searching for insect prey.

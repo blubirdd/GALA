@@ -38,7 +38,14 @@ public class ReticleScript : MonoBehaviour
     {
         if (hit.collider != null)
         {
-            hit.collider.gameObject.SendMessage("Discovered");
+            //OLD METHOD
+            //hit.collider.gameObject.SendMessage("Discovered");
+
+            //NEW METHOD (OMSIMIZED)
+            if (_animal != null)
+            {
+                _animal.Discovered();
+            }
         }
     }
     public void Ray()

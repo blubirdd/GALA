@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
+
 
 [CreateAssetMenu(fileName ="New Item", menuName = "Inventory/Item")]
 public class Item : ScriptableObject
@@ -12,6 +12,7 @@ public class Item : ScriptableObject
     public bool isDefaultItem = false;
     public bool isUsable = false;
     public bool isThrowable = false;
+    public bool isAimable = false;
 
     [TextArea(3, 10)]
     public string itemDescription;

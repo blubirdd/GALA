@@ -36,6 +36,10 @@ public class Inventory : MonoBehaviour, IDataPersistence
     public delegate void OnItemAdded(Item item);
     public static event OnItemAdded OnItemAddedCallback;
 
+    //communicate with usegoal
+    public delegate void OnItemUsed(Item item);
+    public static event OnItemUsed OnItemUsedCallback;
+
 
     //  public List<Item> items = new List<Item> ();
 
@@ -94,6 +98,9 @@ public class Inventory : MonoBehaviour, IDataPersistence
     public void Add(Item item, int _amount)
     {
         
+        //trigger the collectiongoal event
+        ItemPickedUp(item);
+
         if (!item.isDefaultItem)
         {
             
@@ -120,8 +127,6 @@ public class Inventory : MonoBehaviour, IDataPersistence
             }
 
         }
-
-        ItemPickedUp(item);
 
 
     }
@@ -167,12 +172,21 @@ public class Inventory : MonoBehaviour, IDataPersistence
         }
     }
 
-
-    public static void ItemPickedUp(Item item)
+    //COLLECTION GOAL
+    public void ItemPickedUp(Item item)
     {
         if(OnItemAddedCallback != null)
         {
            OnItemAddedCallback(item);
+        }
+    }
+
+    //USE GOAL
+    public void ItemUsed(Item item)
+    {
+        if(OnItemUsedCallback != null)
+        {
+            OnItemUsedCallback(item);
         }
     }
 

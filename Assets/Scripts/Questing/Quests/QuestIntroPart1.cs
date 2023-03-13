@@ -13,6 +13,8 @@ public class QuestIntroPart1 : QuestNew
     private int[] requiredAmount = new int[] {1};
     private string ID;
 
+    private GameObject waypoint;
+
     void Start()
     {
 
@@ -54,11 +56,9 @@ public class QuestIntroPart1 : QuestNew
 
         GetGoalsList();
 
-        //event trigger
-        //QuestEvents.instance.QuestAccepted2();
-
 
         //marker
+        SpawnWaypointMarker();
 
     }
 
@@ -92,6 +92,13 @@ public class QuestIntroPart1 : QuestNew
         Initialize();
     }
 
+    public void SpawnWaypointMarker()
+    {
+        waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
+        waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[1]);
+       // waypoint.name = WaypointManager.instance.waypointTransforms[0].name + "Waypoint";
+    }
+
     IEnumerator IsQuestCompleted()
     {
         yield return new WaitUntil(() => questCompleted == true);
@@ -102,9 +109,9 @@ public class QuestIntroPart1 : QuestNew
         //debug
         Debug.Log(this + " is Completed");
 
-        //disable marker
-        Destroy(GameObject.Find("FairyWaypoint").gameObject);
+        Destroy(waypoint);
     }
+
 
 }
 

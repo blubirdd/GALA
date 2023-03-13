@@ -38,7 +38,10 @@ public class Task : MonoBehaviour, IDataPersistence
                 return;
             }
         }
+
         tasks.Add(new TaskSave(id, questTitle, goalDescription, progress, requiredAmount));
+
+        GameEvents.instance.QuestAcceptedNotification(questTitle);
     }
 
     

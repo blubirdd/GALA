@@ -7,7 +7,7 @@ public class SubtleDialogueTrigger : MonoBehaviour
 
     public Dialogue dialogue;
 
-   // public DialogueSO dialogueSO;
+    // public DialogueSO dialogueSO;
 
     public void TriggerDialogue()
     {

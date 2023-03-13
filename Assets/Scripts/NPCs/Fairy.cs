@@ -1,11 +1,16 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Timeline;
 using UnityEngine.UI;
-public class Fairy : MonoBehaviour,  IInteractable, ICharacter
+public class Fairy : MonoBehaviour,  IInteractable, ICharacter, IDataPersistence 
 {
+
+    [Header("Unique ID")]
+    [SerializeField] private string id;
+
     [Header("Interaction")]
     [SerializeField] private string _prompt;
     [SerializeField] private Sprite _icon;
@@ -27,13 +32,16 @@ public class Fairy : MonoBehaviour,  IInteractable, ICharacter
     public string npcName { get; set; }
 
     Rigidbody rb;
+
+
+
     void Start()
     {
         npcName = _dialogue.name;
 
         if (isTalked == true)
         {
-            DisableQuestMarker();
+            Destroy(gameObject);
         }
         rb = GetComponent<Rigidbody>();
     }
@@ -67,8 +75,6 @@ public class Fairy : MonoBehaviour,  IInteractable, ICharacter
     {
         if (isTalked == false)
         {
-            quest = (QuestNew)quests.AddComponent(System.Type.GetType(questType));
-            Debug.Log(this + "Quest New Assigned");
             isTalked = true;
         }
         DisableQuestMarker();
@@ -95,15 +101,31 @@ public class Fairy : MonoBehaviour,  IInteractable, ICharacter
 
     IEnumerator FadeOut()
     {
-        yield return new WaitForSeconds(1f);
 
         flyaway = true;
-        yield return new WaitForSeconds(1f);
 
         _isTalkedDialogue.TriggerIsTalkedDialogue();
 
         yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
+        quest = (QuestNew)quests.AddComponent(System.Type.GetType(questType));
+        Debug.Log(this + "Quest New Assigned");
+
 
         Destroy(this.gameObject);
+    }
+
+    public void LoadData(GameData data)
+    {
+        data.NPCsTalked.TryGetValue(id, out isTalked);
+    }
+
+    public void SaveData(GameData data)
+    {
+        if (data.NPCsTalked.ContainsKey(id))
+        {
+            data.NPCsTalked.Remove(id);
+        }
+
+        data.NPCsTalked.Add(id, isTalked);
     }
 }
