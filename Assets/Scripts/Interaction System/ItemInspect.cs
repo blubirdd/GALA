@@ -49,7 +49,7 @@ public class ItemInspect : MonoBehaviour, IInteractable
         thirdPersonController = ThirdPersonController.instance;
         uiManager = UIManager.instance;
         cinemachineManager = CinemachineManager.instance;
-        cinemachineTargetGroup = CinemachineTargetGroup.instance;
+        //cinemachineTargetGroup = CinemachineTargetGroup.instance;
 
         character = GetComponent<Character>();
         
@@ -92,8 +92,8 @@ public class ItemInspect : MonoBehaviour, IInteractable
 
         if (focusOnTarget)
         {
-            cinemachineTargetGroup.m_Targets[1].target = TargetToFocusOn.transform;
-            cinemachineManager.SwitchToTargetFocusCam();
+            //cinemachineTargetGroup.m_Targets[1].target = TargetToFocusOn.transform;
+            //cinemachineManager.SwitchToTargetFocusCam();
         }
         else
         {
