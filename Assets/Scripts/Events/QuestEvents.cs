@@ -12,6 +12,7 @@ public class QuestEvents : MonoBehaviour
     [SerializeField] private GameObject injuredTamaraw;
     [SerializeField] private GameObject curableTamaraw;
 
+
     private void Start()
     {
         GameEvents.instance.onQuestAcceptedNotification += QuestCheck;
@@ -45,6 +46,13 @@ public class QuestEvents : MonoBehaviour
             injuredTamaraw.SetActive(false);
             curableTamaraw.SetActive(true);
         }
+
+        if(quest =="QuestUseMedkit")
+        {
+
+        }
+
+
     }
 
 
