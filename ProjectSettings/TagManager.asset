@@ -3,32 +3,24 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - CinemachineTarget
-  - Fairy
-  - NPC
-  - Mammal
-  - Prey
-  - Water
-  - HerbivoreFood
-  - Fixable
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - 
   - Water
   - UI
-  - Interactable
-  - Animal
-  - Unwalkable
-  - Prey
-  - GrassFood
-  - Stealth
-  - WaterFood
-  - PlayerChickenFood
-  - Grass
-  - Ground
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
