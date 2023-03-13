@@ -153,7 +153,11 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
 
     void DisableQuestMarker()
     {
-        questMarker.SetActive(false);
+        if(questMarker != null)
+        {
+           questMarker.SetActive(false);
+        }
+
 
     }
 

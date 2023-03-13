@@ -18,6 +18,8 @@ public class ItemUse : MonoBehaviour, IInteractable
     [SerializeField] private Sprite _icon;
     //[SerializeField] private bool consumeItem = false;
 
+    [SerializeField] GameObject particle;
+
     ThirdPersonController thirdPersonController;
     EquipmentManager equipmentManager;
     Inventory inventory;
@@ -50,5 +52,12 @@ public class ItemUse : MonoBehaviour, IInteractable
         Debug.Log("Used " + item.name);
         inventory.ItemUsed(item);
         thirdPersonController.ItemPickupAnim();
+
+        if (particle != null)
+        {
+            GameObject g = Instantiate(particle, transform.position, Quaternion.identity);
+            Destroy(g, 3f);
+        }
+        //ParticleManager.instance.SpawnPuffParticle(this.transform.position);
     }
 }
