@@ -10,7 +10,7 @@ public class DestroyOnTouch : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
 
-void OnMouseDown()
+public void DestroySnake()
 {
     Destroy(gameObject); 
     Debug.Log(gameObject + " hasn't beed destroyed yet!"); 
