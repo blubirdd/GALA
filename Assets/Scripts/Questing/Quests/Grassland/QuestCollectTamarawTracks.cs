@@ -6,7 +6,7 @@ public class QuestCollectTamarawTracks : QuestNew
 {
     private string[] goalDescription = new string[] { "Inspect the discovered tracks" };
     private int[] currentProgress = new int[] { 0 };
-    private int[] requiredAmount = new int[] { 5 };
+    private int[] requiredAmount = new int[] { 4 };
     private string ID;
 
     public GameObject waypoint;

@@ -7,14 +7,15 @@ public class ItemUse : MonoBehaviour, IInteractable
 {
 
 
-    public Sprite icon => _icon;
+
 
     public Item item;
 
-    public string InteractionPrompt => _prompt;
+    public string InteractionPrompt { get; set; }
+    public Sprite icon { get; set; }
 
 
-    [SerializeField] private string _prompt = "Use ";
+    [SerializeField] private string _prompt = "Use (to change) ";
     [SerializeField] private Sprite _icon;
     //[SerializeField] private bool consumeItem = false;
 
@@ -26,7 +27,8 @@ public class ItemUse : MonoBehaviour, IInteractable
     void Start()
     {
         _icon = item.icon;
-
+        InteractionPrompt = _prompt;
+        icon = _icon;
         thirdPersonController = ThirdPersonController.instance;
         equipmentManager = EquipmentManager.instance;
         inventory = Inventory.instance;

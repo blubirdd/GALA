@@ -107,7 +107,7 @@ public class NotificationManager : MonoBehaviour
 
     IEnumerator WaitForDelay(bool isCompletedNotification)
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         animator.SetBool("IsDisplaying", false);
 
         //turn off canvas if performance issues

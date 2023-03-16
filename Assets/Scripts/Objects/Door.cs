@@ -9,8 +9,8 @@ public class Door : MonoBehaviour, IInteractable
     [SerializeField] private Sprite _icon;
 
 
-    public string InteractionPrompt => _prompt;
-    public Sprite icon => _icon;
+    public string InteractionPrompt { get; set; }
+    public Sprite icon { get; set; }
 
     Animator animator;
 
@@ -18,6 +18,8 @@ public class Door : MonoBehaviour, IInteractable
 
     void Start()
     {
+        InteractionPrompt = _prompt;
+        icon = _icon;
         animator = GetComponent<Animator>();
     }
     public bool Interact(Interactor interactor)

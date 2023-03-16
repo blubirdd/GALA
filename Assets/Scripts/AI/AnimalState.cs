@@ -12,6 +12,8 @@ public class AnimalState : ScriptableObject
     public Sprite eating;
     public Sprite drinking;
     public Sprite hunting;
+
+    [Header("Quest Sprite")]
     public Sprite injured;
 
 }

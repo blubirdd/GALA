@@ -10,9 +10,8 @@ public class IdleNPC : MonoBehaviour, ICharacter, IInteractable
 
     [SerializeField] private DialogueTrigger _dialogue;
 
-    public string InteractionPrompt => _prompt;
-    public Sprite icon => _icon;
-
+    public string InteractionPrompt { get; set; }
+    public Sprite icon { get; set; }
 
     [Header("Quest Marker")]
     public GameObject questMarker;
@@ -23,6 +22,8 @@ public class IdleNPC : MonoBehaviour, ICharacter, IInteractable
 
     void Start()
     {
+        InteractionPrompt = _prompt;
+        icon = _icon;
         npcName = _dialogue.name;
     }
 

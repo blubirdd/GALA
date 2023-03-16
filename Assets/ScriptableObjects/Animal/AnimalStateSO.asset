@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f75489512c7c2489f2e4616b097bc7, type: 3}
   m_Name: AnimalStateSO
   m_EditorClassIdentifier: 
-  normal: {fileID: 21300000, guid: 1b9bf63cb17911442a6fe4bbe94af693, type: 3}
+  normal: {fileID: 21300000, guid: 10216303ec5db9349854b4477fbebe46, type: 3}
   runningAway: {fileID: 21300000, guid: 419ecaf53b7d04543950d7a66858a89c, type: 3}
   eating: {fileID: 21300000, guid: 68b153f016d8ebe43b7e7c9e0e3920b9, type: 3}
   drinking: {fileID: 21300000, guid: 0c45b4d2a9976f44fbaf3851b233e5f9, type: 3}

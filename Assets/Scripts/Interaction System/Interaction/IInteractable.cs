@@ -5,8 +5,8 @@ using UnityEngine;
 
 public interface  IInteractable 
 {
-    public string InteractionPrompt { get; }
-    public Sprite icon { get; }
+    public string InteractionPrompt { get; set; }
+    public Sprite icon { get; set; }
     public bool Interact(Interactor interactor);
 
 

@@ -115,6 +115,7 @@ public class QuestTalkWildlifeSpecialist2 : QuestNew
         //disable marker
         //Destroy(_waypoint);
 
-        //AcceptQuest("QuestFeedChicken");
+        yield return new WaitForSeconds(7f);
+        AcceptQuest("QuestTalkWildlifeSpecialist3");
     }
 }
