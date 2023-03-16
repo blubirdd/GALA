@@ -106,7 +106,6 @@ public class GameEvents : MonoBehaviour
     }
 
 
-
     //Delegates
     public delegate void ObjectiveUIEventHander(string title, List<Goal> list);
 

@@ -12,14 +12,19 @@ public class Animal : MonoBehaviour, IAnimal
     [Header("Animal SO")]
     public Photograph photo;
 
-    [Header("States")]
+    [Header("AI States")]
     public bool isPassive;
     public bool isAggro;
     public bool isHunting = false;
-    
+
     //food states
     public bool isHungry;
     public bool isThirsty;
+
+
+    [Header("Quest States")]
+    public bool isInjured;
+    public bool isRunningAway = false;
 
     [Header("State floats")]
     [Range(1, 100)]
@@ -39,14 +44,18 @@ public class Animal : MonoBehaviour, IAnimal
     public Transform predatorTransform;
 
     [Header("Targets")]
-    
+
     public LayerMask targetMask;
+    public LayerMask playerMask;
     [SerializeField] private float _viewRadius;
+    [SerializeField] private float _playerAwarenessRadius = 8;
     [SerializeField] private int _targetsFound;
+    [SerializeField] private int _playerFound;
 
     [Header("NavMesh")]
-    
+
     private readonly Collider[] _colliders = new Collider[3];
+    private readonly Collider[] _playerColliders = new Collider[1];
     //[Header("Predator")]
 
     [Header("ROAMING / WANDER")]
@@ -65,6 +74,7 @@ public class Animal : MonoBehaviour, IAnimal
     public AnimalState animalState;
     //
 
+   
     //a* for wandering
     // public GameObject objectToInstantiate;
     // Transform previousObject;
@@ -82,16 +92,10 @@ public class Animal : MonoBehaviour, IAnimal
 
     Animator animator;
 
-    void Start()
-    {
-        animalName = photo.name;
-        animalGroup = photo.animalGroup;
-    }
-
     private void Awake()
     {
         animalNav = GetComponent<AnimalNav>();
-        statusImage.gameObject.SetActive(false);
+        //statusImage.gameObject.SetActive(false);
 
         // StartCoroutine(FindTargetWithDelay(0.5f));
         // StartCoroutine(RoamAround(0.5f));
@@ -107,10 +111,19 @@ public class Animal : MonoBehaviour, IAnimal
         // thirst = 100f;
 
 
+
     }
+    void Start()
+    {
+        animalName = photo.name;
+        animalGroup = photo.animalGroup;
 
+        if (isInjured)
+        {
+            ChangeUI(AnimalStateUI.Injured);
+        }
 
-
+    }
 
 
 
@@ -119,9 +132,11 @@ public class Animal : MonoBehaviour, IAnimal
         StartCoroutine(FindTargetWithDelay(0.5f));
         StartCoroutine(RoamAround(0.5f));
 
+        StartCoroutine(FindPlayerWithDelay());
         //states 
         hunger = 50f;
         thirst = 100f;
+
 
     }
 
@@ -137,7 +152,7 @@ public class Animal : MonoBehaviour, IAnimal
 
         if (hunger <= 0)
         {
-          //  _viewRadius = 30f;
+            //  _viewRadius = 30f;
             isHungry = true;
             hunger = 0;
         }
@@ -149,9 +164,9 @@ public class Animal : MonoBehaviour, IAnimal
 
         if (thirst <= 0)
         {
-           //9 _viewRadius = 30f;
+            //9 _viewRadius = 30f;
             isThirsty = true;
-           thirst = 0;
+            thirst = 0;
         }
 
         else
@@ -228,14 +243,89 @@ public class Animal : MonoBehaviour, IAnimal
             //reset the wander and enter wander state
             else
             {
-               _animal.ResetPath();
+                _animal.ResetPath();
+                Debug.Log("RESETING PATH");
+                //below code is optimization
+                yield return new WaitUntil(() => animalNav.target == null);
+
             }
 
             yield return null;
         }
     }
 
+    private enum AnimalStateUI
+    {
+        Idle,
+        RunningAway,
+        Eeating,
+        Drinking,
+        Hunting,
+        Injured
 
+    }
+
+    private void ChangeUI(AnimalStateUI status)
+    {
+        //parent if statement so that it will always show injury status
+        if (isInjured && status != AnimalStateUI.RunningAway)
+        {
+            if (statusImage.sprite == animalState.injured)
+            {
+                //return if already set
+                return;
+            }
+
+            else
+            {
+                statusImage.sprite = animalState.injured;
+            }
+        }
+
+        else
+        {
+
+
+            if (status == AnimalStateUI.Idle)
+            {
+                if (statusImage.sprite == animalState.normal)
+                {
+                    return;
+                }
+
+                else
+                {
+                    statusImage.sprite = animalState.normal;
+                }
+            }
+
+            if (status == AnimalStateUI.RunningAway)
+            {
+               if(statusImage.sprite == animalState.runningAway)
+                {
+                    return;
+                }
+
+                else
+                {
+                    statusImage.sprite = animalState.runningAway;
+                }
+            }
+
+            if(status == AnimalStateUI.Eeating)
+            {
+                if (statusImage.sprite == animalState.eating)
+                {
+                    return;
+                }
+
+                else
+                {
+                    statusImage.sprite = animalState.eating;
+                }
+            }
+        }
+    }
 
     private void DoIdle()
     {
@@ -279,6 +369,61 @@ public class Animal : MonoBehaviour, IAnimal
         return navHit.position;
     }
 
+    IEnumerator FindPlayerWithDelay()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(0.1f);
+            FindPlayer();
+
+            yield return null;
+        }
+    }
+
+    private void FindPlayer()
+    {
+        _playerFound = Physics.OverlapSphereNonAlloc(transform.position, _playerAwarenessRadius, _playerColliders, playerMask);
+
+        if(_playerFound > 0)
+        {
+            if (_playerColliders[0].CompareTag("Player"))
+            {
+                statusImage.gameObject.SetActive(true);
+
+                //statusImage.sprite = animalState.runningAway;
+
+                //new optimized
+                isRunningAway = true;
+                ChangeUI(AnimalStateUI.RunningAway);
+
+                predatorTransform = _playerColliders[0].transform;
+
+                Debug.Log(this + " is Running away");
+
+                //run from target
+                Vector3 dirToPredator = transform.position - predatorTransform.position;
+                Vector3 newPosition = transform.position + dirToPredator * 1.3f;
+
+                //rotate on direction
+                Quaternion toRotation = Quaternion.LookRotation(newPosition, Vector3.up);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 1 * Time.deltaTime);
+
+                _animal.speed = _runSpeed;
+                _animal.SetDestination(newPosition);
+            }
+
+        }
+
+        else
+        {
+            //predatorTransform = null;
+            //statusImage.gameObject.SetActive(false);
+            isRunningAway = false;
+            ChangeUI(AnimalStateUI.Idle);
+
+        }
+    }
+
 
     //find target when hungry/thirsty
     IEnumerator FindTargetWithDelay(float delay)
@@ -287,7 +432,11 @@ public class Animal : MonoBehaviour, IAnimal
         {
             yield return new WaitForSeconds(delay);
 
-            FindTarget();
+            if(isHungry || isThirsty)
+            {
+                FindTarget();
+            }
+            
 
             yield return null;
         }
@@ -295,6 +444,7 @@ public class Animal : MonoBehaviour, IAnimal
     void FindTarget()
     {
         //if bug/ clear all _colliders first
+        Debug.Log(this + " is Finding target");
         
         _targetsFound = Physics.OverlapSphereNonAlloc(transform.position, _viewRadius, _colliders, targetMask);
 
@@ -309,13 +459,12 @@ public class Animal : MonoBehaviour, IAnimal
            // preyTransform = null;
            animalNav.target = null;
 
-           predatorTransform = null;
 
             //set the speed back to roaming speed
             _animal.speed = _speed;
 
             //disable status image
-            statusImage.gameObject.SetActive(false);
+            
 
             //animation
             // animator.SetBool("isWalking", false);
@@ -327,31 +476,7 @@ public class Animal : MonoBehaviour, IAnimal
             
             for (int i = 0; i < _targetsFound; i++)
             {
-                if (_colliders[i].CompareTag("Player"))
-                {
-                    statusImage.gameObject.SetActive(true);
-                    statusImage.sprite = animalState.runningAway;
-                    predatorTransform = _colliders[i].transform;
-
-                    Debug.Log(this + " is Running away");
-
-                    //run from target
-                    Vector3 dirToPredator = transform.position - predatorTransform.position;
-                    Vector3 newPosition = transform.position + dirToPredator * 1.5f;
-
-                    //rotate on direction
-                    Quaternion toRotation = Quaternion.LookRotation(newPosition, Vector3.up);
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 1 * Time.deltaTime);
-
-                    _animal.speed = _runSpeed;
-                    _animal.SetDestination(newPosition);
-                }
-
-                else
-                {
-                    predatorTransform = null;
-                    statusImage.gameObject.SetActive(false);
-                }
+                //moved to new
 
             }
 
@@ -394,7 +519,11 @@ public class Animal : MonoBehaviour, IAnimal
                         Debug.Log(this +" is hunting");
 
                         statusImage.gameObject.SetActive(true);
-                        statusImage.sprite = animalState.eating;
+
+                        //
+                        //statusImage.sprite = animalState.eating;
+                        ChangeUI(AnimalStateUI.Eeating);
+
                         // break;
                     }
 
@@ -524,15 +653,15 @@ public class Animal : MonoBehaviour, IAnimal
                 {
 
                     yield return new WaitForSeconds(5);
-                    other.gameObject.SetActive(false);
+                    //other.gameObject.SetActive(false);
 
                     //preyTransform = null;
+                    hunger = 100f;
                     animalNav.target = null;
 
-                    hunger = 100f;
-                    
-                    yield return new WaitForSeconds(10);
-                    other.gameObject.SetActive(true);
+
+                    //yield return new WaitForSeconds(10);
+                    //other.gameObject.SetActive(true);
                 }
             }
         }
@@ -553,7 +682,7 @@ public class Animal : MonoBehaviour, IAnimal
                     Debug.Log(this + "just ate");
 
                     yield return new WaitForSeconds(5);
-                    other.gameObject.SetActive(false);
+                    //other.gameObject.SetActive(false);
 
                     //preyTransform = null;
                     animalNav.target = null;
@@ -575,16 +704,16 @@ public class Animal : MonoBehaviour, IAnimal
                 StartCoroutine(EatDelayWater());
                 IEnumerator EatDelayWater()
                 {
-                    yield return new WaitForSeconds(5);
-                    other.gameObject.SetActive(false);
+                    yield return new WaitForSeconds(7);
+                    //other.gameObject.SetActive(false);
 
                     //preyTransform = null;
                     animalNav.target = null;
 
                     thirst = 150f;
 
-                    yield return new WaitForSeconds(10);
-                    other.gameObject.SetActive(true);
+                    //yield return new WaitForSeconds(10);
+                    //other.gameObject.SetActive(true);
                 }
 
 
@@ -635,7 +764,12 @@ public class Animal : MonoBehaviour, IAnimal
                     Gizmos.DrawLine(pathCorners[i], pathCorners[i + 1]);
                 }
             }
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, _playerAwarenessRadius);
         }
+
+
     }
 
     //using colliders

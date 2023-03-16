@@ -10,10 +10,11 @@ public class ItemInspect : MonoBehaviour, IInteractable
     [SerializeField] private string _prompt = "Inspect ";
     [Header("Interaction Interface")]
     [SerializeField] private Sprite _icon;
-    public Sprite icon => _icon;
+
     public Item item;
 
-    public string InteractionPrompt => _prompt;
+    public string InteractionPrompt { get; set; }
+    public Sprite icon { get; set; }
 
     [Header("Settings")]
     [SerializeField] private bool isItem = true;
@@ -46,6 +47,8 @@ public class ItemInspect : MonoBehaviour, IInteractable
     void Start()
     {
         _icon = item.icon;
+        InteractionPrompt = _prompt;
+        icon = _icon;
         thirdPersonController = ThirdPersonController.instance;
         uiManager = UIManager.instance;
         cinemachineManager = CinemachineManager.instance;

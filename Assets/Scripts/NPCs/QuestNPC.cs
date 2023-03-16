@@ -14,8 +14,8 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
     [SerializeField] private DialogueTrigger _dialogue;
     [SerializeField] private DialogueTrigger _isTalkedDialogue;
 
-    public string InteractionPrompt => _prompt;
-    public Sprite icon => _icon;
+    public string InteractionPrompt { get; set; }
+    public Sprite icon { get; set; }
 
     [Header("Quest")]
     [SerializeField] private GameObject questManager;
@@ -37,6 +37,9 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
 
     void Start()
     {
+        InteractionPrompt = _prompt;
+        icon = _icon;
+
         npcName = id;
 
         if (isTalked == true)
@@ -84,6 +87,7 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
                     TalkEvents.CharacterApproach(this);
 
                     StartCoroutine(AcceptQuest());
+
                 }
 
                 else
@@ -111,11 +115,14 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
 
         if (questManager.TryGetComponent(out task))
         {
-            if (closingQuestID != null && task.tasksCompeleted.Contains(closingQuestID))
+            if (closingQuestID != null)
             {
-                isCompleted = true;
+                if (task.tasksCompeleted.Contains(closingQuestID))
+                {
+                    isCompleted = true;
 
-                this.gameObject.layer = LayerMask.NameToLayer("Default");
+                    this.gameObject.layer = LayerMask.NameToLayer("Default");
+                }
             }
         }
 

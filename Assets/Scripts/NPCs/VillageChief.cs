@@ -14,8 +14,8 @@ public class VillageChief : MonoBehaviour, ICharacter, IDataPersistence, IIntera
     [SerializeField] private DialogueTrigger _dialogue;
     [SerializeField] private DialogueTrigger _isTalkedDialogue;
 
-    public string InteractionPrompt => _prompt;
-    public Sprite icon => _icon;
+    public string InteractionPrompt { get; set; }
+    public Sprite icon { get; set; }
 
     [Header("Quest")]
     [SerializeField] private GameObject quests;
@@ -40,6 +40,8 @@ public class VillageChief : MonoBehaviour, ICharacter, IDataPersistence, IIntera
     Rigidbody rb;
     void Start()
     {
+        InteractionPrompt = _prompt;
+        icon = _icon;
         npcName = _dialogue.name;
 
         if (isTalked == true)

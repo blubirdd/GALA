@@ -13,8 +13,8 @@ public class Bert : MonoBehaviour, IInteractable
     [SerializeField] private DialogueTrigger _dialogue;
     [SerializeField] private DialogueTrigger _isTalkedDialogue;
 
-    public string InteractionPrompt => _prompt;
-    public Sprite icon => _icon;
+    public string InteractionPrompt { get; set; }
+    public Sprite icon { get; set; }
 
     [SerializeField] private GameObject quests;
 
@@ -27,7 +27,10 @@ public class Bert : MonoBehaviour, IInteractable
 
     void Start()
     {
-       if(isTalked == true)
+        InteractionPrompt = _prompt;
+        icon = _icon;
+
+        if (isTalked == true)
         {
             DisableQuestMarker();
         }

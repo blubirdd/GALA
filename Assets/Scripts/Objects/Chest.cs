@@ -6,13 +6,17 @@ public class Chest : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
     [SerializeField] private Sprite _icon;
-    public string InteractionPrompt => _prompt;
-    public Sprite icon => _icon;
+        public string InteractionPrompt { get; set; }
+        public Sprite icon { get; set; }
 
 
     public Animator animator;
 
-    
+    void Start()
+    {
+        InteractionPrompt = _prompt;
+        icon = _icon;
+    }
     public bool Interact(Interactor interactor)
     {
   
