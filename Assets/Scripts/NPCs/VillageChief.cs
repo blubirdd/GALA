@@ -159,7 +159,7 @@ public class VillageChief : MonoBehaviour, ICharacter, IDataPersistence, IIntera
             data.NPCsCompleted.Remove(id);
         }
 
-        data.NPCsCompleted.Add(id, isTalked);
+        data.NPCsCompleted.Add(id, isCompleted);
     }
 
 

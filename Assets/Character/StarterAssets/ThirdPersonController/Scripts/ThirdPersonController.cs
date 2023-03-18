@@ -131,6 +131,8 @@ namespace StarterAssets
         private int _animIDInspect;
         private int _animIDPhotograph;
 
+        private int _animIDFishCast;
+
         //the character transform
         //public Transform player;
 
@@ -149,7 +151,9 @@ namespace StarterAssets
         //my script
         public static bool canMove = true;
 
-        
+
+        //SINGLETON
+        UIManager uiManager;
 
         private bool IsCurrentDeviceMouse
         {
@@ -210,6 +214,7 @@ namespace StarterAssets
             GameEvents.instance.onCameraOpened += DisableMovementOnCamera;
             GameEvents.instance.onCameraClosed += EnableMovementOnThirdP;
 
+            uiManager = UIManager.instance;
         }
 
         public void DisableMovementOnCamera()
@@ -275,6 +280,7 @@ namespace StarterAssets
             _animIDCrouch = Animator.StringToHash("Crouch");
             _animIDCrouchWalking = Animator.StringToHash("CrouchWalking");
             _animIDPhotograph = Animator.StringToHash("Photograph");
+            _animIDFishCast = Animator.StringToHash("FishCast");
             
 
             _animIDItemPickup = Animator.StringToHash("ItemPickup");
@@ -471,6 +477,26 @@ namespace StarterAssets
             _animator.SetBool(_animIDPhotograph, false);
         }
 
+        public void FishCast()
+        {
+            _animator.SetBool(_animIDFishCast, true);
+            uiManager.DisableUnequipButton();
+            uiManager.fishcastButton.SetActive(false);
+            uiManager.SetButtonPanels(false);
+
+        }
+
+        public void FishReel()
+        {
+            //to change and sync
+            _animator.SetBool(_animIDFishCast, false);
+
+            uiManager.EnableUnequipButton();
+            uiManager.fishcastButton.SetActive(true);
+            uiManager.SetButtonPanels(true);
+
+        }
+
         private void JumpAndGravity()
         {
             if (Grounded)
@@ -554,6 +580,8 @@ namespace StarterAssets
         {
             _animator.SetTrigger(_animIDInspect);
         }
+
+
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
         {

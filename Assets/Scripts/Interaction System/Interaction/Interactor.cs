@@ -16,10 +16,12 @@ public class Interactor : MonoBehaviour
     private bool _buttonWasPressed;
 
 
-    private readonly Collider[] _colliders = new Collider[3];
+    private readonly Collider[] _colliders = new Collider[1];
     [SerializeField] private int _numFound;
 
     private IInteractable _interactable;
+    private Outline _outline;
+
 
     private void Start()
     {
@@ -34,6 +36,7 @@ public class Interactor : MonoBehaviour
         if(_numFound > 0 )
         {
             _interactable = _colliders[0].GetComponent<IInteractable>();
+            _outline = _colliders[0].GetComponent<Outline>();
 
             if(_interactable!=null)
             {
@@ -54,13 +57,23 @@ public class Interactor : MonoBehaviour
                     _buttonWasPressed=false;
                 }
 
+            }
 
+            if(_outline != null)
+            {
+                _outline.enabled = true;
             }
 
 
         }
         else 
         {
+            if (_outline != null)
+            {
+                _outline.enabled = false;
+                _outline = null;
+            }
+
             if (_interactable != null)
             {
                 _interactable = null;

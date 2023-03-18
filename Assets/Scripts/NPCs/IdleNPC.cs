@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class IdleNPC : MonoBehaviour, ICharacter, IInteractable
 {
+    [SerializeField] private string id;
     [Header("Interaction")]
     [SerializeField] private string _prompt;
     [SerializeField] private Sprite _icon;
@@ -24,7 +25,7 @@ public class IdleNPC : MonoBehaviour, ICharacter, IInteractable
     {
         InteractionPrompt = _prompt;
         icon = _icon;
-        npcName = _dialogue.name;
+        npcName = id;
     }
 
     public bool Interact(Interactor interactor)

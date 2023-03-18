@@ -144,10 +144,17 @@ public class EquipmentManager : MonoBehaviour
             uiManager.EnableUnequipButton();
         }
 
-        if(item.isAimable)
+        if(item.isAimable && item.isFirable == false)
         {
             uiManager.EnableAimUI();
         }
+
+        if(item.isFirable)
+        {
+            uICanvasControllerInput.VirtualAimInput(true);
+            uiManager.EnableFishCastButton();
+        }
+
     }
 
     IEnumerator DrawProjection()
@@ -224,7 +231,22 @@ public class EquipmentManager : MonoBehaviour
 
                     yield return new WaitForSeconds(1.3f);
                     //disable hand item gameobject
-                    handItems[i].gameObject.SetActive(false);
+
+                    HandItem handItem;
+                    if (handItems[i].gameObject.TryGetComponent(out handItem));
+                    {
+                        if(handItem.disableOnthrow)
+                        {
+                            handItems[i].gameObject.SetActive(false);
+                        }
+
+                        else
+                        {
+                            //do something
+                        }
+                    }
+                   
+
                     GameObject go = Instantiate(handItems[i].handItemPrefab, throwingPoint.position, throwingPoint.rotation);
 
                     //launch instantiated item off hand

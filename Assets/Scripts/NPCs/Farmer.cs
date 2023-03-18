@@ -166,6 +166,6 @@ public class Farmer : MonoBehaviour, ICharacter, IDataPersistence, IInteractable
             data.NPCsCompleted.Remove(id);
         }
 
-        data.NPCsCompleted.Add(id, isTalked);
+        data.NPCsCompleted.Add(id, isCompleted);
     }
 }

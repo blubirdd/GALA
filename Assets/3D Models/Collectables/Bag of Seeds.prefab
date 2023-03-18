@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3380511457260340186}
   - component: {fileID: 3926482765944245016}
   - component: {fileID: 7661840889431284727}
+  - component: {fileID: 792987276208666106}
   m_Layer: 6
   m_Name: Bag of Seeds
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3380511457258403066}
-  m_LocalRotation: {x: -0, y: 0.72587734, z: -0, w: 0.6878242}
+  m_LocalRotation: {x: 0, y: 0.7258787, z: 0, w: 0.68782276}
   m_LocalPosition: {x: -8.28, y: -21.186342, z: -22.660004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -110,5 +111,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11e6ae325d17ab047bf6469ce9334216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _prompt: 'Pick up '
   _icon: {fileID: 0}
   item: {fileID: 11400000, guid: 5e7d1a2a12bed48459768e3b8cf21bb2, type: 2}
+--- !u!114 &792987276208666106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3380511457258403066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 0, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

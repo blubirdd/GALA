@@ -33,7 +33,7 @@ public class Bed : MonoBehaviour, IDataPersistence
 
     IEnumerator WaitForDialogueToTrigger()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(1f);
         _dialogue.TriggerDialogue();
         triggerStartDialogue = false;
 

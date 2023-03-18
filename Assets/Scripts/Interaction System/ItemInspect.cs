@@ -86,7 +86,6 @@ public class ItemInspect : MonoBehaviour, IInteractable
 
     }
 
-
     void PickUp()
     {
         Debug.Log("Inspected " + item.name);
@@ -120,18 +119,20 @@ public class ItemInspect : MonoBehaviour, IInteractable
             //HANDLE DESTROY
             if(isItem)
             {
-                if(focusOnTarget)
-                {
-                    yield return new WaitForSeconds(giveQuestDelay - animationTime);
-                    TargetToFocusOn.GetComponent<Outline>().enabled = true;
-                    Destroy(gameObject);
-                }
+                //if(focusOnTarget)
+                //{
+                //    yield return new WaitForSeconds(giveQuestDelay - animationTime);
+                //    TargetToFocusOn.GetComponent<Outline>().enabled = true;
+                //    Destroy(gameObject);
+                //}
 
-                else
-                {
-                    Destroy(gameObject);
-                }
-               
+                //else
+                //{
+                //    Destroy(gameObject);
+                //}
+
+                yield return new WaitForSeconds(giveQuestDelay - animationTime);
+                Destroy(gameObject);
             }
 
             //if(isItem == false)

@@ -54,7 +54,7 @@ public class QuestNew: MonoBehaviour
             QuestUI.instance.ClearQuestTitle();
             QuestUI.instance.ClearQuestDescription();
 
-            GameEvents.instance.QuestCompleted(this.questName);
+            GameEvents.instance.QuestCompleted(questName);
         }
 
     }

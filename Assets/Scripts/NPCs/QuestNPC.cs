@@ -190,6 +190,6 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
             data.NPCsCompleted.Remove(id);
         }
 
-        data.NPCsCompleted.Add(id, isTalked);
+        data.NPCsCompleted.Add(id, isCompleted);
     }
 }
