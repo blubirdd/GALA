@@ -21,6 +21,7 @@ public class QuizManager : MonoBehaviour
     public TextMeshProUGUI ScoreTxt;
 
     int totalQuestions = 0;
+    int questionsDisplayed = 0;
     public int score;
 
     [SerializeField] private int currentNumber =1;
@@ -42,7 +43,7 @@ public class QuizManager : MonoBehaviour
     {
         Quizpanel.SetActive(false);
         GoPanel.SetActive(true);
-        ScoreTxt.text = score + "/" + totalQuestions;
+        ScoreTxt.text = score + "/" + questionsDisplayed;
     }
 
     public void correct()
@@ -85,29 +86,25 @@ public class QuizManager : MonoBehaviour
     }
 
     void generateQuestion()
+{
+    Debug.Log(currentNumber);
+
+    // Checks if there are questions left in the QnA list and if the number of questions displayed is less than 10
+    if(QnA.Count > 0 && questionsDisplayed < 10)
     {
-        Debug.Log(currentNumber);
-
-        // for(int i =1; i<QnA.Count; i++)
-        // {
-        //     Debug.Log(i);
-        // }
-        if(QnA.Count > 0)
-        {
-            CurrentQuestion = Random.Range(0, QnA.Count);
-
+        CurrentQuestion = Random.Range(0, QnA.Count);
         QuestionTxt.text = QnA[CurrentQuestion].Question;
         SetAnswers();
 
-        }
-        else
-        {
-            Debug.Log("Out of Question");
-            GameOver();
-        }
-        
-       
+        // Increment the number of questions displayed
+        questionsDisplayed++;
     }
+    else
+    {
+        Debug.Log("Out of Question");
+        GameOver();
+    }
+}
 
 
 }
