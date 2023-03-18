@@ -58,7 +58,7 @@ public class ItemUse : MonoBehaviour, IInteractable
         if (particle != null)
         {
             GameObject g = Instantiate(particle, transform.position, Quaternion.identity);
-            Destroy(g, 3f);
+            //Destroy(g, 3f);
         }
         //ParticleManager.instance.SpawnPuffParticle(this.transform.position);
     }

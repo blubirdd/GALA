@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: BrushSettings-Default
   m_EditorClassIdentifier: 
   brushRadiusMin: 0.001
-  brushRadiusMax: 5
-  _radius: 1
+  brushRadiusMax: 10
+  _radius: 10
   _falloff: 0.5
-  _strength: 1
+  _strength: 0.11
   _curve:
     serializedVersion: 2
     m_Curve:

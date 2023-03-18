@@ -12,6 +12,7 @@ TagManager:
   - Water
   - HerbivoreFood
   - Fixable
+  - Collectable
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - PlayerChickenFood
   - Grass
   - Ground
-  - 
+  - Collectable
   - 
   - 
   - 

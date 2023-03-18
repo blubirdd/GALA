@@ -11,8 +11,12 @@ public class Item : ScriptableObject
     public Sprite icon = null;
     public bool isDefaultItem = false;
     public bool isUsable = false;
+    [Header("Throwable Settings")]
     public bool isThrowable = false;
+
+    [Header("Aiming Settings")]
     public bool isAimable = false;
+    public bool isFirable = false;
 
     [TextArea(3, 10)]
     public string itemDescription;

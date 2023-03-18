@@ -22,11 +22,17 @@ public class ParticleManager : MonoBehaviour
     #endregion
 
     public GameObject puffParticle;
-
+    public GameObject waterSplashParticle;
 
     public void SpawnPuffParticle(Vector3 location)
     {
        GameObject g = Instantiate(puffParticle, location, Quaternion.identity);
-       Destroy(g, 3f);
+       //Destroy(g, 3f);
+    }
+
+    public void SpawnWaterSplashParticle(Vector3 location)
+    {
+        GameObject g = Instantiate(waterSplashParticle, location, Quaternion.identity);
+        //Destroy(g, 3f);
     }
 }

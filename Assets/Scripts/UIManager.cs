@@ -46,11 +46,15 @@ public class UIManager : MonoBehaviour
 
     public UIVirtualJoystick uiVirtualJoystick;
 
+    [Header("MOVEMENT BUTTON")]
+    public GameObject movementButtons;
+
     [Header("HAND EQUIPMENTS")]
     public GameObject throwButtonsParent;
     public GameObject throwButton;
     public GameObject unequipButton;
     public GameObject aimButton;
+    public GameObject fishcastButton;
 
     [Header("Camera")]
     public bool cameraOpened;
@@ -145,13 +149,13 @@ public class UIManager : MonoBehaviour
 
     public void DisableButtonsUIPACK()
     {
-        buttonsUIPack.SetActive(false);
+       // buttonsUIPack.SetActive(false);
         DisablePlayerMovement();
     }
 
     public void EnableButtonsUIPACK()
     {
-        buttonsUIPack.SetActive(true);
+       // buttonsUIPack.SetActive(true);
         EnablePlayerMovement();
     }
 
@@ -305,6 +309,17 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void SetButtonPanels(bool state)
+    {
+        buttonsUIPack.SetActive(state);
+    }
+
+    public void SetMovementButtons(bool state)
+    {
+        movementButtons.SetActive(state);
+    }
+
+
     //THROWING
     public void EnableThrowUI()
     {
@@ -338,6 +353,21 @@ public class UIManager : MonoBehaviour
     {
         unequipButton.SetActive(false);
     }
+
+    public void EnableFishCastButton()
+    {
+        SetMovementButtons(false);
+        buttonsUIPack.SetActive(false);
+        fishcastButton.SetActive(true);
+    }
+
+    public void DisableFishCastButton()
+    {
+        SetMovementButtons(true);
+        buttonsUIPack.SetActive(true);
+        fishcastButton.SetActive(false);
+    }
+
 
     
 

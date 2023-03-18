@@ -6,6 +6,22 @@ using System;
 
 public class TimeController : MonoBehaviour
 {
+    #region Singleton
+
+    public static TimeController instance;
+
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one instance of TimeController found");
+            return;
+        }
+
+        instance = this;
+    }
+    #endregion
+
     [Range(0f, 24f)]
     public float timeHour;
 
@@ -70,6 +86,11 @@ public class TimeController : MonoBehaviour
         UpdateTimeOfDay();
         RotateSun();
         UpdateLightSettings();
+    }
+
+    public void SetTimeOfDay(float hour)
+    {
+      currentTime = DateTime.Now.Date + TimeSpan.FromHours(hour);
     }
 
     private void UpdateTimeOfDay()

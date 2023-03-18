@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7181853779653811108}
   - component: {fileID: 4955687726252351963}
   - component: {fileID: 8277798622336934090}
+  - component: {fileID: -5817243336449361384}
   m_Layer: 10
   m_Name: Bag of Seeds
   m_TagString: HerbivoreFood
@@ -127,5 +128,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11e6ae325d17ab047bf6469ce9334216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _prompt: 'Pick up '
   _icon: {fileID: 0}
   item: {fileID: 11400000, guid: 5e7d1a2a12bed48459768e3b8cf21bb2, type: 2}
+--- !u!114 &-5817243336449361384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8880896094582957126}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 255, g: 255, b: 0, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
