@@ -17,7 +17,7 @@ public class QuestPhotographForestTurtle : QuestNew
 
         //setup
         ID = "QuestPhotographForestTurtle"; ;
-        questName = "The Forest Turtle";
+        questName = "Forest Turtle Adventure";
         questDescription = "Photograph a Forest Turtle";
 
         goalDescription[0] = "Photograph a Forest Turtle";
@@ -50,7 +50,7 @@ public class QuestPhotographForestTurtle : QuestNew
         UpdateQuestUI();
 
         //goal (this, name of target, goaldescription, iscompleted bool, current progress, required amount)
-        Goals.Add(new TalkGoal(this, "Forest Turtle", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new PictureGoal(this, "Forest Turtle", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
 
         Goals.ForEach(g => g.InIt());
 

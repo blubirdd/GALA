@@ -14,6 +14,7 @@ public class BillboardUI : MonoBehaviour
     [SerializeField] private float jumpHeight = 0.2f;
     [SerializeField] private int jumpCount = 1;
 
+    [Header("If bounce, else leave null")]
     [SerializeField]private Transform transformOfImage;
     void Start()
     {

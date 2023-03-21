@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QuestTalkRiverWildlifeBiologist : QuestNew
 {
-    static int numberOfGoals = 2;
+    static int numberOfGoals = 1;
 
     private string[] goalDescription = new string[numberOfGoals];
     private int[] currentProgress = new int[numberOfGoals];
@@ -17,14 +17,12 @@ public class QuestTalkRiverWildlifeBiologist : QuestNew
 
         //setup
         ID = "QuestTalkRiverWildlifeBiologist"; ;
-        questName = "Talk to people in the area";
-        questDescription = "Find and talk to people the wildlife biologist";
+        questName = "Find out about this area";
+        questDescription = "Find and talk to the wildlife biologist";
 
-        goalDescription[0] = "Find and talk to people the wildlife biologist";
+        goalDescription[0] = "Find and talk to the wildlife biologist";
         requiredAmount[0] = 1;
 
-        goalDescription[1] = "Find and talk to the wildlife ranger";
-        requiredAmount[1] = 1;
 
 
         reward = 10;
@@ -55,7 +53,6 @@ public class QuestTalkRiverWildlifeBiologist : QuestNew
 
         //goal (this, name of target, goaldescription, iscompleted bool, current progress, required amount)
         Goals.Add(new TalkGoal(this, "RiverWildlifeBiologist", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
-        Goals.Add(new TalkGoal(this, "RiverWildlifeRanger", goalDescription[1], false, currentProgress[1], requiredAmount[1]));
 
         Goals.ForEach(g => g.InIt());
 
@@ -117,6 +114,7 @@ public class QuestTalkRiverWildlifeBiologist : QuestNew
         //disable marker
         //Destroy(_waypoint);
 
+        yield return new WaitForSeconds(10f);
         //AcceptQuest("QuestFeedChicken");
     }
 }

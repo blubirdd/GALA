@@ -29,10 +29,20 @@ public class AnimalNav : MonoBehaviour
     void Start()
     {
         animal = GetComponent<Animal>();
-        StartCoroutine(UpdatePath());
+        //StartCoroutine(UpdatePath());
 
         //StartCoroutine(WanderAround());
 
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(UpdatePath());
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using StarterAssets;
+
 public class WaypointUI : MonoBehaviour
 {
 
@@ -17,11 +19,14 @@ public class WaypointUI : MonoBehaviour
     public Transform playerLocation;
 
     private float _distance;
+
+
     private void Start()
     {
-        playerLocation = GameObject.FindGameObjectWithTag("Player").transform;
+        //playerLocation = GameObject.FindGameObjectWithTag("Player").transform;
+        playerLocation = ThirdPersonController.instance.transform;
 
-        StartCoroutine(UpdateWaypointWithDelay(0.2f));
+        StartCoroutine(UpdateWaypointWithDelay(1f));
     }
     public void SetTarget(Transform location)
     {

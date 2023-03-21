@@ -10,7 +10,7 @@ public class Mole : MonoBehaviour {
   [SerializeField] private Sprite moleHatHit;
 
   [Header("GameManager")]
-  [SerializeField] private GameManager gameManager;
+  [SerializeField] private MoleGameManager gameManager;
 
   // The offset of the sprite to hide it.
   private Vector2 startPosition = new Vector2(0f, -2.56f);
@@ -105,42 +105,42 @@ public void DestroyMole()
     }
   }
 
-  private void OnMouseDown() {
-    if (hittable) {
-      switch (moleType) {
-        case MoleType.Standard:
-          spriteRenderer.sprite = moleHit;
-          gameManager.AddScore(moleIndex);
-          // Stop the animation
-          StopAllCoroutines();
-          StartCoroutine(QuickHide());
-          // Turn off hittable so that we can't keep tapping for score.
-          hittable = false;
-          break;
-        case MoleType.HardHat:
-          // If lives == 2 reduce, and change sprite.
-          if (lives == 2) {
-            spriteRenderer.sprite = moleHatBroken;
-            lives--;
-          } else {
-            spriteRenderer.sprite = moleHatHit;
-            gameManager.AddScore(moleIndex);
-            // Stop the animation
-            StopAllCoroutines();
-            StartCoroutine(QuickHide());
-            // Turn off hittable so that we can't keep tapping for score.
-            hittable = false;
-          }
-          break;
-        case MoleType.Bomb:
-          // Game over, 1 for bomb.
-          gameManager.GameOver(1);
-          break;
-        default:
-          break;
-      }
-    }
-  }
+  //private void OnMouseDown() {
+  //  if (hittable) {
+  //    switch (moleType) {
+  //      case MoleType.Standard:
+  //        spriteRenderer.sprite = moleHit;
+  //        gameManager.AddScore(moleIndex);
+  //        // Stop the animation
+  //        StopAllCoroutines();
+  //        StartCoroutine(QuickHide());
+  //        // Turn off hittable so that we can't keep tapping for score.
+  //        hittable = false;
+  //        break;
+  //      case MoleType.HardHat:
+  //        // If lives == 2 reduce, and change sprite.
+  //        if (lives == 2) {
+  //          spriteRenderer.sprite = moleHatBroken;
+  //          lives--;
+  //        } else {
+  //          spriteRenderer.sprite = moleHatHit;
+  //          gameManager.AddScore(moleIndex);
+  //          // Stop the animation
+  //          StopAllCoroutines();
+  //          StartCoroutine(QuickHide());
+  //          // Turn off hittable so that we can't keep tapping for score.
+  //          hittable = false;
+  //        }
+  //        break;
+  //      case MoleType.Bomb:
+  //        // Game over, 1 for bomb.
+  //        gameManager.GameOver(1);
+  //        break;
+  //      default:
+  //        break;
+  //    }
+  //  }
+  //}
 
   private void CreateNext() {
     float random = Random.Range(0f, 1f);

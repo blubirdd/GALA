@@ -13,11 +13,24 @@ public class QuestEvents : MonoBehaviour
     [SerializeField] private GameObject curableTamaraw;
     [SerializeField] private GameObject wildlifeSpecialist;
 
+    [Header("River")]
+    public SubtleDialogueTrigger afterPhotoForestTurtle;
+    public GameObject FireQuestTriggerCollider;
+    public GameObject FireQuest;
+
+    [Header("River Dialogues")]
+    public SubtleDialogueTrigger afterFireExtinguishedDialogue;
+
     [Header("Grasslands Tamaraw Prefab")]
     public GameObject tamarawPrefab;
 
+
+
     private void Start()
     {
+        //set to falses
+        
+
         GameEvents.instance.onQuestAcceptedNotification += QuestCheck;
         GameEvents.instance.onQuestCompleted += QuestCompleteCheck;
 
@@ -37,6 +50,18 @@ public class QuestEvents : MonoBehaviour
                 curableTamaraw.SetActive(false);
                 wildlifeSpecialist.SetActive(false);
             }
+
+            if (task.tasksCompeleted[i] == "QuestPhotographForestTurtle")
+            {
+                FireQuestTriggerCollider.SetActive(true);
+
+            }
+
+            else
+            {
+                FireQuestTriggerCollider.SetActive(false);
+            }
+
 
         }
     }
@@ -74,6 +99,24 @@ public class QuestEvents : MonoBehaviour
             Instantiate(tamarawPrefab, curableTamaraw.transform.position, Quaternion.identity);
         }
 
+        //QuestPhotographForestTurtle
+        if(quest =="Forest Turtle Adventure")
+        {
+            FireQuestTriggerCollider.SetActive(true);
+
+            StartCoroutine(WaitForCamera());
+            IEnumerator WaitForCamera()
+            {
+                yield return new WaitUntil(() => UIManager.instance.inGameCameraCanvas.activeSelf == false);
+                afterPhotoForestTurtle.TriggerDialogue();
+            }
+           
+        }
+
+        if(quest == "Help extinguish the fire")
+        {
+            afterFireExtinguishedDialogue.TriggerDialogue();
+        }
 
 
     }

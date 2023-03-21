@@ -61,5 +61,12 @@ public class ItemUse : MonoBehaviour, IInteractable
             //Destroy(g, 3f);
         }
         //ParticleManager.instance.SpawnPuffParticle(this.transform.position);
+
+        //replace item
+        ReplaceItemInHand replaceItemInHand;
+        if(TryGetComponent(out replaceItemInHand))
+        {
+            replaceItemInHand.ReplaceItem();
+        }
     }
 }

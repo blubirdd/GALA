@@ -34,7 +34,9 @@ namespace StarterAssets
 
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
-        public float MoveSpeed = 2.0f;
+        private float MoveSpeed;
+        public float normalSpeed = 2.0f;
+        public float crouchSpeed = 1.5f;
 
         [Tooltip("Sprint speed of the character in m/s")]
         public float SprintSpeed = 5.335f;
@@ -180,6 +182,8 @@ namespace StarterAssets
 
         private void Start()
         {
+            MoveSpeed = normalSpeed;
+
             if (_mainCamera == null)
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -438,7 +442,8 @@ namespace StarterAssets
 
         private void CrouchDown()
         {
-            MoveSpeed = MoveSpeed * 0.5f;
+            //MoveSpeed = MoveSpeed * 0.5f;
+            MoveSpeed = crouchSpeed;
             SprintSpeed = SprintSpeed * 0.5f;
             _animator.SetBool(_animIDCrouch, true);
             this.gameObject.layer = LayerMask.NameToLayer("Stealth");
@@ -447,7 +452,8 @@ namespace StarterAssets
         private void CrouchUp()
         {
             _animator.SetBool(_animIDCrouch, false);
-            MoveSpeed = MoveSpeed * 2f;
+            //MoveSpeed = MoveSpeed * 2f;
+            MoveSpeed = normalSpeed;
             SprintSpeed = SprintSpeed * 2f;
             this.gameObject.layer = LayerMask.NameToLayer("Player");
         }

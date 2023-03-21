@@ -22,7 +22,7 @@ public class ThirdPersonAimController : MonoBehaviour
     [Header("Hook")]
     [SerializeField] private GameObject hookPrefab;
     [SerializeField] private Transform fishingHookEnd;
-    [SerializeField] private GameObject reticle;
+    
 
     private void Awake()
     {
@@ -85,7 +85,7 @@ public class ThirdPersonAimController : MonoBehaviour
             }
 
 
-           reticle.SetActive(true);
+           
  
 
         }
@@ -96,7 +96,6 @@ public class ThirdPersonAimController : MonoBehaviour
             {
                 aimVirtualCamera.gameObject.SetActive(false);
                 UIVirtualTouchZone.sensitivity = 3f;
-                reticle.SetActive(false);
 
             }
 

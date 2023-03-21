@@ -13,6 +13,9 @@ public class TimeChangeInteract : MonoBehaviour, IInteractable
 
     [SerializeField] private float _timeToTransition;
 
+    [Header("if has quest prerequisite else, leave null")]
+    [SerializeField] private string prerequisiteQuest;
+    [SerializeField] private SubtleDialogueTrigger _dialogue;
     TimeController timeController;
     void Start()
     {
@@ -23,10 +26,32 @@ public class TimeChangeInteract : MonoBehaviour, IInteractable
     }
     public bool Interact(Interactor interactor)
     {
-        //sleep code here
-        timeController.SetTimeOfDay(_timeToTransition);
+
+        if (Task.instance.tasksCompeleted.Contains(prerequisiteQuest))
+        {
+            //sleep code here
+            Character character;
+            if(TryGetComponent(out character))
+            {
+                TalkEvents.CharacterApproach(character);
+            }
+
+            Sleep();
+
+        }
+
+        else
+        {
+            _dialogue.TriggerDialogue();
+        }
+
         return true;
+
     }
 
+    private void Sleep()
+    {
+        timeController.SetTimeOfDay(_timeToTransition);
+    }
 
 }

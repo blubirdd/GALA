@@ -8,11 +8,11 @@ public class CinemachineManager : MonoBehaviour
     //[SerializeField] private CinemachineVirtualCamera[] _vcams = new CinemachineVirtualCamera[3];
 
     public GameObject[] _cams;
+    public CinemachineVirtualCamera lookAtTargetCamera;
 
     #region Singleton
 
     public static CinemachineManager instance;
-
     void Awake()
     {
         if (instance != null)
@@ -95,17 +95,21 @@ public class CinemachineManager : MonoBehaviour
         SwitchToThirdPersonCam();
     }
 
-    public void SwitchToTargetFocusCam()
+    public void SwitchToTargetFocusCam(float duration)
     {
-        _cams[1].SetActive(true);
-        _cams[0].SetActive(false);
-        StartCoroutine(WaitForSecondsToSwitchToMain());
+        _cams[5].SetActive(true);
+        StartCoroutine(WaitForSecondsToSwitchToMain(duration));
     }
 
-    IEnumerator WaitForSecondsToSwitchToMain()
+    public void TurnOffTargetFocusCAm()
     {
-        yield return new WaitForSeconds(2.5f);
-        SwitchToThirdPersonCam();
+        _cams[5].SetActive(false);
+    }
+
+    IEnumerator WaitForSecondsToSwitchToMain(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        TurnOffTargetFocusCAm();
     }
 
 

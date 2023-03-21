@@ -40,6 +40,11 @@ public class ItemPickup : MonoBehaviour, IInteractable
     public Sprite icon { get; set; }
 
     ThirdPersonController instance;
+
+    //waypoint
+    [Header("If has waypoint on pickup, else leave null")]
+    [SerializeField] private Transform _waypointTransform;
+
     void Start()
     {
         _icon = item.icon;
@@ -50,6 +55,7 @@ public class ItemPickup : MonoBehaviour, IInteractable
     public bool Interact(Interactor interactor)
     {
         PickUp();
+
         return true;
     }
 
@@ -59,8 +65,21 @@ public class ItemPickup : MonoBehaviour, IInteractable
 
         instance.ItemPickupAnim();
         Inventory.instance.Add(item, 1);
+
+
+
+        if (_waypointTransform != null)
+        {
+            SpawnWaypointMarker();
+        }
+
+
         Destroy(gameObject);
     }
-     
 
+    public void SpawnWaypointMarker()
+    {
+       GameObject waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
+       waypoint.GetComponent<WaypointUI>().SetTarget(_waypointTransform);
+    }
 }
