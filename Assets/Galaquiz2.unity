@@ -2698,6 +2698,76 @@ MonoBehaviour:
     - Omnivore
     - None of the Above
     CorrectAnswer: 1
+  - Question: What's the Tamaraw's diet?
+    Answers:
+    - Herbivore
+    - Carnivore
+    - Omnivore
+    - None of the Above
+    CorrectAnswer: 1
+  - Question: What's the fdsfl's diet?
+    Answers:
+    - Herbivore
+    - Carnivore
+    - Omnivore
+    - None of the Above
+    CorrectAnswer: 1
+  - Question: What's the Chicken's diet?
+    Answers:
+    - Herbivore
+    - Carnivore
+    - Omnivore
+    - None of the Above
+    CorrectAnswer: 1
+  - Question: What's the Red Fish's diet?
+    Answers:
+    - Herbivore
+    - Carnivore
+    - Omnivore
+    - None of the Above
+    CorrectAnswer: 1
+  - Question: What's the blue's diet?
+    Answers:
+    - Herbivore
+    - Carnivore
+    - Omnivore
+    - None of the Above
+    CorrectAnswer: 1
+  - Question: What's the yellow's diet?
+    Answers:
+    - Herbivore
+    - Carnivore
+    - Omnivore
+    - None of the Above
+    CorrectAnswer: 1
+  - Question: What's the pink's diet?
+    Answers:
+    - Herbivore
+    - Carnivore
+    - Omnivore
+    - None of the Above
+    CorrectAnswer: 1
+  - Question: What's the Red kangaroo's diet?
+    Answers:
+    - Herbivore
+    - Carnivore
+    - Omnivore
+    - None of the Above
+    CorrectAnswer: 1
+  - Question: What's the Red dsad's diet?
+    Answers:
+    - Herbivore
+    - Carnivore
+    - Omnivore
+    - None of the Above
+    CorrectAnswer: 1
+  - Question: What's the Yellow Junglefowl's diet?
+    Answers:
+    - Herbivore
+    - Carnivore
+    - Omnivore
+    - None of the Above
+    CorrectAnswer: 1
   options:
   - {fileID: 655761781}
   - {fileID: 1747519130}
