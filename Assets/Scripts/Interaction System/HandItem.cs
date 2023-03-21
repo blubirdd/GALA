@@ -10,4 +10,10 @@ public class HandItem : MonoBehaviour
     public GameObject handItemPrefab;
 
     public bool disableOnthrow = true;
+    public bool playPartiicleOnThrow;
+    public GameObject particleToSpawnOnThrow;
+
+    [Header("If Item is to be replaced, else leave null")]
+
+    public Equipment equipmentToReplace;
 }

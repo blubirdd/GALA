@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleNPC : MonoBehaviour, ICharacter, IInteractable
+public class IdleNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersistence
 {
     [SerializeField] private string id;
     [Header("Interaction")]
@@ -18,6 +18,8 @@ public class IdleNPC : MonoBehaviour, ICharacter, IInteractable
     public GameObject questMarker;
 
 
+    [Header("Save and load")]
+    [SerializeField] private bool isTalked = false;
 
     public string npcName { get; set; }
 
@@ -26,6 +28,11 @@ public class IdleNPC : MonoBehaviour, ICharacter, IInteractable
         InteractionPrompt = _prompt;
         icon = _icon;
         npcName = id;
+
+        if(isTalked)
+        {
+            DisableQuestMarker();
+        }
     }
 
     public bool Interact(Interactor interactor)
@@ -33,7 +40,7 @@ public class IdleNPC : MonoBehaviour, ICharacter, IInteractable
         //EVENT TRIGGER
         TalkEvents.CharacterApproach(this);
         _dialogue.TriggerDialogue();
-
+        isTalked = true;
         return true;
     }
 
@@ -42,6 +49,22 @@ public class IdleNPC : MonoBehaviour, ICharacter, IInteractable
     {
         questMarker.SetActive(false);
 
+    }
+
+    public void SaveData(GameData data)
+    {
+        if (data.NPCsTalked.ContainsKey(id))
+        {
+            data.NPCsTalked.Remove(id);
+        }
+
+        data.NPCsTalked.Add(id, isTalked);
+
+    }
+
+    public void LoadData(GameData data)
+    {
+        data.NPCsTalked.TryGetValue(id, out isTalked);
     }
 
 }

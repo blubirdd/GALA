@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: ab4ea855cdad8a448b3d82571029a273
   - enabled: 0
@@ -14,12 +14,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Forest.unity
     guid: d6406991708f59643a858e5ea7ebb932
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/ForestStart.unity
     guid: 70f1974f011296c4c8727591ef93eb7e
-  - enabled: 1
+  - enabled: 0
     path: Assets/2D Game/Mole Minigame/Scenes/Mole Minigame.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 0
+    path: Assets/Scenes/ForestStartTest.unity
+    guid: d6b2bac12759d864b98f69110f1b8dab
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: b70fd9029e039b44d8d9deb549fe18d7,
       type: 2}

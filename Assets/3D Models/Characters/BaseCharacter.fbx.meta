@@ -67,8 +67,8 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 1
     motionNodeName: 
-    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
-      human bone 'LeftFoot' not found\n"
+    rigImportErrors: "Avatar creation failed:\n\tTransform 'LowerLeg.L' is not an
+      ancestor of 'Foot.L_end'\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -84,7 +84,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 0.7

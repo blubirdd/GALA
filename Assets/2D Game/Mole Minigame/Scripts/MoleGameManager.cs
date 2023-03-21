@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class MoleGameManager : MonoBehaviour {
   [SerializeField] private List<Mole> moles;
 
   [Header("UI objects")]

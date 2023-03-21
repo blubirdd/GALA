@@ -13,7 +13,8 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
 
     [SerializeField] private DialogueTrigger _dialogue;
     [SerializeField] private DialogueTrigger _isTalkedDialogue;
-
+    [SerializeField] private SubtleDialogueTrigger _completeTasksubtleDialogue;
+    [SerializeField] private SubtleDialogueTrigger _notAvailablesubtleDialogue;
     public string InteractionPrompt { get; set; }
     public Sprite icon { get; set; }
 
@@ -92,7 +93,12 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
 
                 else
                 {
+                    if(_completeTasksubtleDialogue != null)
+                    {
+                        _completeTasksubtleDialogue.TriggerDialogue();
+                    }
                     Debug.Log("NPCs task is not yet completed. Please finish the task");
+
                 }
             }
 
@@ -100,6 +106,11 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
 
         else
         {
+            if(_notAvailablesubtleDialogue != null)
+            {
+                _notAvailablesubtleDialogue.TriggerDialogue();
+            }
+
             Debug.Log(this + "is unavailable right now");
         }
 

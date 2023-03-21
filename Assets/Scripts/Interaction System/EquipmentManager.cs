@@ -48,6 +48,8 @@ public class EquipmentManager : MonoBehaviour
     [Header("Instantiation point")]
     public Transform throwingPoint;
 
+    [Header("FIRING")]
+    public GameObject reticleAimCrosshair;
     private void Start()
     {
         //cach singletons
@@ -74,6 +76,7 @@ public class EquipmentManager : MonoBehaviour
             oldItem = currentEquipment[slotIndex];
             Debug.Log("Replacing existing");
             inventory.Add(oldItem, 1);
+            UnequipItemIn3D(oldItem);
         }
 
         //invoke the event
@@ -137,6 +140,8 @@ public class EquipmentManager : MonoBehaviour
 
 
             StartCoroutine(DrawProjection());
+
+            uICanvasControllerInput.VirtualAimInput(true);
         }
 
         if (item.isUsable)
@@ -153,6 +158,7 @@ public class EquipmentManager : MonoBehaviour
         {
             uICanvasControllerInput.VirtualAimInput(true);
             uiManager.EnableFishCastButton();
+            reticleAimCrosshair.SetActive(true);
         }
 
     }
@@ -164,7 +170,7 @@ public class EquipmentManager : MonoBehaviour
             _lineRenderer.enabled = true;
             _lineRenderer.positionCount = Mathf.CeilToInt(LinePoints / TimeBetweenPoints) + 1;
             Vector3 startPosition = _releasePosition.position;
-            Vector3 startVelocity = 10f * playerArmature.transform.forward / 1f;
+            Vector3 startVelocity = 15f * playerArmature.transform.forward / 1f;
 
             int i = 0;
             _lineRenderer.SetPosition(i, startPosition);
@@ -206,6 +212,11 @@ public class EquipmentManager : MonoBehaviour
                 //disable line
                 _lineRenderer.enabled = false;
                 isReadyToThrow = false;
+
+                if (item.isFirable)
+                {
+                    reticleAimCrosshair.SetActive(false);
+                }
                 break; 
             }
         }
@@ -233,30 +244,37 @@ public class EquipmentManager : MonoBehaviour
                     //disable hand item gameobject
 
                     HandItem handItem;
-                    if (handItems[i].gameObject.TryGetComponent(out handItem));
+                    if (handItems[i].gameObject.TryGetComponent(out handItem))
                     {
                         if(handItem.disableOnthrow)
                         {
-                            handItems[i].gameObject.SetActive(false);
+                            currentEquipment[0] = null;
+                            UnequipItemIn3D(handItem.handItem);
                         }
 
-                        else
+                        if(handItem.playPartiicleOnThrow)
                         {
-                            //do something
+                            Instantiate(handItems[i].particleToSpawnOnThrow, throwingPoint.position, Quaternion.identity);
+                        }
+
+                        if(handItem.equipmentToReplace)
+                        {
+                            Equip(handItem.equipmentToReplace);
                         }
                     }
-                   
 
                     GameObject go = Instantiate(handItems[i].handItemPrefab, throwingPoint.position, throwingPoint.rotation);
+                    //particle
+
 
                     //launch instantiated item off hand
                     throwableItemPrefab = go.GetComponent<Rigidbody>();
                     throwableItemPrefab.transform.SetParent(null, true);
-                    throwableItemPrefab.AddForce(playerArmature.transform.forward * 10f, ForceMode.Impulse);
+                    throwableItemPrefab.AddForce(playerArmature.transform.forward * 15f, ForceMode.Impulse);
 
 
-                    isReadyToThrow = false;
-                    _lineRenderer.enabled = false;
+                    //isReadyToThrow = false;
+                    //_lineRenderer.enabled = false;
                     break;
                 }
             }
