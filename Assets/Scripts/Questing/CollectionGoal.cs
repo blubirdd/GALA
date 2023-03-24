@@ -28,7 +28,11 @@ public class CollectionGoal : Goal
     {
         base.InIt();
 
-        Inventory.OnItemAddedCallback += ItemPickedUp;
+        Inventory.OnItemAddedCallback += ItemPickedUp; 
+        
+        //to evaluate saved data
+        Debug.Log("Evaluating");
+        Evaluate();
     }
 
     void ItemPickedUp(Item item)

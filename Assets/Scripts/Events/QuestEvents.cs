@@ -13,23 +13,29 @@ public class QuestEvents : MonoBehaviour
     [SerializeField] private GameObject curableTamaraw;
     [SerializeField] private GameObject wildlifeSpecialist;
 
+    [Header("Grasslands Tamaraw Prefab")]
+    public GameObject tamarawPrefab;
+
     [Header("River")]
     public SubtleDialogueTrigger afterPhotoForestTurtle;
     public GameObject FireQuestTriggerCollider;
     public GameObject FireQuest;
 
+    [Header("River Aftermath")]
+    public GameObject characterLawrence;
+    public GameObject characterLawrenceAftermath;
+
     [Header("River Dialogues")]
     public SubtleDialogueTrigger afterFireExtinguishedDialogue;
 
-    [Header("Grasslands Tamaraw Prefab")]
-    public GameObject tamarawPrefab;
+
 
 
 
     private void Start()
     {
         //set to falses
-        
+
 
         GameEvents.instance.onQuestAcceptedNotification += QuestCheck;
         GameEvents.instance.onQuestCompleted += QuestCompleteCheck;
@@ -38,7 +44,7 @@ public class QuestEvents : MonoBehaviour
         for (int i = 0; i < task.tasksCompeleted.Count; i++)
         {
             //scene setup
-            if(task.tasksCompeleted[i] == "QuestTalkWildlifeSpecialist2")
+            if (task.tasksCompeleted[i] == "QuestTalkWildlifeSpecialist2")
             {
                 Destroy(injuredTamaraw);
                 curableTamaraw.SetActive(true);
@@ -51,6 +57,7 @@ public class QuestEvents : MonoBehaviour
                 wildlifeSpecialist.SetActive(false);
             }
 
+            ///
             if (task.tasksCompeleted[i] == "QuestPhotographForestTurtle")
             {
                 FireQuestTriggerCollider.SetActive(true);
@@ -61,7 +68,7 @@ public class QuestEvents : MonoBehaviour
             {
                 FireQuestTriggerCollider.SetActive(false);
             }
-
+            ///
 
         }
     }
@@ -116,6 +123,13 @@ public class QuestEvents : MonoBehaviour
         if(quest == "Help extinguish the fire")
         {
             afterFireExtinguishedDialogue.TriggerDialogue();
+        }
+
+        //QuestTalkDayTent
+        if (quest == "Rest in the camp until morning")
+        {
+            characterLawrence.SetActive(false);
+            characterLawrenceAftermath.SetActive(true);
         }
 
 

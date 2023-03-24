@@ -117,7 +117,7 @@ public class QuestTalkDayTent : QuestNew
         //Destroy(_waypoint);
 
         //wait for notifcation or cutscene
-        //yield return new WaitForSeconds(5f);
-        //AcceptQuest("QuestPhotographForestTurtle");
+        yield return new WaitForSeconds(5f);
+        AcceptQuest("QuestTalkLawrence");
     }
 }

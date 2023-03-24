@@ -13,6 +13,7 @@ TagManager:
   - HerbivoreFood
   - Fixable
   - Collectable
+  - Pushable
   layers:
   - Default
   - TransparentFX

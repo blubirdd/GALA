@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
+
 
 [System.Serializable]
 public class QuestIntroPart2 : QuestNew
@@ -15,8 +15,6 @@ public class QuestIntroPart2 : QuestNew
 
     void Start()
     {
-
-
         //setup
         ID = "QuestIntroPart2";
         questName = "Preparation for Adventure";
@@ -25,7 +23,7 @@ public class QuestIntroPart2 : QuestNew
         goalDescription[0] = "Grab the camera";
         requiredAmount[0] = 1;
 
-        goalDescription[1] = "Grab the journal";
+        goalDescription[1] = "Grab the book journal";
         requiredAmount[1] = 1;
 
         goalDescription[2] = "Grab your backpack";

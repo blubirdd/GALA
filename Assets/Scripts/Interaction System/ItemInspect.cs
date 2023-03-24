@@ -103,7 +103,7 @@ public class ItemInspect : MonoBehaviour, IInteractable
             cinemachineManager.EnableInspectCam();
         }
 
-        Inventory.instance.Add(item, 1);
+        Inventory.instance.Add(item, 1, false);
 
         StartCoroutine(WaitForSeconds(animationTime));
 

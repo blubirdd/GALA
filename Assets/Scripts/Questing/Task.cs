@@ -108,6 +108,8 @@ public class Task : MonoBehaviour, IDataPersistence
         {
             tasksCompeleted.Add(data.tasksCompeleted[i]);
         }
+
+        //foreach(Goal goal in QuestNew)
     }
 
 

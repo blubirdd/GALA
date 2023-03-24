@@ -20,10 +20,16 @@ public class QuestNew: MonoBehaviour
     public string _questDescription;
     public bool _questCompleted;
 
+    //public void SaveData(GameData data)
+    //{
+       
+    //}
 
     private void Start()
     {
         GameEvents.instance.onQuestCompleted += QuestComplete;
+
+
     }
 
     public void Initialize()
@@ -31,6 +37,13 @@ public class QuestNew: MonoBehaviour
         _questName = questName;
         _questDescription = questDescription;
         _questCompleted = questCompleted;
+
+        foreach (Goal goal in Goals)
+        {
+            Debug.Log(goal.description + " progress "+goal.currentAmount);
+        }
+
+        QuestTaskUI.instance.UpdateQuestUI();
     }
     public void CheckGoals()
     {
@@ -46,7 +59,7 @@ public class QuestNew: MonoBehaviour
     {
         if (questCompleted == true)
         {
-            Initialize();
+            //Initialize();
 
             //update quest UI
             Debug.Log("Quest is Completed!!!");
@@ -55,6 +68,7 @@ public class QuestNew: MonoBehaviour
             QuestUI.instance.ClearQuestDescription();
 
             GameEvents.instance.QuestCompleted(questName);
+            QuestTaskUI.instance.UpdateQuestUI();
         }
 
     }

@@ -27,21 +27,21 @@ public class QuestUI : MonoBehaviour
 
     public void UpdateQuestName(string questName)
     {
-        questNameTM.SetText(questName);
+        //questNameTM.SetText(questName);
     }
 
     public void UpdateQuestDescription(string questDescription)
     {
-        questDescriptionTM.SetText(questDescription);
+        //questDescriptionTM.SetText(questDescription);
     }
 
     public void ClearQuestTitle()
     {
-        questNameTM.SetText("No Quest Active");
+        //questNameTM.SetText("No Quest Active");
     }
 
     public void ClearQuestDescription()
     {
-        questDescriptionTM.SetText("Explore the area");
+        //questDescriptionTM.SetText("Explore the area");
     }
 }

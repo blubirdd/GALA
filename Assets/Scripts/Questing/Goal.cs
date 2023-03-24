@@ -21,6 +21,7 @@ public class Goal
     public void Evaluate()
     {
         //event - Goal value changed
+        QuestTaskUI.instance.UpdateQuestUI();
         GameEvents.instance.GoalValueChanged();
 
         if (currentAmount >= requiredAmount)

@@ -75,7 +75,7 @@ public class EquipmentManager : MonoBehaviour
         {
             oldItem = currentEquipment[slotIndex];
             Debug.Log("Replacing existing");
-            inventory.Add(oldItem, 1);
+            inventory.Add(oldItem, 1, false);
             UnequipItemIn3D(oldItem);
         }
 
@@ -103,7 +103,7 @@ public class EquipmentManager : MonoBehaviour
         {
             Equipment oldItem = currentEquipment[slotIndex];
 
-            inventory.Add(oldItem, 1);
+            inventory.Add(oldItem, 1, false);
 
             currentEquipment[slotIndex] = null;
             UnequipItemIn3D(oldItem);

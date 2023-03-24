@@ -40,7 +40,7 @@ public class ItemPickup : MonoBehaviour, IInteractable
     public Sprite icon { get; set; }
 
     ThirdPersonController instance;
-
+    PopupWindow popupWindow;
     //waypoint
     [Header("If has waypoint on pickup, else leave null")]
     [SerializeField] private Transform _waypointTransform;
@@ -51,6 +51,9 @@ public class ItemPickup : MonoBehaviour, IInteractable
         InteractionPrompt = _prompt + item.name;
         icon = _icon;
         instance = ThirdPersonController.instance;
+        popupWindow = PopupWindow.instance;
+
+
     }
     public bool Interact(Interactor interactor)
     {
@@ -62,9 +65,11 @@ public class ItemPickup : MonoBehaviour, IInteractable
     void PickUp()
     {
         Debug.Log("Picked up " + item.name);
+        //popupWindow.AddToQueue("Picked up " + item.name);
+        popupWindow.AddToQueue(item);
 
         instance.ItemPickupAnim();
-        Inventory.instance.Add(item, 1);
+        Inventory.instance.Add(item, 1, true);
 
 
 

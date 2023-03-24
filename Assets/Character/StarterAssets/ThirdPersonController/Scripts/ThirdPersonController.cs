@@ -102,6 +102,9 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
+
+        [Header("Parts References")]
+        public Transform rightHand;
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
@@ -132,9 +135,13 @@ namespace StarterAssets
         private int _animIDItemThrow;
         private int _animIDInspect;
         private int _animIDPhotograph;
+        private int _animIDPush;
+        private int _animIDCarry;
 
         private int _animIDFishCast;
-
+        private int _animIDSit;
+        private int _animIDSitMoveHand;
+        private int _animIDSitMoveWrong;
         //the character transform
         //public Transform player;
 
@@ -285,12 +292,16 @@ namespace StarterAssets
             _animIDCrouchWalking = Animator.StringToHash("CrouchWalking");
             _animIDPhotograph = Animator.StringToHash("Photograph");
             _animIDFishCast = Animator.StringToHash("FishCast");
-            
+            _animIDSit = Animator.StringToHash("Sit");
+            _animIDPush = Animator.StringToHash("Push");
+
+            _animIDCarry = Animator.StringToHash("Carry");
 
             _animIDItemPickup = Animator.StringToHash("ItemPickup");
             _animIDItemThrow = Animator.StringToHash("ItemThrow");
             _animIDInspect = Animator.StringToHash("Inspect");
-            
+            _animIDSitMoveHand = Animator.StringToHash("SitMoveHand");
+            _animIDSitMoveWrong = Animator.StringToHash("SitMoveWrong");
         }
 
         private void GroundedCheck()
@@ -465,6 +476,65 @@ namespace StarterAssets
                 CrouchUp();
             }
         }
+
+
+        public void SitDown()
+        {
+            _animator.SetBool(_animIDSit, true);
+        }
+
+        public void Push()
+        {
+            _animator.SetBool(_animIDPush, true);
+        }
+
+        public void PushStop()
+        {
+            _animator.SetBool(_animIDPush, false);
+        }
+
+        public void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Pushable"))
+            {
+                Push();
+            }
+        }
+
+        public void OnCollisionExit(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Pushable"))
+            {
+                PushStop();
+            }
+        }
+
+        public void Carry()
+        {
+            _animator.SetBool(_animIDCarry, true);
+        }
+
+        public void CarryStop()
+        {
+            _animator.SetBool(_animIDCarry, false);
+        }
+
+        public void SitMoveHand()
+        {
+            _animator.SetTrigger(_animIDSitMoveHand);
+        }
+
+        public void SitMoveWrong()
+        {
+            _animator.SetTrigger(_animIDSitMoveWrong);
+        }
+
+        public void SitUp()
+        {
+            _animator.SetBool(_animIDSit, false);
+        }
+
+
 
         public void ThrowItem()
         {

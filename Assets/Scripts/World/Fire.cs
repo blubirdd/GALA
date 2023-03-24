@@ -18,7 +18,10 @@ public class Fire : MonoBehaviour
        if(other.gameObject.CompareTag("Water"))
         {
             TriggerQuest();
-            Destroy(other);
+            Destroy(other.gameObject);
+
+            //trigger particle
+            ParticleManager.instance.SpawnPuffParticle(transform.position);
             gameObject.SetActive(false);
         }
     }

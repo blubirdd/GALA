@@ -81,6 +81,8 @@ public class UIManager : MonoBehaviour
     [Header("Quest Notification")]
     [SerializeField] private GameObject paperNotifCanvas;
 
+    [Header("Quest UI")]
+    public GameObject questUI;
 
     [Header("Outdated")]
     //THIS IS OUTDATED
@@ -208,6 +210,7 @@ public class UIManager : MonoBehaviour
     {
         uiVirtualJoystick.ResetJoyStick();
         playerInputUI.SetActive(false);
+        questUI.SetActive(false);
         // playerModel.SetActive(false);
     }
 
@@ -215,6 +218,7 @@ public class UIManager : MonoBehaviour
     {
         uiVirtualJoystick.ResetJoyStick();
         playerInputUI.SetActive(true);
+        questUI.SetActive(true);
         //playerModel.SetActive(true);
     }
 

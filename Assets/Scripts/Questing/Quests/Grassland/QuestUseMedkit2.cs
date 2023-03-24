@@ -16,12 +16,12 @@ public class QuestUseMedkit2 : QuestNew
     {
 
         //setup
-        ID = "QuestUseMedkit"; ;
+        ID = "QuestUseMedkit2"; ;
         questName = "Curing the Tamaraws";
         questDescription = "Cure the remaining infected tamaraw in the area";
 
-        goalDescription[0] = "Cure the remaining infected tamaraw in the area";
-        requiredAmount[0] = 5;
+        goalDescription[0] = "Cure the remaining infected \ntamaraw in the area";
+        requiredAmount[0] = 2;
 
 
         reward = 10;

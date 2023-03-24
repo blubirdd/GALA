@@ -22,6 +22,9 @@ public class UseGoal : Goal
         base.InIt();
 
         Inventory.OnItemUsedCallback += UseItem_Goal;
+        //to evaluate saved data
+        Debug.Log("Evaluating");
+        Evaluate();
     }
 
     void UseItem_Goal(Item item)

@@ -21,6 +21,9 @@ public class ItemUse : MonoBehaviour, IInteractable
 
     [SerializeField] GameObject particle;
 
+    [Header("Dialogue")]
+    [SerializeField] private SubtleDialogueTrigger subtleDialogue;
+
     ThirdPersonController thirdPersonController;
     EquipmentManager equipmentManager;
     Inventory inventory;
@@ -43,7 +46,11 @@ public class ItemUse : MonoBehaviour, IInteractable
 
         else
         {
-            Debug.Log("Required item not in hand");
+            if(subtleDialogue != null)
+            {
+                subtleDialogue.TriggerDialogue();
+            }
+            
         }
         
         return true;

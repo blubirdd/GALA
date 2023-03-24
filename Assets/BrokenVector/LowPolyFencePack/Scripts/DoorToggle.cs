@@ -11,17 +11,17 @@ namespace BrokenVector.LowPolyFencePack
 	public class DoorToggle : MonoBehaviour
     {
 
-     //   private DoorController doorController;
+        private DoorController doorController;
 
-     //   void Awake()
-     //   {
-     //       doorController = GetComponent<DoorController>();
-     //   }
+        void Awake()
+        {
+            doorController = GetComponent<DoorController>();
+        }
 
-	    //void OnMouseDown()
-	    //{
-	    //    doorController.ToggleDoor();
-	    //}
+        void OnMouseDown()
+        {
+            doorController.ToggleDoor();
+        }
 
-	}
+    }
 }

@@ -25,6 +25,8 @@ public class Animal : MonoBehaviour, IAnimal
     [Header("Quest States")]
     public bool isInjured;
     public bool isRunningAway = false;
+    public bool canMove = true;
+    public bool canBePickedUp = false;
 
     [Header("State floats")]
     [Range(1, 100)]
@@ -74,7 +76,7 @@ public class Animal : MonoBehaviour, IAnimal
     public AnimalState animalState;
     //
 
-   
+
     //a* for wandering
     // public GameObject objectToInstantiate;
     // Transform previousObject;
@@ -109,9 +111,6 @@ public class Animal : MonoBehaviour, IAnimal
         //states 
         // hunger = 50f;
         // thirst = 100f;
-
-
-
     }
     void Start()
     {
@@ -129,15 +128,41 @@ public class Animal : MonoBehaviour, IAnimal
 
     void OnEnable()
     {
+        if(canMove)
+        {
+            StartCoroutine(FindTargetWithDelay(0.5f));
+            StartCoroutine(RoamAround(0.5f));
+
+            StartCoroutine(FindPlayerWithDelay());
+        }
+
+        //states 
+        hunger = 50f;
+        thirst = 100f;
+    }
+
+    public void ActivateAnimal()
+    {
+        canMove = true;
         StartCoroutine(FindTargetWithDelay(0.5f));
         StartCoroutine(RoamAround(0.5f));
 
         StartCoroutine(FindPlayerWithDelay());
+
         //states 
         hunger = 50f;
         thirst = 100f;
+    }
 
+    public void DeactivateAnimal()
+    {
+        StopAllCoroutines();
+    }
 
+    public void HealAnimal()
+    {
+        isInjured = false;
+        ChangeUI(AnimalStateUI.Idle);
     }
 
     void OnDisable()

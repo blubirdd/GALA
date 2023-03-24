@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-
-
+using StarterAssets;
 
 public class QuizManager : MonoBehaviour
 {
     [NonReorderable]
     public List<QuestionAndAnswers> QnA;
+    public List<QuestionAndAnswers> remaningQuestions;
     public GameObject[] options;
     public int CurrentQuestion;
 
@@ -24,19 +24,53 @@ public class QuizManager : MonoBehaviour
     int questionsDisplayed = 0;
     public int score;
 
-    [SerializeField] private int currentNumber =1;
+    [SerializeField] private int currentNumber = 1;
 
     [SerializeField] TextMeshProUGUI numberUI;
+
+    [Header("UI AND 3D Elements")]
+    public GameObject bookJournal3D;
+    public GameObject thoughtBubbleUI;
     private void Start()
     {
-        totalQuestions = QnA.Count;
+        totalQuestions = remaningQuestions.Count;
+        remaningQuestions = new List<QuestionAndAnswers>(QnA);
+        //currentNumber = 1;
+        //UpdateNumberUI();
+        //questionsDisplayed = 0;
+
         GoPanel.SetActive(false);
-        generateQuestion(); 
+        generateQuestion();
+
+        
     }
 
     public void retry()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        GoPanel.SetActive(false);
+        Quizpanel.SetActive(true);
+
+        remaningQuestions.Clear();
+
+        remaningQuestions = new List<QuestionAndAnswers>(QnA);
+        totalQuestions = remaningQuestions.Count;
+
+        //reset
+        
+
+        currentNumber = 1;
+        UpdateNumberUI();
+        questionsDisplayed = 0;
+        score = 0;
+
+
+
+
+
+        generateQuestion();
+
     }
 
     void GameOver()
@@ -52,23 +86,30 @@ public class QuizManager : MonoBehaviour
         score += 1;
         currentNumber +=1;
         UpdateNumberUI();
-        QnA.RemoveAt(CurrentQuestion);
+        remaningQuestions.RemoveAt(CurrentQuestion);
         generateQuestion();
+
+        Debug.Log("CORRECT");
+        ThirdPersonController.instance.SitMoveHand();
     }
 
     public void wrong()
     {
         // When answer wrong
-        QnA.RemoveAt(CurrentQuestion);
+        remaningQuestions.RemoveAt(CurrentQuestion);
         generateQuestion();
         currentNumber +=1;
         UpdateNumberUI();
 
+        Debug.Log("WRONG!");
+        ThirdPersonController.instance.SitMoveWrong();
     }
 
     public void UpdateNumberUI()
     {
         numberUI.text = currentNumber.ToString();
+
+        
     }
 
     void SetAnswers()
@@ -76,9 +117,9 @@ public class QuizManager : MonoBehaviour
         for (int i = 0; i < options.Length; i++)
         {
             options[i].GetComponent<AnswerScript>().isCorrect = false;
-            options[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = QnA[CurrentQuestion].Answers[i];
+            options[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = remaningQuestions[CurrentQuestion].Answers[i];
 
-            if(QnA[CurrentQuestion].CorrectAnswer == i+1)
+            if(remaningQuestions[CurrentQuestion].CorrectAnswer == i+1)
             {
                 options[i].GetComponent<AnswerScript>().isCorrect = true;
             }
@@ -86,25 +127,45 @@ public class QuizManager : MonoBehaviour
     }
 
     void generateQuestion()
-{
-    Debug.Log(currentNumber);
-
-    // Checks if there are questions left in the QnA list and if the number of questions displayed is less than 10
-    if(QnA.Count > 0 && questionsDisplayed < 10)
     {
-        CurrentQuestion = Random.Range(0, QnA.Count);
-        QuestionTxt.text = QnA[CurrentQuestion].Question;
-        SetAnswers();
+        //Enable UI
+        //bookJournal3D.SetActive(true);
+        //thoughtBubbleUI.SetActive(true);
 
-        // Increment the number of questions displayed
-        questionsDisplayed++;
+        // Checks if there are questions left in the QnA list and if the number of questions displayed is less than 10
+        if(remaningQuestions.Count > 0 && questionsDisplayed < 10)
+        {
+            CurrentQuestion = Random.Range(0, remaningQuestions.Count);
+            QuestionTxt.text = remaningQuestions[CurrentQuestion].Question;
+            SetAnswers();
+
+            // Increment the number of questions displayed
+            questionsDisplayed++;
+        }
+        else
+        {
+            Debug.Log("Out of Question");
+            GameOver();
+        }
     }
-    else
+
+    public void Finish()
     {
-        Debug.Log("Out of Question");
-        GameOver();
+        GoPanel.SetActive(false);
+        Quizpanel.SetActive(false);
+
+        bookJournal3D.SetActive(false);
+        thoughtBubbleUI.SetActive(false);
+
+        UIManager.instance.EnablePlayerMovement();
+        ThirdPersonController.instance.SitUp();
+
+        //disable quiz camera
+        CinemachineManager.instance._cams[6].SetActive(false);
+
+        //UI
+
     }
-}
 
 
 }

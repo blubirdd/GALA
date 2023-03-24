@@ -43,12 +43,12 @@ public class QuestCollectTamarawTracks : QuestNew
         //start coroutine
         StartCoroutine(IsQuestCompleted());
 
-        UpdateQuestUI();
+       
 
         //goal (this, name of target, goaldescription, iscompleted bool, current progress, required amount)
         Goals.Add(new CollectionGoal(this, "Tamaraw Tracks", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
         Goals.ForEach(g => g.InIt());
-
+        UpdateQuestUI();
         GetGoalsList();
 
 

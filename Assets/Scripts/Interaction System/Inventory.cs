@@ -49,10 +49,12 @@ public class Inventory : MonoBehaviour, IDataPersistence
     //save
     public int naturePoints;
 
+    [Header("New Discovery")]
+    public ItemDiscovery itemDiscovery;
+
 
     private void Start()
     {
-
 
     }
 
@@ -95,11 +97,29 @@ public class Inventory : MonoBehaviour, IDataPersistence
     //}
 
 
-    public void Add(Item item, int _amount)
+    public void Add(Item item, int _amount, bool triggerDiscovery)
     {
         
         //trigger the collectiongoal event
         ItemPickedUp(item);
+
+        if (item.displayDiscovery && triggerDiscovery)
+        {
+            bool isFound = false;
+            for (int i = 0; i < container.Count; i++)
+            {
+                if (container[i].item == item)
+                {
+                    isFound = true;
+                }
+            }
+
+            if (!isFound)
+            {
+                itemDiscovery.NewItemDiscovered(item.icon, item.name, item.itemDescription);
+                isFound = false;
+            }
+        }
 
         if (!item.isDefaultItem)
         {
@@ -127,7 +147,6 @@ public class Inventory : MonoBehaviour, IDataPersistence
             }
 
         }
-
 
     }
     //public void Remove(Item item)
@@ -224,7 +243,7 @@ public class Inventory : MonoBehaviour, IDataPersistence
             //Add(keyValuePair.Value.item, keyValuePair.Value.amount);
 
             //this method works by getting the item using the id
-            Add(database.getItem[keyValuePair.Value.ID], keyValuePair.Value.amount);
+            Add(database.getItem[keyValuePair.Value.ID], keyValuePair.Value.amount, false);
         }
 
         this.naturePoints = data.naturePoints; 
