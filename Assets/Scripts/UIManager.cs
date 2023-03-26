@@ -49,6 +49,9 @@ public class UIManager : MonoBehaviour
     [Header("MOVEMENT BUTTON")]
     public GameObject movementButtons;
 
+    [Header("SUBTLE NOTIFICATION")]
+    public GameObject subtleNotificationPanel;
+
     [Header("HAND EQUIPMENTS")]
     public GameObject throwButtonsParent;
     public GameObject throwButton;

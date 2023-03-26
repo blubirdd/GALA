@@ -15,7 +15,7 @@ private string[] goalDescription = new string[] { "Report back to the Village Ch
      
         //setup
         ID = "QuestTalkVillageChief2"; ;
-        questName = "The Village Chief 2";
+        questName = "Report to the Village Chief";
         questDescription = "Report back to the Village Chief";
 
 

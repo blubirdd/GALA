@@ -14,6 +14,9 @@ TagManager:
   - Fixable
   - Collectable
   - Pushable
+  - FxTemporaire
+  - Forest Turtle
+  - Animal
   layers:
   - Default
   - TransparentFX

@@ -107,6 +107,7 @@ public class QuestTalkFarmer : QuestNew
         //disable marker
         Destroy(_waypoint);
 
+        yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
         AcceptQuest("QuestFeedChicken");
     }
 }

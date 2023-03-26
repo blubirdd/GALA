@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using StarterAssets;
+using DG.Tweening;
 
 public class QuizManager : MonoBehaviour
 {
@@ -14,7 +15,10 @@ public class QuizManager : MonoBehaviour
     public GameObject[] options;
     public int CurrentQuestion;
 
+    [Header("Panels")]
     public GameObject Quizpanel;
+    //private CanvasGroup quizPanelCanvasGroup;
+    public GameObject startPanel;
     public GameObject GoPanel;
 
     public TextMeshProUGUI QuestionTxt;
@@ -31,8 +35,14 @@ public class QuizManager : MonoBehaviour
     [Header("UI AND 3D Elements")]
     public GameObject bookJournal3D;
     public GameObject thoughtBubbleUI;
+
+    [Header("DOTWEEN")]
+    private bool isMoving = false;
+
     private void Start()
     {
+        //originalPosition = Quizpanel.transform.position;
+        //quizPanelCanvasGroup = Quizpanel.GetComponent<CanvasGroup>();
         totalQuestions = remaningQuestions.Count;
         remaningQuestions = new List<QuestionAndAnswers>(QnA);
         //currentNumber = 1;
@@ -40,6 +50,7 @@ public class QuizManager : MonoBehaviour
         //questionsDisplayed = 0;
 
         GoPanel.SetActive(false);
+        Quizpanel.SetActive(false);
         generateQuestion();
 
         
@@ -51,6 +62,7 @@ public class QuizManager : MonoBehaviour
 
         GoPanel.SetActive(false);
         Quizpanel.SetActive(true);
+        startPanel.SetActive(false);
 
         remaningQuestions.Clear();
 
@@ -89,8 +101,7 @@ public class QuizManager : MonoBehaviour
         remaningQuestions.RemoveAt(CurrentQuestion);
         generateQuestion();
 
-        Debug.Log("CORRECT");
-        ThirdPersonController.instance.SitMoveHand();
+
     }
 
     public void wrong()
@@ -101,15 +112,30 @@ public class QuizManager : MonoBehaviour
         currentNumber +=1;
         UpdateNumberUI();
 
-        Debug.Log("WRONG!");
-        ThirdPersonController.instance.SitMoveWrong();
     }
 
     public void UpdateNumberUI()
     {
+        bookJournal3D.SetActive(true);
+        thoughtBubbleUI.SetActive(true);
         numberUI.text = currentNumber.ToString();
 
-        
+        //dotween
+        if (isMoving) return;
+
+
+        Sequence sequence = DOTween.Sequence();
+        //sequence.Append(quizPanelCanvasGroup.DOFade(0f, 0.3f));
+        sequence.Append(Quizpanel.transform.DOMoveX(Quizpanel.transform.position.x + 1000f, 0.5f));
+        //quizPanelCanvasGroup.DOFade(1f, 0.3f);
+        sequence.Append(Quizpanel.transform.DOMoveX(Quizpanel.transform.position.x, 0.3f));
+
+
+        //set the flag to prevent multiple triggers
+        isMoving = true;
+
+        sequence.OnComplete(() => { isMoving = false; });
+
     }
 
     void SetAnswers()
@@ -132,14 +158,14 @@ public class QuizManager : MonoBehaviour
         //bookJournal3D.SetActive(true);
         //thoughtBubbleUI.SetActive(true);
 
-        // Checks if there are questions left in the QnA list and if the number of questions displayed is less than 10
+        //checks if there are questions left in the QnA list and if the number of questions displayed is less than 10
         if(remaningQuestions.Count > 0 && questionsDisplayed < 10)
         {
             CurrentQuestion = Random.Range(0, remaningQuestions.Count);
             QuestionTxt.text = remaningQuestions[CurrentQuestion].Question;
             SetAnswers();
 
-            // Increment the number of questions displayed
+            //increment the number of questions displayed
             questionsDisplayed++;
         }
         else
@@ -151,8 +177,12 @@ public class QuizManager : MonoBehaviour
 
     public void Finish()
     {
+        //disable canvas
+
+        Quizpanel.transform.parent.gameObject.SetActive(false);
         GoPanel.SetActive(false);
         Quizpanel.SetActive(false);
+        startPanel.SetActive(true);
 
         bookJournal3D.SetActive(false);
         thoughtBubbleUI.SetActive(false);
@@ -164,6 +194,8 @@ public class QuizManager : MonoBehaviour
         CinemachineManager.instance._cams[6].SetActive(false);
 
         //UI
+
+
 
     }
 

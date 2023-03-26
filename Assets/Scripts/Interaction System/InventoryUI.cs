@@ -61,7 +61,7 @@ public class InventoryUI : MonoBehaviour
 
     public void CloseInventory()
     {
-        itemDetailsBackgroundImage.color = new Color32(116, 91, 91, 255);
+        //itemDetailsBackgroundImage.color = new Color32(116, 91, 91, 255);
         itemDetailsParent.SetActive(false);
         inventoryUI.SetActive(false);
         UIManager.instance.EnableButtonsUIPACK();

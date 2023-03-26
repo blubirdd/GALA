@@ -458,6 +458,7 @@ namespace StarterAssets
             SprintSpeed = SprintSpeed * 0.5f;
             _animator.SetBool(_animIDCrouch, true);
             this.gameObject.layer = LayerMask.NameToLayer("Stealth");
+            uiManager.subtleNotificationPanel.SetActive(true);
         }
 
         private void CrouchUp()
@@ -467,6 +468,7 @@ namespace StarterAssets
             MoveSpeed = normalSpeed;
             SprintSpeed = SprintSpeed * 2f;
             this.gameObject.layer = LayerMask.NameToLayer("Player");
+            uiManager.subtleNotificationPanel.SetActive(false);
         }
 
         public void CrouchToStand()
@@ -481,6 +483,7 @@ namespace StarterAssets
         public void SitDown()
         {
             _animator.SetBool(_animIDSit, true);
+            
         }
 
         public void Push()

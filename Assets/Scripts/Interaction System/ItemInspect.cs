@@ -1,5 +1,6 @@
 using Cinemachine;
 using StarterAssets;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,7 @@ public class ItemInspect : MonoBehaviour, IInteractable
 
     [Header("Animation")]
     [SerializeField] private float animationTime = 2.5f;
-
+    [SerializeField] private bool playInspectAnimation = true;
     [Header("Revelation")]
     [SerializeField] private bool focusOnTarget = false;
     [SerializeField] private GameObject TargetToFocusOn;
@@ -32,6 +33,9 @@ public class ItemInspect : MonoBehaviour, IInteractable
     [SerializeField] private GameObject questManager;
     [SerializeField] private string questID;
     [SerializeField] private float giveQuestDelay = 0f;
+
+    public bool triggerCharacterApproach = true;
+    public bool disableScriptAfterInspect = false;
     private QuestNew quest { get; set; }
 
     [Header("Dialogue")]
@@ -71,10 +75,12 @@ public class ItemInspect : MonoBehaviour, IInteractable
             _dialogue.TriggerDialogue();
         }
 
-        if(character != null)
+        if(character != null && triggerCharacterApproach)
         {
             TalkEvents.CharacterApproach(character);
         }
+
+        
 
         return true;
     }
@@ -99,7 +105,11 @@ public class ItemInspect : MonoBehaviour, IInteractable
         }
         else
         {
-            thirdPersonController.InspectAnim();
+            if (playInspectAnimation)
+            {
+                thirdPersonController.InspectAnim();
+            }
+            
             cinemachineManager.EnableInspectCam();
         }
 
@@ -132,6 +142,9 @@ public class ItemInspect : MonoBehaviour, IInteractable
                 //}
 
                 yield return new WaitForSeconds(giveQuestDelay - animationTime);
+
+
+
                 Destroy(gameObject);
             }
 
@@ -139,6 +152,18 @@ public class ItemInspect : MonoBehaviour, IInteractable
             //{
             //    this.gameObject.layer = LayerMask.NameToLayer("Default");
             //}
+
+            if (disableScriptAfterInspect)
+            {
+                ItemUse itemUse;
+                if(this.TryGetComponent(out itemUse))
+                {
+                    itemUse.enabled = true;
+                }
+                //this.GetComponent<ItemInspect>().enabled = false;
+                Destroy(this.GetComponent<ItemInspect>());
+
+            }
 
         }
 

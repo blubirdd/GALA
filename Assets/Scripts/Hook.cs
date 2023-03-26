@@ -67,7 +67,7 @@ public class Hook : MonoBehaviour
             if (other.TryGetComponent(out item))
             {
                 Debug.Log("Collected " + item.item);
-
+                Inventory.instance.ItemPickedUp(item.item);
                 Destroy(other);
             }
         }

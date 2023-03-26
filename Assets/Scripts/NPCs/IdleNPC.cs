@@ -29,6 +29,7 @@ public class IdleNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersistenc
         icon = _icon;
         npcName = id;
 
+
         if(isTalked)
         {
             DisableQuestMarker();
@@ -39,6 +40,7 @@ public class IdleNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersistenc
     {
         //EVENT TRIGGER
         TalkEvents.CharacterApproach(this);
+
         _dialogue.TriggerDialogue();
         isTalked = true;
         return true;

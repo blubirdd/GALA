@@ -59,7 +59,7 @@ public class InventorySlot : MonoBehaviour
         if(item != null)
         {
             itemDetails.SetActive(true);
-            itemDetailsBackgroundImage.color =  new Color32(255, 255, 255, 255);
+            //itemDetailsBackgroundImage.color =  new Color32(255, 255, 255, 255);
 
             //setup
             itemName.text = item.name;

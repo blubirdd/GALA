@@ -21,6 +21,9 @@ public class AnimalNav : MonoBehaviour
     public float turnDst = 1;
     public float stoppingDst = 1;
 
+    [Header("Conditions")]
+    public bool targetReached = false;
+    
     AstarPath path;
 
     Animal animal;
@@ -44,7 +47,6 @@ public class AnimalNav : MonoBehaviour
     {
         StopAllCoroutines();
     }
-
 
 
     public void Update()
@@ -89,7 +91,7 @@ public class AnimalNav : MonoBehaviour
                 continue;
             }
 
-            
+
             // Update the path
             PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
 
@@ -99,7 +101,6 @@ public class AnimalNav : MonoBehaviour
             while (true)
             {
                 var t = target ?? transform;
-
                 yield return new WaitForSeconds(minPathUpdateTime);
                 if ((t.position - targetPosOld).sqrMagnitude > sqrMoveThreshold)
                 {
@@ -119,7 +120,7 @@ public class AnimalNav : MonoBehaviour
 
         bool followingPath = true;
         int pathIndex = 0;
-
+        Debug.Log("following path");
         //transform.LookAt(path.lookPoints[0]);
 
         //smooth rotation
@@ -171,6 +172,8 @@ public class AnimalNav : MonoBehaviour
                         //reach destination
                         followingPath = false;
                         Debug.Log("Target reached");
+
+                        targetReached = true;
                     }
                 }
 

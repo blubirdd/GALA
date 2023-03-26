@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class QuestTalkLawrence : QuestNew
 {
-    static int numberOfGoals = 2;
+    static int numberOfGoals = 1;
 
     private string[] goalDescription = new string[numberOfGoals];
     private int[] currentProgress = new int[numberOfGoals];
@@ -21,11 +21,8 @@ public class QuestTalkLawrence : QuestNew
         questName = "Forest Fire Aftermath";
         questDescription = "Talk to Lawrence about what happenend";
 
-        goalDescription[0] = "Find and talk to Lawrence";
+        goalDescription[0] = "Talk to Lawrence about what happenend";
         requiredAmount[0] = 1;
-
-        goalDescription[0] = "Cure the forest turtles";
-        requiredAmount[0] = 2;
 
         reward = 10;
 
@@ -55,7 +52,6 @@ public class QuestTalkLawrence : QuestNew
 
         //goal (this, name of target, goaldescription, iscompleted bool, current progress, required amount)
         Goals.Add(new TalkGoal(this, "Lawrence", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
-        Goals.Add(new UseGoal(this, "Medkit", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
 
         Goals.ForEach(g => g.InIt());
 
@@ -118,7 +114,8 @@ public class QuestTalkLawrence : QuestNew
         //Destroy(_waypoint);
 
         //wait for notifcation or cutscene
-        //yield return new WaitForSeconds(5f);
-        //AcceptQuest("QuestPhotographForestTurtle");
+        yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
+        yield return new WaitForSeconds(2f);
+        AcceptQuest("QuestUseMedkitTurtle");
     }
 }

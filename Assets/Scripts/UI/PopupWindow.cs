@@ -49,7 +49,16 @@ public class PopupWindow : MonoBehaviour
     private void ShowPopup(Item item)
     { //parameter the same type as queue
         window.SetActive(true);
-        popupText.text = "Picked up " + item.name;
+        if (item.isAnimlaFood)
+        {
+            popupText.text = "Fed a " + item.name;
+        }
+
+        else
+        {
+            popupText.text = "Picked up " + item.name;
+        }
+
         icon.sprite = item.icon;
         popupAnimator.Play("PopupAnimation");
     }

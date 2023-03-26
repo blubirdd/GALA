@@ -109,6 +109,7 @@ public class QuestCollectSeeds : QuestNew
         Destroy(waypoint);
 
         //Add another quest
+        yield return new WaitForSeconds(5f);
         AcceptQuest("QuestTalkFarmer");
     }
 }

@@ -23,10 +23,12 @@ public class Animal : MonoBehaviour, IAnimal
 
 
     [Header("Quest States")]
+    public Item food;
     public bool isInjured;
     public bool isRunningAway = false;
     public bool canMove = true;
     public bool canBePickedUp = false;
+    public bool playerisInRange = false;
 
     [Header("State floats")]
     [Range(1, 100)]
@@ -226,9 +228,23 @@ public class Animal : MonoBehaviour, IAnimal
     public void Discovered()
     {
         PictureEvents.AnimalDiscovered(this);
+
+
+        if (!Book.instance.photosInventory.Contains(photo))
+        {
+            Debug.Log("NEWLY ISCOVERED ADDED TO DATABASE: " + animalName);
+
+            StartCoroutine(WaitForPhoto());
+            IEnumerator WaitForPhoto()
+            {
+                yield return new WaitForEndOfFrame();
+                Inventory.instance.itemDiscovery.NewItemDiscovered(photo.polaroidPhoto, photo.name, "New Animal Discovered. Check your journal for more details", false);
+            }
+          
+        }
+
         Book.instance.AddAnimalPhoto(photo);
 
-        Debug.Log("NEWLY ISCOVERED ADDED TO DATABASE: " + animalName);
     }
 
     public void Roam()
@@ -665,6 +681,21 @@ public class Animal : MonoBehaviour, IAnimal
     //animal is eating
     public void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (food != null)
+            {
+                Interactor interactor;
+                playerisInRange = true;
+                interactor = other.GetComponent<Interactor>();
+
+                if (food == EquipmentManager.instance.currentEquipment[0] && isInjured == false)
+                {
+                    interactor._interactionPromptUI.Setup("Feed " + photo.name, animalState.eating);
+                }
+            }
+        }
+
         if (other.gameObject.CompareTag("Prey"))
         {
             if (isHungry)
@@ -711,9 +742,10 @@ public class Animal : MonoBehaviour, IAnimal
 
                     //preyTransform = null;
                     animalNav.target = null;
-
-                    hunger = 100f;
                     
+                    hunger = 100f;
+
+                    Destroy(other);
                     // yield return new WaitForSeconds(10);
                     // other.gameObject.SetActive(true);
                 }
@@ -743,6 +775,14 @@ public class Animal : MonoBehaviour, IAnimal
 
 
             }
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            playerisInRange = false;
         }
     }
 

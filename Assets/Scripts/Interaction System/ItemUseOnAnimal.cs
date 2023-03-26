@@ -14,17 +14,18 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
 
 
     [SerializeField] private string _prompt = "Use (change this) ";
+
+    [Header("ICONS")]
     [SerializeField] private Sprite _icon;
     [SerializeField] private Sprite _feedIcon;
+    [SerializeField] private Sprite _pickupIcon;
+    [SerializeField] private Sprite _dropIcon;
     //[SerializeField] private bool consumeItem = false;
 
     [SerializeField] GameObject particle;
 
     [Header("DIALOGUE")]
     [SerializeField] private SubtleDialogueTrigger dialogue;
-
-    [Header("Food ITEM")]
-    [SerializeField] private Equipment food;
 
     [Header("Settings")]
     public bool canMoveAfterHeal = true;
@@ -60,7 +61,7 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
                 if (animal.canBePickedUp)
                 {
                     //to change to pickup icon
-                    interactor._interactionPromptUI.Setup("Pick up animal", _feedIcon);
+                    interactor._interactionPromptUI.Setup("Pick up animal", _pickupIcon);
                 }
 
                 EquipmentManager.instance.Unequip(0);
@@ -69,30 +70,34 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
                 return true;
             }
 
+            return true;
+        }
+
+
+        if (animal.food == equipmentManager.currentEquipment[0] && !isPickedUP)
+        {
+            FeedAnimal();
+            return true;
         }
 
         if (animal.canBePickedUp && !animal.isInjured && isPickedUP == false)
         {
             PickUpAnimal();
 
-            interactor._interactionPromptUI.Setup("Drop animal", _feedIcon);
+            interactor._interactionPromptUI.Setup("Drop " + animal.photo.name, _pickupIcon);
             return true;
         }
+
 
         if (isPickedUP)
         {
             DropAnimal();
         }
 
-        if(food == equipmentManager.currentEquipment[0])
-        {
-            interactor._interactionPromptUI.Setup("Feed animal", _feedIcon);
-            FeedAnimal();
-        }
 
         else
         {
-            if(dialogue != null)
+            if(dialogue != null && animal.isInjured)
             {
                 dialogue.TriggerDialogue();
             }
@@ -122,6 +127,9 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
             GameObject g = Instantiate(particle, transform.position, Quaternion.identity);
             //Destroy(g, 3f);
         }
+
+        InteractionPrompt = "Pick up animal";
+        icon = _pickupIcon;
 
         //ParticleManager.instance.SpawnPuffParticle(this.transform.position);
     }
@@ -166,6 +174,10 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
     {
         Debug.Log("Feeding");
         thirdPersonController.ItemPickupAnim();
+        equipmentManager.Unequip(0);
+        UIManager.instance.DisableUnequipButton();
+
+        PopupWindow.instance.AddToQueue(animal.food);
     }
 
 

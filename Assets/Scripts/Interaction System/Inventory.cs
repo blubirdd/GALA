@@ -116,7 +116,7 @@ public class Inventory : MonoBehaviour, IDataPersistence
 
             if (!isFound)
             {
-                itemDiscovery.NewItemDiscovered(item.icon, item.name, item.itemDescription);
+                itemDiscovery.NewItemDiscovered(item.icon, item.name, item.itemDescription, true);
                 isFound = false;
             }
         }

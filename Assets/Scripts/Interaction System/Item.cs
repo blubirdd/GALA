@@ -22,6 +22,8 @@ public class Item : ScriptableObject
     public bool isAimable = false;
     public bool isFirable = false;
 
+    [Header("Quest Settings")]
+    public bool isAnimlaFood = false;
     [TextArea(3, 10)]
     public string itemDescription;
 

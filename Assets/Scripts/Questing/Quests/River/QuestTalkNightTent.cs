@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QuestTalkNightTent : QuestNew
 {
-    static int numberOfGoals = 1;
+    static int numberOfGoals = 2;
 
     private string[] goalDescription = new string[numberOfGoals];
     private int[] currentProgress = new int[numberOfGoals];
@@ -18,10 +18,13 @@ public class QuestTalkNightTent : QuestNew
         //setup
         ID = "QuestTalkNightTent"; ;
         questName = "Wait until night time.";
-        questDescription = "Wait in the tent until  night time.";
+        questDescription = "Wait in the tent until night time.";
 
-        goalDescription[0] = "Wait in the tent until  night time.";
+        goalDescription[0] = "Secure a flashlight";
         requiredAmount[0] = 1;
+
+        goalDescription[1] = "Wait in the tent until night time.";
+        requiredAmount[1] = 1;
 
 
 
@@ -52,7 +55,8 @@ public class QuestTalkNightTent : QuestNew
         UpdateQuestUI();
 
         //goal (this, name of target, goaldescription, iscompleted bool, current progress, required amount)
-        Goals.Add(new TalkGoal(this, "Night Tent", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new TalkGoal(this, "Flashlight", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new TalkGoal(this, "Night Tent", goalDescription[1], false, currentProgress[1], requiredAmount[1]));
 
 
         Goals.ForEach(g => g.InIt());

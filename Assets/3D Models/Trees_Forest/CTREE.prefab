@@ -49,6 +49,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: CommonTree_2
       objectReference: {fileID: 0}
+    - target: {fileID: 7095385027054278920, guid: 8009dfe96032d6146bf66dafe9063fbe,
+        type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7095385027054278920, guid: 8009dfe96032d6146bf66dafe9063fbe,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7582953165339902898, guid: 8009dfe96032d6146bf66dafe9063fbe,
         type: 3}
       propertyPath: m_RootOrder

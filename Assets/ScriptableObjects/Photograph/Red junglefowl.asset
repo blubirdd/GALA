@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Red junglefowl
   scientificName: Gallus gallus
   animalGroup: Bird
-  polaroidPhoto: {fileID: 21300000, guid: e2d5ea2467ed2804a83069cf8fe11b0a, type: 3}
+  polaroidPhoto: {fileID: 21300000, guid: e983975c42dbc304ba5a45699f9faba6, type: 3}
   lifeSpan: 'Life Span: 10-30 YRS'
   weight: 'Weight: 485-1,450 G'
   height: 'Height: Unknown'
