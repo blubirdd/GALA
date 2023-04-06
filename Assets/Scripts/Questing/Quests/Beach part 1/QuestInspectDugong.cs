@@ -59,7 +59,7 @@ public class QuestInspectDugong : QuestNew
         GetGoalsList();
 
         //waypoint
-        SpawnWaypointMarker();
+        //SpawnWaypointMarker();
 
     }
 

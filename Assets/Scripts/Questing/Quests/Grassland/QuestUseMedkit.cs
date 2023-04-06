@@ -58,7 +58,7 @@ public class QuestUseMedkit : QuestNew
 
 
         //waypoint
-        SpawnWaypointMarker();
+        //SpawnWaypointMarker();
 
     }
 
@@ -112,6 +112,7 @@ public class QuestUseMedkit : QuestNew
         //disable marker
         //Destroy(_waypoint);
 
-        //AcceptQuest("QuestFeedChicken");
+        yield return new WaitForSeconds(5f);
+        AcceptQuest("QuestTalkWildlifeSpecialistFinal");
     }
 }

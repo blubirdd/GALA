@@ -96,6 +96,11 @@ public class UIManager : MonoBehaviour
     public GameObject analytics;
     public Goal goal;
 
+
+    [Header("PLAYER EMOTE")]
+    public GameObject emote;
+    public GameObject hunterEmote;
+
     public bool disableFpsLimit = false;
     private void Start()
     {

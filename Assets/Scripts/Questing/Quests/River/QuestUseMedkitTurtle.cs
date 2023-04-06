@@ -22,10 +22,10 @@ public class QuestUseMedkitTurtle : QuestNew
 
 
         goalDescription[0] = "Heal Forest Turtles";
-        requiredAmount[0] = 1;
+        requiredAmount[0] = 2;
 
         goalDescription[1] = "Temporarily relocate the turtles";
-        requiredAmount[1] = 1;
+        requiredAmount[1] = 2;
 
 
         reward = 10;
@@ -56,7 +56,7 @@ public class QuestUseMedkitTurtle : QuestNew
 
         //goal (this, name of target, goaldescription, iscompleted bool, current progress, required amount)
         Goals.Add(new UseGoal(this, "Medkit", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
-        Goals.Add(new TalkGoal(this, "Turtle Shelter", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new TalkGoal(this, "Turtle Shelter", goalDescription[1], false, currentProgress[1], requiredAmount[1]));
 
         Goals.ForEach(g => g.InIt());
 
@@ -65,6 +65,8 @@ public class QuestUseMedkitTurtle : QuestNew
 
         //waypoint
         SpawnWaypointMarker();
+
+        ClockManager.instance.StartClock(180);
 
     }
 
@@ -101,7 +103,7 @@ public class QuestUseMedkitTurtle : QuestNew
     public void SpawnWaypointMarker()
     {
         _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
-        _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[3]);
+        _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[5]);
 
     }
 
@@ -112,12 +114,14 @@ public class QuestUseMedkitTurtle : QuestNew
         //remove quest from task list
         Task.instance.RemoveTask(ID);
 
+        ClockManager.instance.DisableClock();
         //debug
         Debug.Log(this + " is Completed");
 
         //disable marker
-        //Destroy(_waypoint);
+        Destroy(_waypoint);
 
-        //AcceptQuest("QuestFeedChicken");
+        yield return new WaitForSeconds(5f);
+        AcceptQuest("QuestInspectContaminatedWater");
     }
 }

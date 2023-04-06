@@ -1,3 +1,4 @@
+using StarterAssets;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -16,10 +17,12 @@ public class Animal : MonoBehaviour, IAnimal
     public bool isPassive;
     public bool isAggro;
     public bool isHunting = false;
-
+    public bool chasePlayer = false;
+    //private bool isChasingPlayer;
     //food states
     public bool isHungry;
     public bool isThirsty;
+    public bool isEating;
 
 
     [Header("Quest States")]
@@ -29,12 +32,14 @@ public class Animal : MonoBehaviour, IAnimal
     public bool canMove = true;
     public bool canBePickedUp = false;
     public bool playerisInRange = false;
+    public bool depleteHunger = true;
+
 
     [Header("State floats")]
     [Range(1, 100)]
-    public float hunger;
+    public int hunger;
     [Range(1, 100)]
-    public float thirst;
+    public int thirst;
 
     public string playerFoodTag;
 
@@ -46,6 +51,9 @@ public class Animal : MonoBehaviour, IAnimal
     [SerializeField] private bool showSphere = true;
     public Transform preyTransform;
     public Transform predatorTransform;
+    [Header("BODY PART")]
+    public bool canBeCaptured = false;
+    public GameObject netPart;
 
     [Header("Targets")]
 
@@ -94,7 +102,7 @@ public class Animal : MonoBehaviour, IAnimal
     }
     //
 
-    Animator animator;
+    public Animator animator;
 
     private void Awake()
     {
@@ -104,7 +112,7 @@ public class Animal : MonoBehaviour, IAnimal
         // StartCoroutine(FindTargetWithDelay(0.5f));
         // StartCoroutine(RoamAround(0.5f));
 
-        // animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
 
         _animal = GetComponent<NavMeshAgent>();
 
@@ -113,6 +121,7 @@ public class Animal : MonoBehaviour, IAnimal
         //states 
         // hunger = 50f;
         // thirst = 100f;
+        
     }
     void Start()
     {
@@ -132,15 +141,20 @@ public class Animal : MonoBehaviour, IAnimal
     {
         if(canMove)
         {
-            StartCoroutine(FindTargetWithDelay(0.5f));
+            StartCoroutine(FindTargetWithDelay(3f));
             StartCoroutine(RoamAround(0.5f));
 
             StartCoroutine(FindPlayerWithDelay());
+
+            if (depleteHunger)
+            {
+                StartCoroutine(SimulateHungerAndThirst(10f));
+            }
         }
 
         //states 
-        hunger = 50f;
-        thirst = 100f;
+        hunger = 50;
+        thirst = 100;
     }
 
     public void ActivateAnimal()
@@ -151,9 +165,14 @@ public class Animal : MonoBehaviour, IAnimal
 
         StartCoroutine(FindPlayerWithDelay());
 
+        if (depleteHunger)
+        {
+            StartCoroutine(SimulateHungerAndThirst(10f));
+        }
+
         //states 
-        hunger = 50f;
-        thirst = 100f;
+        hunger = 50;
+        thirst = 100;
     }
 
     public void DeactivateAnimal()
@@ -174,34 +193,88 @@ public class Animal : MonoBehaviour, IAnimal
 
     private void Update()
     {
-        hunger -= Time.deltaTime;
-        thirst -= Time.deltaTime;
+        //hunger -= Time.deltaTime;
+        //thirst -= Time.deltaTime;
+        //Debug.Log(this + "Speed is "+ _animal.speed);
 
-        if (hunger <= 0)
+        //remove null check on final build
+        if(animator != null)
         {
-            //  _viewRadius = 30f;
-            isHungry = true;
-            hunger = 0;
-        }
+            if (!canMove)
+            {
+                animator.enabled = false;
+                return;
+            }
 
-        else
-        {
-            isHungry = false;
-        }
+            if (_animal.velocity.magnitude <= 0.1f)
+            {
+                if (isHunting)
+                {
+                    if (isEating)
+                    {
+                        animator.SetFloat("AnimSpeed", 0f);
+                    }
+                    else
+                    {
+                        animator.SetFloat("AnimSpeed", 0.5f);
+                    }
 
-        if (thirst <= 0)
-        {
-            //9 _viewRadius = 30f;
-            isThirsty = true;
-            thirst = 0;
-        }
+                }
 
-        else
-        {
-            isThirsty = false;
+                else
+                {
+                    animator.SetFloat("AnimSpeed", 0f);
+                }
+                
+                return;
+            }
+
+            else if (isRunningAway)
+            {
+                animator.SetFloat("AnimSpeed", 1f);
+                return;
+            }
+
+            else 
+            {
+                animator.SetFloat("AnimSpeed", 0.5f, 0.5f, Time.deltaTime);
+                return;
+            }
         }
     }
 
+    IEnumerator SimulateHungerAndThirst(float interval)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(interval);
+            hunger -=10;
+            //thirst -= 10;
+            if (hunger <= 0)
+            {
+                //  _viewRadius = 30f;
+                isHungry = true;
+                hunger = 0;
+            }
+
+            else
+            {
+                isHungry = false;
+            }
+
+            if (thirst <= 0)
+            {
+                //9 _viewRadius = 30f;
+                isThirsty = true;
+                thirst = 0;
+            }
+
+            else
+            {
+                isThirsty = false;
+            }
+        }
+    }
     //using astar algo
     //IEnumerator Testing()
     //{
@@ -278,7 +351,11 @@ public class Animal : MonoBehaviour, IAnimal
             // if (preyTransform == null)
             if (animalNav.target == null)
             {
-                Roam();
+                if (canMove)
+                {
+                    Roam();
+                }
+
             }
 
             //reset the wander and enter wander state
@@ -295,18 +372,19 @@ public class Animal : MonoBehaviour, IAnimal
         }
     }
 
-    private enum AnimalStateUI
+    public enum AnimalStateUI
     {
         Idle,
         RunningAway,
         Eeating,
         Drinking,
         Hunting,
-        Injured
+        Injured,
+        Captured
 
     }
 
-    private void ChangeUI(AnimalStateUI status)
+    public void ChangeUI(AnimalStateUI status)
     {
         //parent if statement so that it will always show injury status
         if (isInjured && status != AnimalStateUI.RunningAway)
@@ -325,7 +403,64 @@ public class Animal : MonoBehaviour, IAnimal
 
         else
         {
+            if (canBeCaptured && !canMove)
+            {
+                if (status == AnimalStateUI.Captured)
+                {
+                    if (statusImage.sprite == animalState.net && netPart.activeSelf)
+                    {
+                        return;
+                    }
 
+                    else
+                    {
+                        netPart.SetActive(true);
+                        statusImage.sprite = animalState.net;
+                    }
+
+                    return;
+                }
+
+                else
+                {
+                    if (!netPart.activeSelf)
+                    {
+                        return;
+                    }
+
+                    netPart.SetActive(false);
+                }
+            }
+
+            if (status == AnimalStateUI.RunningAway)
+            {
+                if (statusImage.sprite == animalState.runningAway)
+                {
+                    return;
+                }
+
+                else
+                {
+                    statusImage.sprite = animalState.runningAway;
+                }
+
+                return;
+            }
+
+            if (status == AnimalStateUI.Eeating)
+            {
+                if (statusImage.sprite == animalState.eating)
+                {
+                    return;
+                }
+
+                else
+                {
+                    statusImage.sprite = animalState.eating;
+                }
+
+                return;
+            }
 
             if (status == AnimalStateUI.Idle)
             {
@@ -340,31 +475,6 @@ public class Animal : MonoBehaviour, IAnimal
                 }
             }
 
-            if (status == AnimalStateUI.RunningAway)
-            {
-               if(statusImage.sprite == animalState.runningAway)
-                {
-                    return;
-                }
-
-                else
-                {
-                    statusImage.sprite = animalState.runningAway;
-                }
-            }
-
-            if(status == AnimalStateUI.Eeating)
-            {
-                if (statusImage.sprite == animalState.eating)
-                {
-                    return;
-                }
-
-                else
-                {
-                    statusImage.sprite = animalState.eating;
-                }
-            }
         }
     }
 
@@ -378,6 +488,7 @@ public class Animal : MonoBehaviour, IAnimal
         }
         //Debug.Log(this + " is Wandering");
         _animal.SetDestination(RandomNavSphere(transform.position, _viewRadius, floorMask));
+
         curState = AIStates.Wandering;
 
     }
@@ -390,8 +501,7 @@ public class Animal : MonoBehaviour, IAnimal
         }
 
         waitTimer = Random.Range(minWaitTime, maxWaitTime);
-        //Debug.Log("Waiting for " + waitTimer);
-
+        //Debug.Log("Transition to idle");
         curState = AIStates.Idle;
     }
 
@@ -414,7 +524,7 @@ public class Animal : MonoBehaviour, IAnimal
     {
         while(true)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.5f);
             FindPlayer();
 
             yield return null;
@@ -425,32 +535,48 @@ public class Animal : MonoBehaviour, IAnimal
     {
         _playerFound = Physics.OverlapSphereNonAlloc(transform.position, _playerAwarenessRadius, _playerColliders, playerMask);
 
-        if(_playerFound > 0)
+        if(_playerFound > 0 && canMove)
         {
             if (_playerColliders[0].CompareTag("Player"))
             {
-                statusImage.gameObject.SetActive(true);
+                if(chasePlayer == false)
+                {
 
-                //statusImage.sprite = animalState.runningAway;
+                    statusImage.gameObject.SetActive(true);
 
-                //new optimized
-                isRunningAway = true;
-                ChangeUI(AnimalStateUI.RunningAway);
+                    //statusImage.sprite = animalState.runningAway;
 
-                predatorTransform = _playerColliders[0].transform;
+                    //new optimized
+                    isRunningAway = true;
+                    ChangeUI(AnimalStateUI.RunningAway);
 
-                Debug.Log(this + " is Running away");
+                    predatorTransform = _playerColliders[0].transform;
 
-                //run from target
-                Vector3 dirToPredator = transform.position - predatorTransform.position;
-                Vector3 newPosition = transform.position + dirToPredator * 1.3f;
+                    Debug.Log(this + " is Running away");
 
-                //rotate on direction
-                Quaternion toRotation = Quaternion.LookRotation(newPosition, Vector3.up);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 1 * Time.deltaTime);
+                    //run from target
+                    Vector3 dirToPredator = transform.position - predatorTransform.position;
+                    Vector3 newPosition = transform.position + dirToPredator * 1.3f;
 
-                _animal.speed = _runSpeed;
-                _animal.SetDestination(newPosition);
+                    //rotate on direction
+                    Quaternion toRotation = Quaternion.LookRotation(newPosition, Vector3.up);
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 1 * Time.deltaTime);
+
+                    _animal.speed = _runSpeed;
+                    _animal.SetDestination(newPosition);
+                    //animator.SetFloat("AnimSpeed", 1f);
+ 
+                }
+
+                else
+                {
+                    animalNav.target = _playerColliders[0].transform;
+                    animalNav.speed = _runSpeed;
+                    //isChasingPlayer = true;
+                    UIManager.instance.emote.SetActive(true);
+
+                }
+
             }
 
         }
@@ -460,7 +586,42 @@ public class Animal : MonoBehaviour, IAnimal
             //predatorTransform = null;
             //statusImage.gameObject.SetActive(false);
             isRunningAway = false;
-            ChangeUI(AnimalStateUI.Idle);
+
+            if (_animal.speed == _speed)
+            {
+                //return;
+            }
+            else
+            {
+                _animal.speed = _speed;
+            }
+
+            if (isHunting == false)
+            {
+                if (canMove)
+                {
+                    ChangeUI(AnimalStateUI.Idle);
+                }
+
+                if (animalNav.target == null)
+                {
+                    return;
+                }
+
+                else
+                {
+                    if (canMove)
+                    {
+                        ChangeUI(AnimalStateUI.Idle);
+                    }
+
+                    UIManager.instance.emote.SetActive(false);
+                    //isChasingPlayer = false;
+                    animalNav.target = null;
+                    animalNav.speed = _speed;
+                }
+
+            }
 
         }
     }
@@ -473,11 +634,14 @@ public class Animal : MonoBehaviour, IAnimal
         {
             yield return new WaitForSeconds(delay);
 
-            if(isHungry || isThirsty)
+            //if(isHungry || isThirsty)
+            //{
+            //    FindTarget();
+            //}
+            if (isHungry && canMove)
             {
                 FindTarget();
             }
-            
 
             yield return null;
         }
@@ -497,9 +661,10 @@ public class Animal : MonoBehaviour, IAnimal
             //     animalNav.TargetLocation(null);
             // }
 
-           // preyTransform = null;
-           animalNav.target = null;
-
+            // preyTransform = null;
+            //animalNav.target = null;
+            isHunting = false;
+            animalNav.target = null;
 
             //set the speed back to roaming speed
             _animal.speed = _speed;
@@ -514,7 +679,7 @@ public class Animal : MonoBehaviour, IAnimal
 
         if(_targetsFound > 0)
         {
-            
+
             for (int i = 0; i < _targetsFound; i++)
             {
                 //moved to new
@@ -542,6 +707,8 @@ public class Animal : MonoBehaviour, IAnimal
                         animalNav.target = closestTarget;
                         // preyTransform = closestTarget;
                         // break;
+
+                        isHunting = true;
                     }
 
                     else if (_colliders[i].CompareTag("Prey") && isHungry)
@@ -565,6 +732,7 @@ public class Animal : MonoBehaviour, IAnimal
                         //statusImage.sprite = animalState.eating;
                         ChangeUI(AnimalStateUI.Eeating);
 
+                        isHunting = true;
                         // break;
                     }
 
@@ -574,6 +742,8 @@ public class Animal : MonoBehaviour, IAnimal
                         animalNav.target = _colliders[i].transform;
                         statusImage.gameObject.SetActive(true);
                         statusImage.sprite = animalState.eating;
+
+                        isHunting = true;
                     }
 
                 }
@@ -683,17 +853,54 @@ public class Animal : MonoBehaviour, IAnimal
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (food != null)
+            //if not aggressive
+            if(chasePlayer == false)
             {
-                Interactor interactor;
-                playerisInRange = true;
-                interactor = other.GetComponent<Interactor>();
-
-                if (food == EquipmentManager.instance.currentEquipment[0] && isInjured == false)
+                if (food != null)
                 {
-                    interactor._interactionPromptUI.Setup("Feed " + photo.name, animalState.eating);
+                    Interactor interactor;
+                    playerisInRange = true;
+                    interactor = other.GetComponent<Interactor>();
+
+                    if (food == EquipmentManager.instance.currentEquipment[0] && isInjured == false)
+                    {
+                        interactor._interactionPromptUI.Setup("Feed " + photo.name, food.icon);
+                    }
                 }
             }
+
+
+            //if aggressive
+            else
+            {
+                if (canMove)
+                {
+                    animator.SetTrigger("Attack");
+                    UIManager.instance.DisablePlayerMovement();
+                    //other.GetComponent<ThirdPersonController>().crouching = true;
+                    this.GetComponent<CapsuleCollider>().enabled = false;
+                    Vector3 direction = other.transform.position - transform.position;
+
+                    // Ignore the y-axis rotation to only rotate horizontally
+                    direction.y = 0;
+
+                    // Rotate this object to face the target object
+                    transform.rotation = Quaternion.LookRotation(direction);
+                    
+                    StartCoroutine(WaitForAttackAnimation());
+                    IEnumerator WaitForAttackAnimation()
+                    {
+                        yield return new WaitForSeconds(1f);
+                        Player.instance.EnablePlayerDiedUI();
+                        Debug.Log("Caught player");
+                        UIManager.instance.EnablePlayerMovement();
+                        this.GetComponent<CapsuleCollider>().enabled = true;
+                    }
+
+                }
+
+            }
+
         }
 
         if (other.gameObject.CompareTag("Prey"))
@@ -707,17 +914,20 @@ public class Animal : MonoBehaviour, IAnimal
                 StartCoroutine(EatDelayFood());
                 IEnumerator EatDelayFood() 
                 {
-
+                    Debug.Log("EATING");
+                    isEating = true;
                     yield return new WaitForSeconds(5);
-                    //other.gameObject.SetActive(false);
+                    other.gameObject.SetActive(false);
 
                     //preyTransform = null;
-                    hunger = 100f;
+                    hunger = 100;
+                    isHunting = false;
                     animalNav.target = null;
+                    isEating = false;
 
 
-                    //yield return new WaitForSeconds(10);
-                    //other.gameObject.SetActive(true);
+                    yield return new WaitForSeconds(5);
+                    other.gameObject.SetActive(true);
                 }
             }
         }
@@ -743,7 +953,7 @@ public class Animal : MonoBehaviour, IAnimal
                     //preyTransform = null;
                     animalNav.target = null;
                     
-                    hunger = 100f;
+                    hunger = 100;
 
                     Destroy(other);
                     // yield return new WaitForSeconds(10);
@@ -767,7 +977,7 @@ public class Animal : MonoBehaviour, IAnimal
                     //preyTransform = null;
                     animalNav.target = null;
 
-                    thirst = 150f;
+                    thirst = 150;
 
                     //yield return new WaitForSeconds(10);
                     //other.gameObject.SetActive(true);

@@ -102,10 +102,10 @@ public class DialogueSystem : MonoBehaviour
         StartCoroutine(WaitForSecondsToDisplay());
         IEnumerator WaitForSecondsToDisplay()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             nextSentenceButton.gameObject.SetActive(true);
             continueButton.alpha = 0f;
-            continueButton.DOFade(1f, 1f);
+            continueButton.DOFade(1f, 0.5f);
         }
     }
 

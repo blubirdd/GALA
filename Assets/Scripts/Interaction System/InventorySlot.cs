@@ -11,6 +11,8 @@ public class InventorySlot : MonoBehaviour
     [Header("Item Details Content")]
     public GameObject itemDetails;
     public Image itemDetailsBackgroundImage;
+
+    public Image itemIcon;
     public TextMeshProUGUI itemName;
     public TextMeshProUGUI itemDescription;
     public Button useButton;
@@ -20,6 +22,12 @@ public class InventorySlot : MonoBehaviour
 
     public InventoryUI inventoryUI;
 
+
+    [Header("Other")]
+    public GameObject itemNamePanel;
+    public TextMeshProUGUI itemNameText;
+
+    public bool displayItemCount = false;
 
     //public void AddItem(Item newItem)
     //{
@@ -38,8 +46,16 @@ public class InventorySlot : MonoBehaviour
 
         icon.sprite = item.icon;
         icon.enabled = true;
-        textAmount.enabled = true;
+
+        if (displayItemCount)
+        {
+            textAmount.enabled = true;
+        }
+
+
         textAmount.SetText(amount.ToString());
+        itemNamePanel.SetActive(true);
+        itemNameText.SetText(item.name);
     }
     public void ClearSlot()
     {
@@ -47,7 +63,9 @@ public class InventorySlot : MonoBehaviour
 
         icon.sprite = null;
         icon.enabled = false;
+
         textAmount.enabled = false;
+        itemNamePanel.SetActive(false);
     }
 
     public void OnRemoveButton()
@@ -62,6 +80,7 @@ public class InventorySlot : MonoBehaviour
             //itemDetailsBackgroundImage.color =  new Color32(255, 255, 255, 255);
 
             //setup
+            itemIcon.sprite = item.icon;
             itemName.text = item.name;
             itemDescription.text = item.itemDescription;
             inventoryUI.currentItem = item;

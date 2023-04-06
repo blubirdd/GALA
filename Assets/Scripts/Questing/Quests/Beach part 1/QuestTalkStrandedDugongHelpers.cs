@@ -63,7 +63,7 @@ public class QuestTalkStrandedDugongHelpers : QuestNew
         GetGoalsList();
 
         //waypoint
-        SpawnWaypointMarker();
+        //SpawnWaypointMarker();
 
     }
 

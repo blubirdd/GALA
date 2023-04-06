@@ -68,15 +68,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 150m
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 922c85fa279921c4a817ae89dce21647, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 348f4aa96c0b599448b2ee6c503f72fc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4284605439
+  m_fontColor: {r: 1, g: 0.8886038, b: 0.38113207, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -252,7 +252,7 @@ MonoBehaviour:
   img: {fileID: 7303693829296648633}
   target: {fileID: 0}
   meter: {fileID: 7303693828042189050}
-  offset: {x: 0, y: 1, z: 0}
+  offset: {x: 0, y: 3, z: 0}
   playerLocation: {fileID: 0}
 --- !u!1 &7303693829296648263
 GameObject:
@@ -281,7 +281,7 @@ RectTransform:
   m_GameObject: {fileID: 7303693829296648263}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7303693828042189049}
@@ -314,7 +314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.9437244, b: 0.35283017, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

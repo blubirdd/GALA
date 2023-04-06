@@ -54,7 +54,12 @@ ModelImporter:
   - first:
       74: -2469224417514991532
     second: CharacterArmature|Walk_Carry
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skin
+    second: {fileID: 2100000, guid: 6183cf3dbf10188409e11a6b7ba81da5, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -83,7 +88,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 0.7
@@ -139,7 +144,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.0069999998
+    globalScale: 0.7
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

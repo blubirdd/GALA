@@ -17,6 +17,8 @@ TagManager:
   - FxTemporaire
   - Forest Turtle
   - Animal
+  - Crocodile
+  - Rock
   layers:
   - Default
   - TransparentFX
@@ -35,9 +37,9 @@ TagManager:
   - Grass
   - Ground
   - Collectable
-  - 
-  - 
-  - 
+  - WallForAnimal
+  - WallForPlayer
+  - Threat
   - 
   - 
   - 

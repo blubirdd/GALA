@@ -43,31 +43,52 @@ public class PopupWindow : MonoBehaviour
     {//parameter the same type as queue
         popupQueue.Enqueue(item);
         if (queueChecker == null)
-            queueChecker = StartCoroutine(CheckQueue());
+            queueChecker = StartCoroutine(CheckQueue(false));
+
     }
 
-    private void ShowPopup(Item item)
+    public void AddToQueuePickedUp(Item item)
+    {
+        popupQueue.Enqueue(item);
+        if (queueChecker == null)
+            queueChecker = StartCoroutine(CheckQueue(true));
+    }
+    private void ShowPopup(Item item, bool isItemPickUP)
     { //parameter the same type as queue
         window.SetActive(true);
-        if (item.isAnimlaFood)
+
+        if (isItemPickUP)
         {
-            popupText.text = "Fed a " + item.name;
+            popupText.text = "Picked up " + item.name;
         }
 
         else
         {
-            popupText.text = "Picked up " + item.name;
+            if (item.isAnimalFood)
+            {
+                popupText.text = "Sucessfully fed " + item.name;
+            }
+
+            else if (item.isCustomQuestItem)
+            {
+                popupText.text = "Successfully used " + item.name;
+            }
+
+            else if (item.isCustomPopup)
+            {
+                popupText.text = item.itemDescription;
+            }
         }
 
         icon.sprite = item.icon;
         popupAnimator.Play("PopupAnimation");
     }
 
-    private IEnumerator CheckQueue()
+    private IEnumerator CheckQueue(bool isItemPickup)
     {
         do
         {
-            ShowPopup(popupQueue.Dequeue());
+            ShowPopup(popupQueue.Dequeue(), isItemPickup);
             do
             {
                 yield return null;

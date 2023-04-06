@@ -16,5 +16,9 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 2e940eb0693ebf64c90f56bb2ee94c3f, type: 3}
   isDefaultItem: 1
   isUsable: 1
+  displayDiscovery: 1
   isThrowable: 0
-  itemDescription: 
+  isAimable: 0
+  isFirable: 0
+  isAnimlaFood: 0
+  itemDescription: Used as sa guide and documentation animal discoveries

@@ -47,6 +47,7 @@ public class Inventory : MonoBehaviour, IDataPersistence
     [NonReorderable] public List<InventorySave> container = new List<InventorySave>();
 
     //save
+    public int goldCoins;
     public int naturePoints;
 
     [Header("New Discovery")]

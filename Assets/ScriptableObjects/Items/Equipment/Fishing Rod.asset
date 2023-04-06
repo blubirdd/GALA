@@ -16,8 +16,10 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 7643dc3af09d57a4d8860064387427c2, type: 3}
   isDefaultItem: 0
   isUsable: 1
+  displayDiscovery: 1
   isThrowable: 0
   isAimable: 1
   isFirable: 1
-  itemDescription: 
+  isAnimlaFood: 0
+  itemDescription: Can be used to hook or pull items in the water
   equipSlot: 0

@@ -105,6 +105,7 @@ namespace StarterAssets
 
         [Header("Parts References")]
         public Transform rightHand;
+
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
@@ -178,7 +179,14 @@ namespace StarterAssets
 
         public void LoadData(GameData data)
         {
+            if(data.gameLevel == 2)
+            {
+                this.transform.position = new Vector3(0, 0, 0);
+                Debug.Log("player position should be 0");
+                return;
+            }
             this.transform.position = data.playerPosition;
+            Debug.Log("player position should be not 0");
         }
 
         public void SaveData(GameData data)
@@ -424,6 +432,10 @@ namespace StarterAssets
                 }
         }
 
+       public void AdjustSpeed(float speed)
+        {
+            SprintSpeed = speed;
+        }
        public void Crouch()
         {
             

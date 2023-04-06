@@ -60,15 +60,23 @@ public class QuestNew: MonoBehaviour
         if (questCompleted == true)
         {
             //Initialize();
+            StartCoroutine(CompleteQuest());
+            IEnumerator CompleteQuest()
+            {
+                //yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
 
-            //update quest UI
-            Debug.Log("Quest is Completed!!!");
+                //update quest UI
+                Debug.Log("Quest is Completed!!!");
 
-            QuestUI.instance.ClearQuestTitle();
-            QuestUI.instance.ClearQuestDescription();
+                QuestUI.instance.ClearQuestTitle();
+                QuestUI.instance.ClearQuestDescription();
 
-            GameEvents.instance.QuestCompleted(questName);
-            QuestTaskUI.instance.UpdateQuestUI();
+                GameEvents.instance.QuestCompleted(questName);
+                QuestTaskUI.instance.UpdateQuestUI();
+
+                yield return null;
+            }
+
         }
 
     }

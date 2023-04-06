@@ -26,6 +26,7 @@ public class ReticleScript : MonoBehaviour
     private bool _isDiscovered;
 
     private IAnimal _animal;
+    private IThreat _threat;
     Book book;
     RaycastHit hit;
 
@@ -46,6 +47,12 @@ public class ReticleScript : MonoBehaviour
             {
                 _animal.Discovered();
             }
+
+            if(_threat != null)
+            {
+                Debug.Log("THREAT IS NOT NULL");
+                _threat.Discovered();
+            }
         }
     }
     public void Ray()
@@ -63,17 +70,41 @@ public class ReticleScript : MonoBehaviour
 
             //check discovery status
 
+            //if raycast is animal
             _animal = hit.collider.GetComponent<IAnimal>();
-
-            for (int i = 0; i < book.photosInventory.Count; i++)
+            
+            if(_animal != null)
             {
-                if (book.photosInventory[i].name == _animal.animalName)
+                for (int i = 0; i < book.photosInventory.Count; i++)
                 {
-                    discoveryStatusImage.sprite = book.photosInventory[i].polaroidPhoto;
-                    discoveryStatus.SetText(_animal.animalName);
-                    _isDiscovered = true;
-                }
+                    if (book.photosInventory[i].name == _animal.animalName)
+                    {
+                        discoveryStatusImage.sprite = book.photosInventory[i].polaroidPhoto;
+                        discoveryStatus.SetText(_animal.animalName);
+                        _isDiscovered = true;
+                    }
 
+                }
+            }
+
+            else
+            {
+                _threat = hit.collider.GetComponent<IThreat>();
+                if( _threat != null)
+                {
+                    
+                    for (int i = 0; i < book.photosThreat.Count; i++)
+                    {
+                        if (book.photosThreat[i].threatName == _threat.threatName)
+                        {
+                            discoveryStatusImage.sprite = book.photosThreat[i].threatPicture;
+                            discoveryStatus.SetText(_threat.threatName);
+                            _isDiscovered = true;
+                        }
+
+                    }
+                }
+                
             }
 
             if(_isDiscovered == false)

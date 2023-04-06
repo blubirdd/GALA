@@ -66,7 +66,7 @@ public class ItemPickup : MonoBehaviour, IInteractable
     {
         Debug.Log("Picked up " + item.name);
         //popupWindow.AddToQueue("Picked up " + item.name);
-        popupWindow.AddToQueue(item);
+        popupWindow.AddToQueuePickedUp(item);
 
         instance.ItemPickupAnim();
         Inventory.instance.Add(item, 1, true);

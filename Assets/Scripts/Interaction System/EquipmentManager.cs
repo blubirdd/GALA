@@ -50,6 +50,18 @@ public class EquipmentManager : MonoBehaviour
 
     [Header("FIRING")]
     public GameObject reticleAimCrosshair;
+
+    private bool forceUseItem;
+    private bool forceThrowItem;
+    public void SetForceUseItem(bool condition)
+    {
+        forceUseItem = condition;
+    }
+
+    public void SetForceThrowItem(bool condition)
+    {
+        forceThrowItem = condition;
+    }
     private void Start()
     {
         //cach singletons
@@ -94,8 +106,6 @@ public class EquipmentManager : MonoBehaviour
 
     }
 
-
-
     //unequip
     public void Unequip(int slotIndex)
     {
@@ -132,7 +142,7 @@ public class EquipmentManager : MonoBehaviour
         }
 
         //line
-        if (item.isThrowable)
+        if (item.isThrowable && !item.isUsable)
         {
             isReadyToThrow = true;
 
@@ -144,9 +154,32 @@ public class EquipmentManager : MonoBehaviour
             uICanvasControllerInput.VirtualAimInput(true);
         }
 
-        if (item.isUsable)
+        if (item.isUsable && !item.isThrowable)
         {
             uiManager.EnableUnequipButton();
+        }
+
+        if(item.isUsable && item.isThrowable)
+        {
+            if (forceUseItem)
+            {
+                uiManager.EnableUnequipButton();
+                forceUseItem = false;
+            }
+
+            if (forceThrowItem)
+            {
+                isReadyToThrow = true;
+
+                uiManager.EnableThrowUI();
+
+
+                StartCoroutine(DrawProjection());
+
+                uICanvasControllerInput.VirtualAimInput(true);
+
+                forceThrowItem = false;
+            }
         }
 
         if(item.isAimable && item.isFirable == false)
@@ -228,10 +261,10 @@ public class EquipmentManager : MonoBehaviour
         Rigidbody throwableItemPrefab;
 
         StartCoroutine(WaitForThrowingAnimation());
-
+        UIManager.instance.DisablePlayerMovement();
         IEnumerator WaitForThrowingAnimation()
         {
-
+            
             for (int i = 0; i < handItems.Length; i++)
             {
 
@@ -278,10 +311,13 @@ public class EquipmentManager : MonoBehaviour
                     break;
                 }
             }
+
+            UIManager.instance.EnablePlayerMovement();
             
         }
 
         uICanvasControllerInput.VirtualAimInput(false);
+        
 
     }
 

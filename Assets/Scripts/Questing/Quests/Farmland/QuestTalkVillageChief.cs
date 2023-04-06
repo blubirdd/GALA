@@ -11,12 +11,14 @@ public class QuestTalkVillageChief : QuestNew
     private string ID;
 
     private GameObject _waypoint;
+    private GameObject target;
+    private Outline outline;
     void Start()
     {
      
         //setup
         ID = "QuestTalkVillageChief"; ;
-        questName = "Barrio Luntian Village";
+        questName = "Find out about the Village";
         questDescription = "Talk to the Village Chief";
 
 
@@ -93,7 +95,16 @@ public class QuestTalkVillageChief : QuestNew
     public void SpawnWaypointMarker()
     {
         _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
-       _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[0]);
+
+        target = WaypointManager.instance.waypointTransforms[0].gameObject;
+       _waypoint.GetComponent<WaypointUI>().SetTarget(target.transform);
+
+        
+        if(target.TryGetComponent(out outline))
+        {
+            outline.enabled = true;
+        }
+
        // waypoint.name = WaypointManager.instance.waypointTransforms[0].name + "Waypoint";
     }
 
@@ -110,5 +121,10 @@ public class QuestTalkVillageChief : QuestNew
         //disable marker
         //Destroy(GameObject.Find("Village ChiefWaypoint").gameObject);
         Destroy(_waypoint);
+
+        if (target.TryGetComponent(out outline))
+        {
+            outline.enabled = false;
+        }
     }
 }

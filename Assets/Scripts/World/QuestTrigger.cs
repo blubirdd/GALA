@@ -20,7 +20,7 @@ public class QuestTrigger : MonoBehaviour
         if (other.gameObject.CompareTag(tagToDetect))
         {
             TriggerQuest();
-            other.gameObject.tag = "Untagged";
+            
 
 
             if (destroyOnCollide)
@@ -30,12 +30,13 @@ public class QuestTrigger : MonoBehaviour
 
 
             //trigger particle
-            ParticleManager.instance.SpawnPuffParticle(transform.position);
+            ParticleManager.instance.SpawnPuffParticle(other.transform.position);
 
             if (deactivateTriggerOnCollide)
             {
                 gameObject.SetActive(false);
             }
+            other.gameObject.tag = "Untagged";
 
         }
     }
@@ -43,7 +44,7 @@ public class QuestTrigger : MonoBehaviour
     public void TriggerQuest()
     {
         TalkEvents.CharacterApproach(character);
-        
-        Debug.Log("Detected Forest Turtle");
+        Debug.Log("TRIGGER Detected" + character.name);
+
     }
 }

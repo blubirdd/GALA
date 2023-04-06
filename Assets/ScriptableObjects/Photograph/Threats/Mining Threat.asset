@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e24c4ce4308d9d149ab61df5453ee5d3, type: 3}
+  m_Name: Mining Threat
+  m_EditorClassIdentifier: 
+  threatName: Mining Threat
+  threatPicture: {fileID: 21300000, guid: 0871295e8b028c94d9094b747f09d07f, type: 3}

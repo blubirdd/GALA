@@ -25,6 +25,8 @@ public class QuestEvents : MonoBehaviour
     public GameObject characterLawrence;
     public GameObject characterLawrenceAftermath;
 
+    
+
     [Header("River Dialogues")]
     public SubtleDialogueTrigger afterFireExtinguishedDialogue;
 
@@ -132,6 +134,8 @@ public class QuestEvents : MonoBehaviour
             characterLawrenceAftermath.SetActive(true);
         }
 
+        //Quest
+        //if(quest == "")
 
     }
 

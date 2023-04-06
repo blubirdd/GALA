@@ -27,6 +27,7 @@ public class QuizManager : MonoBehaviour
     int totalQuestions = 0;
     int questionsDisplayed = 0;
     public int score;
+   
 
     [SerializeField] private int currentNumber = 1;
 
@@ -38,7 +39,7 @@ public class QuizManager : MonoBehaviour
 
     [Header("DOTWEEN")]
     private bool isMoving = false;
-
+    public int numberOfQuestionsToDisplay;
     private void Start()
     {
         //originalPosition = Quizpanel.transform.position;
@@ -159,7 +160,7 @@ public class QuizManager : MonoBehaviour
         //thoughtBubbleUI.SetActive(true);
 
         //checks if there are questions left in the QnA list and if the number of questions displayed is less than 10
-        if(remaningQuestions.Count > 0 && questionsDisplayed < 10)
+        if(remaningQuestions.Count > 0 && questionsDisplayed < numberOfQuestionsToDisplay)
         {
             CurrentQuestion = Random.Range(0, remaningQuestions.Count);
             QuestionTxt.text = remaningQuestions[CurrentQuestion].Question;

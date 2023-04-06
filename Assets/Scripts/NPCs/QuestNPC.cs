@@ -65,46 +65,14 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
 
     public bool Interact(Interactor interactor)
     {
-        if (Task.instance.tasksCompeleted.Contains(prerequisiteQuest))
+        if (prerequisiteQuest != "None" && Task.instance.tasksCompeleted.Contains(prerequisiteQuest))
         {
             //trigger dialogue
-            if (isTalked == false)
-            {
-                _dialogue.TriggerDialogue();
-
-                //EVENT TRIGGER
-                TalkEvents.CharacterApproach(this);
-
-                StartCoroutine(AcceptQuest());
-
-            }
-
-            else
-            {
-                if (Task.instance.tasksCompeleted.Contains(questName))
-                {
-                    _dialogue.TriggerIsTalkedDialogue();
-
-                    TalkEvents.CharacterApproach(this);
-
-                    StartCoroutine(AcceptQuest());
-
-                }
-
-                else
-                {
-                    if(_completeTasksubtleDialogue != null)
-                    {
-                        _completeTasksubtleDialogue.TriggerDialogue();
-                    }
-                    Debug.Log("NPCs task is not yet completed. Please finish the task");
-
-                }
-            }
+            TriggerDialogueQuest();
 
         }
 
-        else
+        else if(prerequisiteQuest !="None")
         {
             if(_notAvailablesubtleDialogue != null)
             {
@@ -114,8 +82,51 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
             Debug.Log(this + "is unavailable right now");
         }
 
+        else if(prerequisiteQuest == "None")
+        {
+            TriggerDialogueQuest();
+        }
+
 
         return true;
+    }
+
+    public void TriggerDialogueQuest()
+    {
+        //trigger dialogue
+        if (isTalked == false)
+        {
+            _dialogue.TriggerDialogue();
+
+            //EVENT TRIGGER
+            TalkEvents.CharacterApproach(this);
+
+            StartCoroutine(AcceptQuest());
+
+        }
+
+        else
+        {
+            if (Task.instance.tasksCompeleted.Contains(questName))
+            {
+                _dialogue.TriggerIsTalkedDialogue();
+
+                TalkEvents.CharacterApproach(this);
+
+                StartCoroutine(AcceptQuest());
+
+            }
+
+            else
+            {
+                if (_completeTasksubtleDialogue != null)
+                {
+                    _completeTasksubtleDialogue.TriggerDialogue();
+                }
+                Debug.Log("NPCs task is not yet completed. Please finish the task");
+
+            }
+        }
     }
 
     IEnumerator AcceptQuest()

@@ -61,7 +61,7 @@ public class QuestTalkWildlifeSpecialist2 : QuestNew
 
 
         //waypoint
-        SpawnWaypointMarker();
+        //SpawnWaypointMarker();
 
     }
 

@@ -1,6 +1,7 @@
 using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,9 +16,10 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
 
     [SerializeField] private string _prompt = "Use (change this) ";
 
-    [Header("ICONS")]
+    [Header("THIS IS ITEM ICON")]
     [SerializeField] private Sprite _icon;
-    [SerializeField] private Sprite _feedIcon;
+    [Header("ICONS")]
+
     [SerializeField] private Sprite _pickupIcon;
     [SerializeField] private Sprite _dropIcon;
     //[SerializeField] private bool consumeItem = false;
@@ -29,6 +31,8 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
 
     [Header("Settings")]
     public bool canMoveAfterHeal = true;
+    public string tagWhenDropped;
+    [SerializeField] private GameObject parentWhenDropped;
 
     ThirdPersonController thirdPersonController;
     EquipmentManager equipmentManager;
@@ -47,6 +51,22 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
         inventory = Inventory.instance;
         animal = GetComponent<Animal>();
 
+        if(animal.isInjured == false)
+        {
+            if (animal.canBePickedUp)
+            {
+                InteractionPrompt = "Pick up " + animal.photo.name;
+                icon = _pickupIcon;
+                return;
+            }
+
+            else
+            {
+                InteractionPrompt = "Feed " + animal.photo.name;
+                icon = animal.food.icon;
+            }
+        }
+
     }
     public bool Interact(Interactor interactor)
     {
@@ -61,7 +81,16 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
                 if (animal.canBePickedUp)
                 {
                     //to change to pickup icon
+                    InteractionPrompt = "Pick up " + animal.photo.name;
+                    icon = _pickupIcon;
                     interactor._interactionPromptUI.Setup("Pick up animal", _pickupIcon);
+                }
+
+                else
+                {
+                    interactor._interactionPromptUI.Setup("Feed animal", animal.food.icon);
+                    InteractionPrompt = "Feed " + animal.photo.name;
+                    icon = animal.food.icon;
                 }
 
                 EquipmentManager.instance.Unequip(0);
@@ -70,7 +99,6 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
                 return true;
             }
 
-            return true;
         }
 
 
@@ -127,9 +155,11 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
             GameObject g = Instantiate(particle, transform.position, Quaternion.identity);
             //Destroy(g, 3f);
         }
-
-        InteractionPrompt = "Pick up animal";
-        icon = _pickupIcon;
+        //if (animal.canBePickedUp)
+        //{
+        //    InteractionPrompt = "Pick up animal";
+        //    icon = _pickupIcon;
+        //}
 
         //ParticleManager.instance.SpawnPuffParticle(this.transform.position);
     }
@@ -137,6 +167,7 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
     void PickUpAnimal()
     {
         Debug.Log("PICKING UP ANIMAL");
+        animal.tag = "Untagged";
         isPickedUP = true;
         ThirdPersonController.instance.Carry();
 
@@ -145,6 +176,11 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
         //animal.GetComponent<CapsuleCollider>().enabled = false;
         animal.GetComponent<SphereCollider>().enabled = false;
         animal.GetComponent<NavMeshAgent>().enabled = false;
+        if (animal.chasePlayer)
+        {
+            animal.animator.enabled = false;
+        }
+
         animal.DeactivateAnimal();
 
         //put animal in hand
@@ -159,12 +195,43 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
     void DropAnimal()
     {
         isPickedUP = false;
-        transform.SetParent(null);
+
+        if(parentWhenDropped != null)
+        {
+            transform.SetParent(parentWhenDropped.transform);
+        }
+        else
+        {
+            transform.SetParent(null);
+        }
+
+        animal.tag = tagWhenDropped;
 
         //enable animal dependecies
-        animal.GetComponent<SphereCollider>().enabled = true;
-        animal.GetComponent<NavMeshAgent>().enabled = true;
-        animal.ActivateAnimal();
+        if (animal.chasePlayer)
+        {
+            StartCoroutine(WaitForSecondsToActivate());
+            IEnumerator WaitForSecondsToActivate()
+            {
+                animal.GetComponent<NavMeshAgent>().enabled = true;
+
+                yield return new WaitForSeconds(5f);
+                animal.ActivateAnimal();
+                animal.GetComponent<SphereCollider>().enabled = true;
+
+                animal.netPart.SetActive(false);
+                animal.ChangeUI(Animal.AnimalStateUI.Idle);
+                ParticleManager.instance.SpawnPuffParticle(transform.position);
+                animal.animator.enabled = true;
+            }
+        }
+
+        else
+        {
+            animal.GetComponent<SphereCollider>().enabled = true;
+            animal.GetComponent<NavMeshAgent>().enabled = true;
+            animal.ActivateAnimal();
+        }
 
         ThirdPersonController.instance.CarryStop();
         Debug.Log("Drop animal");
@@ -172,12 +239,15 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
 
     void FeedAnimal()
     {
-        Debug.Log("Feeding");
+        
         thirdPersonController.ItemPickupAnim();
         equipmentManager.Unequip(0);
         UIManager.instance.DisableUnequipButton();
 
         PopupWindow.instance.AddToQueue(animal.food);
+
+        FeedEvents.AnimalFed(animal);
+        Debug.Log("Successfully fed " + animal.photo.name);
     }
 
 

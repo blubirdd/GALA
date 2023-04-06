@@ -34,6 +34,7 @@ public class IdleNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersistenc
         {
             DisableQuestMarker();
         }
+
     }
 
     public bool Interact(Interactor interactor)
@@ -52,6 +53,7 @@ public class IdleNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersistenc
         questMarker.SetActive(false);
 
     }
+
 
     public void SaveData(GameData data)
     {

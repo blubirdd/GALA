@@ -315,7 +315,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &161932871523583690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,8 +346,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounce: 0
-  duration: 0.5
-  jumpHeight: 10
+  duration: 2
+  jumpHeight: 0.2
   jumpCount: 1
   transformOfImage: {fileID: 0}
 --- !u!1 &161932871585294363
