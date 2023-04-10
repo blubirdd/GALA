@@ -27,6 +27,10 @@ public class ItemUse : MonoBehaviour, IInteractable
     ThirdPersonController thirdPersonController;
     EquipmentManager equipmentManager;
     Inventory inventory;
+
+    [Header("Medkit")]
+    public bool isMedkit;
+    public int correctMedkitItem;
     void Start()
     {
         _icon = item.icon;
@@ -59,8 +63,16 @@ public class ItemUse : MonoBehaviour, IInteractable
     void UseItem()
     {
         Debug.Log("Used " + item.name);
-        inventory.ItemUsed(item);
+        if (isMedkit)
+        {
+            DragManager.instance.EnableMedkit(DragManager.instance.dragSystems[correctMedkitItem]);
+        }
+
         thirdPersonController.ItemPickupAnim();
+
+        inventory.ItemUsed(item);
+
+
 
         if (particle != null)
         {

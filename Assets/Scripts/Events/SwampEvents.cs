@@ -154,7 +154,13 @@ public class SwampEvents : MonoBehaviour
         //QuestTalkSwampWildlifeRanger2
         if(questName == "Report to Wildlife Ranger")
         {
-            Destroy(swampWildlifeRanger);
+            StartCoroutine(WaitForDialogue());
+            IEnumerator WaitForDialogue()
+            {
+                yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
+                Destroy(swampWildlifeRanger);
+            }
+
         }
 
     }

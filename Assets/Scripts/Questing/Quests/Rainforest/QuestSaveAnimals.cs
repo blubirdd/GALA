@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QuestSaveAnimals : QuestNew
 {
-    static int numberOfGoals = 2;
+    static int numberOfGoals = 3;
 
     private string[] goalDescription = new string[numberOfGoals];
     private int[] currentProgress = new int[numberOfGoals];
@@ -25,6 +25,9 @@ public class QuestSaveAnimals : QuestNew
 
         goalDescription[1] = "Free caged eagles";
         requiredAmount[1] = 3;
+
+        goalDescription[2] = "Free caged hornbills";
+        requiredAmount[2] = 3;
 
         reward = 10;
 
@@ -54,7 +57,8 @@ public class QuestSaveAnimals : QuestNew
 
         //goal (this, name of target, goaldescription, iscompleted bool, current progress, required amount)
         Goals.Add(new TalkGoal(this, "Tarsier", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
-        Goals.Add(new TalkGoal(this, "Philippine Eagle", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new TalkGoal(this, "Philippine Eagle", goalDescription[1], false, currentProgress[1], requiredAmount[1]));
+        Goals.Add(new TalkGoal(this, "Hornbill", goalDescription[2], false, currentProgress[2], requiredAmount[2]));
 
         Goals.ForEach(g => g.InIt());
 

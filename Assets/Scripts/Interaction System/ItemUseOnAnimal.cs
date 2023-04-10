@@ -38,7 +38,8 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
     EquipmentManager equipmentManager;
     Inventory inventory;
     Animal animal;
-
+    [Header("Settings")]
+    public int correctMedkitItem;
     private bool isPickedUP;
     void Start()
     {
@@ -140,6 +141,8 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
     void UseItem()
     {
         Debug.Log("Used " + item.name);
+        DragManager.instance.EnableMedkit(DragManager.instance.dragSystems[correctMedkitItem]);
+
         inventory.ItemUsed(item);
         thirdPersonController.ItemPickupAnim();
 
@@ -212,6 +215,8 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
         //enable animal dependecies
         if (animal.chasePlayer)
         {
+            Vector3 newScale = transform.localScale + new Vector3(+0.2f, +0.2f, +0.2f);
+
             StartCoroutine(WaitForSecondsToActivate());
             IEnumerator WaitForSecondsToActivate()
             {
@@ -225,7 +230,7 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
                 animal.ChangeUI(Animal.AnimalStateUI.Idle);
                 ParticleManager.instance.SpawnPuffParticle(transform.position);
                 animal.animator.enabled = true;
-                Vector3 newScale = transform.localScale + new Vector3(+0.2f, +0.2f, +0.2f);
+              
                 transform.localScale = newScale;
             }
         }

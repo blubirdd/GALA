@@ -43,6 +43,8 @@ public class DialogueSystem : MonoBehaviour
     [SerializeField] private bool stopAudioSource;
     [Range(1,5)]
     [SerializeField] private int frequencyLevel = 3;
+
+    public bool modifyPitch;
     [Range(-3, 3)]
     [SerializeField] private float minPitch = 0.5f;
 
@@ -168,7 +170,12 @@ public class DialogueSystem : MonoBehaviour
             }
             int randomIndex = UnityEngine.Random.Range(0, dialogueSoundClips.Length);
             AudioClip soundClip = dialogueSoundClips[randomIndex];
-            //audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
+
+            if (modifyPitch)
+            {
+                audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
+            }
+
             audioSource.PlayOneShot(soundClip);
         }
     }

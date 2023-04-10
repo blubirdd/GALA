@@ -16,6 +16,19 @@ public class Cutscene : MonoBehaviour
 
     [Header("Object to disable")]
     [SerializeField] private GameObject objectToDisable;
+
+
+    [Header("If change Fog and Ambient Light")]
+    [SerializeField] private bool changeAmbientLight;
+    [SerializeField] private Color dayAmbientLight;
+
+    [SerializeField] private Color nightAmbientLight;
+
+    [Header("Fog")]
+    [SerializeField] private bool changeFogColor;
+    [SerializeField] private Color dayFogColor;
+    [SerializeField] private Color nightFogColor;
+
     void SpawnDiscoveryUI()
     {
         GameObject go = Instantiate(discoveryUI);
@@ -57,6 +70,8 @@ public class Cutscene : MonoBehaviour
             //Assign Quest
             quest = (QuestNew)quests.AddComponent(System.Type.GetType(questType));
         }
+
+
 
     }
 
