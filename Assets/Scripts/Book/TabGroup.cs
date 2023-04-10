@@ -15,6 +15,7 @@ public class TabGroup : MonoBehaviour
     public Color initialColor;
     public Color selectedColor;
 
+    public bool changeColor = true;
     public void Subscribe(TabButton button)
     {
         if(tabButtons == null)
@@ -41,7 +42,11 @@ public class TabGroup : MonoBehaviour
         ResetTabs();
 
         //set color
-        button.GetComponent<Image>().color = selectedColor;
+        if (changeColor)
+        {
+            button.GetComponent<Image>().color = selectedColor;
+        }
+
 
         int index = button.transform.GetSiblingIndex();
         for(int i = 0; i < objectsToSwap.Count; i++)
@@ -65,7 +70,12 @@ public class TabGroup : MonoBehaviour
             {
                 continue;
             }
-            button.GetComponent<Image>().color = initialColor;
+
+            if (changeColor)
+            {
+                button.GetComponent<Image>().color = initialColor;
+            }
+
         }
     }
 }

@@ -108,7 +108,7 @@ public class QuestInspectContaminatedWater : QuestNew
         Debug.Log(this + " is Completed");
 
         //disable marker
-        //Destroy(waypoint);
+        Destroy(waypoint);
 
         //Add another quest
         //AcceptQuest("QuestTalkFarmer");

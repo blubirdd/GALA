@@ -21,4 +21,5 @@ public class WaypointManager : MonoBehaviour
     #endregion
     public List<Transform> waypointTransforms = new List<Transform> ();
 
+
 }

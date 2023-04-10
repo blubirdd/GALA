@@ -1,61 +1,161 @@
 fileFormatVersion: 2
 guid: 2d10cfc520d694d5ea3aa69de8ba37db
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Armature.010
-    100002: Bone
-    100004: Bone.001
-    100006: Bone.001_end
-    100008: Bone.002
-    100010: Bone.002_end
-    100012: Bone.003
-    100014: Bone.003_end
-    100016: Bone.004
-    100018: Bone.004_end
-    100020: Bone.005
-    100022: Bone.005_end
-    100024: Bone.006
-    100026: Bone.007
-    100028: Bone.008
-    100030: Bone.009
-    100032: Bone.010
-    100034: Bone.011
-    100036: Bone.011_end
-    100038: Bone_end
-    100040: //RootNode
-    100042: Plane.011
-    400000: Armature.010
-    400002: Bone
-    400004: Bone.001
-    400006: Bone.001_end
-    400008: Bone.002
-    400010: Bone.002_end
-    400012: Bone.003
-    400014: Bone.003_end
-    400016: Bone.004
-    400018: Bone.004_end
-    400020: Bone.005
-    400022: Bone.005_end
-    400024: Bone.006
-    400026: Bone.007
-    400028: Bone.008
-    400030: Bone.009
-    400032: Bone.010
-    400034: Bone.011
-    400036: Bone.011_end
-    400038: Bone_end
-    400040: //RootNode
-    400042: Plane.011
-    2100000: Chicken
-    2100002: Chicken_red
-    2100004: Chicken_2
-    4300000: Plane.011
-    9500000: //RootNode
-    13700000: Plane.011
+  serializedVersion: 21202
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Armature.010
+  - first:
+      1: 100002
+    second: Bone
+  - first:
+      1: 100004
+    second: Bone.001
+  - first:
+      1: 100006
+    second: Bone.001_end
+  - first:
+      1: 100008
+    second: Bone.002
+  - first:
+      1: 100010
+    second: Bone.002_end
+  - first:
+      1: 100012
+    second: Bone.003
+  - first:
+      1: 100014
+    second: Bone.003_end
+  - first:
+      1: 100016
+    second: Bone.004
+  - first:
+      1: 100018
+    second: Bone.004_end
+  - first:
+      1: 100020
+    second: Bone.005
+  - first:
+      1: 100022
+    second: Bone.005_end
+  - first:
+      1: 100024
+    second: Bone.006
+  - first:
+      1: 100026
+    second: Bone.007
+  - first:
+      1: 100028
+    second: Bone.008
+  - first:
+      1: 100030
+    second: Bone.009
+  - first:
+      1: 100032
+    second: Bone.010
+  - first:
+      1: 100034
+    second: Bone.011
+  - first:
+      1: 100036
+    second: Bone.011_end
+  - first:
+      1: 100038
+    second: Bone_end
+  - first:
+      1: 100040
+    second: //RootNode
+  - first:
+      1: 100042
+    second: Plane.011
+  - first:
+      4: 400000
+    second: Armature.010
+  - first:
+      4: 400002
+    second: Bone
+  - first:
+      4: 400004
+    second: Bone.001
+  - first:
+      4: 400006
+    second: Bone.001_end
+  - first:
+      4: 400008
+    second: Bone.002
+  - first:
+      4: 400010
+    second: Bone.002_end
+  - first:
+      4: 400012
+    second: Bone.003
+  - first:
+      4: 400014
+    second: Bone.003_end
+  - first:
+      4: 400016
+    second: Bone.004
+  - first:
+      4: 400018
+    second: Bone.004_end
+  - first:
+      4: 400020
+    second: Bone.005
+  - first:
+      4: 400022
+    second: Bone.005_end
+  - first:
+      4: 400024
+    second: Bone.006
+  - first:
+      4: 400026
+    second: Bone.007
+  - first:
+      4: 400028
+    second: Bone.008
+  - first:
+      4: 400030
+    second: Bone.009
+  - first:
+      4: 400032
+    second: Bone.010
+  - first:
+      4: 400034
+    second: Bone.011
+  - first:
+      4: 400036
+    second: Bone.011_end
+  - first:
+      4: 400038
+    second: Bone_end
+  - first:
+      4: 400040
+    second: //RootNode
+  - first:
+      4: 400042
+    second: Plane.011
+  - first:
+      21: 2100000
+    second: Chicken
+  - first:
+      21: 2100002
+    second: Chicken_red
+  - first:
+      21: 2100004
+    second: Chicken_2
+  - first:
+      43: 4300000
+    second: Plane.011
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Plane.011
   externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -64,6 +164,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -87,34 +188,47 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -124,14 +238,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 0.01
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

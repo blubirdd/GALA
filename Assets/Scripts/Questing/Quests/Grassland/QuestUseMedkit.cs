@@ -95,7 +95,7 @@ public class QuestUseMedkit : QuestNew
     public void SpawnWaypointMarker()
     {
         _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
-        _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[3]);
+        _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[10]);
 
     }
 
@@ -110,8 +110,11 @@ public class QuestUseMedkit : QuestNew
         Debug.Log(this + " is Completed");
 
         //disable marker
-        //Destroy(_waypoint);
+        Destroy(_waypoint);
 
-        //AcceptQuest("QuestFeedChicken");
+        //outline
+
+        yield return new WaitForSeconds(5f);
+        AcceptQuest("QuestTalkWildlifeSpecialistFinal");
     }
 }

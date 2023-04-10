@@ -15,5 +15,6 @@ public class AnimalState : ScriptableObject
 
     [Header("Quest Sprite")]
     public Sprite injured;
+    public Sprite net;
 
 }

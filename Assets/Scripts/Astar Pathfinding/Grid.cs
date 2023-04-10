@@ -57,7 +57,7 @@ public class Grid : MonoBehaviour
                 Ray ray = new Ray(worldPoint + Vector3.up * 50, Vector3.down);
                 RaycastHit rayhit;
 
-                if (Physics.Raycast(ray, out rayhit, 100, unwalkbleMask))
+                if (Physics.Raycast(ray, out rayhit, 100, unwalkbleMask, QueryTriggerInteraction.Collide))
                 {
                     worldPoint = rayhit.point;
                 }

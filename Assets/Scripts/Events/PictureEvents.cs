@@ -8,6 +8,9 @@ public class PictureEvents : MonoBehaviour
 
     public static event AnimalEventHandler onAnimalDiscovered;
 
+    public delegate void ThreatEventHandler(IThreat threat);
+
+    public static event ThreatEventHandler onThreatDiscovered;
     public static void AnimalDiscovered(IAnimal animal)
     {
         if(onAnimalDiscovered != null)
@@ -15,6 +18,14 @@ public class PictureEvents : MonoBehaviour
            onAnimalDiscovered(animal);
         }
         
+    }
+
+    public static void ThreatDiscovered(IThreat threat)
+    {
+        if (onThreatDiscovered != null)
+        {
+            onThreatDiscovered(threat);
+        }
     }
 
 }

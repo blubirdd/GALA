@@ -32,7 +32,9 @@ public class UIManager : MonoBehaviour
     [Header("Animations")]
     // [SerializeField] private float fadeTime = 1f;
     [Header("Player")]
+    public GameObject playerParent;
     public GameObject playerArmature;
+    public GameObject crouchGradientPanel;
 
     [Header("Controls")]
     public GameObject firstPersonCamera;
@@ -95,6 +97,11 @@ public class UIManager : MonoBehaviour
 
     public GameObject analytics;
     public Goal goal;
+
+
+    [Header("PLAYER EMOTE")]
+    public GameObject emote;
+    public GameObject hunterEmote;
 
     public bool disableFpsLimit = false;
     private void Start()

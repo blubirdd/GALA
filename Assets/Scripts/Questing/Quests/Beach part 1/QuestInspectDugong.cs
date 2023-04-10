@@ -17,13 +17,13 @@ public class QuestInspectDugong : QuestNew
         //setup
         ID = "QuestInspectDugong"; ;
         questName = "Approach the stranded Dugong";
-        questDescription = "Approach the stranded Dugong";
+        questDescription = "Approach the stranded Dugongs";
 
-        goalDescription[0] = "Inspect and approach the dugong";
+        goalDescription[0] = "Inspect and approach a stuck dugong";
         requiredAmount[0] = 1;
 
-        goalDescription[1] = "Splash some water on the dugong";
-        requiredAmount[1] = 3;
+        goalDescription[1] = "Splash water on the dugong";
+        requiredAmount[1] = 2;
 
         reward = 10;
 
@@ -59,7 +59,7 @@ public class QuestInspectDugong : QuestNew
         GetGoalsList();
 
         //waypoint
-        SpawnWaypointMarker();
+        //SpawnWaypointMarker();
 
     }
 

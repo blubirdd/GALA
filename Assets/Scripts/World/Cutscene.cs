@@ -14,6 +14,8 @@ public class Cutscene : MonoBehaviour
     [SerializeField] private GameObject quests;
     [SerializeField] private string questType;
 
+    [Header("Object to disable")]
+    [SerializeField] private GameObject objectToDisable;
     void SpawnDiscoveryUI()
     {
         GameObject go = Instantiate(discoveryUI);
@@ -38,6 +40,12 @@ public class Cutscene : MonoBehaviour
             UIManager.instance.DisablePlayerMovement();
 
             StartCoroutine(WaitToAssignQuest());
+
+
+            if(objectToDisable != null)
+            {
+                objectToDisable.SetActive(false);
+            }
         }
     }
 

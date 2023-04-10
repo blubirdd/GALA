@@ -8,6 +8,7 @@ using static Task;
 [System.Serializable]
 public class GameData
 {
+    public int gameLevel; 
 
     public bool triggerStartDialogue;
     public Vector3 playerPosition;
@@ -47,5 +48,17 @@ public class GameData
         //NPCs
         NPCsTalked = new SerializableDictionary<string, bool>();
         NPCsCompleted = new SerializableDictionary<string, bool>();
+
+        gameLevel = 1;
+
     }
+
+
+
 }
+
+public class LevelOneDAta
+{
+    public List<string> tasksCompleted;
+}
+

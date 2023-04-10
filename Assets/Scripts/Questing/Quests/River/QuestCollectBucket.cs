@@ -112,7 +112,7 @@ public class QuestCollectBucket : QuestNew
         //disable marker
         //Destroy(_waypoint);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
         AcceptQuest("QuestPutOutFire");
     }
 }

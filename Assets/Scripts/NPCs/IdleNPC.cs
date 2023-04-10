@@ -10,7 +10,7 @@ public class IdleNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersistenc
     [SerializeField] private Sprite _icon;
 
     [SerializeField] private DialogueTrigger _dialogue;
-
+    [SerializeField] private DialogueTrigger isTalkedDialogue;
     public string InteractionPrompt { get; set; }
     public Sprite icon { get; set; }
 
@@ -34,6 +34,7 @@ public class IdleNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersistenc
         {
             DisableQuestMarker();
         }
+
     }
 
     public bool Interact(Interactor interactor)
@@ -41,8 +42,30 @@ public class IdleNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersistenc
         //EVENT TRIGGER
         TalkEvents.CharacterApproach(this);
 
-        _dialogue.TriggerDialogue();
+        if (!isTalked)
+        {
+            if (isTalkedDialogue == null)
+            {
+                _dialogue.TriggerDialogue();
+
+            }
+
+            else
+            {
+                isTalkedDialogue.TriggerDialogue();
+            }
+        }
+        else
+        {
+            if(isTalkedDialogue != null)
+            {
+               isTalkedDialogue.TriggerDialogue();
+            }
+           
+        }
+
         isTalked = true;
+
         return true;
     }
 
@@ -52,6 +75,7 @@ public class IdleNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersistenc
         questMarker.SetActive(false);
 
     }
+
 
     public void SaveData(GameData data)
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class QuestCollectContaminatedBarrel : QuestNew
 { 
-    static int numberOfGoals = 1;
+    static int numberOfGoals = 2;
 
     private string[] goalDescription = new string[numberOfGoals];
     private int[] currentProgress = new int[numberOfGoals];
@@ -21,8 +21,11 @@ public class QuestCollectContaminatedBarrel : QuestNew
         questName = "Cleaning the river";
         questDescription = "Get rid of the source of water pollution";
 
-        goalDescription[0] = "Get rid of the source of water pollution";
-        requiredAmount[0] = 3;
+        goalDescription[0] = "Obtain a fishing rod";
+        requiredAmount[0] = 1;
+
+        goalDescription[1] = "Get rid of the source of water pollution";
+        requiredAmount[1] = 3;
 
         reward = 10;
 
@@ -51,7 +54,8 @@ public class QuestCollectContaminatedBarrel : QuestNew
         UpdateQuestUI();
 
         //goal (this, name of target, goaldescription, iscompleted bool, current progress, required amount)
-        Goals.Add(new CollectionGoal(this, "Barrel", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new CollectionGoal(this, "Fishing Rod", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new CollectionGoal(this, "Barrel", goalDescription[1], false, currentProgress[1], requiredAmount[1]));
 
         Goals.ForEach(g => g.InIt());
 

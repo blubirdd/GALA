@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class ItemInspect : MonoBehaviour, IInteractable
 {
-    
-    [SerializeField] private string _prompt = "Inspect ";
+
+    [SerializeField] private string _prompt;
     [Header("Interaction Interface")]
     [SerializeField] private Sprite _icon;
 
@@ -42,7 +42,7 @@ public class ItemInspect : MonoBehaviour, IInteractable
     [SerializeField] private bool hasDialogue = false;
     [SerializeField] private SubtleDialogueTrigger _dialogue;
 
-
+    
     ThirdPersonController thirdPersonController;
     UIManager uiManager;
     CinemachineManager cinemachineManager;

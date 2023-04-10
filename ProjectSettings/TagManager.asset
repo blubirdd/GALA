@@ -17,6 +17,11 @@ TagManager:
   - FxTemporaire
   - Forest Turtle
   - Animal
+  - Crocodile
+  - Rock
+  - Nest
+  - Water Trigger
+  - Meat
   layers:
   - Default
   - TransparentFX
@@ -35,10 +40,10 @@ TagManager:
   - Grass
   - Ground
   - Collectable
-  - 
-  - 
-  - 
-  - 
+  - WallForAnimal
+  - WallForPlayer
+  - Threat
+  - Trigger
   - 
   - 
   - 

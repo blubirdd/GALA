@@ -26,23 +26,31 @@ public class TimeChangeInteract : MonoBehaviour, IInteractable
     }
     public bool Interact(Interactor interactor)
     {
-
-        if (Task.instance.tasksCompeleted.Contains(prerequisiteQuest))
+        if(prerequisiteQuest == "")
         {
-            //sleep code here
-            Character character;
-            if(TryGetComponent(out character))
-            {
-                TalkEvents.CharacterApproach(character);
-            }
-
             Sleep();
-
         }
 
         else
         {
-            _dialogue.TriggerDialogue();
+            if (Task.instance.tasksCompeleted.Contains(prerequisiteQuest))
+            {
+                //sleep code here
+                Character character;
+                if (TryGetComponent(out character))
+                {
+                    TalkEvents.CharacterApproach(character);
+                }
+
+                Sleep();
+
+            }
+
+            else
+            {
+                _dialogue.TriggerDialogue();
+            }
+
         }
 
         return true;

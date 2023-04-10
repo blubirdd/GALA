@@ -55,7 +55,7 @@ public class QuestTalkNightTent : QuestNew
         UpdateQuestUI();
 
         //goal (this, name of target, goaldescription, iscompleted bool, current progress, required amount)
-        Goals.Add(new TalkGoal(this, "Flashlight", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new CollectionGoal(this, "Flashlight", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
         Goals.Add(new TalkGoal(this, "Night Tent", goalDescription[1], false, currentProgress[1], requiredAmount[1]));
 
 

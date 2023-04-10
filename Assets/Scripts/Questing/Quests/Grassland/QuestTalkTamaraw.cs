@@ -53,7 +53,7 @@ public class QuestTalkTamaraw : QuestNew
 
 
         //waypoint
-        //SpawnWaypointMarker();
+        SpawnWaypointMarker();
 
     }
 
@@ -90,7 +90,7 @@ public class QuestTalkTamaraw : QuestNew
     public void SpawnWaypointMarker()
     {
         waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
-        waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[2]);
+        waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[8]);
     }
 
     IEnumerator IsQuestCompleted()
@@ -104,7 +104,7 @@ public class QuestTalkTamaraw : QuestNew
         Debug.Log(this + " is Completed");
 
         //disable marker
-        //Destroy(waypoint);
+        Destroy(waypoint);
 
         //Add another quest
         //AcceptQuest("QuestTalkFarmer");

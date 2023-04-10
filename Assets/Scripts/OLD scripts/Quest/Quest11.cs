@@ -18,10 +18,10 @@ public class Quest11 : MonoBehaviour
     public void AcceptQuest()
     {
         
-        quest.isActive = true;
-        UpdateQuestUI();
-        player.quest = quest;
-        animator.SetBool("isOpen", true);
+        //quest.isActive = true;
+        //UpdateQuestUI();
+        //player.quest = quest;
+        //animator.SetBool("isOpen", true);
     }
 
     public void UpdateQuestUI()

@@ -20,6 +20,7 @@ MonoBehaviour:
   isThrowable: 0
   isAimable: 0
   isFirable: 0
-  isAnimlaFood: 1
+  isAnimalFood: 1
+  isCustomQuestItem: 0
   itemDescription: Can be used to feed to carnivores or omivores
   equipSlot: 0

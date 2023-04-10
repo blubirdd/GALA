@@ -16,5 +16,11 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 119ff2c63188a7f47a6538b592e51f8d, type: 3}
   isDefaultItem: 0
   isUsable: 0
+  displayDiscovery: 1
   isThrowable: 0
-  itemDescription: Can be use to open a locked door.
+  isAimable: 0
+  isFirable: 0
+  isAnimalFood: 0
+  isCustomQuestItem: 0
+  isCustomPopup: 0
+  itemDescription: Can be use to open locked doors or cages.

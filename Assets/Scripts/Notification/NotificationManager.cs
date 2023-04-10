@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class NotificationManager : MonoBehaviour
 {
     public Animator animator;
@@ -20,6 +20,7 @@ public class NotificationManager : MonoBehaviour
 
     [Header("Completed Notif UI's")]
     [SerializeField] private GameObject checkMark;
+    [SerializeField] private GameObject newIcon;
     private void Start()
     {
         GameEvents.instance.onQuestAcceptedNotification += AddQuestNotification;
@@ -60,7 +61,9 @@ public class NotificationManager : MonoBehaviour
             //IF ACCEPT
             if(isCompletedNotification == false)
             {
+                Debug.Log("SHOULD DISPLAY QUEST ACCEPTED");
                 checkMark.SetActive(false);
+                newIcon.SetActive(true);
                 questNameText.fontStyle = FontStyles.Bold;
                 questNameText.SetText(questName);
                 pencilWriter.WriteText();
@@ -69,6 +72,8 @@ public class NotificationManager : MonoBehaviour
             else
             {
                 checkMark.SetActive(true);
+                newIcon.SetActive(false);
+                Debug.Log("SHOULD DISPLAY QUEST COMPLETED OK??????????");
                 var duration = 0.5f;
                 var sequence = DOTween.Sequence();
                 sequence.Append(checkMark.transform.DOScale(1.2f, duration));
@@ -80,11 +85,9 @@ public class NotificationManager : MonoBehaviour
 
                 questNameText.fontStyle = FontStyles.Strikethrough | FontStyles.Bold;
 
+                isDisplaying = true;
             }
-            
-            
 
-            isDisplaying = true;
 
             if(isCompletedNotification == true)
             {
@@ -95,7 +98,11 @@ public class NotificationManager : MonoBehaviour
             {
                 StartCoroutine(WaitForDelay(false));
             }
-            
+
+            if (!isCompletedNotification)
+            {
+                isDisplaying = true;
+            }
         }
         else
         {
@@ -107,7 +114,7 @@ public class NotificationManager : MonoBehaviour
 
     IEnumerator WaitForDelay(bool isCompletedNotification)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3.5f);
         animator.SetBool("IsDisplaying", false);
 
         //turn off canvas if performance issues

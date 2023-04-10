@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,6 +8,7 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    public TMP_InputField nameInputField;
     [Header("Menu Buttons")]
     [SerializeField] private Button newGameButton;
     [SerializeField] private Button continueGameButton;
@@ -17,6 +19,12 @@ public class MainMenu : MonoBehaviour
         {
             continueGameButton.interactable = false;
         }
+    }
+
+    public void GetPlayerName()
+    {
+        Player.playerName = nameInputField.text;
+        Debug.Log(Player.playerName);
     }
     public void StartGame()
     {

@@ -1,25 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class InventoryUI : MonoBehaviour
 {
     public Transform itemsParent;
     public GameObject inventoryUI;
+
+    [Header("Item Details")]
+
     public GameObject itemContents;
     public GameObject itemDetailsParent;
     public Image itemDetailsBackgroundImage;
 
     Inventory inventory;
-    
+    Book book;
     InventorySlot[] slots;
 
     public Item currentItem;
 
+    [Header("Rewards collections")]
+    public TextMeshProUGUI goldCoinsCollectedText;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI numberOfPhotographsCollectedText;
 
     void Start()
     {
         inventory = Inventory.instance;
+        book = Book.instance;
 
         inventory.OnItemChangedCallback += UpdateUI;
 
@@ -47,7 +56,6 @@ public class InventoryUI : MonoBehaviour
                 slots[i].ClearSlot();
             }
         }
-         
     }
 
     public void OpenInventory()
@@ -57,6 +65,10 @@ public class InventoryUI : MonoBehaviour
         itemDetailsParent.SetActive(true);
         itemContents.SetActive(false);
         UIManager.instance.DisableButtonsUIPACK();
+
+        goldCoinsCollectedText.text = inventory.goldCoins.ToString();
+        scoreText.text = inventory.naturePoints.ToString();
+        numberOfPhotographsCollectedText.text = book.photosInventory.Count.ToString();
     }
 
     public void CloseInventory()

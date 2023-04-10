@@ -58,7 +58,7 @@ public class QuestUseMedkit2 : QuestNew
 
 
         //waypoint
-        SpawnWaypointMarker();
+        //SpawnWaypointMarker();
 
     }
 

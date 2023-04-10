@@ -99,7 +99,6 @@ public class GameEvents : MonoBehaviour
 
     public event Action<string> onQuestCompleted;
 
-
     public void QuestCompleted(string questName)
     {
         onQuestCompleted?.Invoke(questName);

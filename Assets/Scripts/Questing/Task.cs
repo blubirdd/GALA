@@ -92,22 +92,25 @@ public class Task : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         //load the current quests in json
-        foreach (KeyValuePair<string, TaskSave> keyValuePair in data.taskList)
-        {
-            AddTask(keyValuePair.Key, keyValuePair.Value.questTitle, keyValuePair.Value.goalDescription, keyValuePair.Value.progress, keyValuePair.Value.requiredAmount);
-        }
 
-        //accept the existing quests in load data
-        for(int i = 0; i < tasks.Count; i++)
-        {
-            quest = (QuestNew)quests.AddComponent(System.Type.GetType(tasks[i].ID));
-        }
+        //foreach (KeyValuePair<string, TaskSave> keyValuePair in data.taskList)
+        //{
+        //    AddTask(keyValuePair.Key, keyValuePair.Value.questTitle, keyValuePair.Value.goalDescription, keyValuePair.Value.progress, keyValuePair.Value.requiredAmount);
+        //}
 
-        //load the tasks completed
-        for (int i = 0; i < data.tasksCompeleted.Count; i++) 
-        {
-            tasksCompeleted.Add(data.tasksCompeleted[i]);
-        }
+        ////accept the existing quests in load data
+        //for (int i = 0; i < tasks.Count; i++)
+        //{
+        //    quest = (QuestNew)quests.AddComponent(System.Type.GetType(tasks[i].ID));
+        //}
+
+        ////load the tasks completed
+        //for (int i = 0; i < data.tasksCompeleted.Count; i++)
+        //{
+        //    tasksCompeleted.Add(data.tasksCompeleted[i]);
+        //}
+
+
 
         //foreach(Goal goal in QuestNew)
     }

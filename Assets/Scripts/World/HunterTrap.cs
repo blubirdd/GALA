@@ -2,30 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HunterTrap : MonoBehaviour, IInteractable
+public class HunterTrap : MonoBehaviour
 {
-    [SerializeField] private string _prompt;
-    [SerializeField] private Sprite _icon;
+    Character character;
+    public Item item;
 
-    public string InteractionPrompt { get; set; }
-    public Sprite icon { get; set; }
-
-    void Start()
+    private void Start()
     {
-        InteractionPrompt = _prompt;
-        icon = _icon;
+        character = GetComponent<Character>();
+
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+
+        if (other.gameObject.CompareTag("Rock"))
+        {
+            TriggerQuest();
+            Destroy(other.gameObject);
+
+            //trigger particle
+            ParticleManager.instance.SpawnPuffParticle(transform.position);
+            PopupWindow.instance.AddToQueue(item);
+            //gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
     }
 
-    public bool Interact(Interactor interactor)
+    public void TriggerQuest()
     {
-
-       this.gameObject.SetActive(false);
-       return true;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        TalkEvents.CharacterApproach(character);
     }
 }

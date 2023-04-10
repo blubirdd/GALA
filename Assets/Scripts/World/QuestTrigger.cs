@@ -9,6 +9,8 @@ public class QuestTrigger : MonoBehaviour
     [SerializeField] private bool destroyOnCollide = false;
     [SerializeField] private bool deactivateTriggerOnCollide = false;
 
+    [Header("Dialogue on enter")]
+    [SerializeField] private SubtleDialogueTrigger enterDialogue;
     private void Start()
     {
         character = GetComponent<Character>();
@@ -16,11 +18,18 @@ public class QuestTrigger : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if(enterDialogue != null)
+            {
+                enterDialogue.TriggerDialogue();
+            }
+        }
 
         if (other.gameObject.CompareTag(tagToDetect))
         {
             TriggerQuest();
-            other.gameObject.tag = "Untagged";
+            
 
 
             if (destroyOnCollide)
@@ -30,12 +39,13 @@ public class QuestTrigger : MonoBehaviour
 
 
             //trigger particle
-            ParticleManager.instance.SpawnPuffParticle(transform.position);
+            ParticleManager.instance.SpawnPuffParticle(other.transform.position);
 
             if (deactivateTriggerOnCollide)
             {
                 gameObject.SetActive(false);
             }
+            other.gameObject.tag = "Untagged";
 
         }
     }
@@ -43,7 +53,7 @@ public class QuestTrigger : MonoBehaviour
     public void TriggerQuest()
     {
         TalkEvents.CharacterApproach(character);
-        
-        Debug.Log("Detected Forest Turtle");
+        Debug.Log("TRIGGER Detected" + character.name);
+
     }
 }

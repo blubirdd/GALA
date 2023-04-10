@@ -29,8 +29,29 @@ public class Book : MonoBehaviour
     public List<Photograph> photosBird = new List<Photograph>();
     public List<Photograph> photosReptile = new List<Photograph>();
 
+    public List<Photograph> photosAquatic = new List<Photograph>();
+
+    public List<ThreatScriptable> photosThreat = new List<ThreatScriptable>();
 
     public string recentAnimalDiscovered;
+
+    public void AddThreatPhoto(ThreatScriptable photo)
+    {
+        if (!photosThreat.Contains(photo))
+        {
+            photosThreat.Add(photo);
+
+            Debug.Log("Took a picture of " + photo.threatName);
+
+            if (OnPictureAddedCallback != null)
+            {
+                OnPictureAddedCallback.Invoke();
+                Debug.Log("Invoked");
+
+            }
+        }
+    }
+
     public void AddAnimalPhoto(Photograph photo)
     {
         if (!photosInventory.Contains(photo))

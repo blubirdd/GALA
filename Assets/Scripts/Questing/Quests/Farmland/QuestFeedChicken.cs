@@ -6,7 +6,7 @@ public class QuestFeedChicken : QuestNew
 {
     private string[] goalDescription = new string[] { "Throw and feed seeds to a Red junglefowl" };
     private int[] currentProgress = new int[] { 0 };
-    private int[] requiredAmount = new int[] { 3 };
+    private int[] requiredAmount = new int[] { 1 };
     private string ID;
 
     public GameObject waypoint;

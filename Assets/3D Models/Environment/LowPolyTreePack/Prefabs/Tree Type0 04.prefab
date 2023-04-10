@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 448686}
   - component: {fileID: 3399442}
   - component: {fileID: 2322584}
-  - component: {fileID: -2109445884265034575}
+  - component: {fileID: 8559163328328330448}
   m_Layer: 0
   m_Name: Tree Type0 04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &448686
 Transform:
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &-2109445884265034575
-MeshCollider:
+--- !u!65 &8559163328328330448
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -94,7 +94,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: b4f0e46a9f630054c925d3d92d45584e, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.95702744, y: 4.3208637, z: 1.2813568}
+  m_Center: {x: -0.0016269684, y: 2.0964994, z: 0.08768451}
