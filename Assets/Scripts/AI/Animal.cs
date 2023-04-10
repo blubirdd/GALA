@@ -54,6 +54,7 @@ public class Animal : MonoBehaviour, IAnimal
     [Header("BODY PART")]
     public bool canBeCaptured = false;
     public GameObject netPart;
+    [SerializeField] private bool isCapturedOnStart = false;
 
     [Header("Targets")]
 
@@ -121,6 +122,11 @@ public class Animal : MonoBehaviour, IAnimal
         //states 
         // hunger = 50f;
         // thirst = 100f;
+        if (isCapturedOnStart)
+        {
+            netPart.SetActive(true);
+            ChangeUI(AnimalStateUI.Captured);
+        }
         
     }
     void Start()
@@ -141,14 +147,14 @@ public class Animal : MonoBehaviour, IAnimal
     {
         if(canMove)
         {
-            StartCoroutine(FindTargetWithDelay(3f));
+            StartCoroutine(FindTargetWithDelay(1f));
             StartCoroutine(RoamAround(0.5f));
 
             StartCoroutine(FindPlayerWithDelay());
 
             if (depleteHunger)
             {
-                StartCoroutine(SimulateHungerAndThirst(10f));
+                StartCoroutine(SimulateHungerAndThirst(5f));
             }
         }
 
@@ -223,7 +229,15 @@ public class Animal : MonoBehaviour, IAnimal
 
                 else
                 {
-                    animator.SetFloat("AnimSpeed", 0f);
+                    if(chasePlayer && animalNav.target != null)
+                    {
+                        animator.SetFloat("AnimSpeed", 0.5f);
+                    }
+                    else
+                    {
+                        animator.SetFloat("AnimSpeed", 0f);
+                    }
+
                 }
                 
                 return;
@@ -248,7 +262,7 @@ public class Animal : MonoBehaviour, IAnimal
         while (true)
         {
             yield return new WaitForSeconds(interval);
-            hunger -=10;
+            hunger -=5;
             //thirst -= 10;
             if (hunger <= 0)
             {
@@ -642,14 +656,13 @@ public class Animal : MonoBehaviour, IAnimal
             {
                 FindTarget();
             }
-
             yield return null;
         }
     }
     void FindTarget()
     {
         //if bug/ clear all _colliders first
-        Debug.Log(this + " is Finding target");
+        //Debug.Log(this + " is Finding target");
         
         _targetsFound = Physics.OverlapSphereNonAlloc(transform.position, _viewRadius, _colliders, targetMask);
 
@@ -711,7 +724,8 @@ public class Animal : MonoBehaviour, IAnimal
                         isHunting = true;
                     }
 
-                    else if (_colliders[i].CompareTag("Prey") && isHungry)
+                    //else if (_colliders[i].CompareTag("Prey") && isHungry)
+                    else if (_colliders[i].CompareTag("Prey"))
                     {
                         float distance = Vector3.Distance(transform.position, _colliders[i].transform.position);
                         if (distance < closestDistance)
@@ -740,6 +754,17 @@ public class Animal : MonoBehaviour, IAnimal
                     {
                         Debug.Log("FOUND FOOD FROM PLAYER");
                         animalNav.target = _colliders[i].transform;
+                        statusImage.gameObject.SetActive(true);
+                        statusImage.sprite = animalState.eating;
+
+                        isHunting = true;
+                    }
+
+                    else if (_colliders[i].CompareTag("Meat"))
+                    {
+                        Debug.Log("FOUND FOOD FROM PLAYER");
+                        animalNav.target = _colliders[i].transform;
+                        //animalNav.speed = _runSpeed;
                         statusImage.gameObject.SetActive(true);
                         statusImage.sprite = animalState.eating;
 
@@ -903,9 +928,10 @@ public class Animal : MonoBehaviour, IAnimal
 
         }
 
-        if (other.gameObject.CompareTag("Prey"))
+        if (other.gameObject.CompareTag("Meat"))
         {
-            if (isHungry)
+            //if aggressive
+            if (chasePlayer)
             {
                 //set view radius to normal
                 //_viewRadius = 15f;
@@ -914,20 +940,23 @@ public class Animal : MonoBehaviour, IAnimal
                 StartCoroutine(EatDelayFood());
                 IEnumerator EatDelayFood() 
                 {
-                    Debug.Log("EATING");
-                    isEating = true;
-                    yield return new WaitForSeconds(5);
-                    other.gameObject.SetActive(false);
+                    //trigger the quest event
+                    FeedEvents.AnimalFed(this);
+                    Debug.Log(this + "just ate");
+                    ParticleManager.instance.SpawnPuffParticle(transform.position);
+
+                    animator.SetTrigger("Attack");
+                    yield return new WaitForSeconds(1.5f);
+                    //other.gameObject.SetActive(false);
 
                     //preyTransform = null;
-                    hunger = 100;
-                    isHunting = false;
                     animalNav.target = null;
-                    isEating = false;
 
-
-                    yield return new WaitForSeconds(5);
-                    other.gameObject.SetActive(true);
+                    hunger = 100;
+                    
+                    Destroy(other);
+                    // yield return new WaitForSeconds(10);
+                    // other.gameObject.SetActive(true);
                 }
             }
         }
@@ -960,6 +989,7 @@ public class Animal : MonoBehaviour, IAnimal
                     // other.gameObject.SetActive(true);
                 }
         }
+
 
         if (other.gameObject.CompareTag("Water"))
         {

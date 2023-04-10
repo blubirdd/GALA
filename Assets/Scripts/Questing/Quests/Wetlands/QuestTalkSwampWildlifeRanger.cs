@@ -113,7 +113,8 @@ public class QuestTalkSwampWildlifeRanger : QuestNew
         //Destroy(_waypoint);
 
         //wait for notifcation or cutscene
-        yield return new WaitForSeconds(5f);
+        //yield return new WaitForSeconds(5f);
+        yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
         AcceptQuest("QuestRelocateCrocodile");
     }
 }

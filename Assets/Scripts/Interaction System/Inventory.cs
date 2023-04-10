@@ -52,7 +52,8 @@ public class Inventory : MonoBehaviour, IDataPersistence
 
     [Header("New Discovery")]
     public ItemDiscovery itemDiscovery;
-
+    [Header("Newspaper Discovery")]
+    public NewpaperDiscovery newpaperDiscovery;
 
     private void Start()
     {

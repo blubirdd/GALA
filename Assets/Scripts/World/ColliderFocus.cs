@@ -39,10 +39,14 @@ public class ColliderFocus : MonoBehaviour
                 {
                     yield return new WaitForSeconds(duration);
                     CinemachineManager.instance.lookAtTargetCamera.gameObject.SetActive(false);
-
                     quest = (QuestNew)questManager.AddComponent(System.Type.GetType(questID));
                     Destroy(gameObject);
                 }
+            }
+
+            if(questID != "" && targetToFocus == null)
+            {
+                quest = (QuestNew)questManager.AddComponent(System.Type.GetType(questID));
             }
             
         }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Net : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class Net : MonoBehaviour
             }
 
             animal.canMove = false;
+            animal.GetComponent<NavMeshAgent>().ResetPath();
             animal.ChangeUI(Animal.AnimalStateUI.Captured);
             ParticleManager.instance.SpawnPuffParticle(other.transform.position);
 

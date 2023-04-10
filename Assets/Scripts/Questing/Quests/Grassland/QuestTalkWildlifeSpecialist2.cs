@@ -61,7 +61,7 @@ public class QuestTalkWildlifeSpecialist2 : QuestNew
 
 
         //waypoint
-        //SpawnWaypointMarker();
+        SpawnWaypointMarker();
 
     }
 
@@ -98,7 +98,7 @@ public class QuestTalkWildlifeSpecialist2 : QuestNew
     public void SpawnWaypointMarker()
     {
         _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
-        _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[3]);
+        _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[7]);
 
     }
 
@@ -113,7 +113,11 @@ public class QuestTalkWildlifeSpecialist2 : QuestNew
         Debug.Log(this + " is Completed");
 
         //disable marker
-        //Destroy(_waypoint);
+        if(_waypoint != null)
+        {
+           Destroy(_waypoint);
+        }
+
 
         yield return new WaitForSeconds(7f);
         AcceptQuest("QuestTalkWildlifeSpecialist3");

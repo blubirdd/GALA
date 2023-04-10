@@ -68,8 +68,8 @@ public class QuestNew: MonoBehaviour
                 //update quest UI
                 Debug.Log("Quest is Completed!!!");
 
-                QuestUI.instance.ClearQuestTitle();
-                QuestUI.instance.ClearQuestDescription();
+                //QuestUI.instance.ClearQuestTitle();
+                //QuestUI.instance.ClearQuestDescription();
 
                 GameEvents.instance.QuestCompleted(questName);
                 QuestTaskUI.instance.UpdateQuestUI();

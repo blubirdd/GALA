@@ -6,6 +6,8 @@ using TMPro;
 using UnityEngine.XR;
 using DG.Tweening;
 using Cinemachine;
+using System.Linq;
+using System;
 
 public class DialogueSystem : MonoBehaviour
 {
@@ -20,7 +22,7 @@ public class DialogueSystem : MonoBehaviour
     public Animator animator;
 
     private Queue<string> sentences;
-
+    private Queue<string> subtleSentences;
     public GameObject controlsCanvas;
     public GameObject dialogueCanvas;
 
@@ -35,10 +37,25 @@ public class DialogueSystem : MonoBehaviour
     public float fadeDuration = 5f; // The duration of the fade animation
     public float pauseDuration = 0.5f;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip[] dialogueSoundClips;
+    private AudioSource audioSource;
+    [SerializeField] private bool stopAudioSource;
+    [Range(1,5)]
+    [SerializeField] private int frequencyLevel = 3;
+    [Range(-3, 3)]
+    [SerializeField] private float minPitch = 0.5f;
+
+    [Range(-3, 3)]
+    [SerializeField] private float maxPitch = 2f;
+
+    [Range(0, 1)]
+    [SerializeField] private float _volume = 1f;
     // Start is called before the first frame update
     void Start()
     {
         sentences = new Queue<string>();
+        subtleSentences = new Queue<string>();
         //continueButton.alpha = 0f;
         //Sequence fadeInOut = DOTween.Sequence()
         //    .Append(continueButton.DOFade(1f, fadeDuration).SetEase(Ease.InOutQuad))
@@ -49,6 +66,9 @@ public class DialogueSystem : MonoBehaviour
 
         //// Start the fade in and out sequence
         //fadeInOut.Play();
+
+        audioSource = this.gameObject.AddComponent<AudioSource>();
+        audioSource.volume = _volume;
     }
 
 
@@ -69,7 +89,15 @@ public class DialogueSystem : MonoBehaviour
         //
         animator.SetBool("isOpen", true);
 
-        nameText.text = dialogue.name;
+        if(dialogue.name == "Player")
+        {
+            nameText.text = Player.playerName;
+        }
+        else
+        {
+            nameText.text = dialogue.name;
+        }
+
   
 
         sentences.Clear();
@@ -113,12 +141,16 @@ public class DialogueSystem : MonoBehaviour
     IEnumerator TypeSentence(string sentence)
     {
         dialogueText.text = "";
+        int currentDisplayedCharacterCount = 0;
         for (int letterIndex = 0; letterIndex < sentence.Length; letterIndex += 2)
         {
             dialogueText.text += sentence[letterIndex];
+            currentDisplayedCharacterCount ++;
             if (letterIndex + 1 < sentence.Length)
             {
                 dialogueText.text += sentence[letterIndex + 1];
+                PlayDialogueSound(currentDisplayedCharacterCount);
+
             }
             //  yield return new WaitForSeconds(0.01f);
             yield return null;
@@ -126,6 +158,20 @@ public class DialogueSystem : MonoBehaviour
        
     }
 
+    private void PlayDialogueSound(int currentDisplayedCharacterCount)
+    {
+        if (currentDisplayedCharacterCount % frequencyLevel == 0) // Play the audio clip every x characters
+        {
+            if (stopAudioSource)
+            {
+                audioSource.Stop();
+            }
+            int randomIndex = UnityEngine.Random.Range(0, dialogueSoundClips.Length);
+            AudioClip soundClip = dialogueSoundClips[randomIndex];
+            //audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
+            audioSource.PlayOneShot(soundClip);
+        }
+    }
     public void EndDialogue()
     {
 
@@ -141,13 +187,28 @@ public class DialogueSystem : MonoBehaviour
     //////////////SUBTLE DIALOGUE
     public void StartSubtleDialogue(Dialogue dialogue)
     {
-        subtleDialogueCanvas.SetActive(true);
+        if (subtleDialogueCanvas.activeSelf)
+        {
+            // If the subtle dialogue is already active, check if it's displaying the same dialogue
+            if (dialogue.sentences.SequenceEqual(subtleSentences))
+            {
+                // If it is, do nothing
+                return;
+            }
+            else
+            {
+                // If it's not, stop displaying the current dialogue and start displaying the new one
+                StopAllCoroutines();
+                EndSubtleDialogue();
+            }
+        }
 
-        sentences.Clear();
+        subtleDialogueCanvas.SetActive(true);
+        subtleSentences.Clear();
 
         foreach (string sentence in dialogue.sentences)
         {
-            sentences.Enqueue(sentence);
+            subtleSentences.Enqueue(sentence);
         }
 
         StartCoroutine(EnumDisplaySubtleNextSentence());
@@ -159,9 +220,9 @@ public class DialogueSystem : MonoBehaviour
         {
             DisplaySubtleNextSentence();
             Debug.Log("DISPLAY NEXT SENTENCE");
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(5f);
 
-            if(sentences.Count == 0)
+            if(subtleSentences.Count == 0)
             {
                 EndSubtleDialogue();
                 yield break;
@@ -171,11 +232,11 @@ public class DialogueSystem : MonoBehaviour
 
     public void DisplaySubtleNextSentence()
     {
-        if (sentences.Count == 0)
+        if (subtleSentences.Count == 0)
         {
             return;
         }
-        string sentence = sentences.Dequeue();
+        string sentence = subtleSentences.Dequeue();
         StopCoroutine(TypeSubtleSentence(sentence));
         StartCoroutine(TypeSubtleSentence(sentence));
     }

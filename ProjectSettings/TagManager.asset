@@ -19,6 +19,9 @@ TagManager:
   - Animal
   - Crocodile
   - Rock
+  - Nest
+  - Water Trigger
+  - Meat
   layers:
   - Default
   - TransparentFX
@@ -40,7 +43,7 @@ TagManager:
   - WallForAnimal
   - WallForPlayer
   - Threat
-  - 
+  - Trigger
   - 
   - 
   - 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class DestroyAfterStart : MonoBehaviour
 {
     // Start is called before the first frame update
+    public float duration = 5f;
     void Start()
     {
         StartCoroutine(WaitForSecondsAfterStart());
@@ -12,7 +13,7 @@ public class DestroyAfterStart : MonoBehaviour
 
     IEnumerator WaitForSecondsAfterStart()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(duration);
         Destroy(gameObject);
     }
     // Update is called once per frame

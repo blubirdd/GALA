@@ -448,6 +448,7 @@ namespace StarterAssets
                     if (_hasAnimator)
                     {
                         CrouchDown();
+                        uiManager.crouchGradientPanel.SetActive(true);
                     }
 
                 }
@@ -457,6 +458,7 @@ namespace StarterAssets
                     if (_hasAnimator)
                     {
                         CrouchUp();
+                        uiManager.crouchGradientPanel.SetActive(false);
                     }
                 }
 

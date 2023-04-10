@@ -29,6 +29,8 @@ public class Book : MonoBehaviour
     public List<Photograph> photosBird = new List<Photograph>();
     public List<Photograph> photosReptile = new List<Photograph>();
 
+    public List<Photograph> photosAquatic = new List<Photograph>();
+
     public List<ThreatScriptable> photosThreat = new List<ThreatScriptable>();
 
     public string recentAnimalDiscovered;

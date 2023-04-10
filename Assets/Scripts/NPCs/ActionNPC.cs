@@ -15,6 +15,8 @@ public class ActionNPC : MonoBehaviour, ICharacter, IInteractable
     public Sprite icon { get; set; }
     public string npcName { get; set; }
 
+    [Header("Animation")]
+    public bool isBusy = false;
 
     [Header("Location Target")]
     [SerializeField] private Transform locationTarget;
@@ -25,6 +27,7 @@ public class ActionNPC : MonoBehaviour, ICharacter, IInteractable
 
     [Header("Others")]
     [SerializeField] private GameObject questMarker;
+
 
     AnimalNav navigation;
     Animator animator;
@@ -37,11 +40,23 @@ public class ActionNPC : MonoBehaviour, ICharacter, IInteractable
 
         animator = GetComponent<Animator>();
         navigation = GetComponent<AnimalNav>();
+
+        if (isBusy)
+        {
+            animator.SetBool("Busy", true);
+        }
     }
 
     public bool Interact(Interactor interactor)
     {
         _dialogue.TriggerDialogue();
+
+        if (isBusy)
+        {
+            animator.SetBool("Busy", false);
+        }
+
+        transform.LookAt(interactor.gameObject.transform);
 
         StartCoroutine(WaitUntilDialogueEnds());
 
@@ -76,6 +91,7 @@ public class ActionNPC : MonoBehaviour, ICharacter, IInteractable
             //Do action
             animator.SetBool(action, true);
             Debug.Log(action);
+            this.gameObject.layer = LayerMask.NameToLayer("Default");
         }
     }
 

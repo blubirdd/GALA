@@ -52,12 +52,12 @@ public class QuestEvents : MonoBehaviour
                 curableTamaraw.SetActive(true);
             }
 
-            //disable for debug purposes
-            if (task.tasksCompeleted[i] == "QuestUseMedkit")
-            {
-                curableTamaraw.SetActive(false);
-                wildlifeSpecialist.SetActive(false);
-            }
+            ////disable for debug purposes
+            //if (task.tasksCompeleted[i] == "QuestUseMedkit")
+            //{
+            //    curableTamaraw.SetActive(false);
+            //    wildlifeSpecialist.SetActive(false);
+            //}
 
             ///
             if (task.tasksCompeleted[i] == "QuestPhotographForestTurtle")
@@ -86,27 +86,6 @@ public class QuestEvents : MonoBehaviour
 
     public void QuestCompleteCheck(string quest)
     {
-        //QuestCollectTamarawTracks
-        if(quest == "Tracking the tamaraw")
-        {
-            injuredTamaraw.SetActive(true);
-            curableTamaraw.SetActive(false);
-            wildlifeSpecialist.SetActive(false);
-            Debug.Log("Completed " + quest);
-        }
-
-        if(quest == "Tamaraw Rescue")
-        {
-            injuredTamaraw.SetActive(false);
-            curableTamaraw.SetActive(true);
-            wildlifeSpecialist.SetActive(true);
-        }
-
-        if(quest == "Heal the Tamaraw")
-        {
-            Destroy(curableTamaraw);
-            Instantiate(tamarawPrefab, curableTamaraw.transform.position, Quaternion.identity);
-        }
 
         //QuestPhotographForestTurtle
         if(quest =="Forest Turtle Adventure")

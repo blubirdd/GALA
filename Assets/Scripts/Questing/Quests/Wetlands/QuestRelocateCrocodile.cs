@@ -17,7 +17,7 @@ public class QuestRelocateCrocodile : QuestNew
 
         //setup
         ID = "QuestRelocateCrocodile"; ;
-        questName = "Releasing the crocodiles";
+        questName = "Release crocodiles in the wild";
         questDescription = "Help release the crocodiles in the wild";
 
 
@@ -113,7 +113,7 @@ public class QuestRelocateCrocodile : QuestNew
 
         //disable marker
         //Destroy(_waypoint);
-        yield return new WaitForSeconds(5f);
-        //AcceptQuest("QuestInspectContaminatedWater");
+        yield return new WaitForSeconds(7f);
+        AcceptQuest("QuestTalkSwampWildlifeRanger2");
     }
 }

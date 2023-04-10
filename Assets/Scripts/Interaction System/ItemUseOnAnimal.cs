@@ -179,6 +179,8 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
         if (animal.chasePlayer)
         {
             animal.animator.enabled = false;
+            Vector3 newScale = transform.localScale + new Vector3(-0.2f, -0.2f, -0.2f);
+            transform.localScale = newScale;
         }
 
         animal.DeactivateAnimal();
@@ -223,6 +225,8 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
                 animal.ChangeUI(Animal.AnimalStateUI.Idle);
                 ParticleManager.instance.SpawnPuffParticle(transform.position);
                 animal.animator.enabled = true;
+                Vector3 newScale = transform.localScale + new Vector3(+0.2f, +0.2f, +0.2f);
+                transform.localScale = newScale;
             }
         }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QuestTalkStrandedDugongHelpers : QuestNew
 {
-    static int numberOfGoals = 3;
+    static int numberOfGoals = 2;
 
     private string[] goalDescription = new string[numberOfGoals];
     private int[] currentProgress = new int[numberOfGoals];
@@ -16,8 +16,8 @@ public class QuestTalkStrandedDugongHelpers : QuestNew
     {
         //setup
         ID = "QuestTalkStrandedDugongHelpers"; ;
-        questName = "Save the stranded Dugong";
-        questDescription = "Find help to save the Dugong";
+        questName = "Find help to save the Dugong";
+        questDescription = "Save the stranded Dugong";
 
         goalDescription[0] = "Find lawrence to save the dugong";
         requiredAmount[0] = 1;
@@ -25,8 +25,6 @@ public class QuestTalkStrandedDugongHelpers : QuestNew
         goalDescription[1] = "Find another person the save the dugong";
         requiredAmount[1] = 1;
 
-        goalDescription[2] = "Push the dugong together";
-        requiredAmount[2] = 1;
 
         reward = 10;
 
@@ -57,7 +55,6 @@ public class QuestTalkStrandedDugongHelpers : QuestNew
         //goal (this, name of target, goaldescription, iscompleted bool, current progress, required amount)
         Goals.Add(new TalkGoal(this, "Stranded Dugong Helper 1", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
         Goals.Add(new TalkGoal(this, "Stranded Dugong Helper 2", goalDescription[1], false, currentProgress[1], requiredAmount[1]));
-        Goals.Add(new UseGoal(this, "Stick", goalDescription[2], false, currentProgress[2], requiredAmount[2]));
         Goals.ForEach(g => g.InIt());
         UpdateQuestUI();
         GetGoalsList();
@@ -118,6 +115,6 @@ public class QuestTalkStrandedDugongHelpers : QuestNew
 
         //Add another quest
         yield return new WaitForSeconds(5f);
-        //AcceptQuest("QuestTalkStrandedDugongHelpers");
+        AcceptQuest("QuestPushDugong");
     }
 }

@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class GrasslandEvents : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private Task task;
+
     public GameObject wildTamaraws;
     public GameObject wildlifeSpecialist1;
+
+    [SerializeField] private GameObject injuredTamaraw;
+    [SerializeField] private GameObject curableTamaraw;
+    [SerializeField] private GameObject wildlifeSpecialist2;
+
+    [Header("Prefab to instantiate")]
+    [SerializeField] private GameObject tamarawPrefab;
 
     [Header("Wild animals")]
     public GameObject tamarawWildAnimalsParent;
@@ -14,6 +24,17 @@ public class GrasslandEvents : MonoBehaviour
     {
         GameEvents.instance.onQuestCompleted += GrasslandQuestAcceptCheck;
         GameEvents.instance.onQuestCompleted += GrasslandQuestCompleteCheck;
+
+        for (int i = 0; i < task.tasksCompeleted.Count; i++)
+        {
+            //scene setup
+            //if (task.tasksCompeleted[i] == "QuestTalkWildlifeSpecialist2")
+            //{
+            //    Destroy(injuredTamaraw);
+            //    curableTamaraw.SetActive(true);
+            //}
+        }
+
     }
 
     public void GrasslandQuestAcceptCheck(string questName)
@@ -26,8 +47,29 @@ public class GrasslandEvents : MonoBehaviour
     }
     public void GrasslandQuestCompleteCheck(string questName)
     {
+        //QuestCollectTamarawTracks
+        if (questName == "Tracking the tamaraw")
+        {
+            injuredTamaraw.SetActive(true);
+            curableTamaraw.SetActive(false);
+            wildlifeSpecialist2.SetActive(false);
+        }
+        if (questName == "Tamaraw Rescue")
+        {
+            injuredTamaraw.SetActive(false);
+            curableTamaraw.SetActive(true);
+            wildlifeSpecialist2.SetActive(true);
+        }
+
+        if (questName == "Heal the Tamaraw")
+        {
+            Destroy(curableTamaraw);
+            Instantiate(tamarawPrefab, curableTamaraw.transform.position, Quaternion.identity);
+        }
+
+
         //QuestTalkWildlifeSpecialist2
-        if(questName == "Report back to the wildlife specialist")
+        if (questName == "Report back to the wildlife specialist")
         {
             wildlifeSpecialist1.SetActive(false);
         }

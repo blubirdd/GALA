@@ -116,7 +116,7 @@ public class QuestContainCrocodile : QuestNew
         //disable marker
         //Destroy(_waypoint);
 
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(10f);
         AcceptQuest("QuestTalkSwampWildlifeRanger");
     }
 }

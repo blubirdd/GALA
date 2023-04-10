@@ -60,7 +60,7 @@ public class QuestTalkRiverWildlifeBiologist2 : QuestNew
 
 
         //waypoint
-        //SpawnWaypointMarker();
+        SpawnWaypointMarker();
 
     }
 
@@ -97,7 +97,7 @@ public class QuestTalkRiverWildlifeBiologist2 : QuestNew
     public void SpawnWaypointMarker()
     {
         _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
-        _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[3]);
+        _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[11]);
 
     }
 
@@ -112,7 +112,7 @@ public class QuestTalkRiverWildlifeBiologist2 : QuestNew
         Debug.Log(this + " is Completed");
 
         //disable marker
-        //Destroy(_waypoint);
+        Destroy(_waypoint);
 
         //AcceptQuest("QuestFeedChicken");
     }
