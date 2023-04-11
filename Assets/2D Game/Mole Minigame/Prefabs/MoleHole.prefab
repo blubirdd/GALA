@@ -292,7 +292,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 712b3a92b8cb85349b74a7ee8963335d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7274aab664772b549bb654c4651cffe6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -328,11 +328,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d54d44dceef8e3042ad5af5b62882de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mole: {fileID: 21300000, guid: 712b3a92b8cb85349b74a7ee8963335d, type: 3}
-  moleHardHat: {fileID: 21300000, guid: ba11b84ec7f1eab4fb7ea615eb908cc6, type: 3}
-  moleHatBroken: {fileID: 21300000, guid: 29d5973033bbfe44b9d806b4f621d284, type: 3}
-  moleHit: {fileID: 21300000, guid: af4be49c395e56649ac08069bd117009, type: 3}
-  moleHatHit: {fileID: 21300000, guid: 4702b86f3a3def34685d8d68ede166d7, type: 3}
+  mole: {fileID: 21300000, guid: 7274aab664772b549bb654c4651cffe6, type: 3}
+  moleHardHat: {fileID: 21300000, guid: e1bd162d26393ce4d9df2f397cfdb9c9, type: 3}
+  moleHatBroken: {fileID: 21300000, guid: 860d8ac775e27a34e92bbca62e1e0de1, type: 3}
+  moleHit: {fileID: 21300000, guid: 7274aab664772b549bb654c4651cffe6, type: 3}
+  moleHatHit: {fileID: 21300000, guid: d4c1428488ba938428320f5904ca0cb6, type: 3}
   gameManager: {fileID: 0}
 --- !u!61 &1614671867789996478
 BoxCollider2D:
@@ -351,7 +351,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 2.56, y: 2.56}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -370,7 +370,7 @@ Animator:
   m_GameObject: {fileID: 1614671867789996474}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 979282e6a69bfd245acd1c8f5d4fa3c7, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2175223d800545f499cf1f0074ac6ebc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
