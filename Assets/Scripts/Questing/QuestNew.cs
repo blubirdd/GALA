@@ -6,11 +6,12 @@ using TMPro;
 
 
 [System.Serializable]
-public class QuestNew: MonoBehaviour
+public class QuestNew : MonoBehaviour
 {
 
 
     public List<Goal> Goals { get; set; } = new List<Goal>();
+    public string questID { get; set; }
     public string questName { get; set; }
     public string questDescription { get; set; }
     public int reward { get; set; }
@@ -22,7 +23,7 @@ public class QuestNew: MonoBehaviour
 
     //public void SaveData(GameData data)
     //{
-       
+
     //}
 
     private void Start()
@@ -40,7 +41,7 @@ public class QuestNew: MonoBehaviour
 
         foreach (Goal goal in Goals)
         {
-            Debug.Log(goal.description + " progress "+goal.currentAmount);
+            Debug.Log(goal.description + " progress " + goal.currentAmount);
         }
 
         QuestTaskUI.instance.UpdateQuestUI();
@@ -54,7 +55,7 @@ public class QuestNew: MonoBehaviour
         }
 
     }
-    
+
     public void QuestComplete(string questName)
     {
         if (questCompleted == true)
@@ -86,4 +87,12 @@ public class QuestNew: MonoBehaviour
         this.gameObject.AddComponent(System.Type.GetType(questName));
     }
 
+    public void RemoveQuest(string questName)
+    {
+        Component componentToRemove = this.gameObject.GetComponent(System.Type.GetType(questName));
+        if (componentToRemove != null)
+        {
+            Destroy(componentToRemove);
+        }
+    }
 }

@@ -15,7 +15,14 @@ public class ColliderFocus : MonoBehaviour
     [Header("Quest")]
     public GameObject questManager;
     public string questID;
+    public bool giveQuestDelay = false;
+    Character character;
     private QuestNew quest { get; set; }
+
+    private void Start()
+    {
+        character = GetComponent<Character>();
+    }
 
     public void OnTriggerEnter(Collider other)
     {
@@ -46,10 +53,38 @@ public class ColliderFocus : MonoBehaviour
 
             if(questID != "" && targetToFocus == null)
             {
-                quest = (QuestNew)questManager.AddComponent(System.Type.GetType(questID));
+                if (giveQuestDelay)
+                {
+                    StartCoroutine(GiveQuestDelay());
+
+                }
+                else
+                {
+                    quest = (QuestNew)questManager.AddComponent(System.Type.GetType(questID));
+
+                }
+    
             }
+
             
+            if(character != null)
+            {
+                TalkEvents.CharacterApproach(character);
+            }
+
+            if (!giveQuestDelay)
+            {
+                Destroy(gameObject);
+            }
+           
         }
+    }
+
+    IEnumerator GiveQuestDelay()
+    {
+        yield return new WaitForSeconds(5f);
+        quest = (QuestNew)questManager.AddComponent(System.Type.GetType(questID));
+        Destroy(gameObject);
     }
 
 }

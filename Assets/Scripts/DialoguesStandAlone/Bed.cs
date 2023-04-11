@@ -45,7 +45,7 @@ public class Bed : MonoBehaviour, IDataPersistence
     {
         yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
 
-        UIManager.instance.OpenCloseTutorialPrompt();
+        //UIManager.instance.OpenCloseTutorialPrompt();
 
         AssignQuest();
     }

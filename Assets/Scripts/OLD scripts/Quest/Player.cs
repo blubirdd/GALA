@@ -24,8 +24,10 @@ public class Player : MonoBehaviour
     [Header("UI Canvases")]
     public GameObject playerDiedCanvas;
     public GameObject playerSpottedCanvas;
+    public GameObject playerOutOfTimeCanvas;
 
     [Header("Respawn Locations")]
+    public Transform riverCampRespawnPoint;
     public Transform swampVillageRespawnPoint;
     public Transform hunterVillageRespawnPoint;
     private void Start()
@@ -54,6 +56,13 @@ public class Player : MonoBehaviour
         playerSpottedCanvas.SetActive(false);
         ThirdPersonController.instance.gameObject.SetActive(false);
         ThirdPersonController.instance.transform.position = hunterVillageRespawnPoint.position;
+        ThirdPersonController.instance.gameObject.SetActive(true);
+    }
+
+    public void RespawnToRiverCamp()
+    {
+        ThirdPersonController.instance.gameObject.SetActive(false);
+        ThirdPersonController.instance.transform.position = riverCampRespawnPoint.position;
         ThirdPersonController.instance.gameObject.SetActive(true);
     }
 }

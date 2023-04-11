@@ -17,6 +17,9 @@ public class QuestUseMedkitTurtle : QuestNew
 
         //setup
         ID = "QuestUseMedkitTurtle"; ;
+
+        questID = ID;
+
         questName = "Saving the Forest turtles";
         questDescription = "Save and relocation the forest turtles";
 
@@ -66,7 +69,7 @@ public class QuestUseMedkitTurtle : QuestNew
         //waypoint
         SpawnWaypointMarker();
 
-        ClockManager.instance.StartClock(180);
+        ClockManager.instance.StartClock(180, this);
 
     }
 
@@ -114,7 +117,7 @@ public class QuestUseMedkitTurtle : QuestNew
         //remove quest from task list
         Task.instance.RemoveTask(ID);
 
-        ClockManager.instance.DisableClock();
+        //ClockManager.instance.DisableClock();
         //debug
         Debug.Log(this + " is Completed");
 

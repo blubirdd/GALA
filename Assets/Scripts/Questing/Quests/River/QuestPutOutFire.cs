@@ -61,6 +61,9 @@ public class QuestPutOutFire : QuestNew
         //waypoint
         //SpawnWaypointMarker();
 
+        //timer
+        ClockManager.instance.StartClock(300, this);
+
     }
 
     private void GetGoalsList()
@@ -112,6 +115,12 @@ public class QuestPutOutFire : QuestNew
 
         //disable marker
         //Destroy(_waypoint);
+
+        //turn of clock
+        //if (ClockManager.instance.clockui.gameObject.activeSelf)
+        //{
+        //    ClockManager.instance.clockui.gameObject.SetActive(false);
+        //}
 
         yield return new WaitForSeconds(8f);
         AcceptQuest("QuestTalkDayTent");

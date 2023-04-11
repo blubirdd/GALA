@@ -13,19 +13,33 @@ public class RiverEvents : MonoBehaviour
     void Start()
     {
         injuredTurtle.SetActive(false);
+
+        GameEvents.instance.onQuestAcceptedNotification += RiverQuestAcceptCheck;
         GameEvents.instance.onQuestCompleted += RiverQuestCompleteCheck;
 
     }
 
-    public void RiverQuestCompleteCheck(string questName)
+    public void RiverQuestAcceptCheck(string questName)
     {
-        //QuestTalkDayTent
-        if(questName == "Rest in the camp until morning")
+        //QuestUseMedkitTurtle
+        if (questName == "Saving the Forest turtles")
         {
             injuredTurtle.SetActive(true);
 
-            fireQuest.SetActive(false);
+            //ffalse or destroy
+            //fireQuest.SetActive(false);
+            Destroy(fireQuest);
         }
+    }
+    public void RiverQuestCompleteCheck(string questName)
+    {
+        //QuestTalkDayTent
+        //if(questName == "Rest in the camp until morning")
+        //{
+        //    injuredTurtle.SetActive(true);
+
+        //    fireQuest.SetActive(false);
+        //}
 
         //QuestCollectContaminatedBarrel
         if (questName == "Cleaning the river")

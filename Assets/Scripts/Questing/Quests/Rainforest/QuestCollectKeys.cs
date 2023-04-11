@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QuestCollectKeys : QuestNew
 {
-    static int numberOfGoals = 1;
+    static int numberOfGoals = 2;
 
     private string[] goalDescription = new string[numberOfGoals];
     private int[] currentProgress = new int[numberOfGoals];
@@ -20,10 +20,11 @@ public class QuestCollectKeys : QuestNew
         questName = "Grab keys for the cages";
         questDescription = "Grab keys for the cages";
 
-        goalDescription[0] = "Grab the keys for the cages";
-        requiredAmount[0] = 2;
+        goalDescription[0] = "Grab the bird cage key";
+        requiredAmount[0] = 1;
 
-
+        goalDescription[1] = "Grab the small cage key";
+        requiredAmount[1] = 1;
         reward = 10;
 
         questCompleted = false;
@@ -51,7 +52,8 @@ public class QuestCollectKeys : QuestNew
         UpdateQuestUI();
 
         //goal (this, name of target, goaldescription, iscompleted bool, current progress, required amount)
-        Goals.Add(new CollectionGoal(this, "Key", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new CollectionGoal(this, "Bird Cage Key", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new CollectionGoal(this, "Small Cage Key", goalDescription[1], false, currentProgress[1], requiredAmount[1]));
 
         Goals.ForEach(g => g.InIt());
 

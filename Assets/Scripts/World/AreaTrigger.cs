@@ -6,6 +6,8 @@ public class AreaTrigger : MonoBehaviour
 {
     public float fogStartDistance = 5f; // The fog start distance to set
     public float fogEndDistance = 50f; // The fog end distance to set
+
+    public bool changeFogColor = false;
     public Color fogColor;
     private void OnTriggerEnter(Collider other)
     {
@@ -15,7 +17,13 @@ public class AreaTrigger : MonoBehaviour
             RenderSettings.fog = true;
             RenderSettings.fogStartDistance = fogStartDistance;
             RenderSettings.fogEndDistance = fogEndDistance;
-            RenderSettings.fogColor = fogColor;
+
+            if (changeFogColor)
+            {
+                //change to timecontroller function
+                RenderSettings.fogColor = fogColor;
+            }
+
         }
     }
 }

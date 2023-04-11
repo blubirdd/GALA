@@ -24,16 +24,23 @@ public class ClockUI : MonoBehaviour
 
     private void Start()
     {
-        UpdateClock(duration);
+
     }
 
-    public void UpdateClock(int second)
+    public void UpdateClock(int second, QuestNew quest)
     {
+        duration = second;
         remainingDuration = second;
-        StartCoroutine(UpdateTimer());
-    }
+        StartCoroutine(UpdateTimer(quest));
 
-    private IEnumerator UpdateTimer()
+        StartCoroutine(WaitUntilQuestCompleted(quest));
+    }
+    IEnumerator WaitUntilQuestCompleted(QuestNew quest)
+    {
+        yield return new WaitUntil(() => quest.questCompleted);
+        ClockManager.instance.TimerEnd(quest);
+    }
+    private IEnumerator UpdateTimer(QuestNew quest)
     {
         while(remainingDuration > 0)
         {
@@ -46,13 +53,14 @@ public class ClockUI : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
 
-        OnEnd();
+        //OnEnd();
+        ClockManager.instance.TimerEnd(quest);
     }
 
-    private void OnEnd()
-    {
-        Debug.Log("TIMER END");
-        this.gameObject.SetActive(false);
-    }
+    //private void OnEnd()
+    //{
+    //    Debug.Log("TIMER END");
+    //    this.gameObject.SetActive(false);
+    //}
 
 }

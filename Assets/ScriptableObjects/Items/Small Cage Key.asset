@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a34a3a46a495c42499b3200f67f5ee17, type: 3}
+  m_Name: Small Cage Key
+  m_EditorClassIdentifier: 
+  name: Small Cage Key
+  icon: {fileID: 0}
+  isDefaultItem: 1
+  isUsable: 0
+  displayDiscovery: 1
+  isThrowable: 0
+  isAimable: 0
+  isFirable: 0
+  isAnimalFood: 0
+  isCustomQuestItem: 0
+  isCustomPopup: 0
+  itemDescription: Used to open small cages

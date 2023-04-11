@@ -35,13 +35,13 @@ public class TutorialUI : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Testing());
-        IEnumerator Testing()
-        {
-            yield return new WaitForSeconds(5);
-            EnableTutorial(0);
+        //StartCoroutine(Testing());
+        //IEnumerator Testing()
+        //{
+        //    yield return new WaitForSeconds(5);
+        //    EnableTutorial(0);
 
-        }
+        //}
     }
 
 }

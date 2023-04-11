@@ -75,8 +75,8 @@ public class UIManager : MonoBehaviour
     [Header("BUTTONS PARENT")]
     public GameObject buttonsUIPack;
 
-    [Header("Tutorial")]
-    public GameObject tutorialCanvas;
+    //[Header("Tutorial")]
+    //public GameObject tutorialCanvas;
     //task ui is on taskui script
     // public TaskUI taskUI;
 
@@ -123,6 +123,15 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+    }
 
     public void ToggleFPS()
     {
@@ -154,10 +163,10 @@ public class UIManager : MonoBehaviour
     //    Debug.Log("Working close inventory");
     //}
 
-    public void OpenCloseTutorialPrompt()
-    {
-        tutorialCanvas.SetActive(!tutorialCanvas.activeSelf);
-    }
+    //public void OpenCloseTutorialPrompt()
+    //{
+    //    tutorialCanvas.SetActive(!tutorialCanvas.activeSelf);
+    //}
 
     public void DisableButtonsUIPACK()
     {
