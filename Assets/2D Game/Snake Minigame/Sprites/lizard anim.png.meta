@@ -1,0 +1,279 @@
+fileFormatVersion: 2
+guid: 68190c61f254c9a4ead1f278b6aa12e0
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: lizard anim_32
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 280
+        width: 28
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0238890c6e4f9e4caa3a3ad09c13f89
+      internalID: -378959085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lizard anim_33
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 280
+        width: 29
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2fa0b6f78b0ea34d9914e8c692d632a
+      internalID: -1019586196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lizard anim_34
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 280
+        width: 28
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54d474d46745b6046ae923fea4e18619
+      internalID: 573549955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: ba01750e9cf0cfa42b496f8330ed012d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      lizard anim_80: -2110804018
+      lizard anim_25: -51449832
+      lizard anim_19: 232133137
+      lizard anim_51: 159564170
+      lizard anim_21: 774135422
+      lizard anim_52: 481953383
+      lizard anim_45: 1146557747
+      lizard anim_50: 1108887781
+      lizard anim_18: -1449429041
+      lizard anim_49: 632312908
+      lizard anim_16: 2088016492
+      lizard anim_7: -378777829
+      lizard anim_65: 1483567158
+      lizard anim_29: 1315012807
+      lizard anim_54: -1743858155
+      lizard anim_72: 1220627875
+      lizard anim_20: -1105901047
+      lizard anim_15: -522593703
+      lizard anim_74: 1156444991
+      lizard anim_24: -308146009
+      lizard anim_26: 316482927
+      lizard anim_55: -542711379
+      lizard anim_60: 1133519418
+      lizard anim_77: 1063689479
+      lizard anim_13: -33597512
+      lizard anim_48: 1147500388
+      lizard anim_70: 846141093
+      lizard anim_78: 623955965
+      lizard anim_0: -89118865
+      lizard anim_23: -980682657
+      lizard anim_27: 1916471537
+      lizard anim_32: -378959085
+      lizard anim_4: -2131047238
+      lizard anim_42: 701788061
+      lizard anim_44: 240812100
+      lizard anim_61: -1449571079
+      lizard anim_14: 7870548
+      lizard anim_75: 1873941400
+      lizard anim_71: -456115081
+      lizard anim_59: 2050544165
+      lizard anim_31: 1177703275
+      lizard anim_35: -402882821
+      lizard anim_33: -1019586196
+      lizard anim_6: 445844747
+      lizard anim_3: -1844415459
+      lizard anim_37: 1288747263
+      lizard anim_28: -1139468825
+      lizard anim_64: -2096267621
+      lizard anim_43: -2022295981
+      lizard anim_1: 2064101517
+      lizard anim_57: 1967539427
+      lizard anim_68: -252027601
+      lizard anim_76: -1235478466
+      lizard anim_62: 1078879848
+      lizard anim_40: 2117056237
+      lizard anim_8: -1593967663
+      lizard anim_46: -186231767
+      lizard anim_79: -1086544674
+      lizard anim_47: 1140397378
+      lizard anim_73: 381065990
+      lizard anim_17: -1219809444
+      lizard anim_39: -866915405
+      lizard anim_69: 2036788986
+      lizard anim_38: -140128072
+      lizard anim_34: 573549955
+      lizard anim_30: 1464428884
+      lizard anim_5: 1236397720
+      lizard anim_22: -2078146771
+      lizard anim_53: 2077987991
+      lizard anim_2: -1846673784
+      lizard anim_36: 1013539308
+      lizard anim_12: 942948661
+      lizard anim_63: -1207478404
+      lizard anim_67: -1288700057
+      lizard anim_58: -1409263518
+      lizard anim_9: 1253687407
+      lizard anim_11: -1681419622
+      lizard anim_66: 691013844
+      lizard anim_81: 299154066
+      lizard anim_56: -978161245
+      lizard anim_10: -235894493
+      lizard anim_41: 1199928224
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
