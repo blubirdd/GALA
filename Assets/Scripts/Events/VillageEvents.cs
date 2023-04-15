@@ -5,6 +5,8 @@ using UnityEngine;
 public class VillageEvents : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    
     void Start()
     {
         GameEvents.instance.onQuestAcceptedNotification += VillageQuestAcceptCheck;

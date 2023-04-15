@@ -59,7 +59,7 @@ public class QuestTalkWildlifeSpecialist3 : QuestNew
 
         //waypoint
         SpawnWaypointMarker();
-
+        //Debug.Log(this);
     }
 
     private void GetGoalsList()
@@ -96,7 +96,6 @@ public class QuestTalkWildlifeSpecialist3 : QuestNew
     {
         _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
         _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[9]);
-
     }
 
     IEnumerator IsQuestCompleted()

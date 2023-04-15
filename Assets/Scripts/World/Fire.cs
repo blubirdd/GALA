@@ -6,7 +6,7 @@ public class Fire : MonoBehaviour
 {
 
     Character character;
-
+    public GameObject smoke;
     private void Start()
     {
         character = GetComponent<Character>();
@@ -22,7 +22,9 @@ public class Fire : MonoBehaviour
 
             //trigger particle
             ParticleManager.instance.SpawnPuffParticle(transform.position);
+            smoke.SetActive(true);
             gameObject.SetActive(false);
+
         }
     }
 

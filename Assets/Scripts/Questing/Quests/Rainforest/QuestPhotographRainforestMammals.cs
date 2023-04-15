@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QuestPhotographRainforestMammals : QuestNew
 {
-    static int numberOfGoals = 2;
+    static int numberOfGoals = 3;
 
     private string[] goalDescription = new string[numberOfGoals];
     private int[] currentProgress = new int[numberOfGoals];
@@ -17,14 +17,17 @@ public class QuestPhotographRainforestMammals : QuestNew
 
         //setup
         ID = "QuestPhotographRainforestMammals"; ;
-        questName = "Rainforest Mammals";
-        questDescription = "Photograph mammal in the area";
+        questName = "Rainforest Animals";
+        questDescription = "Photograph animals in the area";
 
-        goalDescription[0] = "Photograph a Visayan spotted deer";
+        goalDescription[0] = "Photograph a Rufous hornbill";
         requiredAmount[0] = 1;
 
         goalDescription[1] = "Photograph a Tarsier";
         requiredAmount[1] = 1;
+
+        goalDescription[2] = "Photograph a Visayan spotted deer";
+        requiredAmount[2] = 1;
 
         reward = 10;
 
@@ -53,8 +56,9 @@ public class QuestPhotographRainforestMammals : QuestNew
         UpdateQuestUI();
 
         //goal (this, name of target, goaldescription, iscompleted bool, current progress, required amount)
-        Goals.Add(new PictureGoal(this, "Visayan Spotted Deer", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
-        Goals.Add(new PictureGoal(this, "Tarsier", goalDescription[1], false, currentProgress[1], requiredAmount[1]));
+        Goals.Add(new PictureGoal(this, "Rufous Hornbill", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new PictureGoal(this, "Philippine Tarsier", goalDescription[1], false, currentProgress[1], requiredAmount[1]));
+        Goals.Add(new PictureGoal(this, "Visayan Spotted Deer", goalDescription[2], false, currentProgress[2], requiredAmount[2]));
 
         Goals.ForEach(g => g.InIt());
 
@@ -116,8 +120,8 @@ public class QuestPhotographRainforestMammals : QuestNew
 
         //disable marker
         //Destroy(_waypoint);
-
-        //AcceptQuest("QuestFeedChicken");
+        yield return new WaitForSeconds(5f);
+        AcceptQuest("QuestGoToMountain");
     }
 }
 

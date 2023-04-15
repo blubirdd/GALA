@@ -22,7 +22,7 @@ public class QuestPutOutFire : QuestNew
         questDescription = "Grab a water from the river and \n put out the fire";
 
         goalDescription[0] = "Put out the fire using the bucket";
-        requiredAmount[0] = 4;
+        requiredAmount[0] = 3;
 
         reward = 10;
 
@@ -63,6 +63,8 @@ public class QuestPutOutFire : QuestNew
 
         //timer
         ClockManager.instance.StartClock(300, this);
+
+        GameEvents.instance.QuestAcceptedForSave(questName);
 
     }
 

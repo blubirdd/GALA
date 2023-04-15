@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QuestTalkWildlifeSpecialist2 : QuestNew
 {
-    static int numberOfGoals = 2;
+    static int numberOfGoals = 1;
 
     private string[] goalDescription = new string[numberOfGoals];
     private int[] currentProgress = new int[numberOfGoals];
@@ -23,8 +23,8 @@ public class QuestTalkWildlifeSpecialist2 : QuestNew
         goalDescription[0] = "Report back to the wildlife specialist";
         requiredAmount[0] = 1;
 
-        goalDescription[1] = "Grab a medkit to save the Tamaraw";
-        requiredAmount[1] = 1;
+        //goalDescription[1] = "Grab a medkit to save the Tamaraw";
+        //requiredAmount[1] = 1;
 
         reward = 10;
 
@@ -54,7 +54,7 @@ public class QuestTalkWildlifeSpecialist2 : QuestNew
 
         //goal (this, name of target, goaldescription, iscompleted bool, current progress, required amount)
         Goals.Add(new TalkGoal(this, "Wildlife Specialist", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
-        Goals.Add(new CollectionGoal(this, "Medkit", goalDescription[1], false, currentProgress[1], requiredAmount[1]));
+        //Goals.Add(new CollectionGoal(this, "Medkit", goalDescription[1], false, currentProgress[1], requiredAmount[1]));
         Goals.ForEach(g => g.InIt());
 
         GetGoalsList();
@@ -120,6 +120,6 @@ public class QuestTalkWildlifeSpecialist2 : QuestNew
 
 
         yield return new WaitForSeconds(7f);
-        AcceptQuest("QuestTalkWildlifeSpecialist3");
+        //AcceptQuest("QuestTalkWildlifeSpecialist3");
     }
 }

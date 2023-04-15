@@ -961,6 +961,35 @@ public class Animal : MonoBehaviour, IAnimal
             }
         }
 
+        if (other.gameObject.CompareTag("Prey"))
+        {
+            //if not aggressive
+            if (!chasePlayer)
+            {
+                //set view radius to normal
+                //_viewRadius = 15f;
+                //do something
+
+                StartCoroutine(EatDelayFood());
+                IEnumerator EatDelayFood()
+                {
+                    //trigger the quest event
+                    Debug.Log(this + "just ate");
+
+                    yield return new WaitForSeconds(1.5f);
+                    other.gameObject.SetActive(false);
+
+                    //preyTransform = null;
+                    animalNav.target = null;
+
+                    hunger = 100;
+
+                    yield return new WaitForSeconds(10);
+                    other.gameObject.SetActive(true);
+                }
+            }
+        }
+
         if (other.gameObject.CompareTag("HerbivoreFood"))
         {
 

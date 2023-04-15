@@ -62,7 +62,7 @@ public class QuestTalkDayTent : QuestNew
 
 
         //waypoint
-        //SpawnWaypointMarker();
+        SpawnWaypointMarker();
 
     }
 
@@ -99,7 +99,7 @@ public class QuestTalkDayTent : QuestNew
     public void SpawnWaypointMarker()
     {
         _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
-        _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[3]);
+        _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[12]);
 
     }
 
@@ -114,7 +114,7 @@ public class QuestTalkDayTent : QuestNew
         Debug.Log(this + " is Completed");
 
         //disable marker
-        //Destroy(_waypoint);
+        Destroy(_waypoint);
 
         //wait for notifcation or cutscene
         yield return new WaitForSeconds(5f);

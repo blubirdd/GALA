@@ -71,6 +71,10 @@ public class TimeController : MonoBehaviour
     [SerializeField] private Color dayFogColor;
     [SerializeField] private Color nightFogColor;
 
+    [Header("Canvases")]
+    public GameObject sleepToNightCanvas;
+    public GameObject sleeptoDayCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -91,6 +95,24 @@ public class TimeController : MonoBehaviour
     public void SetTimeOfDay(float hour)
     {
       currentTime = DateTime.Now.Date + TimeSpan.FromHours(hour);
+
+      if(hour >= 19)
+      {
+            StartCoroutine(SetActiveForFewSeconds(sleepToNightCanvas));
+      }
+      if(hour <=7)
+      {
+            StartCoroutine(SetActiveForFewSeconds(sleeptoDayCanvas));
+      }
+    }
+
+    IEnumerator SetActiveForFewSeconds(GameObject objectToActivate)
+    {
+        objectToActivate.SetActive(true);
+        Debug.Log("active");
+        yield return new WaitForSecondsRealtime(3f);
+        Debug.Log("not active");
+        objectToActivate.SetActive(false);
     }
 
     private void UpdateTimeOfDay()

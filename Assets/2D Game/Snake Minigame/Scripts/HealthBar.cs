@@ -8,6 +8,9 @@ public class HealthBar : MonoBehaviour
     public float maxHealth;
     public Image healthBar;
 
+    public GameObject canvas;
+    public GameObject clockUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,5 +21,12 @@ public class HealthBar : MonoBehaviour
     void Update()
     {
         healthBar.fillAmount = Mathf.Clamp(health / maxHealth, 0, 1);
+
+        if (health <= 0)
+        {
+            canvas.SetActive(true);
+            Time.timeScale = 0f;
+            clockUI.SetActive(false);
+        }
     }
 }

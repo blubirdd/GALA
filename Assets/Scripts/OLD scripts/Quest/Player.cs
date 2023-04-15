@@ -20,16 +20,21 @@ public class Player : MonoBehaviour
     }
     #endregion
     public static string playerName;
+    [Header("Game Scores")]
+    public float eggGameScore;
+    public float moleGameScore;
+
 
     [Header("UI Canvases")]
     public GameObject playerDiedCanvas;
     public GameObject playerSpottedCanvas;
     public GameObject playerOutOfTimeCanvas;
-
+    public GameObject playerFellOffCanvas;
     [Header("Respawn Locations")]
     public Transform riverCampRespawnPoint;
     public Transform swampVillageRespawnPoint;
     public Transform hunterVillageRespawnPoint;
+    public Transform swampLakeRespawnPoint;
     private void Start()
     {
         Hunter.OnHunterHasSpottedPlayer += ShowPlayerCaughtUI;
@@ -41,6 +46,18 @@ public class Player : MonoBehaviour
     public void ShowPlayerCaughtUI()
     {
         playerSpottedCanvas.SetActive(true);
+    }
+
+    public void EnableSwampLakeUI()
+    {
+        playerFellOffCanvas.SetActive(true);
+    }
+    public void Respawn(Transform location, GameObject canvasToActivate)
+    {
+        canvasToActivate.SetActive(false);
+        ThirdPersonController.instance.gameObject.SetActive(false);
+        ThirdPersonController.instance.transform.position = location.position;
+        ThirdPersonController.instance.gameObject.SetActive(true);
     }
 
     public void RespawnToSwampVillage()
@@ -63,6 +80,14 @@ public class Player : MonoBehaviour
     {
         ThirdPersonController.instance.gameObject.SetActive(false);
         ThirdPersonController.instance.transform.position = riverCampRespawnPoint.position;
+        ThirdPersonController.instance.gameObject.SetActive(true);
+    }
+
+    public void RespawnToLake()
+    {
+        playerFellOffCanvas.SetActive(false);
+        ThirdPersonController.instance.gameObject.SetActive(false);
+        ThirdPersonController.instance.transform.position = swampLakeRespawnPoint.position;
         ThirdPersonController.instance.gameObject.SetActive(true);
     }
 }

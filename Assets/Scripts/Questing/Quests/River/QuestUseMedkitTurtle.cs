@@ -71,6 +71,9 @@ public class QuestUseMedkitTurtle : QuestNew
 
         ClockManager.instance.StartClock(180, this);
 
+        //trigger quest event
+        GameEvents.instance.QuestAcceptedForSave(questName);
+
     }
 
     private void GetGoalsList()

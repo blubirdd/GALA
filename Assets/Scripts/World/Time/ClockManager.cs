@@ -50,6 +50,18 @@ public class ClockManager : MonoBehaviour
 
     }
 
+    public void StartClockIndependent(int seconds)
+    {
+        clockui.gameObject.SetActive(true);
+        //clockui.duration = seconds;
+        clockui.UpdateClockIndependent(seconds);
+    }
+
+    public void IndependentClockEnd()
+    {
+        Debug.Log("End game");
+    }
+
     public void DisableClock()
     {
         clockui.gameObject.SetActive(false);

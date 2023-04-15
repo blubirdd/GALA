@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 public class ClockUI : MonoBehaviour
 {
@@ -55,6 +56,30 @@ public class ClockUI : MonoBehaviour
 
         //OnEnd();
         ClockManager.instance.TimerEnd(quest);
+    }
+
+    public void UpdateClockIndependent(int second)
+    {
+        duration = second;
+        remainingDuration = second;
+        StartCoroutine(UpdateTimerIndependent());
+    }
+
+    private IEnumerator UpdateTimerIndependent()
+    {
+        while (remainingDuration > 0)
+        {
+            clockText.text = remainingDuration.ToString() + "s";
+            clockFill.fillAmount = Mathf.InverseLerp(0, duration, remainingDuration);
+            clockHandTransform.eulerAngles = new Vector3(0, 0, -(duration - remainingDuration) * 360f / duration);
+
+            remainingDuration--;
+
+            yield return new WaitForSeconds(1f);
+        }
+
+        ClockManager.instance.IndependentClockEnd();
+
     }
 
     //private void OnEnd()

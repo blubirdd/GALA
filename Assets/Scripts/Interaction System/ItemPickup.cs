@@ -75,7 +75,7 @@ public class ItemPickup : MonoBehaviour, IInteractable
 
         if (_waypointTransform != null)
         {
-            SpawnWaypointMarker();
+            //SpawnWaypointMarker();
         }
 
 

@@ -11,8 +11,9 @@ public class HarmfulCollider : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.SetActive(false);
-            other.transform.position = respawnLocation.position;
-            other.gameObject.SetActive(true);
+
+            Player.instance.EnableSwampLakeUI();
+
         }
     }
 }

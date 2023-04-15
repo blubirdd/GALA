@@ -21,6 +21,9 @@ public class QuizManager : MonoBehaviour
     public GameObject startPanel;
     public GameObject GoPanel;
 
+    [Header("Buttons")]
+    public GameObject finishButton;
+
     public TextMeshProUGUI QuestionTxt;
     public TextMeshProUGUI ScoreTxt;
 
@@ -40,6 +43,8 @@ public class QuizManager : MonoBehaviour
     [Header("DOTWEEN")]
     private bool isMoving = false;
     public int numberOfQuestionsToDisplay;
+
+    Character character;
     private void Start()
     {
         //originalPosition = Quizpanel.transform.position;
@@ -54,7 +59,7 @@ public class QuizManager : MonoBehaviour
         Quizpanel.SetActive(false);
         generateQuestion();
 
-        
+        character = GetComponent<Character>();
     }
 
     public void retry()
@@ -91,6 +96,16 @@ public class QuizManager : MonoBehaviour
         Quizpanel.SetActive(false);
         GoPanel.SetActive(true);
         ScoreTxt.text = score + "/" + questionsDisplayed;
+
+        if (score <= 1)
+        {
+            finishButton.SetActive(false);
+        }
+
+        else
+        {
+            finishButton.SetActive(true);
+        }
     }
 
     public void correct()
@@ -196,7 +211,10 @@ public class QuizManager : MonoBehaviour
 
         //UI
 
-
+        if(character != null)
+        {
+           TalkEvents.CharacterApproach(character); 
+        }
 
     }
 

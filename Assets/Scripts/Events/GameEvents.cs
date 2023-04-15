@@ -38,8 +38,18 @@ public class GameEvents : MonoBehaviour
 
     public event Action onGoalCompleted;
 
-   
-   
+    public event Action<string> onQuestAcceptedForSave;
+    public void QuestAcceptedForSave(string questName)
+    {
+       onQuestAcceptedForSave?.Invoke(questName);
+    }
+
+    public event Action onLocationChange;
+    public void ChangeLocation()
+    {
+        onLocationChange?.Invoke();
+    }
+
 
     //Dialogue EVENTS
 

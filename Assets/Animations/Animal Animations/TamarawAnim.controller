@@ -31,7 +31,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 0c8e67340bd49424b9668878720b7b03, type: 2}
+    m_Motion: {fileID: 7400000, guid: 6d20f34506971a04c9c078616ffb6ae3, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -39,7 +39,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: f9250cda670516f408d4595d86c45f68, type: 2}
+    m_Motion: {fileID: 7400000, guid: c045fce790eaf8c45acdb0d91e26ef6b, type: 2}
     m_Threshold: 0.5
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -47,7 +47,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: c9fc137648cfd9542bf7477fa94c837a, type: 2}
+    m_Motion: {fileID: 7400000, guid: 3e64e6cfa65719448a5dad7d218f4ac2, type: 2}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -75,7 +75,7 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer

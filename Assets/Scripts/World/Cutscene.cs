@@ -15,7 +15,7 @@ public class Cutscene : MonoBehaviour
     [SerializeField] private string questType;
 
     [Header("Object to disable")]
-    [SerializeField] private GameObject objectToDisable;
+    [SerializeField] private GameObject[] objectToDisable;
 
 
     [Header("If change Fog and Ambient Light")]
@@ -55,9 +55,14 @@ public class Cutscene : MonoBehaviour
             StartCoroutine(WaitToAssignQuest());
 
 
-            if(objectToDisable != null)
+            //if(objectToDisable != null)
+            //{
+            //    objectToDisable.SetActive(false);
+            //}
+
+            foreach (var objects in objectToDisable)
             {
-                objectToDisable.SetActive(false);
+                objects.SetActive(false);
             }
         }
     }

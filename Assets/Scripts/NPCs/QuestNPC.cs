@@ -191,8 +191,15 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
 
         if(isTalked == true)
         {
-            quest = (QuestNew)questManager.AddComponent(System.Type.GetType(closingQuestID));
-            Debug.Log(this + "Quest New Assigned");
+            StartCoroutine(WaitForNotification());
+            IEnumerator WaitForNotification()
+            {
+                yield return new WaitForSeconds(5f);
+                quest = (QuestNew)questManager.AddComponent(System.Type.GetType(closingQuestID));
+                Debug.Log(this + "Quest New Assigned");
+
+            }
+           
 
             if (targetTransform2 != null)
             {

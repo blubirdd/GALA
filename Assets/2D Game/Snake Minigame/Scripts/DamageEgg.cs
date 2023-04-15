@@ -24,4 +24,13 @@ public class DamageEgg : MonoBehaviour
             pHealth.health -= damage;
         }
     }
+
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Egg"))
+    //    {
+    //        Debug.Log("TEST HELLO 2");
+    //        pHealth.health -= damage;
+    //    }
+    //}
 }

@@ -22,7 +22,7 @@ public class GrasslandEvents : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameEvents.instance.onQuestCompleted += GrasslandQuestAcceptCheck;
+        GameEvents.instance.onQuestAcceptedNotification += GrasslandQuestAcceptCheck;
         GameEvents.instance.onQuestCompleted += GrasslandQuestCompleteCheck;
 
         for (int i = 0; i < task.tasksCompeleted.Count; i++)
@@ -43,6 +43,11 @@ public class GrasslandEvents : MonoBehaviour
         if(questName == "Curing the Tamaraws")
         {
             wildTamaraws.SetActive(true);
+        }
+
+        if (questName == "Heal the Tamaraw")
+        {
+            StartCoroutine(WaitUntilDialogueEnd(3, 3f));
         }
     }
     public void GrasslandQuestCompleteCheck(string questName)
@@ -68,16 +73,21 @@ public class GrasslandEvents : MonoBehaviour
         }
 
 
+
         //QuestTalkWildlifeSpecialist2
         if (questName == "Report back to the wildlife specialist")
         {
             wildlifeSpecialist1.SetActive(false);
         }
 
+        //grassland ending
         //QuestTalkWildlifeSpecialistFinal
         if(questName == "Report back to the specialist")
         {
             tamarawWildAnimalsParent.SetActive(true);
+
+            //play cutscene here
+            ParticleManager.instance.SpawnPuffParticle(wildlifeSpecialist2.transform.position);
         }
 
         //QuestTalkRiverWildlifeBiologist
@@ -86,6 +96,13 @@ public class GrasslandEvents : MonoBehaviour
             tamarawWildAnimalsParent.SetActive(false);
         }
 
+    }
+
+    IEnumerator WaitUntilDialogueEnd(int tutorialID, float delay)
+    {
+        //yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
+        yield return new WaitForSeconds(delay);
+        TutorialUI.instance.EnableTutorial(tutorialID);
     }
 
     private void OnDisable()

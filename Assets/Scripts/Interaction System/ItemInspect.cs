@@ -42,7 +42,16 @@ public class ItemInspect : MonoBehaviour, IInteractable
     [SerializeField] private bool hasDialogue = false;
     [SerializeField] private SubtleDialogueTrigger _dialogue;
 
-    
+    [Header("Timeline")]
+    [SerializeField] private bool hasTimeline;
+    [SerializeField] private GameObject timeline;
+
+
+
+    [Header("Minigame")]
+    [SerializeField] private bool hasMinigame;
+    [SerializeField] private string miniGameScene;
+
     ThirdPersonController thirdPersonController;
     UIManager uiManager;
     CinemachineManager cinemachineManager;
@@ -80,7 +89,7 @@ public class ItemInspect : MonoBehaviour, IInteractable
             TalkEvents.CharacterApproach(character);
         }
 
-        
+
 
         return true;
     }
@@ -122,6 +131,11 @@ public class ItemInspect : MonoBehaviour, IInteractable
             uiManager.DisablePlayerMovement();
 
             yield return new WaitForSeconds(delay);
+
+            if (hasMinigame)
+            {
+                MinigameTrigger.instance.LoadScene(miniGameScene, 8f);
+            }
 
             cinemachineManager.DisableInspectCam();
             uiManager.EnablePlayerMovement();

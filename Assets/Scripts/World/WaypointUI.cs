@@ -20,13 +20,15 @@ public class WaypointUI : MonoBehaviour
 
     private float _distance;
 
-
+    Camera _camera;
     private void Start()
     {
         //playerLocation = GameObject.FindGameObjectWithTag("Player").transform;
         playerLocation = ThirdPersonController.instance.transform;
 
         StartCoroutine(UpdateWaypointWithDelay(1f));
+
+        _camera = Camera.main;
     }
     public void SetTarget(Transform location)
     {
@@ -47,11 +49,11 @@ public class WaypointUI : MonoBehaviour
         float maxY = Screen.height - minY;
 
         // Temporary variable to store the converted position from to 2D screen point
-        Vector2 pos = Camera.main.WorldToScreenPoint(target.position + offset);
+        Vector2 pos = _camera.WorldToScreenPoint(target.position + offset);
 
 
         // Check if the target is behind ,
-        if (Vector3.Dot((target.position - Camera.main.transform.position), Camera.main.transform.forward) < 0)
+        if (Vector3.Dot((target.position - _camera.transform.position), _camera.transform.forward) < 0)
         {
             // Check if the target is on the left side of the screen
             if (pos.x < Screen.width / 2)
@@ -79,20 +81,23 @@ public class WaypointUI : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(delay);
-            _distance = Vector3.Distance(target.position, playerLocation.position);
 
-            // Change the meter text to the distance with the meter unit 'm'
-            meter.text = _distance.ToString("0") + "m";
-            if (_distance >= 5)
+            if(playerLocation != null)
             {
-                img.gameObject.SetActive(true);
-            }
+                _distance = Vector3.Distance(target.position, playerLocation.position);
 
-            else
-            {
-                img.gameObject.SetActive(false);
-            }
+                // Change the meter text to the distance with the meter unit 'm'
+                meter.text = _distance.ToString("0") + "m";
+                if (_distance >= 5)
+                {
+                    img.gameObject.SetActive(true);
+                }
 
+                else
+                {
+                    img.gameObject.SetActive(false);
+                }
+            }
 
         }
     }

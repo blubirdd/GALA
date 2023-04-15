@@ -19,7 +19,7 @@ public class DragSystem : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
 
     public bool isCorrect;
 
-    void Awake()
+    void Start()
     {
         if (gameObject.GetComponent<CanvasGroup>() == null)
             gameObject.AddComponent<CanvasGroup>();
@@ -27,12 +27,18 @@ public class DragSystem : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
 
         image = GetComponent<Image>();
         originalColor = image.color;
-        originalPosition = transform.position;
     }
 
     void OnEnable()
     {
-        Time.timeScale = 0f;
+        StartCoroutine(WaitForShuffle());
+        IEnumerator WaitForShuffle()
+        {
+            yield return new WaitForEndOfFrame();
+            originalPosition = transform.position;
+            Time.timeScale = 0f;
+        }
+
     }
 
     public void OnDrag(PointerEventData eventData)
