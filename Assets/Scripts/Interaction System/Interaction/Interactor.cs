@@ -29,16 +29,19 @@ public class Interactor : MonoBehaviour
         _buttonWasPressed = false;
 
     }
+
+    private bool _wasEnabled = false;
+
     private void Update()
     {
         _numFound = Physics.OverlapSphereNonAlloc(_interactionPoint.position, _interactionPointRadius, _colliders, _interactableMask, QueryTriggerInteraction.Ignore);
 
-        if(_numFound > 0 )
+        if (_numFound > 0)
         {
             _interactable = _colliders[0].GetComponent<IInteractable>();
             _outline = _colliders[0].GetComponent<Outline>();
 
-            if(_interactable!=null)
+            if (_interactable != null)
             {
                 if (!_interactionPromptUI.isDisplayed)
                 {
@@ -48,44 +51,42 @@ public class Interactor : MonoBehaviour
                 if (Keyboard.current.eKey.wasPressedThisFrame)
                 {
                     _interactable.Interact(this);
-
                 }
 
                 if (_buttonWasPressed == true)
                 {
                     _interactable.Interact(this);
-                    _buttonWasPressed=false;
+                    _buttonWasPressed = false;
                 }
-
             }
 
-            if(_outline != null)
-            {
-                _outline.enabled = true;
-            }
-
-
-        }
-        else 
-        {
             if (_outline != null)
             {
+                if (!_outline.enabled && !_wasEnabled)
+                {
+                    _outline.enabled = true;
+                    _wasEnabled = true;
+                }
+            }
+        }
+        else
+        {
+            if (_wasEnabled && _outline != null)
+            {
                 _outline.enabled = false;
-                _outline = null;
+                _wasEnabled = false;
             }
 
             if (_interactable != null)
             {
                 _interactable = null;
             }
-          
-            if(_interactionPromptUI.isDisplayed)
+
+            if (_interactionPromptUI.isDisplayed)
             {
                 _interactionPromptUI.Close();
             }
-            
         }
-       
     }
 
     private void ButtonPressed()

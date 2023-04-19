@@ -20,8 +20,8 @@ public class QuestTalkRainforestFairy : QuestNew
         questName = "Talk to the fairy";
         questDescription = "Approach and talk to the fairy";
 
-        goalDescription[0] = "Free caged tarsiers";
-        requiredAmount[0] = 3;
+        goalDescription[0] = "Approach and talk to the fairy";
+        requiredAmount[0] = 1;
 
 
         reward = 10;

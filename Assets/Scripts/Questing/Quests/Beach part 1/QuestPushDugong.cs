@@ -114,6 +114,6 @@ public class QuestPushDugong : QuestNew
 
         //Add another quest
         yield return new WaitForSeconds(10f);
-        //AcceptQuest("QuestTalkStrandedDugongHelpers");
+        AcceptQuest("QuestTalkBeachHelpers");
     }
 }

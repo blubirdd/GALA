@@ -34,6 +34,8 @@ public class ItemDiscovery : MonoBehaviour
         itemNameText.text = name;
         itemDescriptionText.text = description;
 
+        SoundManager.instance.PlaySoundFromClips(0);
+
     }
 
     public void ClosePanel()

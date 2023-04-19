@@ -44,6 +44,7 @@ public class QuizManager : MonoBehaviour
     private bool isMoving = false;
     public int numberOfQuestionsToDisplay;
 
+
     Character character;
     private void Start()
     {

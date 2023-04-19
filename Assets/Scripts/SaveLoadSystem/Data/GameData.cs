@@ -14,6 +14,11 @@ public class GameData
     public Vector3 playerPosition;
     public int naturePoints;
 
+    //play name
+    public string playerName;
+    //player location
+    public string playerLocation;
+
     //inventory
     public SerializableDictionary<int, InventorySave> itemsCollected;
 
@@ -24,6 +29,9 @@ public class GameData
     //NPC's talked to
     public SerializableDictionary<string, bool> NPCsTalked;
     public SerializableDictionary<string, bool> NPCsCompleted;
+
+    //CUTSCENES TRIGGERED
+    public SerializableDictionary<string, bool> cutsceneTriggered;
 
     // the values defined in this constructor will be the default values
     // the game starts with when there's no data to load
@@ -49,7 +57,12 @@ public class GameData
         NPCsTalked = new SerializableDictionary<string, bool>();
         NPCsCompleted = new SerializableDictionary<string, bool>();
 
+        //cutscene
+        cutsceneTriggered = new SerializableDictionary<string, bool>();
+
         gameLevel = 1;
+
+        playerLocation = "Village";
 
     }
 

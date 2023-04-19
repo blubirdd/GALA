@@ -48,7 +48,7 @@ public class BeachEvents : MonoBehaviour
             {
                 float distanceMoved = 0f;
                 Vector3 startPosition = questParent.transform.position;
-                Vector3 endPosition = questParent.transform.position + questParent.transform.forward * 13f;
+                Vector3 endPosition = questParent.transform.position + questParent.transform.forward * 13f - Vector3.up * 1f;
 
                 while (distanceMoved < 13f)
                 {
@@ -58,7 +58,7 @@ public class BeachEvents : MonoBehaviour
                     yield return null;
                 }
 
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(2f);
                 dugongHelper1.GetComponent<Animator>().SetBool("Idle", true);
                 dugongHelper2.GetComponent<Animator>().SetBool("Idle", true);
 

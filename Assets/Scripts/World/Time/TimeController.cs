@@ -75,21 +75,39 @@ public class TimeController : MonoBehaviour
     public GameObject sleepToNightCanvas;
     public GameObject sleeptoDayCanvas;
 
+    [Header("Skybox Materials")]
+    [SerializeField] private Material daySkyboxMaterial;
+    [SerializeField] private Material nightSkyboxMaterial;
+
     // Start is called before the first frame update
     void Start()
     {
+
         currentTime = DateTime.Now.Date + TimeSpan.FromHours(startHour);
 
         sunriseTime = TimeSpan.FromHours(sunriseHour);
         sunsetTime = TimeSpan.FromHours(sunsetHour);
+
+
+        //set up skybox on start
+        if (timeHour >= sunriseHour && timeHour < sunsetHour)
+        {
+            RenderSettings.skybox = daySkyboxMaterial;
+        }
+        else
+        {
+            RenderSettings.skybox = nightSkyboxMaterial;
+        }
+
+        StartCoroutine(UpdateTimeOfDayCoroutineForOptimization());
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateTimeOfDay();
-        RotateSun();
-        UpdateLightSettings();
+        //UpdateTimeOfDay();
+        //RotateSun();
+        //UpdateLightSettings();
     }
 
     public void SetTimeOfDay(float hour)
@@ -100,7 +118,7 @@ public class TimeController : MonoBehaviour
       {
             StartCoroutine(SetActiveForFewSeconds(sleepToNightCanvas));
       }
-      if(hour <=7)
+      if(hour <=10)
       {
             StartCoroutine(SetActiveForFewSeconds(sleeptoDayCanvas));
       }
@@ -124,8 +142,29 @@ public class TimeController : MonoBehaviour
             timeText.text = currentTime.ToString("HH:mm");
             timeHour = currentTime.Hour;
         }
+
+        // Set skybox material based on time of day
+        if (timeHour >= sunriseHour && timeHour < sunsetHour)
+        {
+            RenderSettings.skybox = daySkyboxMaterial;
+        }
+        else
+        {
+            RenderSettings.skybox = nightSkyboxMaterial;
+        }
+
     }
 
+    private IEnumerator UpdateTimeOfDayCoroutineForOptimization()
+    {
+        while (true)
+        {
+            UpdateTimeOfDay();
+            RotateSun();
+            UpdateLightSettings();
+            yield return new WaitForSeconds(1f);
+        }
+    }
     private void RotateSun()
     {
         float sunLightRotation;

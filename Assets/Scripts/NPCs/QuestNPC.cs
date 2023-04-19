@@ -194,7 +194,7 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
             StartCoroutine(WaitForNotification());
             IEnumerator WaitForNotification()
             {
-                yield return new WaitForSeconds(5f);
+                yield return new WaitForSeconds(1f);
                 quest = (QuestNew)questManager.AddComponent(System.Type.GetType(closingQuestID));
                 Debug.Log(this + "Quest New Assigned");
 

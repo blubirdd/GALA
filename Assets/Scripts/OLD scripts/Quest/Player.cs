@@ -1,10 +1,11 @@
 using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDataPersistence
 {
     #region Singleton
     public static Player instance;
@@ -89,5 +90,15 @@ public class Player : MonoBehaviour
         ThirdPersonController.instance.gameObject.SetActive(false);
         ThirdPersonController.instance.transform.position = swampLakeRespawnPoint.position;
         ThirdPersonController.instance.gameObject.SetActive(true);
+    }
+
+    public void LoadData(GameData data)
+    {
+        playerName = data.playerName;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.playerName = playerName;
     }
 }

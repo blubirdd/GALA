@@ -51,7 +51,9 @@ public class QuestTaskUI : MonoBehaviour
             {
 
                 GameObject g;
-                questTitleText.text = task.tasks[0].questTitle;
+                //questTitleText.text = task.tasks[0].questTitle;
+                int lastIndex = task.tasks.Count - 1;
+                questTitleText.text = task.tasks[lastIndex].questTitle;
 
                 //destroy first before adding again
                 for (int i = 1; i < questTextArea.transform.childCount; i++)
@@ -62,15 +64,15 @@ public class QuestTaskUI : MonoBehaviour
                     Destroy(childTransform.gameObject);
                 }
 
-                for (int j = 0; j < task.tasks[0].goalDescription.Length; j++)
+                for (int j = 0; j < task.tasks[lastIndex].goalDescription.Length; j++)
                 {
                     g = Instantiate(goalPrefab, questTextArea.transform);
                     TextMeshProUGUI goalText = g.GetComponent<TextMeshProUGUI>();
-                    goalText.text = task.tasks[0].goalDescription[j] + ": " + task.tasks[0].progress[j] + "/" + task.tasks[0].requiredAmount[j];
+                    goalText.text = task.tasks[lastIndex].goalDescription[j] + ": " + task.tasks[lastIndex].progress[j] + "/" + task.tasks[lastIndex].requiredAmount[j];
 
                     GameObject goalCheckbox = g.transform.GetChild(1).gameObject;
 
-                    if (task.tasks[0].progress[j] >= task.tasks[0].requiredAmount[j])
+                    if (task.tasks[lastIndex].progress[j] >= task.tasks[lastIndex].requiredAmount[j])
                     {
                         goalCheckbox.SetActive(true);
                     }

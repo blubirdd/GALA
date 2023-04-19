@@ -8,6 +8,8 @@ public class InventoryUI : MonoBehaviour
     public Transform itemsParent;
     public GameObject inventoryUI;
 
+    public TextMeshProUGUI bagName;
+
     [Header("Item Details")]
 
     public GameObject itemContents;
@@ -35,6 +37,8 @@ public class InventoryUI : MonoBehaviour
         slots = itemsParent.GetComponentsInChildren<InventorySlot>(true);
 
         UpdateUI();
+
+        bagName.text = Player.playerName + "'s Bag";
 
     }
 

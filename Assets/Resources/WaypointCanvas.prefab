@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 7303693828756292040}
   - component: {fileID: 7303693828756292055}
   - component: {fileID: 4649628954170958409}
+  - component: {fileID: 5045097190843562436}
   m_Layer: 0
   m_Name: WaypointCanvas
   m_TagString: Untagged
@@ -254,6 +255,18 @@ MonoBehaviour:
   meter: {fileID: 7303693828042189050}
   offset: {x: 0, y: 3, z: 0}
   playerLocation: {fileID: 0}
+--- !u!225 &5045097190843562436
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7303693828756292053}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &7303693829296648263
 GameObject:
   m_ObjectHideFlags: 0

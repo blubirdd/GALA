@@ -18,7 +18,7 @@ public class QuestCollectContaminatedBarrel : QuestNew
 
         //setup
         ID = "QuestCollectContaminatedBarrel"; ;
-        questName = "Cleaning the river";
+        questName = "Clean the river";
         questDescription = "Get rid of the source of water pollution";
 
         goalDescription[0] = "Obtain a fishing rod";
@@ -61,7 +61,7 @@ public class QuestCollectContaminatedBarrel : QuestNew
 
         GetGoalsList();
 
-
+        GameEvents.instance.QuestAcceptedForSave(questName);
         //waypoint
         //SpawnWaypointMarker();
 
@@ -117,7 +117,7 @@ public class QuestCollectContaminatedBarrel : QuestNew
         //disable marker
         //Destroy(_waypoint);
 
-        //yield return new WaitForSeconds(3f);
-        //AcceptQuest("QuestPutOutFire");
+        yield return new WaitForSeconds(4f);
+        AcceptQuest("QuestHeadToBeach");
     }
 }

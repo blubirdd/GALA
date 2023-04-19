@@ -55,9 +55,19 @@ public class Inventory : MonoBehaviour, IDataPersistence
     [Header("Newspaper Discovery")]
     public NewpaperDiscovery newpaperDiscovery;
 
+    [Header("Toolbar")]
+    public GameObject[] toolbarItems;
+
     private void Start()
     {
-
+        //set toolbar items to true once tutorial is done
+        if (Task.instance.tasksCompeleted.Contains("QuestIntroPart2"))
+        {
+            foreach (var item in toolbarItems)
+            {
+                item.SetActive(true);
+            }
+        }
     }
 
     private void OnEnable()

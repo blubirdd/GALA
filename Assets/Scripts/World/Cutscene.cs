@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cutscene : MonoBehaviour
+public class Cutscene : MonoBehaviour, IDataPersistence
 {
-
+    public string ID;
     public string locationName;
     public string placeName;
     public GameObject discoveryUI;
-    bool isDone = false;
+    [SerializeField] private bool isDone = false;
 
     private QuestNew quest { get; set; }
     [SerializeField] private GameObject quests;
@@ -29,6 +29,11 @@ public class Cutscene : MonoBehaviour
     [SerializeField] private Color dayFogColor;
     [SerializeField] private Color nightFogColor;
 
+    Character character;
+    void Start()
+    {
+        character = GetComponent<Character>();
+    }
     void SpawnDiscoveryUI()
     {
         GameObject go = Instantiate(discoveryUI);
@@ -48,6 +53,7 @@ public class Cutscene : MonoBehaviour
 
             //ui
             SpawnDiscoveryUI();
+
 
             //turn off joystick
             UIManager.instance.DisablePlayerMovement();
@@ -69,7 +75,15 @@ public class Cutscene : MonoBehaviour
 
     IEnumerator WaitToAssignQuest()
     {
+
+
+
         yield return new WaitForSeconds(7f);
+        if (character != null)
+        {
+            TalkEvents.CharacterApproach(character);
+            yield return new WaitForSeconds(4f);
+        }
         if (questType != null)
         {
             //Assign Quest
@@ -77,7 +91,21 @@ public class Cutscene : MonoBehaviour
         }
 
 
+    }
 
+    public void LoadData(GameData data)
+    {
+        data.cutsceneTriggered.TryGetValue(ID, out isDone);
+    }
+
+    public void SaveData(GameData data)
+    {
+        if (data.cutsceneTriggered.ContainsKey(ID))
+        {
+            data.cutsceneTriggered.Remove(ID);
+        }
+
+        data.cutsceneTriggered.Add(ID, isDone);
     }
 
 

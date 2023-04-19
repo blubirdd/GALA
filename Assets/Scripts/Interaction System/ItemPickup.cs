@@ -45,6 +45,8 @@ public class ItemPickup : MonoBehaviour, IInteractable
     [Header("If has waypoint on pickup, else leave null")]
     [SerializeField] private Transform _waypointTransform;
 
+    [Header("If has object to activate on pickup, else leave null")]
+    [SerializeField] private GameObject objectToActivate;
     void Start()
     {
         _icon = item.icon;
@@ -78,7 +80,10 @@ public class ItemPickup : MonoBehaviour, IInteractable
             //SpawnWaypointMarker();
         }
 
-
+        if (objectToActivate != null)
+        {
+            objectToActivate.SetActive(true);
+        }
         Destroy(gameObject);
     }
 

@@ -13,12 +13,22 @@ public class GrasslandEvents : MonoBehaviour
     [SerializeField] private GameObject injuredTamaraw;
     [SerializeField] private GameObject curableTamaraw;
     [SerializeField] private GameObject wildlifeSpecialist2;
+    [SerializeField] private GameObject idleWildlifeSpecialist2;
 
     [Header("Prefab to instantiate")]
     [SerializeField] private GameObject tamarawPrefab;
 
     [Header("Wild animals")]
-    public GameObject tamarawWildAnimalsParent;
+    //public GameObject tamarawWildAnimalsParent;
+
+    [Header("Cutscenes")]
+    [SerializeField] private GameObject cureTamarawCutscene;
+
+    [Header("Location")]
+    public GameObject riverLocation;
+
+    [Header("GiveItem")]
+    public Item itemTogive;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,9 +50,32 @@ public class GrasslandEvents : MonoBehaviour
     public void GrasslandQuestAcceptCheck(string questName)
     {
         //QuestUseMedkit2
-        if(questName == "Curing the Tamaraws")
+        if(questName == "Cure the remaining Tamaraws")
         {
             wildTamaraws.SetActive(true);
+            //tamarawWildAnimalsParent.SetActive(true);
+            //cureTamarawCutscene.SetActive(true);
+
+            
+            //play cutscene here
+            //play cutscene
+            StartCoroutine(WaitForDialogue());
+            IEnumerator WaitForDialogue()
+            {
+                yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
+
+                cureTamarawCutscene.SetActive(true);
+                UIManager.instance.DisablePlayerMovement();
+                //wait for cutscene to display tutorial
+                //wait for cutscene to display tutorial
+                yield return new WaitForSeconds(12f);
+
+                //display sneak curing tutorial
+                TutorialUI.instance.EnableTutorial(4);
+                UIManager.instance.EnablePlayerMovement();
+                idleWildlifeSpecialist2.SetActive(true);
+
+            }
         }
 
         if (questName == "Heal the Tamaraw")
@@ -64,36 +97,54 @@ public class GrasslandEvents : MonoBehaviour
             injuredTamaraw.SetActive(false);
             curableTamaraw.SetActive(true);
             wildlifeSpecialist2.SetActive(true);
+
+            StartCoroutine(WaitForDialogue());
+            IEnumerator WaitForDialogue()
+            {
+                yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
+                Inventory.instance.Add(itemTogive, 1, true);
+
+
+            }
         }
 
         if (questName == "Heal the Tamaraw")
         {
             Destroy(curableTamaraw);
+
             Instantiate(tamarawPrefab, curableTamaraw.transform.position, Quaternion.identity);
+
         }
 
 
 
-        //QuestTalkWildlifeSpecialist2
+        //QuestTalkWildlifeSpecialist3
+        //follow specialist to tamaraw
         if (questName == "Report back to the wildlife specialist")
         {
             wildlifeSpecialist1.SetActive(false);
+
         }
 
         //grassland ending
         //QuestTalkWildlifeSpecialistFinal
         if(questName == "Report back to the specialist")
         {
-            tamarawWildAnimalsParent.SetActive(true);
+            //tamarawWildAnimalsParent.SetActive(true);
 
-            //play cutscene here
-            ParticleManager.instance.SpawnPuffParticle(wildlifeSpecialist2.transform.position);
+            //ParticleManager.instance.SpawnPuffParticle(wildlifeSpecialist2.transform.position);
         }
 
         //QuestTalkRiverWildlifeBiologist
         if(questName == "Find out about this area")
         {
-            tamarawWildAnimalsParent.SetActive(false);
+            //tamarawWildAnimalsParent.SetActive(false);
+        }
+
+        //QuestTakegrasslandQuiz
+        if(questName == "Head out to the river")
+        {
+            riverLocation.SetActive(true);
         }
 
     }
@@ -105,11 +156,11 @@ public class GrasslandEvents : MonoBehaviour
         TutorialUI.instance.EnableTutorial(tutorialID);
     }
 
-    private void OnDisable()
-    {
-        GameEvents.instance.onQuestCompleted -= GrasslandQuestAcceptCheck;
-        GameEvents.instance.onQuestCompleted -= GrasslandQuestCompleteCheck;
-    }
+    //private void OnDisable()
+    //{
+    //    GameEvents.instance.onQuestCompleted -= GrasslandQuestAcceptCheck;
+    //    GameEvents.instance.onQuestCompleted -= GrasslandQuestCompleteCheck;
+    //}
 
     // Update is called once per frame
     void Update()

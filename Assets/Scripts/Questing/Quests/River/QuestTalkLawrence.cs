@@ -59,7 +59,7 @@ public class QuestTalkLawrence : QuestNew
 
 
         //waypoint
-        //SpawnWaypointMarker();
+        SpawnWaypointMarker();
 
     }
 
@@ -95,8 +95,9 @@ public class QuestTalkLawrence : QuestNew
 
     public void SpawnWaypointMarker()
     {
+        //aftermath
         _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
-        _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[3]);
+        _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[16]);
 
     }
 
@@ -111,7 +112,7 @@ public class QuestTalkLawrence : QuestNew
         Debug.Log(this + " is Completed");
 
         //disable marker
-        //Destroy(_waypoint);
+        Destroy(_waypoint);
 
         //wait for notifcation or cutscene
         yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);

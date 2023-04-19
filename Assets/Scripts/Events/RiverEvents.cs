@@ -14,11 +14,26 @@ public class RiverEvents : MonoBehaviour
 
     [Header("Dialogues")]
     public SubtleDialogueTrigger dialogueToGoToBeach;
+    public SubtleDialogueTrigger dialogueTurtleWaterPollution;
 
     [Header("River water")]
     public GameObject riverWaterObject;
     public Material cleanWater;
     public Material dirtyWater;
+
+    [Header("Turtle oil")]
+    public GameObject turtleOil;
+
+    [Header("Cleaning river")]
+    public GameObject[] oilBarrels;
+    public GameObject fishingRod;
+
+    [Header("Cutscene")]
+    public GameObject cureTurtleCutscene;
+
+    [Header("Characters")]
+    public GameObject lawrenceRanger;
+    public GameObject lawrenceAftermath;
     void Start()
     {
         injuredTurtle.SetActive(false);
@@ -34,9 +49,25 @@ public class RiverEvents : MonoBehaviour
         if (questName == "Saving the Forest turtles")
         {
             injuredTurtle.SetActive(true);
+            cureTurtleCutscene.SetActive(true);
 
+            turtleOil.SetActive(true);
             //ffalse or destroy
             //fireQuest.SetActive(false);
+            UIManager.instance.DisablePlayerMovement();
+
+            StartCoroutine(DisableCharacterNPC());
+            IEnumerator DisableCharacterNPC()
+            {
+                //cutscene duration
+                dialogueTurtleWaterPollution.TriggerDialogue();
+
+                yield return new WaitForSeconds(20f);
+                //lawrenceAftermath.SetActive(false);
+
+                UIManager.instance.EnablePlayerMovement();
+
+            }
             Destroy(fireQuest);
         }
 
@@ -53,6 +84,20 @@ public class RiverEvents : MonoBehaviour
             //}
         }
 
+
+        //QuestCollectContaminatedBarrel
+        if (questName == "Clean the river")
+        {
+            fishingRod.GetComponent<Outline>().enabled = true;
+            //dialogueToGoToBeach.TriggerDialogue();
+            foreach (var item in oilBarrels)
+            {
+                item.SetActive(true);
+            }
+        }
+
+        //WARNING THIS USES A DIFFERENT EVENT!!!
+
     }
     public void RiverQuestCompleteCheck(string questName)
     {
@@ -65,9 +110,10 @@ public class RiverEvents : MonoBehaviour
         //}
 
         //QuestCollectContaminatedBarrel
-        if (questName == "Cleaning the river")
+        if (questName == "Clean the river")
         {
             dialogueToGoToBeach.TriggerDialogue();
+            turtleOil.SetActive(false);
         }
 
         if (questName == "Help extinguish the fire")
@@ -80,6 +126,8 @@ public class RiverEvents : MonoBehaviour
         if (questName == "Rest in the camp until morning")
         {
             riverWaterObject.GetComponent<Renderer>().material = dirtyWater;
+
+            lawrenceAftermath.SetActive(true);
         }
 
     }

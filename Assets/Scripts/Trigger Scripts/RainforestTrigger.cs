@@ -4,15 +4,57 @@ using UnityEngine;
 
 public class RainforestTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject[] rainforestObjects;
+    public GameObject[] swampObjects;
 
-    // Update is called once per frame
-    void Update()
+    public void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.CompareTag("Player"))
+        {
+
+            //when entering the rainforest
+            if (PlayerLocationManager.currentLocation == "Swamp")
+            {
+                //enable rainforest objects
+                foreach (var objects in rainforestObjects)
+                {
+                    objects.SetActive(true);
+                }
+
+                //disable swamp objects
+                foreach (var objects in swampObjects)
+                {
+                    objects.SetActive(false);
+                }
+
+                PlayerLocationManager.currentLocation = "Rainforest";
+                GameEvents.instance.ChangeLocation();
+
+                return;
+            }
+
+            //when exiting the rainforest back to swamp
+
+            if (PlayerLocationManager.currentLocation == "Rainforest")
+            {
+                //disable rainforest objects
+                foreach (var objects in rainforestObjects)
+                {
+                    objects.SetActive(false);
+                }
+
+                //enable swamp objects
+                foreach (var objects in rainforestObjects)
+                {
+                    objects.SetActive(true);
+                }
+
+
+                PlayerLocationManager.currentLocation = "Swamp";
+                GameEvents.instance.ChangeLocation();
+
+                return;
+            }
+        }
     }
 }

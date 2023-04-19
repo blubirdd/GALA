@@ -69,7 +69,7 @@ public class QuestUseMedkitTurtle : QuestNew
         //waypoint
         SpawnWaypointMarker();
 
-        ClockManager.instance.StartClock(180, this);
+        ClockManager.instance.StartClock(200, this);
 
         //trigger quest event
         GameEvents.instance.QuestAcceptedForSave(questName);

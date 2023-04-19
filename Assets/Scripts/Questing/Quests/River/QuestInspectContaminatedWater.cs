@@ -57,7 +57,7 @@ public class QuestInspectContaminatedWater : QuestNew
         GetGoalsList();
 
         ////waypoint
-        //SpawnWaypointMarker();
+        SpawnWaypointMarker();
 
     }
 
@@ -94,7 +94,7 @@ public class QuestInspectContaminatedWater : QuestNew
     public void SpawnWaypointMarker()
     {
         waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
-        waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[4]);
+        waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[17]);
     }
 
     IEnumerator IsQuestCompleted()

@@ -4,20 +4,55 @@ using UnityEngine;
 
 public class SwampTrigger : MonoBehaviour
 {
-    public GameObject[] objectsToActivate;
-    public GameObject[] objectsToDeactivate;
+    public GameObject[] swampObjects;
+    public GameObject[] riverObjects;
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+
+            //when entering the swamp
             if (PlayerLocationManager.currentLocation == "River")
             {
-                //enable swamp objects
+                //enable river objects
+                foreach (var objects in swampObjects)
+                {
+                    objects.SetActive(true);
+                }
+
+                //disable river objects
+                foreach (var objects in riverObjects)
+                {
+                    objects.SetActive(false);
+                }
+
+                PlayerLocationManager.currentLocation = "Swamp";
+                GameEvents.instance.ChangeLocation();
+
+                return;
             }
+
+            //when exiting the swamp back to river
 
             if (PlayerLocationManager.currentLocation == "Swamp")
             {
-                //disable swamp objects, enable river objects
+                //disable swamp objects
+                foreach (var objects in swampObjects)
+                {
+                    objects.SetActive(false);
+                }
+
+                //enable river objects
+                foreach (var objects in riverObjects)
+                {
+                    objects.SetActive(true);
+                }
+
+                PlayerLocationManager.currentLocation = "River";
+                GameEvents.instance.ChangeLocation();
+
+                return;
             }
         }
     }

@@ -8,11 +8,12 @@ public class Door : MonoBehaviour, IInteractable
     [SerializeField] private string _prompt;
     [SerializeField] private Sprite _icon;
 
+    public SubtleDialogueTrigger subtleDialogue;
 
     public string InteractionPrompt { get; set; }
     public Sprite icon { get; set; }
 
-    Animator animator;
+    public Animator animator;
 
     private bool isOpen = false;
 
@@ -24,7 +25,11 @@ public class Door : MonoBehaviour, IInteractable
     }
     public bool Interact(Interactor interactor)
     {
-
+        if (!Task.instance.tasksCompeleted.Contains("QuestIntroPart2"))
+        {
+            subtleDialogue.TriggerDialogue();
+            return false;
+        }
         isOpen = !isOpen;
 
         if (isOpen)

@@ -119,7 +119,7 @@ public class NotificationManager : MonoBehaviour
 
         //turn off canvas if performance issues
         //turn off canvas
-        
+        //checkMark.SetActive(false);
 
         if (notificationQueue.Count > 0)
         {

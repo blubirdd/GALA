@@ -6,8 +6,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour
+public class MainMenu : MonoBehaviour, IDataPersistence
 {
+    private string tempPlayerName;
     public TMP_InputField nameInputField;
     [Header("Menu Buttons")]
     [SerializeField] private Button newGameButton;
@@ -23,7 +24,7 @@ public class MainMenu : MonoBehaviour
 
     public void GetPlayerName()
     {
-        Player.playerName = nameInputField.text;
+        tempPlayerName = nameInputField.text;
         Debug.Log(Player.playerName);
     }
     public void StartGame()
@@ -61,5 +62,13 @@ public class MainMenu : MonoBehaviour
         continueGameButton.interactable = false;
     }
 
+    public void LoadData(GameData data)
+    {
+       
+    }
 
+    public void SaveData(GameData data)
+    {
+        data.playerName = tempPlayerName;
+    }
 }

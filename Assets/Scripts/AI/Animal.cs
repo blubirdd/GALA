@@ -27,6 +27,7 @@ public class Animal : MonoBehaviour, IAnimal
 
     [Header("Quest States")]
     public Item food;
+    public bool runawayFromPlayer = true;
     public bool isInjured;
     public bool isRunningAway = false;
     public bool canMove = true;
@@ -556,30 +557,34 @@ public class Animal : MonoBehaviour, IAnimal
                 if(chasePlayer == false)
                 {
 
-                    statusImage.gameObject.SetActive(true);
+                    if (runawayFromPlayer)
+                    {
+                        statusImage.gameObject.SetActive(true);
 
-                    //statusImage.sprite = animalState.runningAway;
+                        //statusImage.sprite = animalState.runningAway;
 
-                    //new optimized
-                    isRunningAway = true;
-                    ChangeUI(AnimalStateUI.RunningAway);
+                        //new optimized
+                        isRunningAway = true;
+                        ChangeUI(AnimalStateUI.RunningAway);
 
-                    predatorTransform = _playerColliders[0].transform;
+                        predatorTransform = _playerColliders[0].transform;
 
-                    Debug.Log(this + " is Running away");
+                        Debug.Log(this + " is Running away");
 
-                    //run from target
-                    Vector3 dirToPredator = transform.position - predatorTransform.position;
-                    Vector3 newPosition = transform.position + dirToPredator * 1.3f;
+                        //run from target
+                        Vector3 dirToPredator = transform.position - predatorTransform.position;
+                        Vector3 newPosition = transform.position + dirToPredator * 1.3f;
 
-                    //rotate on direction
-                    Quaternion toRotation = Quaternion.LookRotation(newPosition, Vector3.up);
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 1 * Time.deltaTime);
+                        //rotate on direction
+                        Quaternion toRotation = Quaternion.LookRotation(newPosition, Vector3.up);
+                        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 1 * Time.deltaTime);
 
-                    _animal.speed = _runSpeed;
-                    _animal.SetDestination(newPosition);
-                    //animator.SetFloat("AnimSpeed", 1f);
- 
+                        _animal.speed = _runSpeed;
+                        _animal.SetDestination(newPosition);
+                        //animator.SetFloat("AnimSpeed", 1f);
+                    }
+
+
                 }
 
                 else

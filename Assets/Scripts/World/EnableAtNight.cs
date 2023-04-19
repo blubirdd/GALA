@@ -9,8 +9,14 @@ public class EnableAtNight : MonoBehaviour
     void Start()
     {
         timeController = TimeController.instance;
-        StartCoroutine(CheckForTime());
+        //StartCoroutine(CheckForTime());
 
+    }
+
+    private void OnEnable()
+    {
+        StopAllCoroutines();
+        StartCoroutine(CheckForTime());
     }
 
     // Update is called once per frame

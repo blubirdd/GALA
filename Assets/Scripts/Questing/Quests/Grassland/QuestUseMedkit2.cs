@@ -17,7 +17,7 @@ public class QuestUseMedkit2 : QuestNew
 
         //setup
         ID = "QuestUseMedkit2"; ;
-        questName = "Curing the Tamaraws";
+        questName = "Cure the remaining Tamaraws";
         questDescription = "Cure the remaining infected tamaraw in the area";
 
         goalDescription[0] = "Cure the remaining infected \ntamaraw in the area";
@@ -112,6 +112,7 @@ public class QuestUseMedkit2 : QuestNew
         //disable marker
         //Destroy(_waypoint);
 
-        //AcceptQuest("QuestFeedChicken");
+        yield return new WaitForSeconds(5f);
+        AcceptQuest("QuestTakeGrasslandQuiz");
     }
 }

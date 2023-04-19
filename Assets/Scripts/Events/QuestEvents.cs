@@ -13,8 +13,8 @@ public class QuestEvents : MonoBehaviour
     [SerializeField] private GameObject curableTamaraw;
     [SerializeField] private GameObject wildlifeSpecialist;
 
-    [Header("Grasslands Tamaraw Prefab")]
-    public GameObject tamarawPrefab;
+    //[Header("Grasslands Tamaraw Prefab")]
+    //public GameObject tamarawPrefab;
 
     [Header("River")]
     public SubtleDialogueTrigger afterPhotoForestTurtle;
@@ -31,8 +31,9 @@ public class QuestEvents : MonoBehaviour
     public SubtleDialogueTrigger afterFireExtinguishedDialogue;
 
 
-
-
+    [Header("Waypoint ")]
+    public Transform campWaypoint;
+    private GameObject _waypoint;
 
     private void Start()
     {
@@ -46,11 +47,11 @@ public class QuestEvents : MonoBehaviour
         for (int i = 0; i < task.tasksCompeleted.Count; i++)
         {
             //scene setup
-            if (task.tasksCompeleted[i] == "QuestTalkWildlifeSpecialist2")
-            {
-                Destroy(injuredTamaraw);
-                curableTamaraw.SetActive(true);
-            }
+            //if (task.tasksCompeleted[i] == "QuestTalkWildlifeSpecialist2")
+            //{
+            //    Destroy(injuredTamaraw);
+            //    curableTamaraw.SetActive(true);
+            //}
 
             ////disable for debug purposes
             //if (task.tasksCompeleted[i] == "QuestUseMedkit")
@@ -77,11 +78,11 @@ public class QuestEvents : MonoBehaviour
 
     public void QuestCheck(string quest)
     {
-        //QuestUseMedkit2
-        if(quest == "Curing the Tamaraws")
+        if(quest == "Grab a water bucket")
         {
-            Destroy(wildlifeSpecialist);
+            Destroy(_waypoint);
         }
+
     }
 
     public void QuestCompleteCheck(string quest)
@@ -92,13 +93,18 @@ public class QuestEvents : MonoBehaviour
         {
             FireQuestTriggerCollider.SetActive(true);
 
+            //waypoint
+            _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
+            _waypoint.GetComponent<WaypointUI>().SetTarget(campWaypoint.transform);
+
             StartCoroutine(WaitForCamera());
             IEnumerator WaitForCamera()
             {
                 yield return new WaitUntil(() => UIManager.instance.inGameCameraCanvas.activeSelf == false);
                 afterPhotoForestTurtle.TriggerDialogue();
             }
-           
+
+
         }
 
         if(quest == "Help extinguish the fire")

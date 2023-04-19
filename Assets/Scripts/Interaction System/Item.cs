@@ -11,7 +11,7 @@ public class Item : ScriptableObject
     public Sprite icon = null;
     public bool isDefaultItem = false;
     public bool isUsable = false;
-
+    
     [Header("Discovery Settings")]
     public bool displayDiscovery = true;
 
