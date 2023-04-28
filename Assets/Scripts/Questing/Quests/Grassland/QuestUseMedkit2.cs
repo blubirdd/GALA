@@ -51,7 +51,7 @@ public class QuestUseMedkit2 : QuestNew
         UpdateQuestUI();
 
         //goal (this, name of target, goaldescription, iscompleted bool, current progress, required amount)
-        Goals.Add(new UseGoal(this, "Medkit", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new UseGoal(this, "Med kit", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
         Goals.ForEach(g => g.InIt());
 
         GetGoalsList();
@@ -59,6 +59,7 @@ public class QuestUseMedkit2 : QuestNew
 
         //waypoint
         //SpawnWaypointMarker();
+        GameEvents.instance.QuestAcceptedForSave(questName);
 
     }
 
@@ -113,6 +114,6 @@ public class QuestUseMedkit2 : QuestNew
         //Destroy(_waypoint);
 
         yield return new WaitForSeconds(5f);
-        AcceptQuest("QuestTakeGrasslandQuiz");
+        AcceptQuest("QuestTalkRiverGuard");
     }
 }

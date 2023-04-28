@@ -8,11 +8,19 @@ using TouchPhase = UnityEngine.TouchPhase;
 public class DestroyOnTouch : MonoBehaviour
 {
 
-    public SpriteRenderer spriteRenderer;
+     public SpriteRenderer spriteRenderer;
+    EggGameManager eggGameManager;
 
-public void DestroySnake()
-{
-    Destroy(gameObject); 
-    Debug.Log(gameObject + " hasn't beed destroyed yet!"); 
-}
+
+    private void Start()
+    {
+        eggGameManager = EggGameManager.instance;
+    }
+    public void DestroySnake()
+    {
+
+        Destroy(gameObject); 
+    }
+
+
 }

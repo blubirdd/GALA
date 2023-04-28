@@ -7,7 +7,7 @@ public class BookContentScript : MonoBehaviour
     public GameObject[] pages;
     int index;
  
-
+    SoundManager soundManager;
     private void Start()
     {
         index = 0;
@@ -16,10 +16,13 @@ public class BookContentScript : MonoBehaviour
         {
             pages[i].SetActive(false);
         }*/
+
+        soundManager = SoundManager.instance;
     }
 
     public void ButtonNext()
     {
+        soundManager.PlaySoundFromClips(4);
         if (index < pages.Length - 1)
         {
             index += 1;
@@ -34,6 +37,7 @@ public class BookContentScript : MonoBehaviour
 
     public void ButtonPrevious()
     {
+        soundManager.PlaySoundFromClips(4);
         if (index != 0)
         {
             index -= 1;

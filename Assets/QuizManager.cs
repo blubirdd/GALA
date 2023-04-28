@@ -27,10 +27,11 @@ public class QuizManager : MonoBehaviour
     public TextMeshProUGUI QuestionTxt;
     public TextMeshProUGUI ScoreTxt;
 
+    [Header("Settings")]
     int totalQuestions = 0;
     int questionsDisplayed = 0;
     public int score;
-   
+    public int requiredScore = 1;
 
     [SerializeField] private int currentNumber = 1;
 
@@ -98,7 +99,7 @@ public class QuizManager : MonoBehaviour
         GoPanel.SetActive(true);
         ScoreTxt.text = score + "/" + questionsDisplayed;
 
-        if (score <= 1)
+        if (score <= requiredScore)
         {
             finishButton.SetActive(false);
         }

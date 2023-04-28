@@ -17,10 +17,10 @@ public class QuestTakeGrasslandQuiz : QuestNew
 
         //setup
         ID = "QuestTakeGrasslandQuiz"; ;
-        questName = "Head out to the river";
-        questDescription = "Find a way to the river";
+        questName = "Take and pass the grassland quiz";
+        questDescription = "Score atleast 2 points on the quiz";
 
-        goalDescription[0] = "Find a way to the river";
+        goalDescription[0] = "Score atleast 2 points on the quiz";
         requiredAmount[0] = 1;
 
         reward = 10;
@@ -59,6 +59,8 @@ public class QuestTakeGrasslandQuiz : QuestNew
         //waypoint
         SpawnWaypointMarker();
 
+        GameEvents.instance.QuestAcceptedForSave(questName);
+
     }
 
     private void GetGoalsList()
@@ -93,7 +95,8 @@ public class QuestTakeGrasslandQuiz : QuestNew
 
     public void SpawnWaypointMarker()
     {
-        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
+        Transform waypointParent = FindObjectOfType<WaypointParent>(true).gameObject.transform;
+        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"), waypointParent);
         _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[15]);
 
     }

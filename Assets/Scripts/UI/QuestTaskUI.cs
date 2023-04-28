@@ -42,6 +42,7 @@ public class QuestTaskUI : MonoBehaviour
 
     public void UpdateQuestUI()
     {
+        this.gameObject.SetActive(true);
         StartCoroutine(WaitForFewSeconds());
         IEnumerator WaitForFewSeconds()
         {
@@ -49,7 +50,6 @@ public class QuestTaskUI : MonoBehaviour
 
             if (task.tasks.Count > 0)
             {
-
                 GameObject g;
                 //questTitleText.text = task.tasks[0].questTitle;
                 int lastIndex = task.tasks.Count - 1;
@@ -80,15 +80,16 @@ public class QuestTaskUI : MonoBehaviour
             }
             else
             {
-                questTitleText.text = "Explore the area";
+                this.gameObject.SetActive(false);
+                //questTitleText.text = "Explore the area";
 
-                for (int i = 1; i < questTextArea.transform.childCount; i++)
-                {
-                    Transform childTransform = questTextArea.transform.GetChild(i);
+                //for (int i = 1; i < questTextArea.transform.childCount; i++)
+                //{
+                //    Transform childTransform = questTextArea.transform.GetChild(i);
 
-                    //destroy the child object.
-                    Destroy(childTransform.gameObject);
-                }
+                //    //destroy the child object.
+                //    Destroy(childTransform.gameObject);
+                //}
 
             }
         }

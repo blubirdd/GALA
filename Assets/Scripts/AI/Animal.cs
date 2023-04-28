@@ -12,6 +12,7 @@ public class Animal : MonoBehaviour, IAnimal
     public string animalGroup { get; set; }
     [Header("Animal SO")]
     public Photograph photo;
+    public bool isDiscovered = false;
 
     [Header("AI States")]
     public bool isPassive;
@@ -220,6 +221,7 @@ public class Animal : MonoBehaviour, IAnimal
                     if (isEating)
                     {
                         animator.SetFloat("AnimSpeed", 0f);
+                        Debug.Log(this + "is eating");
                     }
                     else
                     {
@@ -252,6 +254,7 @@ public class Animal : MonoBehaviour, IAnimal
 
             else 
             {
+                //transition from running to walk
                 animator.SetFloat("AnimSpeed", 0.5f, 0.5f, Time.deltaTime);
                 return;
             }
@@ -1006,6 +1009,7 @@ public class Animal : MonoBehaviour, IAnimal
                 IEnumerator EatDelayFood() 
                 {
 
+                    isEating = true;
                     //trigger the quest event
                     FeedEvents.AnimalFed(this);
                     Debug.Log(this + "just ate");
@@ -1017,6 +1021,7 @@ public class Animal : MonoBehaviour, IAnimal
                     animalNav.target = null;
                     
                     hunger = 100;
+                    isEating = false;
 
                     Destroy(other);
                     // yield return new WaitForSeconds(10);

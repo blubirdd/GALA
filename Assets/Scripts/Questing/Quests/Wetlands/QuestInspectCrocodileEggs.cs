@@ -57,6 +57,7 @@ public class QuestInspectCrocodileEggs : QuestNew
 
         //waypoint
         //SpawnWaypointMarker();
+        GameEvents.instance.QuestAcceptedForSave(questName);
 
     }
 
@@ -92,7 +93,8 @@ public class QuestInspectCrocodileEggs : QuestNew
 
     public void SpawnWaypointMarker()
     {
-        waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
+        Transform waypointParent = FindObjectOfType<WaypointParent>(true).gameObject.transform;
+        waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"), waypointParent);
         waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[4]);
     }
 

@@ -21,11 +21,15 @@ public class NotificationManager : MonoBehaviour
     [Header("Completed Notif UI's")]
     [SerializeField] private GameObject checkMark;
     [SerializeField] private GameObject newIcon;
+
+    DialogueSystem dialogueSystem;
+    SoundManager soundManager;
     private void Start()
     {
+        dialogueSystem = DialogueSystem.instance;
+        soundManager = SoundManager.instance;
         GameEvents.instance.onQuestAcceptedNotification += AddQuestNotification;
         GameEvents.instance.onQuestCompleted += AddQuestNotificationCompleted;
-
     }
 
     public void AddQuestNotification(string questName)
@@ -40,13 +44,14 @@ public class NotificationManager : MonoBehaviour
 
     public void AddQuestNotificationCompleted(string questName)
     {
-
-        notificationQueue.Enqueue(questName);
-        if (!isDisplaying)
+        if(!dialogueSystem.dialogueCanvas.gameObject.activeSelf)
         {
-            DisplayNextNotification(true);
+            notificationQueue.Enqueue(questName);
+            if (!isDisplaying)
+            {
+                DisplayNextNotification(true);
+            }
         }
-
     }
 
     private void DisplayNextNotification(bool isCompletedNotification)
@@ -61,6 +66,7 @@ public class NotificationManager : MonoBehaviour
             //IF ACCEPT
             if(isCompletedNotification == false)
             {
+                soundManager.PlaySoundFromClips(2);
                 Debug.Log("SHOULD DISPLAY QUEST ACCEPTED");
                 checkMark.SetActive(false);
                 newIcon.SetActive(true);
@@ -71,6 +77,7 @@ public class NotificationManager : MonoBehaviour
             //IF COMPLETE
             else
             {
+                soundManager.PlaySoundFromClips(3);
                 checkMark.SetActive(true);
                 newIcon.SetActive(false);
                 Debug.Log("SHOULD DISPLAY QUEST COMPLETED OK??????????");

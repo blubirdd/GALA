@@ -13,7 +13,7 @@ public class TaskUI : MonoBehaviour
 
 
     public GameObject taskUI;
-    
+    public GameObject taskPanelContainer;
 
     [SerializeField] private GameObject taskPrefab;
 
@@ -21,7 +21,7 @@ public class TaskUI : MonoBehaviour
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private RectTransform rectTransform;
 
-    
+
     //[SerializeField] private GameObject goalListPrefab;
 
     private void Start()
@@ -98,22 +98,21 @@ public class TaskUI : MonoBehaviour
         taskUI.SetActive(true);
         UIManager.instance.DisableButtonsUIPACK();
 
-        // Set initial position and alpha
-        taskUI.transform.localPosition = new Vector3(0, 200, 0);
-        // CanvasGroup canvasGroup = taskUI.GetComponent<CanvasGroup>();
-        canvasGroup.alpha = 0;
+        //animate 
+        taskPanelContainer.transform.localPosition = new Vector3(0, -500, 0);
+        taskPanelContainer.GetComponent<CanvasGroup>().alpha = 0;
 
-        // Animate position and alpha to final values
-        taskUI.transform.DOLocalMoveY(0, 0.5f).SetEase(Ease.OutBack);
-        canvasGroup.DOFade(1, 0.5f);
-        
+        taskPanelContainer.transform.DOLocalMoveY(0, 0.5f).SetEase(Ease.OutBack);
+        taskPanelContainer.GetComponent<CanvasGroup>().DOFade(1, 0.5f);
+
         UpdateUI();
+        SoundManager.instance.PlaySoundFromClips(6);
     }
 
     public void CloseTasks()
     {
         // Animate position to initial value
-        
+
         //Vector3 initialPos = rectTransform.anchoredPosition;
         //rectTransform.DOAnchorPosY(initialPos.y - 200, 0.5f, false).SetEase(Ease.InBack).OnComplete(() =>
         //{
@@ -121,13 +120,19 @@ public class TaskUI : MonoBehaviour
         //});
 
 
+
+        taskPanelContainer.transform.DOLocalMoveY(-500, 0.5f).SetEase(Ease.InBack);
+        taskPanelContainer.GetComponent<CanvasGroup>().DOFade(0, 0.5f).OnComplete(() => taskUI.SetActive(false));
+
         // Destroy children and disable task UI
         for (int i = 0; i < this.transform.childCount; i++)
         {
             Destroy(this.transform.GetChild(i).gameObject);
         }
-        taskUI.SetActive(false);
+        //taskUI.SetActive(false);
+
         UIManager.instance.EnableButtonsUIPACK();
+        SoundManager.instance.PlaySoundFromClips(6);
     }
 
 

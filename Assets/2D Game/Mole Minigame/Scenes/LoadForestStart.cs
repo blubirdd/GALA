@@ -14,6 +14,7 @@ public class LoadForestStart : MonoBehaviour
             Player.instance.moleGameScore = moleGameManager.score;
         }
 
+        SwampEvents.fromMoleGame = true;
         SceneManager.LoadScene("ForestStart");
     }
 }

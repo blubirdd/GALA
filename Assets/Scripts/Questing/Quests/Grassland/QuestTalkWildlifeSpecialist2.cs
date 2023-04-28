@@ -63,6 +63,8 @@ public class QuestTalkWildlifeSpecialist2 : QuestNew
         //waypoint
         SpawnWaypointMarker();
 
+        GameEvents.instance.QuestAcceptedForSave(questName);
+
     }
 
     private void GetGoalsList()
@@ -97,7 +99,8 @@ public class QuestTalkWildlifeSpecialist2 : QuestNew
 
     public void SpawnWaypointMarker()
     {
-        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
+        Transform waypointParent = FindObjectOfType<WaypointParent>(true).gameObject.transform;
+        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"), waypointParent);
         _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[7]);
 
     }

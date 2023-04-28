@@ -44,7 +44,7 @@ public class RainforestTrigger : MonoBehaviour
                 }
 
                 //enable swamp objects
-                foreach (var objects in rainforestObjects)
+                foreach (var objects in swampObjects)
                 {
                     objects.SetActive(true);
                 }

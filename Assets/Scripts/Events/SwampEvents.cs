@@ -1,3 +1,4 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,11 @@ using UnityEngine.AI;
 
 public class SwampEvents : MonoBehaviour
 {
+    [Header("Quest Giver")]
+    public GameObject questManager;
+    private QuestNew quest { get; set; }
+
+
     [Header("Quest References")]
     public GameObject crocodileFocus;
     public GameObject crocodile1;
@@ -24,7 +30,8 @@ public class SwampEvents : MonoBehaviour
 
     [Header("Display Crocodile")]
     public Animal displayCrocodile;
-
+    [Header("Display Crocodile")]
+    public GameObject relocateQuestTrigger;
     [Header("Lake target")]
     [SerializeField] private Transform lakeTarget;
 
@@ -32,16 +39,87 @@ public class SwampEvents : MonoBehaviour
     public GameObject timeline001;
     public GameObject timeline002;
 
+    [Header("Walls")]
+    public GameObject relocateCrocodileWall;
+
     [Header("Dialouges")]
     public SubtleDialogueTrigger containCrocsSubtleDialogue;
     public SubtleDialogueTrigger afterContainCrocsSubtleDialogue;
     public SubtleDialogueTrigger relocateCrocsSubtleDialogue;
     public SubtleDialogueTrigger releasedCrocodiles;
 
+    [Header("Quest Characters")]
+    [SerializeField] private Character eggGame;
+    [SerializeField] private Character moleGame;
+
+    [Header("Egg Game")]
+    public Transform eggGameRespawnPoint;
+    public Transform moleGameRespawnPoint;
+    public static bool fromEggGame = false;
+    public static bool fromMoleGame = false;
+    public GameObject otherEggsParent;
+
+    [Header("End")]
+    public GameObject rainforestLocation;
     void Start()
     {
         GameEvents.instance.onQuestAcceptedNotification += SwampQuestAcceptCheck;
         GameEvents.instance.onQuestCompleted += SwampQuestCompleteCheck;
+
+        if (Task.instance.tasksCompeleted.Contains("QuestRelocateCrocodile"))
+        {
+
+            relocateCrocodileWall.SetActive(false);
+        }
+
+        if (fromEggGame)
+        {
+            ThirdPersonController.instance.gameObject.SetActive(false);
+            ThirdPersonController.instance.gameObject.transform.position = eggGameRespawnPoint.position;
+            ThirdPersonController.instance.gameObject.SetActive(true);
+
+            Player.instance.eggGameScore = 10;
+            fromEggGame = false;
+
+            quest = (QuestNew)questManager.AddComponent(System.Type.GetType("QuestFindMoreEggs"));
+        }
+
+        if (fromMoleGame)
+        {
+            ThirdPersonController.instance.gameObject.SetActive(false);
+            ThirdPersonController.instance.gameObject.transform.position = moleGameRespawnPoint.position;
+            ThirdPersonController.instance.gameObject.SetActive(true);
+
+            Player.instance.moleGameScore = 10;
+            quest = (QuestNew)questManager.AddComponent(System.Type.GetType("QuestTalkSwampBiologist2"));
+            fromMoleGame = false;
+        }
+
+        Debug.Log("Egg game: " + Player.instance.eggGameScore);
+        Debug.Log("Mole game: " + Player.instance.moleGameScore);
+
+
+
+        StartCoroutine(WaitForAFewSeconds());
+        IEnumerator WaitForAFewSeconds()
+        {
+            yield return new WaitForEndOfFrame();
+            if (Player.instance.moleGameScore > 0)
+            {
+                TalkEvents.CharacterApproach(moleGame);
+            }
+
+            if (Player.instance.eggGameScore > 0)
+            {
+                TalkEvents.CharacterApproach(eggGame);
+            }
+        }
+
+    }
+
+    private void OnEnable()
+    {
+
     }
 
     public void SwampQuestAcceptCheck(string questName)
@@ -50,8 +128,8 @@ public class SwampEvents : MonoBehaviour
         if(questName == "Contain and capture the crocodiles")
         {
             crocodileQuestAnimals.SetActive(true);
-
-
+            //crocodile1.GetComponent<Outline>().enabled = true;
+            //crocodile2.GetComponent<Outline>().enabled = true;
             FocusOnTransform(crocodileFocus.transform, 10f);
             StartCoroutine(WaitToTriggerDialgoue());
 
@@ -79,12 +157,27 @@ public class SwampEvents : MonoBehaviour
 
             IEnumerator WaitToTriggerDialgoueForRelocation()
             {
+                UIManager.instance.DisablePlayerMovement();
                 yield return new WaitForSeconds(5f);
                 relocateCrocsSubtleDialogue.TriggerDialogue();
                 //crocodile2.layer = LayerMask.NameToLayer("Default");
+                yield return new WaitForSeconds(6f);
+                UIManager.instance.EnablePlayerMovement();
             }
 
+            relocateQuestTrigger.SetActive(true);
+        }
 
+        //QuestEnterCrocSanctuary
+        if(questName == "Enter the Crocodile Sanctuary")
+        {
+            relocateCrocodileWall.SetActive(false);
+        }
+
+        //QuestFindMoreEggs
+        if(questName == "Find more Crocodile Eggs")
+        {
+            otherEggsParent.SetActive(true);
         }
 
     }
@@ -101,12 +194,18 @@ public class SwampEvents : MonoBehaviour
         {
             //ranger entrance
             afterContainCrocsSubtleDialogue.TriggerDialogue();
-            StartCoroutine(WaitForDialogue());
+            StartCoroutine(WaitForDialogueToContain());
 
-            IEnumerator WaitForDialogue()
+            //crocodile1.GetComponent<Outline>().enabled = false;
+            //crocodile2.GetComponent<Outline>().enabled = false; ;
+            IEnumerator WaitForDialogueToContain()
             {
                 yield return new WaitForSeconds(2f);
+
                 timeline001.SetActive(true);
+                UIManager.instance.DisablePlayerMovement();
+                yield return new WaitForSeconds(10f);
+                UIManager.instance.EnablePlayerMovement();
             }
 
 
@@ -157,10 +256,19 @@ public class SwampEvents : MonoBehaviour
             StartCoroutine(WaitForDialogue());
             IEnumerator WaitForDialogue()
             {
+                yield return new WaitForEndOfFrame();
                 yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
+
+                ParticleManager.instance.SpawnPuffParticle(swampWildlifeRanger.transform.position);
                 Destroy(swampWildlifeRanger);
             }
 
+        }
+
+        //QuestTakeSwampQuiz
+        if(questName == "Take and pass the swamp quiz")
+        {
+            rainforestLocation.SetActive(true);
         }
 
     }

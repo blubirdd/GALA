@@ -23,6 +23,9 @@ public class IdleNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersistenc
 
     public string npcName { get; set; }
 
+    [Header("Idle Animation")]
+    public string animationName;
+
     void Start()
     {
         InteractionPrompt = _prompt;
@@ -48,11 +51,13 @@ public class IdleNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersistenc
             {
                 _dialogue.TriggerDialogue();
 
+                PositionPlayer(interactor);
             }
 
             else
             {
                 isTalkedDialogue.TriggerDialogue();
+                PositionPlayer(interactor);
             }
         }
         else
@@ -60,6 +65,7 @@ public class IdleNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersistenc
             if(isTalkedDialogue != null)
             {
                isTalkedDialogue.TriggerDialogue();
+               PositionPlayer(interactor);
             }
            
         }
@@ -67,6 +73,14 @@ public class IdleNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersistenc
         isTalked = true;
 
         return true;
+    }
+
+    public void PositionPlayer(Interactor interactor)
+    {
+        interactor.gameObject.SetActive(false);
+        interactor.transform.position = transform.position + transform.forward * 2;
+        interactor.transform.LookAt(transform);
+        interactor.gameObject.SetActive(true);
     }
 
 

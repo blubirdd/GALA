@@ -35,13 +35,13 @@ public class Door : MonoBehaviour, IInteractable
         if (isOpen)
         {
             animator.SetBool("isOpen", true);
-            _prompt = "Close Door";
+            _prompt = "Use Door";
         }
 
         else
         {
             animator.SetBool("isOpen", false);
-            _prompt = "Open Door";
+            _prompt = "Use Door";
         }
 
         return true;

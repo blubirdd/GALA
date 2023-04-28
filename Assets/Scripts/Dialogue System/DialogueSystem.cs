@@ -11,7 +11,21 @@ using System;
 
 public class DialogueSystem : MonoBehaviour
 {
+    #region Singleton
 
+    public static DialogueSystem instance;
+
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one DialogueSystem of task found");
+            return;
+        }
+
+        instance = this;
+    }
+    #endregion
     public static bool dialogueEnded = false;
 
 
@@ -77,6 +91,11 @@ public class DialogueSystem : MonoBehaviour
     public void StartDialogue(Dialogue dialogue)
     {
         //CinemachineTargetGroup.instance.m_Targets[1].target = null;
+
+        if (subtleDialogueCanvas.gameObject.activeSelf)
+        {
+            subtleDialogueCanvas.SetActive(false);
+        }
 
         dialogueEnded = false;
 
@@ -151,7 +170,12 @@ public class DialogueSystem : MonoBehaviour
             if (letterIndex + 1 < sentence.Length)
             {
                 dialogueText.text += sentence[letterIndex + 1];
-                PlayDialogueSound(currentDisplayedCharacterCount);
+
+                if(dialogueEnded == false)
+                {
+                    PlayDialogueSound(currentDisplayedCharacterCount);
+                }
+  
 
             }
             //  yield return new WaitForSeconds(0.01f);

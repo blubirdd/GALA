@@ -15,7 +15,7 @@ public class QuestTalkFarmer : QuestNew
      
         //setup
         ID = "QuestTalkFarmer"; ;
-        questName = "Helping the Farmer";
+        questName = "Give the seeds to the Farmer";
         questDescription = "Give the obtained seeds";
 
 
@@ -55,6 +55,8 @@ public class QuestTalkFarmer : QuestNew
         //waypoint
         SpawnWaypointMarker();
 
+        GameEvents.instance.QuestAcceptedForSave(questName);
+
     }
 
     private void GetGoalsList()
@@ -89,8 +91,9 @@ public class QuestTalkFarmer : QuestNew
 
     public void SpawnWaypointMarker()
     {
-        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
-       _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[3]);
+        Transform waypointParent = FindObjectOfType<WaypointParent>(true).gameObject.transform;
+        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"), waypointParent);
+        _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[3]);
        
     }
 

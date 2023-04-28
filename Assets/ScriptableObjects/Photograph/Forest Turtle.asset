@@ -20,7 +20,7 @@ MonoBehaviour:
   weight: 'Weight: 0.37 - 0.59 KG'
   height: 'Height: Unkown'
   length: 'Length: 21-130 CM'
-  biomeImage: {fileID: 0}
+  biomeImage: {fileID: 21300000, guid: fa87ac2d698becd4a90b82e9a52debb2, type: 3}
   biome: Wetlands
   diet: 'Diet: Omnivore'
   food: 'Food: Aquatic Plants, Small Fish'

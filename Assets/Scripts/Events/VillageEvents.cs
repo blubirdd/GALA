@@ -1,3 +1,4 @@
+using BrokenVector.LowPolyFencePack;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class VillageEvents : MonoBehaviour
     // Start is called before the first frame update
     public Door door;
     public GameObject[] itemsToCollect;
+
+    public DoorController doorController;
     void Start()
     {
         GameEvents.instance.onQuestAcceptedNotification += VillageQuestAcceptCheck;
@@ -43,7 +46,7 @@ public class VillageEvents : MonoBehaviour
         //QuestIntroPart1
         if(questName == "The mysterious person")
         {
-            StartCoroutine(WaitUntilDialogueEnd(0, 0.3f));
+            StartCoroutine(WaitUntilDialogueEnd(0, 2f));
         }
 
         if(questName == "Preparation for Adventure")
@@ -58,13 +61,13 @@ public class VillageEvents : MonoBehaviour
         //QuestTalkVillageChief
         if (questName == "Find out about the Village")
         {
-            StartCoroutine(WaitUntilDialogueEnd(1, 0.3f));
+            //StartCoroutine(WaitUntilDialogueEnd(1, 2f));
         }
 
         //QuestPhotoChicken
-        if(questName == "Animals in Antrophogenic Biome")
+        if(questName == "Photograph a Red junglefowl")
         {
-            StartCoroutine(WaitUntilDialogueEnd(2, 3f));
+            StartCoroutine(WaitUntilDialogueEnd(2, 2f));
         }
 
         //QuestFeedChicken
@@ -78,6 +81,7 @@ public class VillageEvents : MonoBehaviour
             }
 
         }
+
     }
 
     public void VillageQuestCompleteCheck(string questName)
@@ -88,10 +92,19 @@ public class VillageEvents : MonoBehaviour
             //QuestIntroPart2
             door.animator.SetBool("isOpen", true);
         }
+
+        //QuestTakeVillageQuiz
+        if(questName == "Take and pass the quiz")
+        {
+            doorController.ToggleDoor();
+        }
     }
     IEnumerator WaitUntilDialogueEnd(int tutorialID , float delay)
     {
-        //yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
+
+        yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
+        yield return new WaitForEndOfFrame();
+        UIManager.instance.DisablePlayerMovement();
         yield return new WaitForSeconds(delay);
         TutorialUI.instance.EnableTutorial(tutorialID);
     }

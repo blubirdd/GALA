@@ -18,9 +18,9 @@ public class QuestPhotographEagle : QuestNew
         //setup
         ID = "QuestPhotographEagle"; ;
         questName = "Photograph a Philippine Eagle";
-        questDescription = "Find and photograph a Philippine Eagle";
+        questDescription = "Find and photograph \na Philippine Eagle";
 
-        goalDescription[0] = "Find and photograph a Philippine Eagle";
+        goalDescription[0] = "Find and photograph \na Philippine Eagle";
         requiredAmount[0] = 3;
 
 
@@ -61,6 +61,7 @@ public class QuestPhotographEagle : QuestNew
 
         //waypoint
         //SpawnWaypointMarker();
+        GameEvents.instance.QuestAcceptedForSave(questName);
 
     }
 

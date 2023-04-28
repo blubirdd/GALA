@@ -28,7 +28,9 @@ public class PhotoCapture : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI animalText;
 
-
+    [Header("Flash Effect")]
+    [SerializeField] private GameObject cameraFlash;
+    [SerializeField] private float flashTime = 0.2f; 
 
     void Start()
     {
@@ -83,7 +85,7 @@ public class PhotoCapture : MonoBehaviour
     {
         //set camera ui to false 
         CameraUIPack.SetActive(false);
-
+        SoundManager.instance.PlaySoundFromClips(1);
         viewingPhoto = true;
         yield return new WaitForEndOfFrame();
 
@@ -107,6 +109,15 @@ public class PhotoCapture : MonoBehaviour
 
        okButton.SetActive(true);
 
+        StartCoroutine(CameraFlashEffect());
+
+    }
+
+    IEnumerator CameraFlashEffect()
+    {
+        cameraFlash.SetActive(true);
+        yield return new WaitForSeconds(flashTime);
+        cameraFlash.SetActive(false);
     }
 
     void RemovePhoto()

@@ -18,6 +18,9 @@ public class QuestPutOutFire : QuestNew
 
         //setup
         ID = "QuestPutOutFire"; ;
+
+        questID = ID;
+
         questName = "Help extinguish the fire";
         questDescription = "Grab a water from the river and \n put out the fire";
 
@@ -62,7 +65,7 @@ public class QuestPutOutFire : QuestNew
         //SpawnWaypointMarker();
 
         //timer
-        ClockManager.instance.StartClock(300, this);
+        ClockManager.instance.StartClock(100, this);
 
         GameEvents.instance.QuestAcceptedForSave(questName);
 
@@ -100,7 +103,8 @@ public class QuestPutOutFire : QuestNew
 
     public void SpawnWaypointMarker()
     {
-        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
+        Transform waypointParent = FindObjectOfType<WaypointParent>(true).gameObject.transform;
+        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"), waypointParent);
         _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[3]);
 
     }

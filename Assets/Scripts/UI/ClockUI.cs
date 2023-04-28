@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
+
 
 public class ClockUI : MonoBehaviour
 {
@@ -14,7 +14,7 @@ public class ClockUI : MonoBehaviour
     [SerializeField] private Image clockFill;
     [SerializeField] private TextMeshProUGUI clockText;
 
-    public int duration;
+    private int duration;
     private int remainingDuration;
 
 
@@ -55,7 +55,14 @@ public class ClockUI : MonoBehaviour
         }
 
         //OnEnd();
+        Debug.Log(quest.questID + "QUEST ID WORKING?");
         ClockManager.instance.TimerEnd(quest);
+    }
+
+
+    public void ResetClock()
+    {
+        remainingDuration = duration;
     }
 
     public void UpdateClockIndependent(int second)
@@ -80,6 +87,11 @@ public class ClockUI : MonoBehaviour
 
         ClockManager.instance.IndependentClockEnd();
 
+    }
+
+    void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     //private void OnEnd()

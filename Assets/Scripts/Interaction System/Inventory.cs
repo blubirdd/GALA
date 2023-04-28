@@ -61,13 +61,13 @@ public class Inventory : MonoBehaviour, IDataPersistence
     private void Start()
     {
         //set toolbar items to true once tutorial is done
-        if (Task.instance.tasksCompeleted.Contains("QuestIntroPart2"))
-        {
-            foreach (var item in toolbarItems)
-            {
-                item.SetActive(true);
-            }
-        }
+        //if (Task.instance.tasksCompeleted.Contains("QuestIntroPart2"))
+        //{
+        //    foreach (var item in toolbarItems)
+        //    {
+        //        item.SetActive(true);
+        //    }
+        //}
     }
 
     private void OnEnable()

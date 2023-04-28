@@ -65,6 +65,8 @@ public class QuestNovicePart1 : QuestNew
         //event trigger
         //QuestEvents.instance.QuestAccepted2();
 
+        GameEvents.instance.QuestAcceptedForSave(questName);
+
     }
 
     private void GetGoalsList()

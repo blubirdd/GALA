@@ -47,6 +47,8 @@ public class ItemInspect : MonoBehaviour, IInteractable
     [SerializeField] private GameObject timeline;
 
 
+    [Header("Object to activate")]
+    [SerializeField] private GameObject objectToActivate;
 
     [Header("Minigame")]
     [SerializeField] private bool hasMinigame;
@@ -89,7 +91,11 @@ public class ItemInspect : MonoBehaviour, IInteractable
             TalkEvents.CharacterApproach(character);
         }
 
-
+        if(objectToActivate != null)
+        {
+            ParticleManager.instance.SpawnPuffParticle(transform.position);
+            objectToActivate.SetActive(true);
+        }
 
         return true;
     }
@@ -134,11 +140,17 @@ public class ItemInspect : MonoBehaviour, IInteractable
 
             if (hasMinigame)
             {
+         
                 MinigameTrigger.instance.LoadScene(miniGameScene, 8f);
             }
 
             cinemachineManager.DisableInspectCam();
-            uiManager.EnablePlayerMovement();
+
+            if (!hasMinigame)
+            {
+                uiManager.EnablePlayerMovement();
+            }
+
 
             //HANDLE DESTROY
             if(isItem)

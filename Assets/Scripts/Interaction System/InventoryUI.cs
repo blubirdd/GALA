@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -18,6 +19,7 @@ public class InventoryUI : MonoBehaviour
 
     Inventory inventory;
     Book book;
+    UIManager uiManager;
     InventorySlot[] slots;
 
     public Item currentItem;
@@ -31,14 +33,14 @@ public class InventoryUI : MonoBehaviour
     {
         inventory = Inventory.instance;
         book = Book.instance;
-
+        uiManager = UIManager.instance;
         inventory.OnItemChangedCallback += UpdateUI;
 
         slots = itemsParent.GetComponentsInChildren<InventorySlot>(true);
 
         UpdateUI();
 
-        bagName.text = Player.playerName + "'s Bag";
+        //bagName.text = Player.playerName + "'s Bag";
 
     }
 
@@ -66,21 +68,40 @@ public class InventoryUI : MonoBehaviour
     {
         //inventoryUI.SetActive(!inventoryUI.activeSelf);
         inventoryUI.SetActive(true);
-        itemDetailsParent.SetActive(true);
+        //itemDetailsParent.SetActive(true);
         itemContents.SetActive(false);
+        inventoryUI.transform.localPosition = new Vector3(-132, -500, 0);
+        inventoryUI.GetComponent<CanvasGroup>().alpha = 0;
+
+        inventoryUI.transform.DOLocalMoveY(-50, 0.5f).SetEase(Ease.OutBack);
+        inventoryUI.GetComponent<CanvasGroup>().DOFade(1, 0.5f);
+
         UIManager.instance.DisableButtonsUIPACK();
 
         goldCoinsCollectedText.text = inventory.goldCoins.ToString();
         scoreText.text = inventory.naturePoints.ToString();
         numberOfPhotographsCollectedText.text = book.photosInventory.Count.ToString();
+
+        SoundManager.instance.PlaySoundFromClips(9);
+
+        uiManager.RotatePlayerToCamera();
+        uiManager.animatedFirstPersonCamera.SetActive(true);
     }
 
     public void CloseInventory()
     {
         //itemDetailsBackgroundImage.color = new Color32(116, 91, 91, 255);
-        itemDetailsParent.SetActive(false);
-        inventoryUI.SetActive(false);
+        inventoryUI.transform.DOLocalMoveY(-500, 0.5f).SetEase(Ease.InBack);
+        inventoryUI.GetComponent<CanvasGroup>().DOFade(0, 0.5f).OnComplete(() =>
+        {
+            inventoryUI.SetActive(false);
+            //itemDetailsParent.SetActive(false);
+        });
+
+        //inventoryUI.SetActive(false);
+        //itemDetailsParent.SetActive(false);
         UIManager.instance.EnableButtonsUIPACK();
+        uiManager.animatedFirstPersonCamera.SetActive(false);
     }
 
     public void ConsumeItem()

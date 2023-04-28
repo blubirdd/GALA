@@ -14,8 +14,8 @@ public class QuestPhotoChicken : QuestNew
 
         //setup
         ID = "QuestPhotoChicken"; ;
-        questName = "Animals in Antrophogenic Biome";
-        questDescription = "Photograph a Red junglefowl";
+        questName = "Photograph a Red junglefowl";
+        questDescription = "Find and photograph a Red junglefowl";
 
 
         reward = 10;
@@ -55,6 +55,8 @@ public class QuestPhotoChicken : QuestNew
 
         //waypoint
         //SpawnWaypointMarker();
+
+        GameEvents.instance.QuestAcceptedForSave(questName);
 
     }
 

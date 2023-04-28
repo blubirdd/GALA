@@ -61,6 +61,8 @@ public class QuestTalkLawrence : QuestNew
         //waypoint
         SpawnWaypointMarker();
 
+        GameEvents.instance.QuestAcceptedForSave(questName);
+
     }
 
     private void GetGoalsList()
@@ -96,7 +98,8 @@ public class QuestTalkLawrence : QuestNew
     public void SpawnWaypointMarker()
     {
         //aftermath
-        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
+        Transform waypointParent = FindObjectOfType<WaypointParent>(true).gameObject.transform;
+        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"), waypointParent);  
         _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[16]);
 
     }

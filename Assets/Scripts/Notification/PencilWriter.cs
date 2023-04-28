@@ -30,7 +30,7 @@ public class PencilWriter : MonoBehaviour
         {
             _text.text += letter;
             //anim speed
-            yield return new WaitForSeconds(0.07f);
+            yield return new WaitForSeconds(0.04f);
 
         }
     }

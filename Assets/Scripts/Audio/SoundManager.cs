@@ -32,7 +32,37 @@ public class SoundManager : MonoBehaviour
         switch (sound)
         {
             case 0:
-                audioSource.PlayOneShot(sounds[0], 0.4f);
+                audioSource.PlayOneShot(sounds[0], 0.5f);
+                break;
+            case 1:
+                audioSource.PlayOneShot(sounds[1], 1f);
+                break;
+            case 2:
+                audioSource.PlayOneShot(sounds[2], 1f);
+                break;
+            case 3:
+                audioSource.PlayOneShot(sounds[3], 0.5f);
+                break;
+            case 4:
+                audioSource.PlayOneShot(sounds[4], 0.8f);
+                break;
+            case 5:
+                audioSource.PlayOneShot(sounds[5], 0.7f);
+                break;
+            case 6:
+                audioSource.PlayOneShot(sounds[6], 1f);
+                break;
+            case 7:
+                audioSource.PlayOneShot(sounds[7], 1f);
+                break;
+            case 8:
+                audioSource.PlayOneShot(sounds[8], 1f);
+                break;
+            case 9:
+                audioSource.PlayOneShot(sounds[9], 0.5f);
+                break;
+            case 10:
+                audioSource.PlayOneShot(sounds[10], 1f);
                 break;
             default:
                 Debug.LogError("No sound sound");

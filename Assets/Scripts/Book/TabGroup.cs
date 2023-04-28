@@ -16,6 +16,7 @@ public class TabGroup : MonoBehaviour
     public Color selectedColor;
 
     public bool changeColor = true;
+    public bool isBook = false;
     public void Subscribe(TabButton button)
     {
         if(tabButtons == null)
@@ -28,6 +29,11 @@ public class TabGroup : MonoBehaviour
 
     public void OnTabEnter(TabButton button)
     {
+        if (isBook)
+        {
+            SoundManager.instance.PlaySoundFromClips(4);
+        }
+
         ResetTabs();
        
     }
@@ -45,6 +51,11 @@ public class TabGroup : MonoBehaviour
         if (changeColor)
         {
             button.GetComponent<Image>().color = selectedColor;
+        }
+
+        else
+        {
+            button.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
         }
 
 
@@ -74,6 +85,11 @@ public class TabGroup : MonoBehaviour
             if (changeColor)
             {
                 button.GetComponent<Image>().color = initialColor;
+            }
+
+            else
+            {
+                button.transform.localScale = new Vector3(1f, 1f, 1f);
             }
 
         }

@@ -26,6 +26,7 @@ public class ParticleManager : MonoBehaviour
 
     public void SpawnPuffParticle(Vector3 location)
     {
+        SoundManager.instance.PlaySoundFromClips(10);
        GameObject g = Instantiate(puffParticle, location, Quaternion.identity);
        //Destroy(g, 3f);
     }

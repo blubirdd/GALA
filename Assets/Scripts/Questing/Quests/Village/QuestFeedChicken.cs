@@ -54,6 +54,8 @@ public class QuestFeedChicken : QuestNew
         //event trigger
         //QuestEvents.instance.QuestAccepted2();
 
+        GameEvents.instance.QuestAcceptedForSave(questName);
+
     }
 
     private void GetGoalsList()
@@ -102,6 +104,6 @@ public class QuestFeedChicken : QuestNew
 
         //Add another quest
         yield return new WaitForSeconds(4f);
-        AcceptQuest("QuestTakeVillageQuiz");
+        AcceptQuest("QuestTalkVillageChief");
     }
 }

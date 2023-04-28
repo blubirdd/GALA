@@ -20,7 +20,7 @@ MonoBehaviour:
   weight: 'Weight: 125-143 G'
   height: 'Height: Unkown'
   length: 'Length: 218-221 MM'
-  biomeImage: {fileID: 0}
+  biomeImage: {fileID: 21300000, guid: 0740f7efe904acc49a4f6590e2809922, type: 3}
   biome: Anthropogenic, Forest
   diet: 'Diet: Frugivore, Herbivore'
   food: 'Food: Fruits, Seeds'

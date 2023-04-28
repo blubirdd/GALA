@@ -18,8 +18,8 @@ public class QuestTakeVillageQuiz : QuestNew
 
         //setup
         ID = "QuestTakeVillageQuiz"; ;
-        questName = "Try to go out the village";
-        questDescription = "Find and talk to the village guard";
+        questName = "Take and pass the quiz";
+        questDescription = "Score atleast 2 points on the quiz";
 
         goalDescription[0] = "Find and talk to the village guard";
         requiredAmount[0] = 1;
@@ -60,6 +60,8 @@ public class QuestTakeVillageQuiz : QuestNew
         //waypoint
         SpawnWaypointMarker();
 
+        GameEvents.instance.QuestAcceptedForSave(questName);
+
     }
 
     private void GetGoalsList()
@@ -94,7 +96,8 @@ public class QuestTakeVillageQuiz : QuestNew
 
     public void SpawnWaypointMarker()
     {
-        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
+        Transform waypointParent = FindObjectOfType<WaypointParent>(true).gameObject.transform;
+        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"), waypointParent);
         _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[13]);
 
     }
@@ -112,7 +115,7 @@ public class QuestTakeVillageQuiz : QuestNew
         //disable marker
         Destroy(_waypoint);
 
-        //yield return new WaitForSeconds(7f);
-        //AcceptQuest("QuestTalkWildlifeSpecialist3");
+        yield return new WaitForSeconds(4f);
+        AcceptQuest("QuestTalkWildlifeSpecialist");
     }
 }

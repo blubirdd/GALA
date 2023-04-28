@@ -21,6 +21,8 @@ public class QuestEvents : MonoBehaviour
     public GameObject FireQuestTriggerCollider;
     public GameObject FireQuest;
 
+
+
     [Header("River Aftermath")]
     public GameObject characterLawrence;
     public GameObject characterLawrenceAftermath;

@@ -66,6 +66,8 @@ public class QuestTalkNightTent : QuestNew
 
         //waypoint
         //SpawnWaypointMarker();
+        GameEvents.instance.QuestAcceptedForSave(questName);
+
 
     }
 
@@ -101,7 +103,8 @@ public class QuestTalkNightTent : QuestNew
 
     public void SpawnWaypointMarker()
     {
-        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
+        Transform waypointParent = FindObjectOfType<WaypointParent>(true).gameObject.transform;
+        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"), waypointParent);
         _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[3]);
 
     }

@@ -59,6 +59,7 @@ public class QuestPhotographForestTurtle : QuestNew
 
         //waypoint
         //SpawnWaypointMarker();
+        GameEvents.instance.QuestAcceptedForSave(questName);
 
     }
 

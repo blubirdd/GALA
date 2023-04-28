@@ -82,9 +82,9 @@ public class Cutscene : MonoBehaviour, IDataPersistence
         if (character != null)
         {
             TalkEvents.CharacterApproach(character);
-            yield return new WaitForSeconds(4f);
+            //yield return new WaitForSeconds(4f);
         }
-        if (questType != null)
+        if (questType != "")
         {
             //Assign Quest
             quest = (QuestNew)quests.AddComponent(System.Type.GetType(questType));

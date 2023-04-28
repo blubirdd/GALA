@@ -29,13 +29,19 @@ public class Hunter : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        
         //uiManager = UIManager.instance;
 
         //_hunterEmote = uiManager.hunterEmote;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         viewAngle = spotlight.spotAngle;
         originalSpotlightColour = spotlight.color;
+
+    }
+
+    private void OnEnable()
+    {
+        animator = GetComponent<Animator>();
 
         Vector3[] waypoints = new Vector3[pathHolder.childCount];
         for (int i = 0; i < waypoints.Length; i++)

@@ -1,3 +1,4 @@
+using BrokenVector.LowPolyFencePack;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,9 @@ public class GrasslandEvents : MonoBehaviour
 
     [Header("GiveItem")]
     public Item itemTogive;
+
+    [Header("Door Border")]
+    public DoorController riverDoorBorder;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,10 +60,14 @@ public class GrasslandEvents : MonoBehaviour
             //tamarawWildAnimalsParent.SetActive(true);
             //cureTamarawCutscene.SetActive(true);
 
-            
+
             //play cutscene here
             //play cutscene
-            StartCoroutine(WaitForDialogue());
+            if (DialogueSystem.instance.dialogueCanvas.activeSelf)
+            {
+                StartCoroutine(WaitForDialogue());
+            }
+
             IEnumerator WaitForDialogue()
             {
                 yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
@@ -141,10 +149,11 @@ public class GrasslandEvents : MonoBehaviour
             //tamarawWildAnimalsParent.SetActive(false);
         }
 
-        //QuestTakegrasslandQuiz
-        if(questName == "Head out to the river")
+        //QuestTakeGrasslandQuiz
+        if(questName == "Take and pass the grassland quiz")
         {
             riverLocation.SetActive(true);
+            riverDoorBorder.ToggleDoor();
         }
 
     }

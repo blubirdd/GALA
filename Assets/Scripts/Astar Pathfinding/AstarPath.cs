@@ -45,7 +45,7 @@ public class AstarPath
 
     public void DrawWithGizmos()
     {
-        Gizmos.color = Color.white;
+        Gizmos.color = Color.yellow;
         for (int i = 0; i < lookPoints.Length; i++)
         {
             Vector3 p = lookPoints[i];

@@ -6,6 +6,7 @@ using System.Drawing;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using StarterAssets;
 
 public class UIManager : MonoBehaviour
 {
@@ -43,9 +44,10 @@ public class UIManager : MonoBehaviour
     public GameObject playerInputUI;
 
     public GameObject playerModel;
-
+    
+    [Header("Pause")]
     public GameObject pauseMenu;
-
+    public GameObject pauseMenuPanel;
     public UIVirtualJoystick uiVirtualJoystick;
 
     [Header("MOVEMENT BUTTON")]
@@ -71,6 +73,8 @@ public class UIManager : MonoBehaviour
     [Header("Book")]
     public GameObject book;
 
+    [Header("CAMERA ANIM")]
+    public GameObject animatedFirstPersonCamera;
 
     [Header("BUTTONS PARENT")]
     public GameObject buttonsUIPack;
@@ -104,18 +108,29 @@ public class UIManager : MonoBehaviour
     public GameObject hunterEmote;
 
     public bool disableFpsLimit = false;
+
+    [Header("WAYPOINT")]
+    public GameObject waypointParent;
+
+    SoundManager soundManager;
+    Camera _mainCamera;
+    ThirdPersonController player;
     private void Start()
     {
-        //camera 
 
+        //camera 
+        _mainCamera = Camera.main;
         inGameCameraCanvas.SetActive(false);
+
+        //player
+        player = ThirdPersonController.instance;
 
         //events
         // GameEvents.onQuestAccepted += GetObjectives;
 
         GameEvents.instance.onQuestCompleted += ClearObjectiveList;
 
-
+        soundManager = SoundManager.instance;
     }
 
     private void Update()
@@ -123,9 +138,17 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void RotatePlayerToCamera()
+    {
+        Quaternion cameraRotation = _mainCamera.transform.rotation;
+
+        // Rotate the player with camera rotation
+        player.transform.rotation = Quaternion.Euler(0f, cameraRotation.eulerAngles.y, 0f);
+    }
     public void PauseGame()
     {
         Time.timeScale = 0f;
+       
     }
 
     public void ResumeGame()
@@ -182,10 +205,13 @@ public class UIManager : MonoBehaviour
 
     public void ClosePauseMenu()
     {
-        pauseMenu.SetActive(false);
+        pauseMenuPanel.transform.DOLocalMoveY(-800, 0.5f).SetUpdate(true).OnComplete(() => EnableButtonsUIPACK());
+        //pauseMenuPanel.GetComponent<CanvasGroup>().DOFade(0, 0.5f).SetUpdate(true).OnComplete(() => pauseMenu.SetActive(false));
+        //pauseMenu.SetActive(false);
+
         Time.timeScale = 1f;
 
-        EnableButtonsUIPACK();
+
 
     }
 
@@ -194,9 +220,15 @@ public class UIManager : MonoBehaviour
     public void OpenPauseMenu()
     {
         pauseMenu.SetActive(true);
+        DisableButtonsUIPACK();
+        //pauseMenuPanel.GetComponent<CanvasGroup>().alpha = 0;
+        //pauseMenuPanel.GetComponent<CanvasGroup>().DOFade(1, 0.5f).SetUpdate(true);
+        pauseMenuPanel.transform.localPosition = new Vector3(0, -800, 0);
+        pauseMenuPanel.transform.DOLocalMoveY(0, 0.5f).SetEase(Ease.OutBack).SetUpdate(true);
+
         Time.timeScale = 0f;
 
-        DisableButtonsUIPACK();
+
     }
 
     //controls
@@ -230,6 +262,8 @@ public class UIManager : MonoBehaviour
         uiVirtualJoystick.ResetJoyStick();
         playerInputUI.SetActive(false);
         questUI.SetActive(false);
+
+        waypointParent.SetActive(false);
         // playerModel.SetActive(false);
     }
 
@@ -238,6 +272,8 @@ public class UIManager : MonoBehaviour
         uiVirtualJoystick.ResetJoyStick();
         playerInputUI.SetActive(true);
         questUI.SetActive(true);
+
+        waypointParent.SetActive(true);
         //playerModel.SetActive(true);
     }
 
@@ -252,8 +288,10 @@ public class UIManager : MonoBehaviour
         
         IEnumerator WaitForSeconds()
         {
-            yield return new WaitForSeconds(1f);
+            soundManager.PlaySoundFromClips(7);
+            yield return new WaitForSeconds(0.8f);
             inGameCameraCanvas.SetActive(true);
+
 
         }
 
@@ -309,19 +347,41 @@ public class UIManager : MonoBehaviour
 
     public void OpenBook()
     {
+        RotatePlayerToCamera();
         book.SetActive(!book.activeSelf);
+        
+        soundManager.PlaySoundFromClips(5);
 
         DisablePlayerMovement();
+        animatedFirstPersonCamera.SetActive(true);
 
+        //animate
+        book.transform.localPosition = new Vector3(0, -500, 0);
+        book.GetComponent<CanvasGroup>().alpha = 0;
+
+        book.transform.DOLocalMoveY(0, 0.3f);
+        book.GetComponent<CanvasGroup>().DOFade(1, 0.3f);
+        book.transform.DOScaleX(1f, 0.5f)
+        .From(0f)
+        .SetEase(Ease.InOutSine);
         //DisableButtonsUIPACK();
     }
 
     public void CloseBook()
     {
-        EnablePlayerMovement();
-        book.SetActive(!book.activeSelf);
+        soundManager.PlaySoundFromClips(6);
 
-       // EnableButtonsUIPACK();
+        book.transform.DOScaleX(0f, 0.5f)
+        .SetEase(Ease.InOutSine);
+
+        book.transform.DOLocalMoveY(-500, 0.5f).SetEase(Ease.InBack);
+        book.GetComponent<CanvasGroup>().DOFade(0, 0.5f).OnComplete(() => book.SetActive(false));
+
+        EnablePlayerMovement();
+        animatedFirstPersonCamera.SetActive(false);
+        //book.SetActive(!book.activeSelf);
+
+        // EnableButtonsUIPACK();
     }
 
 

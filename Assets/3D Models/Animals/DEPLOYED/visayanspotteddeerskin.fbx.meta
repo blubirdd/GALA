@@ -1,0 +1,149 @@
+fileFormatVersion: 2
+guid: 9695f48303fd4a947b7c97bc89da83af
+ModelImporter:
+  serializedVersion: 21202
+  internalIDToNameTable:
+  - first:
+      74: 1295166733979404430
+    second: AnimalArmature|AnimalArmature|AnimalArmature|Attack_Headbutt
+  - first:
+      74: -163246995411613862
+    second: AnimalArmature|AnimalArmature|AnimalArmature|Attack_Kick
+  - first:
+      74: 8521775250740709660
+    second: AnimalArmature|AnimalArmature|AnimalArmature|Death
+  - first:
+      74: -3344703500148145360
+    second: AnimalArmature|AnimalArmature|AnimalArmature|Eating
+  - first:
+      74: 5647582266791160013
+    second: AnimalArmature|AnimalArmature|AnimalArmature|Gallop
+  - first:
+      74: 7013544455352213731
+    second: AnimalArmature|AnimalArmature|AnimalArmature|Gallop_Jump
+  - first:
+      74: -3139318931099021752
+    second: AnimalArmature|AnimalArmature|AnimalArmature|Idle
+  - first:
+      74: 2939452359933011610
+    second: AnimalArmature|AnimalArmature|AnimalArmature|Idle_2
+  - first:
+      74: 7331789526819060564
+    second: AnimalArmature|AnimalArmature|AnimalArmature|Idle_Headlow
+  - first:
+      74: -5605129409483263827
+    second: AnimalArmature|AnimalArmature|AnimalArmature|Idle_HitReact_Left
+  - first:
+      74: -6047522251566751074
+    second: AnimalArmature|AnimalArmature|AnimalArmature|Idle_HitReact_Right
+  - first:
+      74: 7659362484663763505
+    second: AnimalArmature|AnimalArmature|AnimalArmature|Jump_toIdle
+  - first:
+      74: 6845075774388015246
+    second: AnimalArmature|AnimalArmature|AnimalArmature|Walk
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deerskin
+    second: {fileID: 2100000, guid: d0eacea16a423d64889081bc73e58f60, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 0
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 0.01
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

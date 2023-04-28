@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class QuestFeedCrocodile : QuestNew
 {
-    static int numberOfGoals = 1;
+    static int numberOfGoals = 3;
 
     private string[] goalDescription = new string[numberOfGoals];
     private int[] currentProgress = new int[numberOfGoals];
@@ -21,8 +21,16 @@ public class QuestFeedCrocodile : QuestNew
         questName = "Feed the crocodiles";
         questDescription = "Feed a Philippine Crocodile";
 
-        goalDescription[0] = "Feed a Philippine Crocodile";
-        requiredAmount[0] = 2;
+        goalDescription[0] = "Collect meat to feed the crocodiles";
+        requiredAmount[0] = 1;
+
+        goalDescription[1] = "Feed a Philippine Crocodile";
+        requiredAmount[1] = 2;
+
+        goalDescription[2] = "Photograph a Philippine Crocodile";
+        requiredAmount[2] = 1;
+
+
 
         reward = 10;
 
@@ -51,7 +59,9 @@ public class QuestFeedCrocodile : QuestNew
         UpdateQuestUI();
 
         //goal (this, name of target, goaldescription, iscompleted bool, current progress, required amount)
-        Goals.Add(new FeedGoal(this, "Philippine Crocodile", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new CollectionGoal(this, "Meat", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new FeedGoal(this, "Philippine Crocodile", goalDescription[1], false, currentProgress[1], requiredAmount[1]));
+        Goals.Add(new PictureGoal(this, "Philippine Crocodile", goalDescription[2], false, currentProgress[2], requiredAmount[2]));
 
         Goals.ForEach(g => g.InIt());
 
@@ -60,6 +70,7 @@ public class QuestFeedCrocodile : QuestNew
 
         //waypoint
         //SpawnWaypointMarker();
+        GameEvents.instance.QuestAcceptedForSave(questName);
 
     }
 
@@ -95,7 +106,8 @@ public class QuestFeedCrocodile : QuestNew
 
     public void SpawnWaypointMarker()
     {
-        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
+        Transform waypointParent = FindObjectOfType<WaypointParent>(true).gameObject.transform;
+        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"), waypointParent);
         _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[3]);
 
     }

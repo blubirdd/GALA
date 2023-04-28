@@ -25,9 +25,19 @@ public class ClockManager : MonoBehaviour
     // Start is called before the first frame update
     public void StartClock(int seconds, QuestNew quest)
     {
-        clockui.gameObject.SetActive(true);
-        //clockui.duration = seconds;
-        clockui.UpdateClock(seconds, quest);
+        if (clockui.gameObject.activeSelf)
+        {
+            // If the clock is already running, reset it instead of starting a new one
+            clockui.ResetClock();
+        }
+
+        else
+        {
+            clockui.gameObject.SetActive(true);
+            //clockui.duration = seconds;
+            clockui.UpdateClock(seconds, quest);
+        }
+
 
     }
 
@@ -36,6 +46,7 @@ public class ClockManager : MonoBehaviour
         //if player ran out oftime
         if (!quest.questCompleted)
         {
+            //Debug.Log(quest.questID + "IS THIS WORKING");
             quest.RemoveQuest(quest.questID);
             Task.instance.RemoveTaskNotComplete(quest.questID);
 

@@ -5,6 +5,21 @@ using UnityEngine;
 
 public class PlayerLocationManager : MonoBehaviour, IDataPersistence
 {
+    #region Singleton
+
+    public static PlayerLocationManager instance;
+
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one instance of PlayerLocationManager found");
+            return;
+        }
+
+        instance = this;
+    }
+    #endregion
     public static string currentLocation;
     public GameObject locationPanel;
     public TextMeshProUGUI locationText;
@@ -17,16 +32,27 @@ public class PlayerLocationManager : MonoBehaviour, IDataPersistence
 
     public float displayTime = 3f;
 
+    public string displayLocationInInspector;
+
     void Start()
     {
         GameEvents.instance.onLocationChange += LocationChange;
         LocationChange();
 
+        SetCurrentLocationActive();
+
+
+    }
+
+    public void SetCurrentLocationActive()
+    {
         villageLocation.SetActive(currentLocation == "Village");
         grasslandLocation.SetActive(currentLocation == "Grassland");
         riverLocation.SetActive(currentLocation == "River");
         swampLocation.SetActive(currentLocation == "Swamp");
         rainforestLocation.SetActive(currentLocation == "Rainforest");
+
+        displayLocationInInspector = currentLocation;
     }
     public void LocationChange()
     {

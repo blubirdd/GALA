@@ -26,7 +26,7 @@ public class WaypointUI : MonoBehaviour
         //playerLocation = GameObject.FindGameObjectWithTag("Player").transform;
         playerLocation = ThirdPersonController.instance.transform;
 
-        StartCoroutine(UpdateWaypointWithDelay(1f));
+        StartCoroutine(UpdateWaypointWithDelay(0.1f));
 
         _camera = Camera.main;
     }

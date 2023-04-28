@@ -59,6 +59,7 @@ public class QuestTalkSwampWildlifeRanger2 : QuestNew
 
         //waypoint
         //SpawnWaypointMarker();
+        GameEvents.instance.QuestAcceptedForSave(questName);
 
     }
 
@@ -94,7 +95,8 @@ public class QuestTalkSwampWildlifeRanger2 : QuestNew
 
     public void SpawnWaypointMarker()
     {
-        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
+        Transform waypointParent = FindObjectOfType<WaypointParent>(true).gameObject.transform;
+        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"), waypointParent);
         _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[3]);
 
     }
@@ -114,7 +116,7 @@ public class QuestTalkSwampWildlifeRanger2 : QuestNew
 
         //wait for notifcation or cutscene
         //yield return new WaitForSeconds(5f);
-        //yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
-        //AcceptQuest("QuestRelocateCrocodile");
+        yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
+        AcceptQuest("QuestEnterCrocSanctuary");
     }
 }

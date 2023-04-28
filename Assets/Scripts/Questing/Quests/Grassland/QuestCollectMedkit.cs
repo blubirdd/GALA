@@ -56,6 +56,8 @@ public class QuestCollectMedkit : QuestNew
         //waypoint
         //SpawnWaypointMarker();
 
+        GameEvents.instance.QuestAcceptedForSave(questName);
+
     }
 
     private void GetGoalsList()

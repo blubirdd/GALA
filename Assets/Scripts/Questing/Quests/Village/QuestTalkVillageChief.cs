@@ -60,6 +60,7 @@ public class QuestTalkVillageChief : QuestNew
         //waypoint
         SpawnWaypointMarker();
 
+        GameEvents.instance.QuestAcceptedForSave(questName);
     }
 
     private void GetGoalsList()
@@ -94,7 +95,8 @@ public class QuestTalkVillageChief : QuestNew
 
     public void SpawnWaypointMarker()
     {
-        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
+        Transform waypointParent = FindObjectOfType<WaypointParent>(true).gameObject.transform;
+        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"), waypointParent);
 
         target = WaypointManager.instance.waypointTransforms[0].gameObject;
        _waypoint.GetComponent<WaypointUI>().SetTarget(target.transform);

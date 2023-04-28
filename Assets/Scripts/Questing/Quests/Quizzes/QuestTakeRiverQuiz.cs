@@ -18,9 +18,9 @@ public class QuestTakeRiverQuiz : QuestNew
         //setup
         ID = "QuestTakeRiverQuiz"; ;
         questName = "Try to cross the bridge";
-        questDescription = "Head to the other size of the river";
+        questDescription = "Score atleast 2 points";
 
-        goalDescription[0] = "Head to the other size of the river";
+        goalDescription[0] = "Score atleast 2 points";
         requiredAmount[0] = 1;
 
         reward = 10;
@@ -57,7 +57,9 @@ public class QuestTakeRiverQuiz : QuestNew
 
 
         //waypoint
-        SpawnWaypointMarker();
+        //SpawnWaypointMarker();
+
+        GameEvents.instance.QuestAcceptedForSave(questName);
 
     }
 
@@ -93,7 +95,8 @@ public class QuestTakeRiverQuiz : QuestNew
 
     public void SpawnWaypointMarker()
     {
-        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
+        Transform waypointParent = FindObjectOfType<WaypointParent>(true).gameObject.transform;
+        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"), waypointParent);
         _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[13]);
 
     }
@@ -111,7 +114,7 @@ public class QuestTakeRiverQuiz : QuestNew
         //disable marker
         Destroy(_waypoint);
 
-        //yield return new WaitForSeconds(7f);
-        //AcceptQuest("QuestTalkWildlifeSpecialist3");
+        yield return new WaitForSeconds(2f);
+        AcceptQuest("QuestTalkSwampResident");
     }
 }

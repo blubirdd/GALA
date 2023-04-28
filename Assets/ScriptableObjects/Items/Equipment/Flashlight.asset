@@ -16,7 +16,12 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 97c8c3356f35f7d4a8e3f349cf7256d7, type: 3}
   isDefaultItem: 0
   isUsable: 1
+  displayDiscovery: 1
   isThrowable: 0
   isAimable: 1
-  itemDescription: Let there be light!
+  isFirable: 0
+  isAnimalFood: 0
+  isCustomQuestItem: 0
+  isCustomPopup: 0
+  itemDescription: 'A reliable tool for navigating through the darkness. '
   equipSlot: 0

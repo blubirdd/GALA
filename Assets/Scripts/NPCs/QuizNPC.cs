@@ -15,13 +15,21 @@ public class QuizNPC : MonoBehaviour, IInteractable
 
     [Header("Dialgoue")]
     [SerializeField] private DialogueTrigger _dialogue;
+    [SerializeField] private DialogueTrigger afterDialogue;
 
     [Header("Quiz")]
     [SerializeField] private GameObject _quizCanvas;
     [SerializeField] private Transform _benchLocation;
 
+    [Header("If has quiz quest, else leave null")]
+    [SerializeField] private GameObject questManager;
+    [SerializeField] private string questID;
+    public QuestNew quest { get; set; }
+
+
     UIManager uiManager;
     ThirdPersonController thirdPersonController;
+    Character character;
     private void Start()
     {
         InteractionPrompt = _prompt;
@@ -30,14 +38,37 @@ public class QuizNPC : MonoBehaviour, IInteractable
         //cache
         uiManager = UIManager.instance;
         thirdPersonController = ThirdPersonController.instance;
+
+        character = GetComponent<Character>();
   
     }
     public bool Interact(Interactor interactor)
     {
         _dialogue.TriggerDialogue();
+        PositionPlayer(interactor);
 
+        if(character != null)
+        {
+            TalkEvents.CharacterApproach(character);
+        }
         StartCoroutine(WaitForDialogueEnd());
+
+        if (Task.instance.tasksCompeleted.Contains(questID))
+        {
+            if(afterDialogue != null)
+            {
+                afterDialogue.TriggerDialogue();
+            }
+        }
         return true;
+    }
+
+    public void PositionPlayer(Interactor interactor)
+    {
+        interactor.gameObject.SetActive(false);
+        interactor.transform.position = transform.position + transform.forward * 2;
+        interactor.transform.LookAt(transform);
+        interactor.gameObject.SetActive(true);
     }
 
     IEnumerator WaitForDialogueEnd()
@@ -53,6 +84,12 @@ public class QuizNPC : MonoBehaviour, IInteractable
         thirdPersonController.transform.position = _benchLocation.position;
         thirdPersonController.gameObject.SetActive(true);
         EnterQuizState();
+
+        if(questManager != null)
+        {
+            quest = (QuestNew)questManager.AddComponent(System.Type.GetType(questID));
+        }
+       
 
     }
     public void EnterQuizState()

@@ -39,6 +39,7 @@ public class MainMenu : MonoBehaviour, IDataPersistence
         DataPersistenceManager.instance.SaveGame();
         //load the scene with the load game from DatapersistenceManager.
         SceneManager.LoadSceneAsync("ForestStart");
+        //SceneManager.LoadSceneAsync("GALA Demo");
     }
 
     public void OnContinueGame()
@@ -49,6 +50,7 @@ public class MainMenu : MonoBehaviour, IDataPersistence
 
         //load the scene
         SceneManager.LoadSceneAsync("ForestStart");
+        //SceneManager.LoadSceneAsync("GALA Demo");
     }
 
     public void QuitGame()

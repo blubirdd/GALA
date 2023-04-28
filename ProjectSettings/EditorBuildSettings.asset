@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/2D Game/Snake Minigame/Scenes/Egg Game.unity
     guid: 14e36b1353517104c93e0b1667ce28c0
+  - enabled: 0
+    path: Assets/Scenes/GALA Demo.unity
+    guid: c15c0e878e2149e4c9b848697b7e0430
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: b70fd9029e039b44d8d9deb549fe18d7,
       type: 2}

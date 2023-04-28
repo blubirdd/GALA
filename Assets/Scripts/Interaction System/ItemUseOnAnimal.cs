@@ -182,8 +182,8 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
         if (animal.chasePlayer)
         {
             animal.animator.enabled = false;
-            Vector3 newScale = transform.localScale + new Vector3(-0.2f, -0.2f, -0.2f);
-            transform.localScale = newScale;
+            //Vector3 newScale = transform.localScale + new Vector3(-0.1f, -0.1f, -0.1f);
+            //transform.localScale = newScale;
         }
 
         animal.DeactivateAnimal();
@@ -199,6 +199,7 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
 
     void DropAnimal()
     {
+        StopAllCoroutines();
         isPickedUP = false;
 
         if(parentWhenDropped != null)
@@ -210,12 +211,12 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
             transform.SetParent(null);
         }
 
-        animal.tag = tagWhenDropped;
+
 
         //enable animal dependecies
         if (animal.chasePlayer)
         {
-            Vector3 newScale = transform.localScale + new Vector3(+0.2f, +0.2f, +0.2f);
+            //Vector3 newScale = transform.localScale + new Vector3(+0.1f, +0.1f, +0.1f);
 
             StartCoroutine(WaitForSecondsToActivate());
             IEnumerator WaitForSecondsToActivate()
@@ -223,20 +224,26 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
                 animal.GetComponent<NavMeshAgent>().enabled = true;
 
                 yield return new WaitForSeconds(5f);
-                animal.ActivateAnimal();
-                animal.GetComponent<SphereCollider>().enabled = true;
 
-                animal.netPart.SetActive(false);
-                animal.ChangeUI(Animal.AnimalStateUI.Idle);
-                ParticleManager.instance.SpawnPuffParticle(transform.position);
-                animal.animator.enabled = true;
-              
-                transform.localScale = newScale;
+                if(isPickedUP == false)
+                {
+                    animal.ActivateAnimal();
+                    animal.GetComponent<SphereCollider>().enabled = true;
+
+                    animal.netPart.SetActive(false);
+                    animal.ChangeUI(Animal.AnimalStateUI.Idle);
+                    ParticleManager.instance.SpawnPuffParticle(transform.position);
+                    animal.animator.enabled = true;
+                    animal.tag = tagWhenDropped;
+                    //transform.localScale = newScale;
+                }
+
             }
         }
 
         else
         {
+            animal.tag = tagWhenDropped;
             animal.GetComponent<SphereCollider>().enabled = true;
             animal.GetComponent<NavMeshAgent>().enabled = true;
             animal.ActivateAnimal();

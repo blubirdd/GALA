@@ -30,10 +30,15 @@ public class ReticleScript : MonoBehaviour
     Book book;
     RaycastHit hit;
 
+    SoundManager soundManager;
+    private bool hasPlayedSound = false;
+
     private void Start()
     {
         //cache the book instance
         book = Book.instance;
+
+        soundManager = SoundManager.instance;
     }
     public void Discovered()
     {
@@ -59,7 +64,8 @@ public class ReticleScript : MonoBehaviour
     {
         Debug.DrawRay(transform.position, transform.forward * 50f, Color.red);
 
-       
+        bool shouldPlaySound = false;
+
         if (Physics.Raycast(transform.position, transform.forward, out hit, 50f, layerMask))// && hit.transform.gameObject.CompareTag("NPC"))
         {
             reticle.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
@@ -72,8 +78,8 @@ public class ReticleScript : MonoBehaviour
 
             //if raycast is animal
             _animal = hit.collider.GetComponent<IAnimal>();
-            
-            if(_animal != null)
+
+            if (_animal != null)
             {
                 for (int i = 0; i < book.photosInventory.Count; i++)
                 {
@@ -82,17 +88,18 @@ public class ReticleScript : MonoBehaviour
                         discoveryStatusImage.sprite = book.photosInventory[i].polaroidPhoto;
                         discoveryStatus.SetText(_animal.animalName);
                         _isDiscovered = true;
-                    }
 
+                        shouldPlaySound = true;
+                    }
                 }
             }
 
             else
             {
                 _threat = hit.collider.GetComponent<IThreat>();
-                if( _threat != null)
+                if (_threat != null)
                 {
-                    
+
                     for (int i = 0; i < book.photosThreat.Count; i++)
                     {
                         if (book.photosThreat[i].threatName == _threat.threatName)
@@ -100,17 +107,19 @@ public class ReticleScript : MonoBehaviour
                             discoveryStatusImage.sprite = book.photosThreat[i].threatPicture;
                             discoveryStatus.SetText(_threat.threatName);
                             _isDiscovered = true;
-                        }
 
+                            shouldPlaySound = true;
+                        }
                     }
                 }
-                
             }
 
-            if(_isDiscovered == false)
+            if (_isDiscovered == false)
             {
                 discoveryStatusImage.sprite = undiscoveredSprite;
                 discoveryStatus.SetText("Undiscovered");
+
+                shouldPlaySound = true;
             }
 
         }
@@ -123,6 +132,14 @@ public class ReticleScript : MonoBehaviour
 
             //disable panel
             discoveryPanel.SetActive(false);
+
+            hasPlayedSound = false;
+        }
+
+        if (shouldPlaySound && !hasPlayedSound)
+        {
+            soundManager.PlaySoundFromClips(8);
+            hasPlayedSound = true;
         }
     }
 

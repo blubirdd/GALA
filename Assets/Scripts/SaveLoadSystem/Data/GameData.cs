@@ -8,7 +8,7 @@ using static Task;
 [System.Serializable]
 public class GameData
 {
-    public int gameLevel; 
+    //public int gameLevel; 
 
     public bool triggerStartDialogue;
     public Vector3 playerPosition;
@@ -33,6 +33,10 @@ public class GameData
     //CUTSCENES TRIGGERED
     public SerializableDictionary<string, bool> cutsceneTriggered;
 
+    //2D minigames
+    public int eggGameScore;
+    public int moleGameScore;
+
     // the values defined in this constructor will be the default values
     // the game starts with when there's no data to load
     public GameData()
@@ -45,6 +49,9 @@ public class GameData
 
         //to change
         playerPosition = new Vector3(-307.29f, 2, 353.81f);
+
+        //temporary for demo
+        //playerPosition = new Vector3(188.4223f, 1, 85.26123f);
         //playerPosition = Vector3.zero;
 
 
@@ -60,7 +67,10 @@ public class GameData
         //cutscene
         cutsceneTriggered = new SerializableDictionary<string, bool>();
 
-        gameLevel = 1;
+        //2D Minigame
+        eggGameScore = 0;
+        moleGameScore = 0;
+        //gameLevel = 1;
 
         playerLocation = "Village";
 
@@ -70,8 +80,8 @@ public class GameData
 
 }
 
-public class LevelOneDAta
-{
-    public List<string> tasksCompleted;
-}
+//public class LevelOneDAta
+//{
+//    public List<string> tasksCompleted;
+//}
 

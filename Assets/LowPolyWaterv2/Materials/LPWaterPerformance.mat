@@ -64,13 +64,14 @@ Material:
     - _FoamSpeed: 0.3
     - _FoamSpread: 1
     - _FresPower: 1.5
+    - _Gloss: 0.6
     - _HQFoam: 0
     - _Height: 0.1
     - _Height_: 0.1
     - _Length: 4
     - _LightAbs: 0
     - _NormalOffset: 1
-    - _Opacity: 0.592
+    - _Opacity: 0.6
     - _PointLights: 0
     - _RHeight: 0
     - _RHeight_: 0
@@ -84,6 +85,7 @@ Material:
     - _Shadow: 0.6
     - _ShoreDistance: 0.5
     - _ShoreIntensity: 0.3
+    - _Smoothness: 1
     - _Specular: 92
     - _Speed: 2
     - _Speed_: 2
@@ -95,7 +97,7 @@ Material:
     - _Waves: 1
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.022783887, g: 0.3075181, b: 0.3773585, a: 1}
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _DeepColor: {r: 0, g: 0.20955881, b: 0.41911763, a: 1}
     - _Direction_: {r: -0.9396926, g: -0.34202015, b: -1.8793852, a: -0.6840403}
     - _FresColor: {r: 0, g: 0, b: 0, a: 1}

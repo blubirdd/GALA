@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 6648255401718644411}
   - component: {fileID: 6648255401718644410}
   - component: {fileID: 6648255401718644409}
+  - component: {fileID: 8669440716860445465}
   m_Layer: 0
   m_Name: lizard
   m_TagString: Untagged
@@ -402,3 +403,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!225 &8669440716860445465
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6648255401718644387}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

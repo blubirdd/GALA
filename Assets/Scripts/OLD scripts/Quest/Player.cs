@@ -22,8 +22,8 @@ public class Player : MonoBehaviour, IDataPersistence
     #endregion
     public static string playerName;
     [Header("Game Scores")]
-    public float eggGameScore;
-    public float moleGameScore;
+    public int eggGameScore;
+    public int moleGameScore;
 
 
     [Header("UI Canvases")]
@@ -95,10 +95,17 @@ public class Player : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         playerName = data.playerName;
+
+        eggGameScore = data.eggGameScore;
+        moleGameScore = data.moleGameScore;
+
     }
 
     public void SaveData(GameData data)
     {
         data.playerName = playerName;
+
+        data.eggGameScore = eggGameScore;
+        data.moleGameScore = moleGameScore;
     }
 }

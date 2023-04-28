@@ -29,6 +29,11 @@ public class TimeChangeInteract : MonoBehaviour, IInteractable
         if(prerequisiteQuest == "")
         {
             Sleep();
+            Character character;
+            if (TryGetComponent(out character))
+            {
+                TalkEvents.CharacterApproach(character);
+            }
         }
 
         else

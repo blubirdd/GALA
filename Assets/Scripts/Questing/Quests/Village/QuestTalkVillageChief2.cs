@@ -56,7 +56,7 @@ private string[] goalDescription = new string[] { "Report back to the Village Ch
 
         //waypoint
         SpawnWaypointMarker();
-
+        GameEvents.instance.QuestAcceptedForSave(questName);
     }
 
     private void GetGoalsList()
@@ -91,8 +91,9 @@ private string[] goalDescription = new string[] { "Report back to the Village Ch
 
     public void SpawnWaypointMarker()
     {
-        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
-       _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[0]);
+        Transform waypointParent = FindObjectOfType<WaypointParent>(true).gameObject.transform;
+        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"), waypointParent);
+        _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[0]);
        // waypoint.name = WaypointManager.instance.waypointTransforms[0].name + "Waypoint";
     }
 

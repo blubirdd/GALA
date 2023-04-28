@@ -58,7 +58,7 @@ public class QuestUseMedkitTurtle : QuestNew
         UpdateQuestUI();
 
         //goal (this, name of target, goaldescription, iscompleted bool, current progress, required amount)
-        Goals.Add(new UseGoal(this, "Medkit", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new UseGoal(this, "Med kit", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
         Goals.Add(new TalkGoal(this, "Turtle Shelter", goalDescription[1], false, currentProgress[1], requiredAmount[1]));
 
         Goals.ForEach(g => g.InIt());
@@ -69,11 +69,17 @@ public class QuestUseMedkitTurtle : QuestNew
         //waypoint
         SpawnWaypointMarker();
 
-        ClockManager.instance.StartClock(200, this);
+        StartCoroutine(WaitForStartClock());
 
         //trigger quest event
         GameEvents.instance.QuestAcceptedForSave(questName);
 
+    }
+
+    IEnumerator WaitForStartClock()
+    {
+        yield return new WaitForSeconds(17f);
+        ClockManager.instance.StartClock(200, this);
     }
 
     private void GetGoalsList()

@@ -18,9 +18,9 @@ public class QuestUseMedkit : QuestNew
         //setup
         ID = "QuestUseMedkit"; ;
         questName = "Heal the Tamaraw";
-        questDescription = "Use the medkit to the injured Tamaraw";
+        questDescription = "Use the med kit to the injured Tamaraw";
 
-        goalDescription[0] = "Use the medkit to the injured Tamaraw";
+        goalDescription[0] = "Use the med kit to the injured Tamaraw";
         requiredAmount[0] = 1;
 
 
@@ -51,7 +51,7 @@ public class QuestUseMedkit : QuestNew
         UpdateQuestUI();
 
         //goal (this, name of target, goaldescription, iscompleted bool, current progress, required amount)
-        Goals.Add(new UseGoal(this, "Medkit", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new UseGoal(this, "Med kit", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
         Goals.ForEach(g => g.InIt());
 
         GetGoalsList();
@@ -59,6 +59,8 @@ public class QuestUseMedkit : QuestNew
 
         //waypoint
         SpawnWaypointMarker();
+
+        GameEvents.instance.QuestAcceptedForSave(questName);
 
     }
 
@@ -114,7 +116,7 @@ public class QuestUseMedkit : QuestNew
 
         //outline
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1f);
         AcceptQuest("QuestTalkWildlifeSpecialistFinal");
     }
 }

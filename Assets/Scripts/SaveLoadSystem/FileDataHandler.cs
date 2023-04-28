@@ -41,7 +41,7 @@ public class FileDataHandler
                 // optionally decrypt the data
                 if (useEncryption)
                 {
-               //   dataToLoad = EncryptDecrypt(dataToLoad);
+                    dataToLoad = EncryptDecrypt(dataToLoad);
                 }
 
                 // deserialize the data from Json back into the C# object

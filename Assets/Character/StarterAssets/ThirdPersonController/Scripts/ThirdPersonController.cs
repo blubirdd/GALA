@@ -179,14 +179,14 @@ namespace StarterAssets
 
         public void LoadData(GameData data)
         {
-            if(data.gameLevel == 2)
-            {
-                this.transform.position = new Vector3(0, 0, 0);
-                Debug.Log("player position should be 0");
-                return;
-            }
+            //if (data.gameLevel == 2)
+            //{
+            //    this.transform.position = new Vector3(0, 0, 0);
+            //    Debug.Log("player position should be 0");
+            //    return;
+            //}
             this.transform.position = data.playerPosition;
-            Debug.Log("player position should be not 0");
+
         }
 
         public void SaveData(GameData data)
@@ -516,6 +516,11 @@ namespace StarterAssets
             {
                 Push();
             }
+
+            if (collision.gameObject.CompareTag("Water"))
+            {
+                ParticleManager.instance.SpawnWaterSplashParticle(transform.position);
+            }
         }
 
         public void OnCollisionExit(Collision collision)
@@ -628,6 +633,11 @@ namespace StarterAssets
                 {
                     _jumpTimeoutDelta -= Time.deltaTime;
                 }
+
+                if (!uiManager.movementButtons.activeSelf)
+                {
+                    uiManager.movementButtons.SetActive(true);
+                }
             }
             else
             {
@@ -650,6 +660,10 @@ namespace StarterAssets
 
                 // if we are not grounded, do not jump
                 _input.jump = false;
+
+                //disable buttons
+                //uiManager.buttonsUIPack.SetActive(false);
+                uiManager.movementButtons.SetActive(false);
             }
 
             // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)

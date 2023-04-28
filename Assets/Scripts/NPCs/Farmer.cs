@@ -30,6 +30,8 @@ public class Farmer : MonoBehaviour, ICharacter, IDataPersistence, IInteractable
     private QuestNew quest { get; set; }
     public string npcName { get; set; }
 
+    public SubtleDialogueTrigger subtleDialogueTrigger;
+
 //this is the closing quest if NPC is MAIN
 
     QuestTalkFarmer closingQuest;
@@ -86,6 +88,7 @@ public class Farmer : MonoBehaviour, ICharacter, IDataPersistence, IInteractable
                 else
                 {
                     Debug.Log("NPCs task is not yet completed. Please finish the task");
+                    subtleDialogueTrigger.TriggerDialogue();
                 }
             }
 

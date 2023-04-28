@@ -61,7 +61,7 @@ public class QuestDisarmTraps : QuestNew
 
         //waypoint
         //SpawnWaypointMarker();
-
+        GameEvents.instance.QuestAcceptedForSave(questName);
     }
 
     private void GetGoalsList()

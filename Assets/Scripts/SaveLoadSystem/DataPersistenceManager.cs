@@ -83,6 +83,7 @@ public class DataPersistenceManager : MonoBehaviour
     }
     public void SaveGame()
     {
+        Debug.Log("IS GAME SAVING");
         if(this.gameData == null)
         {
             Debug.Log("No data was found. Start a new game first.");

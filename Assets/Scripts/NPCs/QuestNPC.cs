@@ -22,9 +22,9 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
     [SerializeField] private GameObject questManager;
     [SerializeField] private string prerequisiteQuest;
     [SerializeField] private string questName;
-    [SerializeField] private bool isTalked = false;
+    public bool isTalked = false;
 
-    [SerializeField] private bool isCompleted = false;
+    public bool isCompleted = false;
 
     [Header("Quest Marker")]
     public GameObject questMarker;
@@ -81,6 +81,7 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
         {
             //trigger dialogue
             TriggerDialogueQuest();
+            PositionPlayer(interactor);
 
         }
 
@@ -97,10 +98,19 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
         else if(prerequisiteQuest == "None")
         {
             TriggerDialogueQuest();
+            PositionPlayer(interactor);
         }
 
 
         return true;
+    }
+    
+    public void PositionPlayer(Interactor interactor)
+    {
+        interactor.gameObject.SetActive(false);
+        interactor.transform.position = transform.position + transform.forward * 2;
+        interactor.transform.LookAt(transform);
+        interactor.gameObject.SetActive(true);
     }
 
     public void TriggerDialogueQuest()
@@ -245,9 +255,9 @@ public class QuestNPC : MonoBehaviour, ICharacter, IInteractable, IDataPersisten
 
     public void LoadData(GameData data)
     {
-        //data.NPCsTalked.TryGetValue(id, out isTalked);
+        data.NPCsTalked.TryGetValue(id, out isTalked);
 
-        //data.NPCsCompleted.TryGetValue(id, out isCompleted);
+        data.NPCsCompleted.TryGetValue(id, out isCompleted);
     }
 
     public void SaveData(GameData data)

@@ -58,7 +58,9 @@ public class QuestIntroPart1 : QuestNew
 
 
         //marker
-        SpawnWaypointMarker();
+        //SpawnWaypointMarker();
+
+        GameEvents.instance.QuestAcceptedForSave(questName);
 
     }
 
@@ -94,7 +96,8 @@ public class QuestIntroPart1 : QuestNew
 
     public void SpawnWaypointMarker()
     {
-        waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
+        Transform waypointParent = FindObjectOfType<WaypointParent>(true).gameObject.transform;
+        waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"), waypointParent);
         waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[1]);
        // waypoint.name = WaypointManager.instance.waypointTransforms[0].name + "Waypoint";
     }
@@ -109,7 +112,7 @@ public class QuestIntroPart1 : QuestNew
         //debug
         Debug.Log(this + " is Completed");
 
-        Destroy(waypoint);
+        //Destroy(waypoint);
     }
 
 

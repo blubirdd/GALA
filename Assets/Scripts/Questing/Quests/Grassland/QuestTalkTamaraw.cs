@@ -55,6 +55,8 @@ public class QuestTalkTamaraw : QuestNew
         //waypoint
         SpawnWaypointMarker();
 
+        GameEvents.instance.QuestAcceptedForSave(questName);
+
     }
 
     private void GetGoalsList()
@@ -89,7 +91,8 @@ public class QuestTalkTamaraw : QuestNew
 
     public void SpawnWaypointMarker()
     {
-        waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
+        Transform waypointParent = FindObjectOfType<WaypointParent>(true).gameObject.transform;
+        waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"), waypointParent);
         waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[8]);
     }
 
