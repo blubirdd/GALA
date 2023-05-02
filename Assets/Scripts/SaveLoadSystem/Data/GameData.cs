@@ -2,6 +2,7 @@ using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Book;
 using static Inventory;
 using static Task;
 
@@ -22,6 +23,8 @@ public class GameData
     //inventory
     public SerializableDictionary<int, InventorySave> itemsCollected;
 
+    //Photos
+    public SerializableDictionary<int, PhotosSave> photosCollected;
     // tasks or objectives
     public List<string> tasksCompeleted;
     public SerializableDictionary<string, TaskSave> taskList;
@@ -54,8 +57,11 @@ public class GameData
         //playerPosition = new Vector3(188.4223f, 1, 85.26123f);
         //playerPosition = Vector3.zero;
 
-
+        //inventory
         itemsCollected = new SerializableDictionary<int, InventorySave>();
+
+        //photos
+        photosCollected = new SerializableDictionary<int, PhotosSave>();
 
         tasksCompeleted = new List<string>();
         taskList = new SerializableDictionary<string, TaskSave>();

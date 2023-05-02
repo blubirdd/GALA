@@ -100,8 +100,8 @@ public class RiverEvents : MonoBehaviour
             fireQuest.SetActive(true);
 
             //enable queststatushint
-            questStatusHintCanvas.SetActive(true);
-            questStatusText.text = "Put out the fire before the timer runs out!";
+            //questStatusHintCanvas.SetActive(true);
+            //questStatusText.text = "Put out the fire before the timer runs out!";
 
             //waypointsForFire = new GameObject[fireTransformsToPutOut.Length];
             //for (int i = 0; i < fireTransformsToPutOut.Length; i++)
@@ -169,7 +169,7 @@ public class RiverEvents : MonoBehaviour
         {
             Debug.Log("TURN OFF QUEST STATUS");
             fireQuest.SetActive(false);
-            questStatusHintCanvas.SetActive(false);
+            //questStatusHintCanvas.SetActive(false);
             //Destroy(fireQuest);
         }
 

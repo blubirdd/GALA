@@ -39,7 +39,16 @@ public class ReticleScript : MonoBehaviour
         book = Book.instance;
 
         soundManager = SoundManager.instance;
+
+        GameEvents.instance.onCameraOpened += ResetDiscoveryUI;
     }
+
+    public void ResetDiscoveryUI()
+    {
+        discoveryStatusImage.sprite = undiscoveredSprite;
+        discoveryStatus.SetText("Undiscovered");
+    }
+
     public void Discovered()
     {
         if (hit.collider != null)

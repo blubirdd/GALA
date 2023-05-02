@@ -49,6 +49,9 @@ public class ItemInspect : MonoBehaviour, IInteractable
 
     [Header("Object to activate")]
     [SerializeField] private GameObject objectToActivate;
+    [Header("Object to Disable")]
+    [SerializeField] private GameObject objectToDisable;
+    [SerializeField] private float delayDurationToDisable = 0;
 
     [Header("Minigame")]
     [SerializeField] private bool hasMinigame;
@@ -97,6 +100,20 @@ public class ItemInspect : MonoBehaviour, IInteractable
             objectToActivate.SetActive(true);
         }
 
+        if(objectToDisable != null)
+        {
+            ParticleManager.instance.SpawnPuffParticle(transform.position);
+
+            StartCoroutine(WaitToDisable());
+            IEnumerator WaitToDisable()
+            {
+                yield return new WaitForSeconds(delayDurationToDisable);
+                objectToDisable.SetActive(false);
+            }
+
+
+        }
+
         return true;
     }
 
@@ -141,7 +158,7 @@ public class ItemInspect : MonoBehaviour, IInteractable
             if (hasMinigame)
             {
          
-                MinigameTrigger.instance.LoadScene(miniGameScene, 8f);
+                MinigameTrigger.instance.LoadScene(miniGameScene, 4f);
             }
 
             cinemachineManager.DisableInspectCam();

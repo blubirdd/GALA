@@ -93,10 +93,12 @@ public class Fairy : MonoBehaviour,  IInteractable, ICharacter, IDataPersistence
     private bool flyaway = false;
     void Update()
     {
-        //if(flyaway == true)
-        //{
-
-        //}
+        if (flyaway == true)
+        {
+            Vector3 currentPosition = transform.position;
+            Vector3 newPosition = currentPosition + Vector3.up * Time.deltaTime * 3f;
+            transform.position = newPosition;
+        }
 
     }
 
@@ -104,11 +106,7 @@ public class Fairy : MonoBehaviour,  IInteractable, ICharacter, IDataPersistence
     {
 
         flyaway = true;
-        Vector3 currentPosition = transform.position;
-        Vector3 newPosition = currentPosition + Vector3.up * Time.deltaTime * 3f;
-        transform.position = newPosition;
 
-        ParticleManager.instance.SpawnPuffParticle(transform.position);
 
         _isTalkedDialogue.TriggerIsTalkedDialogue();
 

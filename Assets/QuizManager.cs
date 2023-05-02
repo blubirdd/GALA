@@ -107,6 +107,11 @@ public class QuizManager : MonoBehaviour
         else
         {
             finishButton.SetActive(true);
+
+            if (character != null)
+            {
+                TalkEvents.CharacterApproach(character);
+            }
         }
     }
 
@@ -213,10 +218,6 @@ public class QuizManager : MonoBehaviour
 
         //UI
 
-        if(character != null)
-        {
-           TalkEvents.CharacterApproach(character); 
-        }
 
     }
 

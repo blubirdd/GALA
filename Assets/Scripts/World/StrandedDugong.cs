@@ -54,7 +54,7 @@ public class StrandedDugong : MonoBehaviour
 
     private IEnumerator DisableAfterSwim()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
         Destroy(gameObject);
     }
 }

@@ -124,6 +124,11 @@ public class TimeController : MonoBehaviour
       }
     }
 
+    public void SetTimeOfDayWithoutCutScene(float hour)
+    {
+        currentTime = DateTime.Now.Date + TimeSpan.FromHours(hour);
+    }
+
     IEnumerator SetActiveForFewSeconds(GameObject objectToActivate)
     {
         objectToActivate.SetActive(true);

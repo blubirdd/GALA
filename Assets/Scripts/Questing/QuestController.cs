@@ -43,6 +43,15 @@ public class QuestController : MonoBehaviour
     [Header("Swamp")]
     public Transform swampLocation;
     public QuestNPC swampQuestNPC;
+
+    [Header("Swamp Enclosure")]
+    public Transform swampEnclosureLocation;
+    public QuestNPC swampEnclosureQuestNPC;
+
+    [Header("Rainforest Start")]
+    public Transform rainForestEntranceLocation;
+    public QuestNPC rainforestFairy;
+
     public void TransferPlayer(Transform location)
     {
         ThirdPersonController.instance.gameObject.SetActive(false);
@@ -115,6 +124,49 @@ public class QuestController : MonoBehaviour
 
         swampQuestNPC.isTalked = false;
         swampQuestNPC.isCompleted = false;
+        swampQuestNPC.gameObject.layer = LayerMask.NameToLayer("Interactable");
+        ClearCompletedQuestDatabase();
+    }
+
+    public void AcceptQuestSwampEnclosureLevel()
+    {
+        ClearAllQuest();
+        ClockManager.instance.DisableClock();
+        quest = (QuestNew)questManager.AddComponent(System.Type.GetType("QuestEnterCrocSanctuary"));
+
+        TransferPlayer(swampEnclosureLocation);
+        PlayerLocationManager.currentLocation = "Swamp";
+        PlayerLocationManager.instance.SetCurrentLocationActive();
+
+        TimeController.instance.SetTimeOfDay(10);
+
+        swampEnclosureQuestNPC.isTalked = false;
+        swampEnclosureQuestNPC.isCompleted = false;
+        swampEnclosureQuestNPC.gameObject.layer = LayerMask.NameToLayer("Interactable");
+        ClearCompletedQuestDatabase();
+    }
+
+    public void AcceptQuestRainforest()
+    {
+        ClearAllQuest();
+        ClockManager.instance.DisableClock();
+        quest = (QuestNew)questManager.AddComponent(System.Type.GetType("QuestTalkRainforestFairy"));
+
+        TransferPlayer(rainForestEntranceLocation);
+        PlayerLocationManager.currentLocation = "Rainforest";
+        PlayerLocationManager.instance.SetCurrentLocationActive();
+
+        TimeController.instance.SetTimeOfDay(10);
+
+        rainforestFairy.isTalked = false;
+        rainforestFairy.isCompleted = false;
+        rainforestFairy.gameObject.layer = LayerMask.NameToLayer("Interactable");
+        ClearCompletedQuestDatabase();
+    }
+
+    public void ClearCompletedQuestDatabase()
+    {
+        Task.instance.tasksCompeleted.Clear();
     }
 
     public void ClearAllQuest()

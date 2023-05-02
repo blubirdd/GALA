@@ -22,6 +22,10 @@ public class BeachEvents : MonoBehaviour
     public GameObject secondStrandedDuong;
     public GameObject secondCharacterSet;
 
+    public GameObject pushDugongTimeline;
+    [Header("Photo")]
+    public Photograph dugongPhotograph;
+
     [Header("Quest 3")]
     public GameObject thirdCharacterSet;
     public GameObject monCharacter3;
@@ -62,14 +66,16 @@ public class BeachEvents : MonoBehaviour
 
 
         //QuestPushDugong
-        if (questName == "Push the stranded Dugong")
-        {
-            strandedDugong.GetComponent<Outline>().enabled = true;
-        }
+        //if (questName == "Push the stranded Dugong")
+        //{
+        //    //strandedDugong.GetComponent<Outline>().enabled = true;
+        //}
 
         //QuestCleanBeachTrash
         if (questName == "Clean the beach")
         {
+            Book.instance.AddAnimalPhoto(dugongPhotograph);
+
             beachTrashToClean.SetActive(true);
             npcWalkingTimeline.SetActive(true);
             grabWaterQuest.SetActive(false);
@@ -103,7 +109,9 @@ public class BeachEvents : MonoBehaviour
         //QuestPushDugong
         if(questName == "Push the stranded Dugong")
         {
-            strandedDugong.GetComponent<Outline>().enabled = false;
+            pushDugongTimeline.SetActive(true);
+            UIManager.instance.DisablePlayerMovement();
+            //strandedDugong.GetComponent<Outline>().enabled = false;
             strandedDugong.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePosition;
             //strandedDugong.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 
@@ -134,6 +142,7 @@ public class BeachEvents : MonoBehaviour
 
                 }
 
+                UIManager.instance.EnablePlayerMovement();
                 //activate infos
                 firstCharacterSet.SetActive(false);
 

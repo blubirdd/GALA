@@ -11,11 +11,14 @@ public class BookSlot : MonoBehaviour
 
     [Header("Upper Left")]
     [SerializeField] private TextMeshProUGUI _animalName;
+    [SerializeField] private TextMeshProUGUI _scientificName;
     [SerializeField] private TextMeshProUGUI _lifeSpan;
     [SerializeField] private TextMeshProUGUI _weight;
     [SerializeField] private TextMeshProUGUI _height;
     [SerializeField] private TextMeshProUGUI _length;
     [SerializeField] private Image _biomeImage;
+    [Header("NEW ADDITIONS")]
+    [SerializeField] private GameObject questionMark;
 
     [Header("Lower Left")]
     public Image dietImage;
@@ -52,11 +55,13 @@ public class BookSlot : MonoBehaviour
 
         polaroidPhoto.sprite = photo.polaroidPhoto;
         polaroidPhoto.enabled = true;
+        questionMark.SetActive(false);
 
         dietImage.enabled = true;
         //set the book ui
         //_animalName.SetText(photo.name + " (" + photo.scientificName + ")");
         _animalName.SetText(photo.name);
+        _scientificName.SetText(photo.scientificName);
         _lifeSpan.SetText(photo.lifeSpan);
         _weight.SetText(photo.weight);
         _height.SetText(photo.height);

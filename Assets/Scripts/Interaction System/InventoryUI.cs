@@ -76,7 +76,7 @@ public class InventoryUI : MonoBehaviour
         inventoryUI.transform.DOLocalMoveY(-50, 0.5f).SetEase(Ease.OutBack);
         inventoryUI.GetComponent<CanvasGroup>().DOFade(1, 0.5f);
 
-        UIManager.instance.DisableButtonsUIPACK();
+        UIManager.instance.DisablePlayerMovement();
 
         goldCoinsCollectedText.text = inventory.goldCoins.ToString();
         scoreText.text = inventory.naturePoints.ToString();
@@ -100,7 +100,7 @@ public class InventoryUI : MonoBehaviour
 
         //inventoryUI.SetActive(false);
         //itemDetailsParent.SetActive(false);
-        UIManager.instance.EnableButtonsUIPACK();
+        UIManager.instance.EnablePlayerMovement();
         uiManager.animatedFirstPersonCamera.SetActive(false);
     }
 

@@ -52,12 +52,18 @@ public class SwampEvents : MonoBehaviour
     [SerializeField] private Character eggGame;
     [SerializeField] private Character moleGame;
 
+    [Header("Crrocodile food")]
+    public Outline meatFoodCollectable;
+
     [Header("Egg Game")]
     public Transform eggGameRespawnPoint;
     public Transform moleGameRespawnPoint;
     public static bool fromEggGame = false;
     public static bool fromMoleGame = false;
     public GameObject otherEggsParent;
+
+    [Header("Mole Game")]
+    public Outline moleGameHouseTrigger;
 
     [Header("End")]
     public GameObject rainforestLocation;
@@ -81,7 +87,14 @@ public class SwampEvents : MonoBehaviour
             Player.instance.eggGameScore = 10;
             fromEggGame = false;
 
-            quest = (QuestNew)questManager.AddComponent(System.Type.GetType("QuestFindMoreEggs"));
+            if (Task.instance.tasksCompeleted.Contains("QuestFindMoreEggs"))
+            {
+                quest = (QuestNew)questManager.AddComponent(System.Type.GetType("QuestFindMoreEggs"));
+            }
+
+            PlayerLocationManager.currentLocation = "Swamp";
+            PlayerLocationManager.instance.SetCurrentLocationActive();
+
         }
 
         if (fromMoleGame)
@@ -91,7 +104,11 @@ public class SwampEvents : MonoBehaviour
             ThirdPersonController.instance.gameObject.SetActive(true);
 
             Player.instance.moleGameScore = 10;
-            quest = (QuestNew)questManager.AddComponent(System.Type.GetType("QuestTalkSwampBiologist2"));
+            if (Task.instance.tasksCompeleted.Contains("QuestTalkSwampBiologist2"))
+            {
+                quest = (QuestNew)questManager.AddComponent(System.Type.GetType("QuestTalkSwampBiologist2"));
+            }
+
             fromMoleGame = false;
         }
 
@@ -100,17 +117,19 @@ public class SwampEvents : MonoBehaviour
 
 
 
-        StartCoroutine(WaitForAFewSeconds());
-        IEnumerator WaitForAFewSeconds()
+        StartCoroutine(WaitForMinigame());
+        IEnumerator WaitForMinigame()
         {
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(1);
             if (Player.instance.moleGameScore > 0)
             {
+                Debug.Log("trigger mole quest event");
                 TalkEvents.CharacterApproach(moleGame);
             }
 
             if (Player.instance.eggGameScore > 0)
             {
+                Debug.Log("trigger mole egg event");
                 TalkEvents.CharacterApproach(eggGame);
             }
         }
@@ -178,6 +197,17 @@ public class SwampEvents : MonoBehaviour
         if(questName == "Find more Crocodile Eggs")
         {
             otherEggsParent.SetActive(true);
+        }
+
+        //Mole Minigame
+        if(questName == "Enter the shelter and complete game")
+        {
+            moleGameHouseTrigger.enabled = true;
+        }
+
+        if(questName== "Learn about the crocodiles")
+        {
+            meatFoodCollectable.enabled = true;
         }
 
     }
@@ -269,6 +299,12 @@ public class SwampEvents : MonoBehaviour
         if(questName == "Take and pass the swamp quiz")
         {
             rainforestLocation.SetActive(true);
+        }
+
+        //QuestPlayMoleGame
+        if (questName == "Enter the shelter and complete game")
+        {
+            moleGameHouseTrigger.enabled = false;
         }
 
     }

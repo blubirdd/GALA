@@ -18,10 +18,10 @@ public class QuestPhotographEagle : QuestNew
         //setup
         ID = "QuestPhotographEagle"; ;
         questName = "Photograph a Philippine Eagle";
-        questDescription = "Find and photograph \na Philippine Eagle";
+        questDescription = "Find and photograph \ntwo Philippine Eagles";
 
-        goalDescription[0] = "Find and photograph \na Philippine Eagle";
-        requiredAmount[0] = 3;
+        goalDescription[0] = "Find and photograph \ntwo Philippine Eagles";
+        requiredAmount[0] = 2;
 
 
         reward = 10;

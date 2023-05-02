@@ -113,7 +113,8 @@ public class QuestUseMedkit2 : QuestNew
         //disable marker
         //Destroy(_waypoint);
 
+        //if constains picture accept else/ dont
         yield return new WaitForSeconds(5f);
-        AcceptQuest("QuestTalkRiverGuard");
+        AcceptQuest("QuestTalkGrasslandGuard");
     }
 }

@@ -42,7 +42,7 @@ public class QuestEvents : MonoBehaviour
         //set to falses
 
 
-        GameEvents.instance.onQuestAcceptedNotification += QuestCheck;
+        GameEvents.instance.onQuestAcceptedForSave += QuestCheck;
         GameEvents.instance.onQuestCompleted += QuestCompleteCheck;
 
 

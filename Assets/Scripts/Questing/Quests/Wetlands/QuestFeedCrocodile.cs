@@ -18,7 +18,7 @@ public class QuestFeedCrocodile : QuestNew
 
         //setup
         ID = "QuestFeedCrocodile"; ;
-        questName = "Feed the crocodiles";
+        questName = "Learn about the crocodiles";
         questDescription = "Feed a Philippine Crocodile";
 
         goalDescription[0] = "Collect meat to feed the crocodiles";
@@ -126,8 +126,8 @@ public class QuestFeedCrocodile : QuestNew
         //Destroy(_waypoint);
 
         //wait for notifcation or cutscene
-        //yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(5f);
         //yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
-        //AcceptQuest("QuestRelocateCrocodile");
+        AcceptQuest("QuestTalkKarlo1");
     }
 }

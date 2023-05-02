@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QuestPushDugong : QuestNew
 {
-    static int numberOfGoals = 2;
+    static int numberOfGoals = 1;
 
     private string[] goalDescription = new string[numberOfGoals];
     private int[] currentProgress = new int[numberOfGoals];
@@ -19,11 +19,11 @@ public class QuestPushDugong : QuestNew
         questName = "Push the stranded Dugong";
         questDescription = "Push the dugong together";
 
-        goalDescription[0] = "Find a stick in the area";
-        requiredAmount[0] = 1;
+        //goalDescription[0] = "Find a stick in the area";
+        //requiredAmount[0] = 1;
 
-        goalDescription[1] = "Push the dugong together";
-        requiredAmount[1] = 1;
+        goalDescription[0] = "Push the dugong together";
+        requiredAmount[0] = 1;
 
         reward = 10;
 
@@ -52,8 +52,8 @@ public class QuestPushDugong : QuestNew
 
 
         //goal (this, name of target, goaldescription, iscompleted bool, current progress, required amount)
-        Goals.Add(new CollectionGoal(this, "Stick", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
-        Goals.Add(new UseGoal(this, "Stick", goalDescription[1], false, currentProgress[1], requiredAmount[1]));
+        //Goals.Add(new CollectionGoal(this, "Stick", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new UseGoal(this, "Stick", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
         Goals.ForEach(g => g.InIt());
         UpdateQuestUI();
         GetGoalsList();

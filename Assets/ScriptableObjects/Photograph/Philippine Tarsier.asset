@@ -22,7 +22,7 @@ MonoBehaviour:
   length: 'Length: 80-160 MM'
   biomeImage: {fileID: 21300000, guid: 0740f7efe904acc49a4f6590e2809922, type: 3}
   biome: Forest
-  diet: 'Diet: Insectivores, Carnivore'
+  diet: 'Diet: Carnivore'
   food: 'Food: Insects'
   appearance: Its eyes are unique and are almost twice as big as those of humans.
     Its head can rotate as much as 180 degrees.

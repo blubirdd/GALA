@@ -14,7 +14,7 @@ public class QuestPhotographPhilippineEagle : QuestNew
     private GameObject _waypoint;
     void Start()
     {
-
+        //THIS ONE IS UNUSED
         //setup
         ID = "QuestPhotographPhilippineEagle"; ;
         questName = "The Philippine Eagle";

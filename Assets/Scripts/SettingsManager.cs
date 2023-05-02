@@ -16,9 +16,28 @@ public class SettingsManager : MonoBehaviour
     [Header("Game Levels")]
     private int currentLevel;
 
+
+    [Header("Waypoint")]
+    public GameObject waypointCanvas;
     void Start()
     {
         currentLevel = 0;
+    }
+
+    public void ToggleWaypoints()
+    {
+        StopAllCoroutines();
+        StartCoroutine(WaitForPauseMenuToClose());
+        IEnumerator WaitForPauseMenuToClose()
+        {
+            yield return new WaitUntil(() => Time.timeScale == 1);
+            yield return new WaitForSeconds(0.5f);
+            waypointCanvas.SetActive(!waypointCanvas.activeSelf);
+            Debug.Log("waypoint canvas is " + waypointCanvas.activeSelf);
+        }
+       
+
+
     }
 
     public void ToggleGrass()

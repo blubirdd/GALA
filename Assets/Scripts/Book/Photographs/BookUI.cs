@@ -32,8 +32,16 @@ public class BookUI : MonoBehaviour
         slotsBirds = birdsCategory.GetComponentsInChildren<BookSlot>(true);
         slotsReptiles = reptilesCategory.GetComponentsInChildren<BookSlot>(true);
         slotsAquatic = aquaticCategory.GetComponentsInChildren<BookSlot>(true);
+
     }
 
+    public void UpdateBookAtStart()
+    {
+        UpdateMammals();
+        UpdateBirds();
+        UpdateReptiles();
+        UpdateAquatic();
+    }
 
     void GetAnimalGroup(IAnimal animal)
     {
@@ -57,6 +65,11 @@ public class BookUI : MonoBehaviour
         if (_animalGroup == "Reptile")
         {
             UpdateReptiles();
+        }
+
+        if (_animalGroup == "Aquatic")
+        {
+            UpdateAquatic();
         }
 
     }
@@ -100,4 +113,16 @@ public class BookUI : MonoBehaviour
 
     }
 
+    void UpdateAquatic()
+    {
+        for (int i = 0; i < slotsAquatic.Length; i++)
+        {
+            if (i < book.photosAquatic.Count)
+            {
+                slotsAquatic[i].AddPhoto(book.photosAquatic[i]);
+
+            }
+        }
+
+    }
 }

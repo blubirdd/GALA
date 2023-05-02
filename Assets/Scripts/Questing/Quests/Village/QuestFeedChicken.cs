@@ -104,6 +104,6 @@ public class QuestFeedChicken : QuestNew
 
         //Add another quest
         yield return new WaitForSeconds(4f);
-        AcceptQuest("QuestTalkVillageChief");
+        AcceptQuest("QuestTalkVillageGuard");
     }
 }
