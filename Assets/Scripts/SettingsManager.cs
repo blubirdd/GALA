@@ -9,7 +9,7 @@ public class SettingsManager : MonoBehaviour
 {
 
     [Header("Environment")]
-    public GameObject grass;
+    public GameObject[] grass;
     public GameObject graphy;
     private bool fpsLimitEnabled = false;
 
@@ -42,7 +42,11 @@ public class SettingsManager : MonoBehaviour
 
     public void ToggleGrass()
     {
-        grass.SetActive(!grass.activeSelf);
+        foreach (var item in grass)
+        {
+            item.SetActive(!item.activeSelf);
+        }
+
     }
 
     public void ToggleGraphy()

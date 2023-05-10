@@ -60,4 +60,11 @@ public class MinigameStart : MonoBehaviour, IInteractable
         SceneManager.LoadSceneAsync("Mole Minigame");
         return true;
     }
+
+    public void StartMoleMinigame()
+    {
+        DataPersistenceManager.instance.SaveGame();
+
+        SceneManager.LoadSceneAsync("Mole Minigame");
+    }
 }

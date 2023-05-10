@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9e7ff59b5ff3f4086cba2f6e166531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerAwarenessDistance: 10
+  _playerAwarenessDistance: 50
 --- !u!114 &26781315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -954,7 +954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9e7ff59b5ff3f4086cba2f6e166531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerAwarenessDistance: 10
+  _playerAwarenessDistance: 50
 --- !u!114 &157719300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3213,7 +3213,7 @@ MonoBehaviour:
   canvas: {fileID: 1624068301}
   gameCanvas: {fileID: 1624068301}
   hitSFX: {fileID: 2117643167}
-  hitSFXClip: {fileID: 8300000, guid: 1321a2eb4a3d8b04795087da4cbc934b, type: 3}
+  hitSFXClip: {fileID: 8300000, guid: 0ef5fec81644fa94d864621ee345831f, type: 3}
   centerPoint: {fileID: 97826332}
 --- !u!4 &909630437
 Transform:
@@ -5828,6 +5828,11 @@ PrefabInstance:
       propertyPath: clockui
       value: 
       objectReference: {fileID: 843990399}
+    - target: {fileID: 708138134775996897, guid: 8a80e41ce97c2d24ead2259ff3de3ca1,
+        type: 3}
+      propertyPath: egggamemanager
+      value: 
+      objectReference: {fileID: 2059060126}
     - target: {fileID: 708138134775996911, guid: 8a80e41ce97c2d24ead2259ff3de3ca1,
         type: 3}
       propertyPath: m_Name
@@ -5874,6 +5879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1767411166}
   gameOverPanel: {fileID: 830119948}
+  loadingScreen: {fileID: 899668187}
 --- !u!4 &2059060127
 Transform:
   m_ObjectHideFlags: 0
@@ -6203,7 +6209,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ae90e67144f33104097c3cf629d4f1e7, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 0ef5fec81644fa94d864621ee345831f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -6320,6 +6326,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6648255401718644411, guid: ac5c953ff31f31340803a87aae7f59c5,
+        type: 3}
+      propertyPath: _playerAwarenessDistance
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6648255401718644414, guid: ac5c953ff31f31340803a87aae7f59c5,
         type: 3}

@@ -12,7 +12,7 @@ public class VillageEvents : MonoBehaviour
     public DoorController doorController;
     void Start()
     {
-        GameEvents.instance.onQuestAcceptedNotification += VillageQuestAcceptCheck;
+        GameEvents.instance.onQuestAcceptedForSave += VillageQuestAcceptCheck;
         GameEvents.instance.onQuestCompleted += VillageQuestCompleteCheck;
 
         if (Task.instance.tasksCompeleted.Contains("QuestIntroPart1"))

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QuestUseMedkit2 : QuestNew
 {
-    static int numberOfGoals = 1;
+    static int numberOfGoals = 2;
 
     private string[] goalDescription = new string[numberOfGoals];
     private int[] currentProgress = new int[numberOfGoals];
@@ -23,6 +23,8 @@ public class QuestUseMedkit2 : QuestNew
         goalDescription[0] = "Cure the remaining infected \ntamaraw in the area";
         requiredAmount[0] = 2;
 
+        goalDescription[1] = "Photgraph a tamaraw in the area";
+        requiredAmount[1] = 2;
 
         reward = 10;
 
@@ -52,6 +54,7 @@ public class QuestUseMedkit2 : QuestNew
 
         //goal (this, name of target, goaldescription, iscompleted bool, current progress, required amount)
         Goals.Add(new UseGoal(this, "Med kit", goalDescription[0], false, currentProgress[0], requiredAmount[0]));
+        Goals.Add(new PictureGoal(this, "Tamaraw", goalDescription[1], false, currentProgress[1], requiredAmount[1]));
         Goals.ForEach(g => g.InIt());
 
         GetGoalsList();
@@ -103,7 +106,7 @@ public class QuestUseMedkit2 : QuestNew
     IEnumerator IsQuestCompleted()
     {
         yield return new WaitUntil(() => questCompleted == true);
-
+        Inventory.instance.naturePoints += reward;
         //remove quest from task list
         Task.instance.RemoveTask(ID);
 

@@ -58,6 +58,8 @@ public class QuestPhotoChicken : QuestNew
 
         GameEvents.instance.QuestAcceptedForSave(questName);
 
+        IndicatorController.instance.EnableCameraIndicator();
+
     }
 
     private void GetGoalsList()
@@ -100,7 +102,7 @@ public class QuestPhotoChicken : QuestNew
     IEnumerator IsQuestCompleted()
     {
         yield return new WaitUntil(() => questCompleted == true);
-
+        Inventory.instance.naturePoints += reward;
         //remove quest from task list
         Task.instance.RemoveTask(ID);
 

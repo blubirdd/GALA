@@ -54,7 +54,7 @@ public class EnemySpawner : MonoBehaviour
         {
             // Calculate the new spawn delay based on the elapsed time
             float elapsedSeconds = Time.deltaTime;
-            float newDelay = initialDelay - (elapsedSeconds / 1f); // change the 10f to adjust the difficulty curve
+            float newDelay = initialDelay - (elapsedSeconds / 0.1f); // change the 10f to adjust the difficulty curve
             Debug.Log("new delay: " + newDelay);
 
             for (int i = 0; i < numberOfItems; i++)

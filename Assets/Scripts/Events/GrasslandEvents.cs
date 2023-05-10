@@ -19,8 +19,9 @@ public class GrasslandEvents : MonoBehaviour
     [Header("Prefab to instantiate")]
     [SerializeField] private GameObject tamarawPrefab;
 
-    [Header("Wild animals")]
+    [Header("First TamarawTrack")]
     //public GameObject tamarawWildAnimalsParent;
+    public GameObject firstTamarawTrack;
 
     [Header("Cutscenes")]
     [SerializeField] private GameObject cureTamarawCutscene;
@@ -36,7 +37,7 @@ public class GrasslandEvents : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameEvents.instance.onQuestAcceptedNotification += GrasslandQuestAcceptCheck;
+        GameEvents.instance.onQuestAcceptedForSave += GrasslandQuestAcceptCheck;
         GameEvents.instance.onQuestCompleted += GrasslandQuestCompleteCheck;
 
         for (int i = 0; i < task.tasksCompeleted.Count; i++)
@@ -54,7 +55,7 @@ public class GrasslandEvents : MonoBehaviour
     public void GrasslandQuestAcceptCheck(string questName)
     {
         //QuestUseMedkit2
-        if(questName == "Cure the remaining Tamaraws")
+        if (questName == "Cure the remaining Tamaraws")
         {
             wildTamaraws.SetActive(true);
             //tamarawWildAnimalsParent.SetActive(true);
@@ -84,11 +85,19 @@ public class GrasslandEvents : MonoBehaviour
                 idleWildlifeSpecialist2.SetActive(true);
 
             }
+
         }
 
         if (questName == "Heal the Tamaraw")
         {
             StartCoroutine(WaitUntilDialogueEnd(3, 3f));
+        }
+
+
+        //QuestCollectTamarawTracks
+        if (questName == "Tracking the tamaraw")
+        {
+            firstTamarawTrack.SetActive(true);
         }
     }
     public void GrasslandQuestCompleteCheck(string questName)

@@ -15,17 +15,18 @@ MonoBehaviour:
   name: Tamaraw
   scientificName: Bubalus mindorensis
   animalGroup: Terrestrial Mammal
-  polaroidPhoto: {fileID: 21300000, guid: da6aa52791865ac40a742abd7d65c9f7, type: 3}
+  polaroidPhoto: {fileID: 21300000, guid: b22f2ad51c740a248bc26d4196fbc572, type: 3}
   lifeSpan: 'Life Span: 20-25 YRS'
   weight: 'Weight: 180-300 KG'
   height: 'Height: 100-105 CM'
   length: 'Length: 2 M'
   biomeImage: {fileID: 21300000, guid: 0740f7efe904acc49a4f6590e2809922, type: 3}
   biome: Grassland, Forest
-  diet: 'Diet: Herbivore'
+  diet: 'Diet Type: Herbivore'
   food: 'Food: Grasses, Young bamboo shoots, and wild Sugarcane.'
-  appearance: Dark brown to grayish in color small hoofed with short and stocky limbs.
-    The horns are V-shaped manner and are triangular at their base.
-  details: They are generally solitary and do not occur in herds or smaller packs
-    and are often found alone. When threatened they lower the head and shake their
-    horns. They may also chase one another.
+  appearance: The hair is nearly black or very dark brown except for a white patch
+    across the throat. The horns are V-shaped manner and are triangular at their
+    base.
+  details: They are reported to feed primarily on grasses and bamboos, especially
+    tender young shoots. Now confined to a few remote areas in rough terrain.  They
+    are Severely over-hunted and geographically restricted.

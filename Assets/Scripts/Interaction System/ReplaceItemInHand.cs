@@ -9,5 +9,6 @@ public class ReplaceItemInHand : MonoBehaviour
     public void ReplaceItem()
     {
         EquipmentManager.instance.Equip(equipmentToPut);
+        SoundManager.instance.PlaySoundFromClips(12);
     }
 }

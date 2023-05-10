@@ -15,14 +15,14 @@ MonoBehaviour:
   name: Bottlenose Dolphin
   scientificName: Tursiops truncatus
   animalGroup: Aquatic
-  polaroidPhoto: {fileID: 21300000, guid: 04202f9649eb0b7479c144224c3c3a7c, type: 3}
+  polaroidPhoto: {fileID: 21300000, guid: c3f02226d04e26e409c098d61063405c, type: 3}
   lifeSpan: 'Life Span: 40-50 YRS'
   weight: 'Weight: 150-650 KG'
   height: 'Height: Unknown'
   length: 'Length: 2-4 M'
   biomeImage: {fileID: 21300000, guid: 95587742ba8c7034fa4b3579c72ac15d, type: 3}
   biome: Marine, Ocean, Coastal
-  diet: 'Diet: Carnivore'
+  diet: 'Diet Type: Carnivore'
   food: 'Food: Fish, Squid, Shrimps'
   appearance: 'Features front flippers, flukes, and a dorsal fin, which they use
     for swimming. The dorsal fin, positioned near the middle of the back, is tall

@@ -60,22 +60,22 @@ namespace StarterAssets
         public float Gravity = -15.0f;
 
         [Space(10)]
-        [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
+        [Tooltip("Time required to pass before being able to jump again.")]
         public float JumpTimeout = 0.50f;
 
-        [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
+        [Tooltip("Time required to pass before entering the fall state.")]
         public float FallTimeout = 0.15f;
 
         [Header("Player Grounded")]
-        [Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
+        [Tooltip("If the character is grounded or not.")]
         public bool Grounded = true;
 
 
         [Tooltip("Useful for rough ground")]
         public float GroundedOffset = -0.14f;
 
-        [Tooltip("The radius of the grounded check. Should match the radius of the CharacterController")]
-        public float GroundedRadius = 0.28f;
+        [Tooltip("The radius of the grounded check.")]
+        public float GroundedRadius = 0.5f;
 
         [Tooltip("What layers the character uses as ground")]
         public LayerMask GroundLayers;
@@ -96,7 +96,7 @@ namespace StarterAssets
         [Tooltip("How far in degrees can you move the camera down")]
         public float BottomClamp = -30.0f;
 
-        [Tooltip("Additional degress to override the camera. Useful for fine tuning camera position when locked")]
+        [Tooltip("Additional degress to override the camera.")]
         public float CameraAngleOverride = 0.0f;
 
         [Tooltip("For locking the camera position on all axis")]
@@ -161,7 +161,7 @@ namespace StarterAssets
         //my script
         public static bool canMove = true;
 
-
+        public GameObject crocodileEmote;
         //SINGLETON
         UIManager uiManager;
 
@@ -177,6 +177,11 @@ namespace StarterAssets
             }
         }
 
+        private void OnEnable()
+        {
+            crocodileEmote.SetActive(false);
+        }
+
         public void LoadData(GameData data)
         {
             //if (data.gameLevel == 2)
@@ -186,7 +191,6 @@ namespace StarterAssets
             //    return;
             //}
             this.transform.position = data.playerPosition;
-
         }
 
         public void SaveData(GameData data)
@@ -197,6 +201,7 @@ namespace StarterAssets
 
         private void Start()
         {
+            uiManager = UIManager.instance;
             MoveSpeed = normalSpeed;
 
             if (_mainCamera == null)
@@ -233,7 +238,7 @@ namespace StarterAssets
             GameEvents.instance.onCameraOpened += DisableMovementOnCamera;
             GameEvents.instance.onCameraClosed += EnableMovementOnThirdP;
 
-            uiManager = UIManager.instance;
+        
         }
 
         public void DisableMovementOnCamera()

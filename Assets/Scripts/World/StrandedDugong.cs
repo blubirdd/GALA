@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class StrandedDugong : MonoBehaviour
 {
     Character character;
     public float speed = 50.0f;
     public GameObject sea;
     private Rigidbody rb;
+
+    public Item stick;
     private void Start()
     {
         character = GetComponent<Character>();
@@ -33,6 +36,15 @@ public class StrandedDugong : MonoBehaviour
             rb.constraints = RigidbodyConstraints.FreezeRotation;
             StartCoroutine(Swim());
         }
+
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (Task.instance.tasksCompeleted.Contains("QuestTalkStrandedDugongHelpers"))
+            {
+                Inventory.instance.ItemUsed(stick);
+
+            }
+        }
             
     }
 
@@ -54,7 +66,7 @@ public class StrandedDugong : MonoBehaviour
 
     private IEnumerator DisableAfterSwim()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
 }

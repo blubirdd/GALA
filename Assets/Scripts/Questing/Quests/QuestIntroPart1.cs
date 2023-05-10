@@ -62,6 +62,7 @@ public class QuestIntroPart1 : QuestNew
 
         GameEvents.instance.QuestAcceptedForSave(questName);
 
+
     }
 
     private void GetGoalsList()

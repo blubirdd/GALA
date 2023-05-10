@@ -48,10 +48,10 @@ public class Interactor : MonoBehaviour
                     _interactionPromptUI.Setup(_interactable.InteractionPrompt, _interactable.icon);
                 }
 
-                if (Keyboard.current.eKey.wasPressedThisFrame)
-                {
-                    _interactable.Interact(this);
-                }
+                //if (Keyboard.current.eKey.wasPressedThisFrame)
+                //{
+                //    _interactable.Interact(this);
+                //}
 
                 if (_buttonWasPressed == true)
                 {

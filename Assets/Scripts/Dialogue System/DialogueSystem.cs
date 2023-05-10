@@ -235,6 +235,7 @@ public class DialogueSystem : MonoBehaviour
         }
 
         subtleDialogueCanvas.SetActive(true);
+        subtleDialogueCanvas.GetComponent<CanvasGroup>().DOFade(1, 0.5f).SetUpdate(true);
         subtleSentences.Clear();
 
         foreach (string sentence in dialogue.sentences)
@@ -286,7 +287,10 @@ public class DialogueSystem : MonoBehaviour
     public void EndSubtleDialogue()
     {
         Debug.Log("Subtle Dialogue End");
-        subtleDialogueCanvas.SetActive(false);
+        subtleDialogueCanvas.GetComponent<CanvasGroup>().DOFade(0, 0.3f).SetUpdate(true).OnComplete(() => {
+            subtleDialogueCanvas.SetActive(false);
+        });
+
     }
      
 

@@ -9,7 +9,7 @@ public class PlayerAwarenessController : MonoBehaviour
     public Vector2 DirectionToPlayer { get; private set; }
 
     [SerializeField]
-    private float _playerAwarenessDistance;
+    private float _playerAwarenessDistance = 50;
 
     private Transform _ChaseEgg;
 

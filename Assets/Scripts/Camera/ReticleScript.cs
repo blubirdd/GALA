@@ -71,7 +71,7 @@ public class ReticleScript : MonoBehaviour
     }
     public void Ray()
     {
-        Debug.DrawRay(transform.position, transform.forward * 50f, Color.red);
+        Debug.DrawRay(transform.position, transform.forward * 200f, Color.red);
 
         bool shouldPlaySound = false;
 

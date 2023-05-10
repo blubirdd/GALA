@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ClockManager : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class ClockManager : MonoBehaviour
     #endregion
 
     public ClockUI clockui;
-
+    public EggGameManager egggamemanager;
     // Start is called before the first frame update
     public void StartClock(int seconds, QuestNew quest)
     {
@@ -71,6 +72,10 @@ public class ClockManager : MonoBehaviour
     public void IndependentClockEnd()
     {
         Debug.Log("End game");
+        if(egggamemanager != null)
+        {
+            egggamemanager.BackToGame();
+        }
     }
 
     public void DisableClock()

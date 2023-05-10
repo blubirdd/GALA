@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 
-public class TimeController : MonoBehaviour
+public class TimeController : MonoBehaviour, IDataPersistence
 {
     #region Singleton
 
@@ -83,23 +83,23 @@ public class TimeController : MonoBehaviour
     void Start()
     {
 
-        currentTime = DateTime.Now.Date + TimeSpan.FromHours(startHour);
+        //currentTime = DateTime.Now.Date + TimeSpan.FromHours(startHour);
 
-        sunriseTime = TimeSpan.FromHours(sunriseHour);
-        sunsetTime = TimeSpan.FromHours(sunsetHour);
+        //sunriseTime = TimeSpan.FromHours(sunriseHour);
+        //sunsetTime = TimeSpan.FromHours(sunsetHour);
 
 
-        //set up skybox on start
-        if (timeHour >= sunriseHour && timeHour < sunsetHour)
-        {
-            RenderSettings.skybox = daySkyboxMaterial;
-        }
-        else
-        {
-            RenderSettings.skybox = nightSkyboxMaterial;
-        }
+        ////set up skybox on start
+        //if (timeHour >= sunriseHour && timeHour < sunsetHour)
+        //{
+        //    RenderSettings.skybox = daySkyboxMaterial;
+        //}
+        //else
+        //{
+        //    RenderSettings.skybox = nightSkyboxMaterial;
+        //}
 
-        StartCoroutine(UpdateTimeOfDayCoroutineForOptimization());
+        //StartCoroutine(UpdateTimeOfDayCoroutineForOptimization());
     }
 
     // Update is called once per frame
@@ -152,10 +152,15 @@ public class TimeController : MonoBehaviour
         if (timeHour >= sunriseHour && timeHour < sunsetHour)
         {
             RenderSettings.skybox = daySkyboxMaterial;
+            sunLight.intensity = 1;
+            moonLight.intensity = 0f ;
+
         }
         else
         {
             RenderSettings.skybox = nightSkyboxMaterial;
+            sunLight.intensity = 0f;
+            moonLight.intensity = 1;
         }
 
     }
@@ -167,7 +172,7 @@ public class TimeController : MonoBehaviour
             UpdateTimeOfDay();
             RotateSun();
             UpdateLightSettings();
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0f);
         }
     }
     private void RotateSun()
@@ -218,5 +223,19 @@ public class TimeController : MonoBehaviour
         return difference;
     }
 
+    public void LoadData(GameData data)
+    {
+        //StartCoroutine(WaitForTimeToSet());
+        //IEnumerator WaitForTimeToSet()
+        //{
+        //    yield return new WaitForEndOfFrame();
+        //    SetTimeOfDayWithoutCutScene(data.time);
+        //}
 
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.time = timeHour;
+    }
 }

@@ -6,7 +6,7 @@ public class Bed : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private DialogueTrigger _dialogue;
     public bool triggerStartDialogue;
-
+    public GameObject eagleCutscene;
 
 
     //yes this is a quest giver
@@ -24,6 +24,8 @@ public class Bed : MonoBehaviour, IDataPersistence
     {
         if (triggerStartDialogue)
         {
+            UIManager.instance.DisablePlayerMovement();
+            eagleCutscene.SetActive(true);
             StartCoroutine(WaitForDialogueToTrigger());
         }
 
@@ -33,7 +35,9 @@ public class Bed : MonoBehaviour, IDataPersistence
 
     IEnumerator WaitForDialogueToTrigger()
     {
-        yield return new WaitForSeconds(1f);
+        //wait for cutscene
+        yield return new WaitForSeconds(10.5f);
+
         _dialogue.TriggerDialogue();
         triggerStartDialogue = false;
 
@@ -44,7 +48,7 @@ public class Bed : MonoBehaviour, IDataPersistence
     IEnumerator AcceptQuest()
     {
         yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
-
+       
         //UIManager.instance.OpenCloseTutorialPrompt();
 
         AssignQuest();

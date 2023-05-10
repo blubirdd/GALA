@@ -30,6 +30,10 @@ public class QuizNPC : MonoBehaviour, IInteractable
     UIManager uiManager;
     ThirdPersonController thirdPersonController;
     Character character;
+
+    [Header("Quest prerequisite")]
+    [SerializeField] private string prerequisiteQuest;
+    [SerializeField] private SubtleDialogueTrigger prerequieSiteSubtleDialogue;
     private void Start()
     {
         InteractionPrompt = _prompt;
@@ -44,22 +48,31 @@ public class QuizNPC : MonoBehaviour, IInteractable
     }
     public bool Interact(Interactor interactor)
     {
-        _dialogue.TriggerDialogue();
-        PositionPlayer(interactor);
-
-        if(character != null)
+        if (prerequisiteQuest == "" || Task.instance.tasksCompeleted.Contains(prerequisiteQuest))
         {
-            TalkEvents.CharacterApproach(character);
-        }
-        StartCoroutine(WaitForDialogueEnd());
+            _dialogue.TriggerDialogue();
+            PositionPlayer(interactor);
 
-        if (Task.instance.tasksCompeleted.Contains(questID))
-        {
-            if(afterDialogue != null)
+            if (character != null)
             {
-                afterDialogue.TriggerDialogue();
+                TalkEvents.CharacterApproach(character);
+            }
+            StartCoroutine(WaitForDialogueEnd());
+
+            if (Task.instance.tasksCompeleted.Contains(questID))
+            {
+                if (afterDialogue != null)
+                {
+                    afterDialogue.TriggerDialogue();
+                }
             }
         }
+
+        else
+        {
+            prerequieSiteSubtleDialogue.TriggerDialogue();
+        }
+
         return true;
     }
 

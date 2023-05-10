@@ -15,16 +15,17 @@ MonoBehaviour:
   name: Philippine Crocodile
   scientificName: Crocodylus mindorensis
   animalGroup: Reptile
-  polaroidPhoto: {fileID: 21300000, guid: 0bba1d9d59062024b9b77f1aba3245f4, type: 3}
+  polaroidPhoto: {fileID: 21300000, guid: 4848673106ea9844dac5379fd678532f, type: 3}
   lifeSpan: Life Span 70-80 YRS
   weight: 'Weight: 90-190 KG'
   height: 'Height: Unknown'
   length: 'Length: 3 M'
   biomeImage: {fileID: 21300000, guid: ffa2e4b6fabb256469319067ed6a2dae, type: 3}
   biome: Rivers, Wetlands
-  diet: 'Diet: Carnivore'
+  diet: 'Diet Type: Carnivore'
   food: 'Food: Small mammals, Fish, Birds'
-  appearance: Small, with relatively broad snouts, on their backs they have thick
-    bony plates. They have between 66 and 68 teeth.
-  details: Philippines crocodiles rest in the sun during the day to warm up. When
-    they are too hot they will open their mouth to release heat.
+  appearance: Has a broad snout, bony plates on their back, and dark brown coloration
+    with transverse dark stripes on the back and sides.
+  details: "Prefer small wetlands, but has also been found in shallow natural ponds
+    and marshes, Have been shown to be quite aggressive towards each other in captivity.
+    Juveniles have displayed intra-speci\uFB01c aggressiveness in the wild"

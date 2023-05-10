@@ -113,7 +113,7 @@ public class QuestGoToRainforest : QuestNew
         Debug.Log(this + " is Completed");
 
         //disable marker
-        //Destroy(_waypoint);
+        Destroy(_waypoint);
 
         //wait for notifcation or cutscene
         //yield return new WaitForSeconds(5f);

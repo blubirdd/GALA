@@ -79,7 +79,7 @@ public class QuestUseMedkitTurtle : QuestNew
     IEnumerator WaitForStartClock()
     {
         yield return new WaitForSeconds(17f);
-        ClockManager.instance.StartClock(200, this);
+        ClockManager.instance.StartClock(150, this);
     }
 
     private void GetGoalsList()
@@ -114,7 +114,8 @@ public class QuestUseMedkitTurtle : QuestNew
 
     public void SpawnWaypointMarker()
     {
-        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"));
+        Transform waypointParent = FindObjectOfType<WaypointParent>(true).gameObject.transform;
+        _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"), waypointParent);
         _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[5]);
 
     }
@@ -122,7 +123,7 @@ public class QuestUseMedkitTurtle : QuestNew
     IEnumerator IsQuestCompleted()
     {
         yield return new WaitUntil(() => questCompleted == true);
-
+        Inventory.instance.naturePoints += reward;
         //remove quest from task list
         Task.instance.RemoveTask(ID);
 

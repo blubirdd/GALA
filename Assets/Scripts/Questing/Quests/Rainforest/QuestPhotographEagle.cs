@@ -63,6 +63,8 @@ public class QuestPhotographEagle : QuestNew
         //SpawnWaypointMarker();
         GameEvents.instance.QuestAcceptedForSave(questName);
 
+        IndicatorController.instance.EnableCameraIndicator();
+
     }
 
     private void GetGoalsList()
@@ -105,7 +107,7 @@ public class QuestPhotographEagle : QuestNew
     IEnumerator IsQuestCompleted()
     {
         yield return new WaitUntil(() => questCompleted == true);
-
+        Inventory.instance.naturePoints += reward;
         //remove quest from task list
         Task.instance.RemoveTask(ID);
 
@@ -116,7 +118,7 @@ public class QuestPhotographEagle : QuestNew
         //Destroy(_waypoint);
 
         //wait for notifcation or cutscene
-        //yield return new WaitForSeconds(5f);
-        //AcceptQuest("QuestTalkLawrence");
+        yield return new WaitForSeconds(5f);
+        AcceptQuest("QuestHeadBackToFairy");
     }
 }

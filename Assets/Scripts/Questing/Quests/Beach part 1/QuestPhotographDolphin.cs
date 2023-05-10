@@ -61,6 +61,8 @@ public class QuestPhotographDolphin : QuestNew
         //SpawnWaypointMarker();
         GameEvents.instance.QuestAcceptedForSave(questName);
 
+        IndicatorController.instance.EnableCameraIndicator();
+
     }
 
     private void GetGoalsList()

@@ -10,6 +10,8 @@ public class Animal : MonoBehaviour, IAnimal
 
     public string animalName { get; set; }
     public string animalGroup { get; set; }
+    public string scientificName { get; set; }
+
     [Header("Animal SO")]
     public Photograph photo;
     public bool isDiscovered = false;
@@ -135,6 +137,7 @@ public class Animal : MonoBehaviour, IAnimal
     {
         animalName = photo.name;
         animalGroup = photo.animalGroup;
+        scientificName = photo.scientificName;
 
         if (isInjured)
         {
@@ -324,6 +327,8 @@ public class Animal : MonoBehaviour, IAnimal
         if (!Book.instance.photosInventory.Contains(photo))
         {
             Debug.Log("NEWLY ISCOVERED ADDED TO DATABASE: " + animalName);
+            IndicatorController.instance.EnableBookIndicator();
+            IndicatorController.instance.EnableBookRedCircle();
 
             StartCoroutine(WaitForPhoto());
             IEnumerator WaitForPhoto()
@@ -910,6 +915,7 @@ public class Animal : MonoBehaviour, IAnimal
                 {
                     animator.SetTrigger("Attack");
                     UIManager.instance.DisablePlayerMovement();
+                    ThirdPersonController.canMove = false;
                     //other.GetComponent<ThirdPersonController>().crouching = true;
                     this.GetComponent<CapsuleCollider>().enabled = false;
                     Vector3 direction = other.transform.position - transform.position;
@@ -927,6 +933,7 @@ public class Animal : MonoBehaviour, IAnimal
                         Player.instance.EnablePlayerDiedUI();
                         Debug.Log("Caught player");
                         UIManager.instance.EnablePlayerMovement();
+                        ThirdPersonController.canMove = true;
                         this.GetComponent<CapsuleCollider>().enabled = true;
                     }
 
@@ -1010,8 +1017,10 @@ public class Animal : MonoBehaviour, IAnimal
                 {
 
                     isEating = true;
+                    
                     //trigger the quest event
                     FeedEvents.AnimalFed(this);
+                    animator.SetTrigger("Eat");
                     Debug.Log(this + "just ate");
 
                     yield return new WaitForSeconds(5);

@@ -62,14 +62,19 @@ public class SwampEvents : MonoBehaviour
     public static bool fromMoleGame = false;
     public GameObject otherEggsParent;
 
+    [Header("EGGS Environment")]
+    public GameObject eggNestQuest;
+    public GameObject eggNestAfterQuest;
+
     [Header("Mole Game")]
     public Outline moleGameHouseTrigger;
 
     [Header("End")]
+    public GameObject swampGuard;
     public GameObject rainforestLocation;
     void Start()
     {
-        GameEvents.instance.onQuestAcceptedNotification += SwampQuestAcceptCheck;
+        GameEvents.instance.onQuestAcceptedForSave += SwampQuestAcceptCheck;
         GameEvents.instance.onQuestCompleted += SwampQuestCompleteCheck;
 
         if (Task.instance.tasksCompeleted.Contains("QuestRelocateCrocodile"))
@@ -77,6 +82,12 @@ public class SwampEvents : MonoBehaviour
 
             relocateCrocodileWall.SetActive(false);
         }
+
+        //if (Task.instance.tasksCompeleted.Contains("QuestTalkSwampBiologist2"))
+        //{
+
+        //    swampGuard.SetActive(true);
+        //}
 
         if (fromEggGame)
         {
@@ -95,6 +106,8 @@ public class SwampEvents : MonoBehaviour
             PlayerLocationManager.currentLocation = "Swamp";
             PlayerLocationManager.instance.SetCurrentLocationActive();
 
+            ThirdPersonController.canMove = true;
+
         }
 
         if (fromMoleGame)
@@ -110,6 +123,10 @@ public class SwampEvents : MonoBehaviour
             }
 
             fromMoleGame = false;
+            PlayerLocationManager.currentLocation = "Swamp";
+            PlayerLocationManager.instance.SetCurrentLocationActive();
+            ThirdPersonController.canMove = true;
+
         }
 
         Debug.Log("Egg game: " + Player.instance.eggGameScore);
@@ -147,8 +164,7 @@ public class SwampEvents : MonoBehaviour
         if(questName == "Contain and capture the crocodiles")
         {
             crocodileQuestAnimals.SetActive(true);
-            //crocodile1.GetComponent<Outline>().enabled = true;
-            //crocodile2.GetComponent<Outline>().enabled = true;
+
             FocusOnTransform(crocodileFocus.transform, 10f);
             StartCoroutine(WaitToTriggerDialgoue());
 
@@ -158,6 +174,8 @@ public class SwampEvents : MonoBehaviour
                 containCrocsSubtleDialogue.TriggerDialogue();
                 yield return new WaitForSeconds(10f);
                 netItem.GetComponent<Outline>().enabled = true;
+                crocodile1.GetComponent<Outline>().enabled = true;
+                crocodile2.GetComponent<Outline>().enabled = true;
 
             }
         }
@@ -210,6 +228,11 @@ public class SwampEvents : MonoBehaviour
             meatFoodCollectable.enabled = true;
         }
 
+        if(questName== "Talk to the guard inside.")
+        {
+            //swampGuard.SetActive(true);
+        }
+
     }
 
     public void SwampQuestCompleteCheck(string questName)
@@ -236,6 +259,8 @@ public class SwampEvents : MonoBehaviour
                 UIManager.instance.DisablePlayerMovement();
                 yield return new WaitForSeconds(10f);
                 UIManager.instance.EnablePlayerMovement();
+                crocodile1.GetComponent<Outline>().enabled = false;
+                crocodile2.GetComponent<Outline>().enabled = false;
             }
 
 

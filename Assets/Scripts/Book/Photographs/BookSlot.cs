@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,8 @@ public class BookSlot : MonoBehaviour
     [Header("Lower Left")]
     public Image dietImage;
     [SerializeField] private TextMeshProUGUI _biome;
+
+    public Image dietBG;
     [SerializeField] private TextMeshProUGUI _diet;
     [SerializeField] private TextMeshProUGUI _food;
 
@@ -58,6 +61,7 @@ public class BookSlot : MonoBehaviour
         questionMark.SetActive(false);
 
         dietImage.enabled = true;
+
         //set the book ui
         //_animalName.SetText(photo.name + " (" + photo.scientificName + ")");
         _animalName.SetText(photo.name);
@@ -74,6 +78,18 @@ public class BookSlot : MonoBehaviour
 
         _appearance.SetText(photo.appearance);
         _details.SetText(photo.details);
+
+        if (_diet.text == "Diet Type: Herbivore")
+        {
+            dietBG.color = new UnityEngine.Color(0.7f, 1.0f, 0.7f);
+        
+        }
+
+        if (_diet.text == "Diet Type: Carnivore")
+        {
+            dietBG.color = new UnityEngine.Color(1.0f, 0.7f, 0.7f);
+
+        }
 
     }
 

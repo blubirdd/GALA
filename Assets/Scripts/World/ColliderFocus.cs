@@ -22,6 +22,7 @@ public class ColliderFocus : MonoBehaviour
     public bool turnToNight = false;
 
     private bool isdone;
+
     private QuestNew quest { get; set; }
 
     private void Start()

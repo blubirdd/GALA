@@ -9,6 +9,7 @@ public class RiverEvents : MonoBehaviour
     public GameObject injuredTurtle;
     public GameObject fireQuest;
     public GameObject[] fireTransformsToPutOut;
+    public GameObject[] fireSmokeToDisable;
     [Header("Waypoint")]
     public GameObject smallWaypointPrefab;
     private GameObject[] waypointsForFire;
@@ -17,9 +18,9 @@ public class RiverEvents : MonoBehaviour
     public SubtleDialogueTrigger dialogueToGoToBeach;
     public SubtleDialogueTrigger dialogueTurtleWaterPollution;
 
-    [Header("Fire Quest")]
-    public GameObject questStatusHintCanvas;
-    public TextMeshProUGUI questStatusText;
+    //[Header("Fire Quest")]
+    //public GameObject questStatusHintCanvas;
+    //public TextMeshProUGUI questStatusText;
     [Header("River water")]
     public GameObject riverWaterObject;
     //public Material cleanWater;
@@ -44,6 +45,7 @@ public class RiverEvents : MonoBehaviour
 
     [Header("GiveItem")]
     public Item flashLightTogive;
+    public GameObject waterBucket;
 
     [Header("River Border To Swamp")]
     public GameObject riverGuard;
@@ -71,6 +73,7 @@ public class RiverEvents : MonoBehaviour
         //QuestUseMedkitTurtle
         if (questName == "Saving the Forest turtles")
         {
+            cureTurtleCutscene.SetActive(false);
             injuredTurtle.SetActive(true);
             cureTurtleCutscene.SetActive(true);
 
@@ -91,13 +94,29 @@ public class RiverEvents : MonoBehaviour
                 UIManager.instance.EnablePlayerMovement();
 
             }
-            Destroy(fireQuest);
+            //Destroy(fireQuest);
+        }
+
+        if(questName == "Grab a water bucket")
+        {
+            waterBucket.SetActive(true);
         }
 
         //QuestPutOutFire
         if (questName == "Help extinguish the fire")
         {
             fireQuest.SetActive(true);
+
+
+            foreach (var item in fireTransformsToPutOut)
+            {
+                item.SetActive(true);
+            }
+
+            foreach (var item in fireSmokeToDisable)
+            {
+                item.SetActive(false);
+            }
 
             //enable queststatushint
             //questStatusHintCanvas.SetActive(true);
@@ -122,6 +141,8 @@ public class RiverEvents : MonoBehaviour
             {
                 item.SetActive(true);
             }
+            turtleOil.SetActive(false);
+            injuredTurtle.SetActive(false);
         }
 
         //QuestTalkNightTent
@@ -140,6 +161,12 @@ public class RiverEvents : MonoBehaviour
         {
             riverGuard.SetActive(true);
         }
+
+        //QuestTalkDayTent
+        if (questName == "Rest in the camp until morning")
+        {
+            fireQuest.SetActive(false);
+        }
             //WARNING THIS USES A DIFFERENT EVENT!!!
 
         }
@@ -152,8 +179,13 @@ public class RiverEvents : MonoBehaviour
 
         //    fireQuest.SetActive(false);
         //}
+        if (questName == "Saving the Forest turtles")
+        {
+            injuredTurtle.SetActive(false);
+        }
 
-        //QuestCollectContaminatedBarrel
+
+            //QuestCollectContaminatedBarrel
         if (questName == "Clean the river")
         {
             dialogueToGoToBeach.TriggerDialogue();
@@ -193,8 +225,8 @@ public class RiverEvents : MonoBehaviour
 
 
 
-    private void OnDisable()
-    {
-        GameEvents.instance.onQuestCompleted -= RiverQuestCompleteCheck;
-    }
+    //private void OnDisable()
+    //{
+    //    GameEvents.instance.onQuestCompleted -= RiverQuestCompleteCheck;
+    //}
 }

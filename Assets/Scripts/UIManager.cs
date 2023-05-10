@@ -112,6 +112,10 @@ public class UIManager : MonoBehaviour
     [Header("WAYPOINT")]
     public GameObject waypointParent;
 
+
+    [Header("Music source")]
+    public AudioSource music;
+
     SoundManager soundManager;
     Camera _mainCamera;
     ThirdPersonController player;
@@ -147,12 +151,13 @@ public class UIManager : MonoBehaviour
     }
     public void PauseGame()
     {
+        music.Pause();
         Time.timeScale = 0f;
-       
     }
 
     public void ResumeGame()
     {
+        music.Play();
         Time.timeScale = 1f;
     }
 
@@ -253,12 +258,15 @@ public class UIManager : MonoBehaviour
         cameraOpened = false;
         GameEvents.instance.CameraClosed();
 
+        IndicatorController.instance.DisableCameraIndicator();
+
 
         //debug purpose
        // Application.targetFrameRate = -1;
     }
     public void DisablePlayerMovement()
     {
+        ThirdPersonController.canMove = false;
         uiVirtualJoystick.ResetJoyStick();
         playerInputUI.SetActive(false);
         questUI.SetActive(false);
@@ -269,6 +277,7 @@ public class UIManager : MonoBehaviour
 
     public void EnablePlayerMovement()
     {
+        ThirdPersonController.canMove = true;
         uiVirtualJoystick.ResetJoyStick();
         playerInputUI.SetActive(true);
         questUI.SetActive(true);
@@ -379,6 +388,9 @@ public class UIManager : MonoBehaviour
 
         EnablePlayerMovement();
         animatedFirstPersonCamera.SetActive(false);
+
+        IndicatorController.instance.DisableBookIndicator();
+        IndicatorController.instance.DisableBookRedCircle();
         //book.SetActive(!book.activeSelf);
 
         // EnableButtonsUIPACK();

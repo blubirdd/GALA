@@ -39,6 +39,8 @@ public class Book : MonoBehaviour, IDataPersistence
 
     public List<ThreatScriptable> photosThreat = new List<ThreatScriptable>();
 
+    public List<string> threatsID = new List<string> ();
+
     public string recentAnimalDiscovered;
 
     public BookUI bookui;

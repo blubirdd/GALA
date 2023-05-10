@@ -102,10 +102,10 @@ public class QuestTalkVillageChief : QuestNew
        _waypoint.GetComponent<WaypointUI>().SetTarget(target.transform);
 
         
-        if(target.TryGetComponent(out outline))
-        {
-            outline.enabled = true;
-        }
+        //if(target.TryGetComponent(out outline))
+        //{
+        //    outline.enabled = true;
+        //}
 
        // waypoint.name = WaypointManager.instance.waypointTransforms[0].name + "Waypoint";
     }
@@ -124,9 +124,9 @@ public class QuestTalkVillageChief : QuestNew
         //Destroy(GameObject.Find("Village ChiefWaypoint").gameObject);
         Destroy(_waypoint);
 
-        if (target.TryGetComponent(out outline))
-        {
-            outline.enabled = false;
-        }
+        //if (target.TryGetComponent(out outline))
+        //{
+        //    outline.enabled = false;
+        //}
     }
 }

@@ -47,7 +47,6 @@ public class PhotoCapture : MonoBehaviour
         //subscribe to picturetaken event
         PictureEvents.onAnimalDiscovered += SetText;
 
-
     }
 
     void Update()
@@ -60,7 +59,7 @@ public class PhotoCapture : MonoBehaviour
 
     void SetText(IAnimal animal)
     {   
-        animalText.SetText(animal.animalName +" ("+ animal.animalGroup + ")");
+        animalText.SetText(animal.animalName +" \n"+ "<i><color=#000000>" + "("+animal.scientificName+ ")"+"</color></i>");
     }
 
 

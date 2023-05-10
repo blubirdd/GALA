@@ -40,6 +40,27 @@ public class GameData
     public int eggGameScore;
     public int moleGameScore;
 
+    public bool hasBackpack;
+
+    //TIME
+    public float time;
+
+
+    //QUIZZES
+    public int villageQuizScore;
+    public int grasslandQuizScore;
+    public int riverQuizScore;
+    public int swampQuizScore;
+    public int rainForestQuizScore;
+
+
+    //AUDIO
+    public float musicVolume;
+    public float SFXVolume;
+
+    //THREATS
+    public List<string> threatsDiscovered;
+
     // the values defined in this constructor will be the default values
     // the game starts with when there's no data to load
     public GameData()
@@ -78,8 +99,25 @@ public class GameData
         moleGameScore = 0;
         //gameLevel = 1;
 
+        hasBackpack = false;
+
         playerLocation = "Village";
 
+        time = 10;
+
+        villageQuizScore = 0;
+        grasslandQuizScore = 0;
+        riverQuizScore = 0;
+        swampQuizScore = 0;
+        rainForestQuizScore = 0;
+
+
+        //AUDIO
+        musicVolume = 0.8f;
+        SFXVolume = 1f;
+
+        //threats
+        threatsDiscovered = new List<string>();
     }
 
 

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c25f5515792a1d40b6d0101ce548f3b, type: 3}
+  m_Name: Philippine Cobra
+  m_EditorClassIdentifier: 
+  name: Philippine Cobra
+  scientificName: Naja philippinensis
+  animalGroup: Reptile
+  polaroidPhoto: {fileID: 0}
+  lifeSpan: 'Life Span: 20 YRS'
+  weight: 'Weight: Unkown'
+  height: 'Height: Unkown'
+  length: 'Length: 1-1.6 M'
+  biomeImage: {fileID: 21300000, guid: 0740f7efe904acc49a4f6590e2809922, type: 3}
+  biome: Anthropogenic, Forest, Wetlands
+  diet: 'Diet: Carnivore'
+  food: 'Food: Small Mammals, Frogs'
+  appearance: The world's largest eagle species, characterized by a white belly and
+    underwing, rich brown upperparts, a distinctive dark-brown and cream crest, yellow
+    legs with powerful claws.
+  details: Inhabit small remaining areas of undisturbed tropical forest dominated
+    by tall hardwood trees.  They are ctive during the day, and use flapping and
+    occasional soaring flight to move around their habitat.

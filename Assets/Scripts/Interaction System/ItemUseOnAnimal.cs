@@ -129,6 +129,7 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
             if(dialogue != null && animal.isInjured)
             {
                 dialogue.TriggerDialogue();
+                IndicatorController.instance.EnableBagIndicator();
             }
 
         }
@@ -263,6 +264,10 @@ public class ItemUseOnAnimal : MonoBehaviour, IInteractable
         PopupWindow.instance.AddToQueue(animal.food);
 
         FeedEvents.AnimalFed(animal);
+        animal.animator.SetTrigger("Eat");
+
+        transform.LookAt(ThirdPersonController.instance.gameObject.transform);
+        animal.GetComponent<NavMeshAgent>().ResetPath();
         Debug.Log("Successfully fed " + animal.photo.name);
     }
 

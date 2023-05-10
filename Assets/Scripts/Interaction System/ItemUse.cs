@@ -53,6 +53,7 @@ public class ItemUse : MonoBehaviour, IInteractable
             if(subtleDialogue != null)
             {
                 subtleDialogue.TriggerDialogue();
+                IndicatorController.instance.EnableBagIndicator();
             }
             
         }
@@ -77,9 +78,11 @@ public class ItemUse : MonoBehaviour, IInteractable
         if (particle != null)
         {
             GameObject g = Instantiate(particle, transform.position, Quaternion.identity);
+            //GameObject g = Instantiate(particle, transform.position, Quaternion.identity);
+            //SoundManager.instance.PlaySoundFromClips(10);
             //Destroy(g, 3f);
         }
-        //ParticleManager.instance.SpawnPuffParticle(this.transform.position);
+
 
         //replace item
         ReplaceItemInHand replaceItemInHand;

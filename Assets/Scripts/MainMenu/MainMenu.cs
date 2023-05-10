@@ -8,12 +8,30 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour, IDataPersistence
 {
+    #region Singleton
+
+    public static MainMenu instance;
+
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one instance of MainMenu found");
+            return;
+        }
+
+        instance = this;
+    }
+    #endregion
+
     private string tempPlayerName;
     public TMP_InputField nameInputField;
     [Header("Menu Buttons")]
     [SerializeField] private Button newGameButton;
     [SerializeField] private Button continueGameButton;
 
+    [SerializeField] private GameObject playernameObject;
+    [SerializeField] private TextMeshProUGUI playerNameUI;
     private void Start()
     {
         if (!DataPersistenceManager.instance.HasGameData())
@@ -24,8 +42,17 @@ public class MainMenu : MonoBehaviour, IDataPersistence
 
     public void GetPlayerName()
     {
-        tempPlayerName = nameInputField.text;
-        Debug.Log(Player.playerName);
+        if(nameInputField.text == "")
+        {
+            tempPlayerName = "Juan";
+        }
+
+        else
+        {
+            tempPlayerName = nameInputField.text;
+            Debug.Log(Player.playerName);
+        }
+
     }
     public void StartGame()
     {
@@ -38,7 +65,8 @@ public class MainMenu : MonoBehaviour, IDataPersistence
 
         DataPersistenceManager.instance.SaveGame();
         //load the scene with the load game from DatapersistenceManager.
-        SceneManager.LoadSceneAsync("ForestStart");
+        SceneManager.LoadSceneAsync("StoryMode");
+        //SceneManager.LoadSceneAsync("ForestStart");
         //SceneManager.LoadSceneAsync("GALA Demo");
     }
 
@@ -49,7 +77,8 @@ public class MainMenu : MonoBehaviour, IDataPersistence
         DataPersistenceManager.instance.SaveGame();
 
         //load the scene
-        SceneManager.LoadSceneAsync("ForestStart");
+        SceneManager.LoadSceneAsync("StoryMode");
+        //SceneManager.LoadSceneAsync("ForestStart");
         //SceneManager.LoadSceneAsync("GALA Demo");
     }
 
@@ -66,11 +95,19 @@ public class MainMenu : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-       
+        if(data.playerName != "")
+        {
+            Debug.Log("true");
+            playernameObject.SetActive(true);
+            playerNameUI.text = data.playerName;
+        }
     }
 
     public void SaveData(GameData data)
     {
-        data.playerName = tempPlayerName;
+        if(tempPlayerName != "")
+        {
+            data.playerName = tempPlayerName;
+        }
     }
 }

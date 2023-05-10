@@ -98,6 +98,7 @@ public class DragSystem : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
     {
         yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1f;
+        SoundManager.instance.PlaySoundFromClips(10);
         parent.SetActive(false);
     }
 }

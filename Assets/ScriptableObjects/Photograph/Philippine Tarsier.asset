@@ -13,19 +13,22 @@ MonoBehaviour:
   m_Name: Philippine Tarsier
   m_EditorClassIdentifier: 
   name: Philippine Tarsier
-  scientificName: Carlito syrichta
+  scientificName: Tarsius syrichta
   animalGroup: Terrestrial Mammal
-  polaroidPhoto: {fileID: 21300000, guid: c51b640ed8d3d294ab8ff7897a48fc82, type: 3}
+  polaroidPhoto: {fileID: 21300000, guid: e17844b73fcc23e4f8a439d9c98b3dfe, type: 3}
   lifeSpan: 'Life Span: 12-20 YRS'
   weight: 'Weight: 85-165 G'
   height: 'Height: 85-160 MM'
   length: 'Length: 80-160 MM'
   biomeImage: {fileID: 21300000, guid: 0740f7efe904acc49a4f6590e2809922, type: 3}
   biome: Forest
-  diet: 'Diet: Carnivore'
+  diet: 'Diet Type: Carnivore'
   food: 'Food: Insects'
-  appearance: Its eyes are unique and are almost twice as big as those of humans.
-    Its head can rotate as much as 180 degrees.
-  details: Are nocturnal but are also active at dawn and dusk. During the day they
-    sleep in dense vegetation or sometimes in a hollow tree. At sunset, they begin
-    searching for insect prey.
+  appearance: 'Small, brownish-grayish mammal with bat-like ears, large round eyes,
+    and long slender limbs with pads on their fingers and toes to help them cling
+    to branches.
+
+'
+  details: They live in trees and are active at night, and spends the day sleeping
+    in trees and hiding in dense vegetation, while emerging at night to hunt for
+    prey and live in male-female pairs.

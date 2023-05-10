@@ -7,6 +7,7 @@ public interface IAnimal
      string animalName { get; set; }
      string animalGroup { get; set; }
 
-     void Discovered();
+     string scientificName { get; set; }
+    void Discovered();
 }
     

@@ -104,7 +104,7 @@ public class QuestPlayMoleGame : QuestNew
     IEnumerator IsQuestCompleted()
     {
         yield return new WaitUntil(() => questCompleted == true);
-
+        Inventory.instance.naturePoints += reward;
         //remove quest from task list
         Task.instance.RemoveTask(ID);
 
@@ -115,8 +115,8 @@ public class QuestPlayMoleGame : QuestNew
         Destroy(_waypoint);
 
         //wait for notifcation or cutscene
-        //yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(5f);
         //yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
-        //AcceptQuest("QuestRelocateCrocodile");
+        AcceptQuest("QuestTalkSwampBiologist2");
     }
 }

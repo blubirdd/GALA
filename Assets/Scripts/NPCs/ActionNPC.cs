@@ -29,6 +29,7 @@ public class ActionNPC : MonoBehaviour, ICharacter, IInteractable
     [SerializeField] private GameObject questMarker;
 
 
+    public string prerequisiteQuest;
     AnimalNav navigation;
     Animator animator;
     void Start()
@@ -45,6 +46,11 @@ public class ActionNPC : MonoBehaviour, ICharacter, IInteractable
         {
             animator.SetBool("Busy", true);
         }
+    }
+
+    private void OnEnable()
+    {
+
     }
 
     public bool Interact(Interactor interactor)

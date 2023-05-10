@@ -56,6 +56,10 @@ public class TabGroup : MonoBehaviour
         else
         {
             button.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
+            foreach (var item in IndicatorController.instance.categoriesCircle)
+            {
+                item.SetActive(false);
+            }
         }
 
 

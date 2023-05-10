@@ -72,6 +72,9 @@ public class QuestIntroPart2 : QuestNew
         //QuestEvents.instance.QuestAccepted2();
         GameEvents.instance.QuestAcceptedForSave(questName);
 
+
+        IndicatorController.instance.EnableToDoIndicator();
+
     }
 
     private void GetGoalsList()

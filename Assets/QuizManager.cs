@@ -221,5 +221,12 @@ public class QuizManager : MonoBehaviour
 
     }
 
+    public void SkipQuiz()
+    {
+        score = 5;
+        Debug.Log("Skipped");
+        GameOver();
+    }
+
 
 }

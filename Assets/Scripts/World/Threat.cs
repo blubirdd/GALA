@@ -6,6 +6,8 @@ public class Threat : MonoBehaviour, IThreat
 {
     public string threatName { get; set; }
     [SerializeField] ThreatScriptable threatScriptable;
+    [SerializeField] private string threatID;
+
     void Start()
     {
         threatName = threatScriptable.threatName;

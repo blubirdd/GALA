@@ -58,7 +58,7 @@ public class QuestFindCrocodileEggs : QuestNew
 
 
         //waypoint
-        //SpawnWaypointMarker();
+        SpawnWaypointMarker();
         GameEvents.instance.QuestAcceptedForSave(questName);
 
     }
@@ -97,7 +97,7 @@ public class QuestFindCrocodileEggs : QuestNew
     {
         Transform waypointParent = FindObjectOfType<WaypointParent>(true).gameObject.transform;
         _waypoint = (GameObject)Instantiate(Resources.Load("WaypointCanvas"), waypointParent);
-        _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[3]);
+        _waypoint.GetComponent<WaypointUI>().SetTarget(WaypointManager.instance.waypointTransforms[30]);
 
     }
 
@@ -112,11 +112,11 @@ public class QuestFindCrocodileEggs : QuestNew
         Debug.Log(this + " is Completed");
 
         //disable marker
-        //Destroy(_waypoint);
+        Destroy(_waypoint);
 
         //wait for notifcation or cutscene
-        //yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(5f);
         //yield return new WaitUntil(() => DialogueSystem.dialogueEnded == true);
-        //AcceptQuest("QuestRelocateCrocodile");
+        AcceptQuest("QuestFindMoreEggs");
     }
 }

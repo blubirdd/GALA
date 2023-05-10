@@ -18,9 +18,9 @@ public class QuestTalkRiverWildlifeBiologist2 : QuestNew
         //setup
         ID = "QuestTalkRiverWildlifeBiologist2";
         questName = "Talk back to the wildlife biologist";
-        questDescription = "Find and talk back to the wildlife biologist";
+        questDescription = "Report back to the wildlife biologist";
 
-        goalDescription[0] = "Find and talk back to the wildlife biologist";
+        goalDescription[0] = "Report back to the wildlife biologist";
         requiredAmount[0] = 1;
 
 

@@ -65,9 +65,11 @@ public class QuestPutOutFire : QuestNew
         //SpawnWaypointMarker();
 
         //timer
-        ClockManager.instance.StartClock(100, this);
+        ClockManager.instance.StartClock(150, this);
 
         GameEvents.instance.QuestAcceptedForSave(questName);
+
+        HintUI.instance.FireQuestHint();
 
     }
 
@@ -112,13 +114,14 @@ public class QuestPutOutFire : QuestNew
     IEnumerator IsQuestCompleted()
     {
         yield return new WaitUntil(() => questCompleted == true);
-
+        Inventory.instance.naturePoints += reward;
         //remove quest from task list
         Task.instance.RemoveTask(ID);
 
         //debug
         Debug.Log(this + " is Completed");
 
+        HintUI.instance.DisableHint();
         //disable marker
         //Destroy(_waypoint);
 

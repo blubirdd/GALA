@@ -14,9 +14,11 @@ public class Cutscene : MonoBehaviour, IDataPersistence
     [SerializeField] private GameObject quests;
     [SerializeField] private string questType;
 
-    [Header("Object to disable")]
+    [Header("Objects to disable")]
     [SerializeField] private GameObject[] objectToDisable;
 
+    [Header("Objects to enable ")]
+    [SerializeField] private GameObject[] objectToEnable;
 
     [Header("If change Fog and Ambient Light")]
     [SerializeField] private bool changeAmbientLight;
@@ -69,6 +71,12 @@ public class Cutscene : MonoBehaviour, IDataPersistence
             foreach (var objects in objectToDisable)
             {
                 objects.SetActive(false);
+            }
+
+
+            foreach (var objects2 in objectToEnable)
+            {
+                objects2.SetActive(true);
             }
         }
     }

@@ -61,13 +61,36 @@ public class Inventory : MonoBehaviour, IDataPersistence
     private void Start()
     {
         //set toolbar items to true once tutorial is done
-        //if (Task.instance.tasksCompeleted.Contains("QuestIntroPart2"))
+        if (Task.instance.tasksCompeleted.Contains("QuestIntroPart2"))
+        {
+            foreach (var item in toolbarItems)
+            {
+                item.SetActive(true);
+            }
+        }
+
+        else
+        {
+            foreach (var item in toolbarItems)
+            {
+                item.SetActive(false);
+            }
+        }
+    }
+
+    public void EnableToolBarItems()
+    {
+        //StartCoroutine(WaitToInitializeToolbarItems());
+        //IEnumerator WaitToInitializeToolbarItems()
         //{
-        //    foreach (var item in toolbarItems)
-        //    {
-        //        item.SetActive(true);
-        //    }
+        //    yield return new WaitForEndOfFrame();
+
+            foreach (var item in toolbarItems)
+            {
+                item.SetActive(true);
+            }
         //}
+
     }
 
     private void OnEnable()
@@ -277,8 +300,15 @@ public class Inventory : MonoBehaviour, IDataPersistence
 
     }
 
-    public void Test()
+    public void UnlockAllItems()
     {
-
+        for (int i = 0; i < database.items.Length; i++)
+        {
+            Add(database.getItem[i], 1, false);
+        }
+        if (OnItemChangedCallback != null)
+        {
+            OnItemChangedCallback.Invoke();
+        }
     }
 }

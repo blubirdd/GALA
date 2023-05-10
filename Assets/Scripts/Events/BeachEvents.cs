@@ -17,6 +17,7 @@ public class BeachEvents : MonoBehaviour
     [Header("First Set Reference")]
     public GameObject firstCharacterSet;
 
+
     [Header("Quest 2")]
 
     public GameObject secondStrandedDuong;
@@ -46,6 +47,7 @@ public class BeachEvents : MonoBehaviour
 
     [Header("Stick item")]
     public Item stick;
+    public Item bucket;
 
     void Start()
     {
@@ -61,6 +63,7 @@ public class BeachEvents : MonoBehaviour
         if(questName == "Approach the stranded Dugong")
         {
             strandedDugong.SetActive(true);
+            Inventory.instance.Add(bucket, 1 , false);
             //strandedDugong.GetComponent<Outline>().enabled = true;
         }
 
@@ -75,23 +78,25 @@ public class BeachEvents : MonoBehaviour
         if (questName == "Clean the beach")
         {
             Book.instance.AddAnimalPhoto(dugongPhotograph);
+            Inventory.instance.itemDiscovery.NewItemDiscovered(dugongPhotograph.polaroidPhoto, dugongPhotograph.name, "New Animal Discovered. Check your journal for more details", false);
 
             beachTrashToClean.SetActive(true);
             npcWalkingTimeline.SetActive(true);
             grabWaterQuest.SetActive(false);
             secondCharacterSet.SetActive(false);
+            UIManager.instance.EnablePlayerMovement();
         }
 
-            //QuestTalkToLawrenceAboutDolphins
-        if (questName == "")
+        //QuestTalkStrandedDugongHelpers
+        if (questName == "Find help to save the Dugong")
         {
-
+            firstCharacterSet.SetActive(true);
         }
 
         //QuestPushDugong
         if(questName == "Push the stranded Dugong")
         {
-            Inventory.instance.Add(stick, 1, true);
+            
         }
 
 
@@ -158,14 +163,19 @@ public class BeachEvents : MonoBehaviour
         {
          
         }
+        //QuestTalkStrandedDugongHelpers
+        if(questName == "Find help to save the Dugong")
+        {
+            Inventory.instance.Add(stick, 1, true);
+        }
 
 
 
         //QuestInspectDugong
-        if (questName == "Approach the stranded Dugong")
-        {
-            strandedDugong.GetComponent<Outline>().enabled = false;
-        }
+        //if (questName == "Approach the stranded Dugong")
+        //{
+        //    //strandedDugong.GetComponent<Outline>().enabled = false;
+        //}
 
         //QuestCleanBeachTrash
         if (questName == "Clean the beach")
@@ -197,11 +207,11 @@ public class BeachEvents : MonoBehaviour
 
     }
 
-    private void OnDisable()
-    {
-        //unsubscribe for optimization
-        GameEvents.instance.onQuestCompleted -= BeachQuestCompleteCheck;
-    }
+    //private void OnDisable()
+    //{
+    //    //unsubscribe for optimization
+    //    GameEvents.instance.onQuestCompleted -= BeachQuestCompleteCheck;
+    //}
 
     // Update is called once per frame
     void Update()

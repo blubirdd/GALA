@@ -15,17 +15,19 @@ MonoBehaviour:
   name: Visayan Spotted Deer
   scientificName: Rusa alfredi
   animalGroup: Terrestrial Mammal
-  polaroidPhoto: {fileID: 21300000, guid: 4e1d71b2d6415154daa4214234fb51f4, type: 3}
+  polaroidPhoto: {fileID: 21300000, guid: e0e06e53096a1564ba6d70a7a1d24858, type: 3}
   lifeSpan: 'Life Span: 15-20 yrs'
   weight: 'Weight: 25-80 KG'
   height: 'Heigth: 70-80 CM'
   length: 'Length: 125-130 CM'
   biomeImage: {fileID: 21300000, guid: 0740f7efe904acc49a4f6590e2809922, type: 3}
   biome: Forest
-  diet: 'Diet: Herbivore'
+  diet: 'Diet Type: Herbivore'
   food: 'Food: Grasses, Leaves'
-  appearance: Large ears, short tails, and long, slender legs. A pattern of beige
-    spots is visible from the back and sides
-  details: 'Visayan spotted deer are nocturnal and come out at dusk to feed. They
-    are very cryptic and cautious animals and will quickly hide into dense vegetation
-    when they sense any danger. '
+  appearance: 'Fine, dense, and soft dark-brown coat on their upper body. Pale white
+    fur on the underside as well as on the chin and lower lip.
+
+'
+  details: "Visayan spotted deer are herbivores with a diet that includes a wide
+    variety of vegetation.\r \nThey are a protected species but the remoteness of
+    their habitat makes guard patrols very difficult."

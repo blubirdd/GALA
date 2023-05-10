@@ -15,20 +15,18 @@ MonoBehaviour:
   name: Dugong
   scientificName: Dugong dugon
   animalGroup: Aquatic
-  polaroidPhoto: {fileID: 21300000, guid: 918444da1c646284ca79baa66ab984e5, type: 3}
+  polaroidPhoto: {fileID: 21300000, guid: 499ac4d0a10eafd44bb94ebbdb466812, type: 3}
   lifeSpan: 'Life Span: 70 YRS'
   weight: 'Weight: 150-400 KG'
   height: 'Height: Unknown'
   length: 'Length: 2.7-3 M'
   biomeImage: {fileID: 21300000, guid: 95587742ba8c7034fa4b3579c72ac15d, type: 3}
   biome: Coastal, Marine, Beaches
-  diet: 'Diet: Herbivore'
+  diet: 'Diet Type: Herbivore'
   food: 'Food: Seagrass'
-  appearance: The dugong is an aquatic mammal with thick, tough, and smooth skin. 
-    The upper lip is cleft and muscular, hanging over the mouth, which is curved
-    downwards. At first sight, dugongs look like whales, but they have evolved independently.
-    They also develop tusks, which are visible in adult males.
-  details: Dugongs are social animals but generally occur alone or in pairs of a
-    mother and calf.Dugongs are shy in their nature and when disturbed, they quickly
-    flee. When they don't flee, they usually explore the vessel or diver from a distance
-    without coming closer.
+  appearance: Dugongs are large, solid mammals with short, paddle-like front flippers,
+    a tail with a straight or concave perimeter, and thick brownish-grey skin.
+  details: 'Dugongs are primarily marine mammals inhabiting shallow waters and seagrass
+    beds. They are social, semi-nomadic, and migrate in search of food.
+
+'

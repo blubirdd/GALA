@@ -14,9 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Rope
   icon: {fileID: 21300000, guid: 476b2fc8526f77b438bcebc707281975, type: 3}
-  isDefaultItem: 0
+  isDefaultItem: 1
   isUsable: 1
+  displayDiscovery: 1
   isThrowable: 0
   isAimable: 1
+  isFirable: 0
+  isAnimalFood: 0
+  isCustomQuestItem: 0
+  isCustomPopup: 0
   itemDescription: 
   equipSlot: 0

@@ -86,6 +86,8 @@ public class InventoryUI : MonoBehaviour
 
         uiManager.RotatePlayerToCamera();
         uiManager.animatedFirstPersonCamera.SetActive(true);
+
+        DialogueSystem.instance.EndSubtleDialogue();
     }
 
     public void CloseInventory()
@@ -102,6 +104,7 @@ public class InventoryUI : MonoBehaviour
         //itemDetailsParent.SetActive(false);
         UIManager.instance.EnablePlayerMovement();
         uiManager.animatedFirstPersonCamera.SetActive(false);
+        IndicatorController.instance.DisableBagIndicator();
     }
 
     public void ConsumeItem()

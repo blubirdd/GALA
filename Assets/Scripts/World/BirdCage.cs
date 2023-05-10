@@ -24,6 +24,13 @@ public class BirdCage : MonoBehaviour, IInteractable
     public bool isSmallCage;
     public bool isOpen;
     Character character;
+    public bool hasPrerequisite = true;
+
+    [Header("Notification")]
+    public Item itemNotif;
+
+    [Header("Dialogue")]
+    [SerializeField] private SubtleDialogueTrigger needKeyDialogue;
     void Start()
     {
         icon = _icon;
@@ -35,7 +42,31 @@ public class BirdCage : MonoBehaviour, IInteractable
     }
     public bool Interact(Interactor interactor)
     {
+        if (hasPrerequisite == true)
+        {
+            if (Task.instance.tasksCompeleted.Contains("QuestCollectKeys"))
+            {
+                OpenCage();
+            }
 
+            else
+            {
+                needKeyDialogue.TriggerDialogue();
+            }
+
+        }
+
+        else
+        {
+            OpenCage();
+        }
+
+
+        return true;
+    }
+
+    public void OpenCage()
+    {
         if (!isOpen)
         {
             ThirdPersonController.instance.ItemPickupAnim();
@@ -64,18 +95,14 @@ public class BirdCage : MonoBehaviour, IInteractable
             isOpen = true;
 
             //trigger Quest
-            if(character != null)
+            if (character != null)
             {
                 TriggerQuest();
             }
 
-
             this.gameObject.layer = LayerMask.NameToLayer("Default");
         }
-
-        return true;
     }
-
     public void TriggerQuest()
     {
         StartCoroutine(WaitForAnimation());
@@ -83,6 +110,7 @@ public class BirdCage : MonoBehaviour, IInteractable
         {
             yield return new WaitForSeconds(2f);
             TalkEvents.CharacterApproach(character);
+            PopupWindow.instance.AddToQueue(itemNotif);
         }
         
     }

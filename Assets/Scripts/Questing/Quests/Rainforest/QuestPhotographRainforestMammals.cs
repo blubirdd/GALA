@@ -17,7 +17,7 @@ public class QuestPhotographRainforestMammals : QuestNew
 
         //setup
         ID = "QuestPhotographRainforestMammals"; ;
-        questName = "Rainforest Animals";
+        questName = "Animals in the area";
         questDescription = "Photograph animals in the area";
 
         goalDescription[0] = "Photograph a Rufous hornbill";
@@ -69,6 +69,8 @@ public class QuestPhotographRainforestMammals : QuestNew
         //SpawnWaypointMarker();
         GameEvents.instance.QuestAcceptedForSave(questName);
 
+        IndicatorController.instance.EnableCameraIndicator();
+
     }
 
     private void GetGoalsList()
@@ -114,6 +116,7 @@ public class QuestPhotographRainforestMammals : QuestNew
         yield return new WaitUntil(() => questCompleted == true);
 
         Inventory.instance.naturePoints += reward;
+
         //remove quest from task list
         Task.instance.RemoveTask(ID);
 
@@ -123,7 +126,7 @@ public class QuestPhotographRainforestMammals : QuestNew
         //disable marker
         //Destroy(_waypoint);
         yield return new WaitForSeconds(5f);
-        AcceptQuest("QuestGoToMountain");
+        AcceptQuest("QuestTalkRainforestFairy2");
     }
 }
 

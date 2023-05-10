@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MainMenuAudio : MonoBehaviour
 {
+    public AudioSource audioSource;
+    private float musicVolume = 0.5f;
+
     public void continuebutton()
     {
         Debug.Log("continuebutton");
@@ -23,5 +26,15 @@ public class MainMenuAudio : MonoBehaviour
     {
         Debug.Log("quitbutton");
         MainMenuButtonSounds.Instance.PlaySound("quitbutton", 1f);
+    }
+
+    public void Update()
+    {
+        audioSource.volume = musicVolume;
+    }
+
+    public void UpdateVolume(float volume)
+    {
+        musicVolume = volume;
     }
 }

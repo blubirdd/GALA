@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : MonoBehaviour, IDataPersistence
 {
 
     #region Singleton
@@ -24,9 +25,35 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource audioSource;
 
+    [Header("Music")]
+    public float musicVolume = 0.8f;
+
+    [Header("Music")]
+    public float SFXVolume = 1f;
+
     [Header("Audio Clips")]
     public AudioClip[] sounds;
 
+    //MUSIC
+
+
+    public void UpdateSFXVolume(float volume)
+    {
+        if (SFXVolume != volume)
+        {
+            SFXVolume = volume;
+            audioSource.volume = SFXVolume;
+        }
+    }
+
+    public void UpdateMusicVolume(float volume)
+    {
+        if (musicVolume != volume)
+        {
+            musicVolume = volume;
+            musicSource.volume = musicVolume;
+        }
+    }
     public void PlaySoundFromClips(int sound)
     {
         switch (sound)
@@ -41,7 +68,7 @@ public class SoundManager : MonoBehaviour
                 audioSource.PlayOneShot(sounds[2], 1f);
                 break;
             case 3:
-                audioSource.PlayOneShot(sounds[3], 0.5f);
+                audioSource.PlayOneShot(sounds[3], 0.3f);
                 break;
             case 4:
                 audioSource.PlayOneShot(sounds[4], 0.8f);
@@ -50,7 +77,7 @@ public class SoundManager : MonoBehaviour
                 audioSource.PlayOneShot(sounds[5], 0.7f);
                 break;
             case 6:
-                audioSource.PlayOneShot(sounds[6], 1f);
+                audioSource.PlayOneShot(sounds[6], 0.7f);
                 break;
             case 7:
                 audioSource.PlayOneShot(sounds[7], 1f);
@@ -62,7 +89,15 @@ public class SoundManager : MonoBehaviour
                 audioSource.PlayOneShot(sounds[9], 0.5f);
                 break;
             case 10:
-                audioSource.PlayOneShot(sounds[10], 1f);
+                audioSource.PlayOneShot(sounds[10], 0.7f);
+                break;
+            case 11:
+                //pencil check
+                audioSource.PlayOneShot(sounds[11], 0.5f);
+                break;
+            case 12:
+                //water
+                audioSource.PlayOneShot(sounds[12], 1f);
                 break;
             default:
                 Debug.LogError("No sound sound");
@@ -77,5 +112,22 @@ public class SoundManager : MonoBehaviour
     public void ChangeMasterVolume(float value)
     {
         AudioListener.volume = value;
+    }
+
+
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
+    public void LoadData(GameData data)
+    {
+        musicSlider.value = data.musicVolume; // Set the slider value
+        sfxSlider.value = data.SFXVolume; // Set the slider value
+        //musicSource.volume = data.musicVolume;
+        //audioSource.volume = data.SFXVolume;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.musicVolume = musicSource.volume;
+        data.SFXVolume = audioSource.volume;
     }
 }

@@ -54,24 +54,27 @@ public class BookUI : MonoBehaviour
         if (_animalGroup == "Terrestrial Mammal")
         {
             UpdateMammals();
-
+            IndicatorController.instance.categoriesCircle[0].SetActive(true);
         }
 
         if(_animalGroup == "Bird")
         {
             UpdateBirds();
+            IndicatorController.instance.categoriesCircle[1].SetActive(true);
         }
 
         if (_animalGroup == "Reptile")
         {
             UpdateReptiles();
+            IndicatorController.instance.categoriesCircle[2].SetActive(true);
         }
 
         if (_animalGroup == "Aquatic")
         {
             UpdateAquatic();
+            IndicatorController.instance.categoriesCircle[3].SetActive(true);
         }
-
+        IndicatorController.instance.EnableBookRedCircle();
     }
 
     void UpdateMammals()

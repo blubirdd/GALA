@@ -34,6 +34,8 @@ public class PlayerLocationManager : MonoBehaviour, IDataPersistence
 
     public string displayLocationInInspector;
 
+    public GameObject swampWallBorder;
+
     void Start()
     {
         GameEvents.instance.onLocationChange += LocationChange;
@@ -53,6 +55,12 @@ public class PlayerLocationManager : MonoBehaviour, IDataPersistence
         rainforestLocation.SetActive(currentLocation == "Rainforest");
 
         displayLocationInInspector = currentLocation;
+
+        if(currentLocation == "Rainforest")
+        {
+            WallManager.instance.swampForestWall.SetActive(true);
+
+        }
     }
     public void LocationChange()
     {

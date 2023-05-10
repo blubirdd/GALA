@@ -28,7 +28,16 @@ public class Task : MonoBehaviour, IDataPersistence
     [NonReorderable] public List<TaskSave> tasks = new List<TaskSave>();
     private QuestNew quest { get; set; }
 
+    public GameObject backpackModel;
+    private bool hasBackpack;
 
+    private void Start()
+    {
+        if (hasBackpack)
+        {
+            backpackModel.SetActive(true);
+        }
+    }
     public void AddTask(string id, string questTitle, string[] goalDescription, int[] progress, int[] requiredAmount)
     {
         for (int i = 0; i < tasks.Count; i++)

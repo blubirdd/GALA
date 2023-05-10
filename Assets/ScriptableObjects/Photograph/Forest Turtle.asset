@@ -15,16 +15,17 @@ MonoBehaviour:
   name: Forest Turtle
   scientificName: Siebenrockiella leytensis
   animalGroup: Reptile
-  polaroidPhoto: {fileID: 21300000, guid: c5dad4a52e25f18479cfe370c9fecf5a, type: 3}
+  polaroidPhoto: {fileID: 21300000, guid: 1252ee86b77c6db45b847da7f91507fe, type: 3}
   lifeSpan: 'Life Span: Unkown'
   weight: 'Weight: 0.37 - 0.59 KG'
   height: 'Height: Unkown'
   length: 'Length: 21-130 CM'
   biomeImage: {fileID: 21300000, guid: fa87ac2d698becd4a90b82e9a52debb2, type: 3}
   biome: Wetlands
-  diet: 'Diet: Omnivore'
+  diet: 'Diet Type: Omnivore'
   food: 'Food: Aquatic Plants, Small Fish'
   appearance: Rough legs, body, and neck . The head is brown in color, sometimes
     speckled at the temples with light brown, orange, or red spots.
-  details: Proved to be very shy and retiring, spending considerable time hiding
-    under rocks, both in and out of the water.
+  details: They became active in the early morning and late evening, foraging for
+    food and moved about during the night. They were not observed to be keen on basking
+    in the sun

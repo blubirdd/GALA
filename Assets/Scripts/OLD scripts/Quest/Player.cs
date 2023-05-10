@@ -21,6 +21,13 @@ public class Player : MonoBehaviour, IDataPersistence
     }
     #endregion
     public static string playerName;
+    [Header("Quiz Scores")]
+    public int villageQuizScore;
+    public int grasslandQuizScore;
+    public int riverQuizScore;
+    public int swampQuizScore;
+    public int rainForestQuizScore;
+
     [Header("Game Scores")]
     public int eggGameScore;
     public int moleGameScore;

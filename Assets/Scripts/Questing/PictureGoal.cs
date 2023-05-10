@@ -21,6 +21,7 @@ public class PictureGoal : Goal
     {
         base.InIt();
         PictureEvents.onAnimalDiscovered += PictureTaken;
+        PictureEvents.onThreatDiscovered += ThreatTaken;
 
         //to evaluate saved data
         Debug.Log("Evaluating");
@@ -37,6 +38,15 @@ public class PictureGoal : Goal
             Evaluate();
             
         }    
+    }
+
+    void ThreatTaken(IThreat threat)
+    {
+        if (threat.threatName == this.animalName && quest.questCompleted == false)
+        {
+            this.currentAmount++;
+            Evaluate();
+        }
     }
 
 }

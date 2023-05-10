@@ -133,6 +133,7 @@ public class TaskUI : MonoBehaviour
 
         UIManager.instance.EnableButtonsUIPACK();
         SoundManager.instance.PlaySoundFromClips(6);
+        IndicatorController.instance.DisableToDoIndicator();
     }
 
 

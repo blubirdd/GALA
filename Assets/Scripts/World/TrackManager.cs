@@ -17,7 +17,7 @@ public class TrackManager : MonoBehaviour
             tracks[i].SetActive(false);
         }
 
-        tracks[currentTrackIndex].SetActive(true);
+        //tracks[currentTrackIndex].SetActive(true);
     }
 
     public void ActivateNextTrack()

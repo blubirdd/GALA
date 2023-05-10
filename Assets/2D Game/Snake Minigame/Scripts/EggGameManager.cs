@@ -24,7 +24,7 @@ public class EggGameManager : MonoBehaviour
     public HealthBar healthBar;
     public GameObject gameOverPanel;
 
-
+    public GameObject loadingScreen;
     void Start()
     {
         Time.timeScale = 0f;   
@@ -61,7 +61,10 @@ public class EggGameManager : MonoBehaviour
     {
         Player.instance.eggGameScore = 10;
         SwampEvents.fromEggGame = true;
-        SceneManager.LoadSceneAsync("ForestStart");
+        loadingScreen.SetActive(true);
+
+        SceneManager.LoadSceneAsync("StoryMode");
+        //SceneManager.LoadSceneAsync("ForestStart");
     }
 
     //public void LoadData(GameData data)

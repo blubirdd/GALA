@@ -52,6 +52,14 @@ public class QuestController : MonoBehaviour
     public Transform rainForestEntranceLocation;
     public QuestNPC rainforestFairy;
 
+    [Header("Beach")]
+    public Transform beachLocation;
+
+    [Header("Forest Hunters")]
+    public Transform hunterRespawnPoint;
+
+    [Header("Village")]
+    public Transform villageRespawnPoint;
     public void TransferPlayer(Transform location)
     {
         ThirdPersonController.instance.gameObject.SetActive(false);
@@ -62,6 +70,12 @@ public class QuestController : MonoBehaviour
     public void ClearTasks()
     {
         Task.instance.tasks.Clear();
+    }
+
+    public void AddNecessaryTask()
+    {
+        Task.instance.tasksCompeleted.Add("QuestIntroPart2");
+        Task.instance.tasksCompeleted.Add("QuestIntroPart1");
     }
     public void AcceptQuestFireQuestControl()
     {
@@ -78,6 +92,7 @@ public class QuestController : MonoBehaviour
 
         //set time to night
         TimeController.instance.SetTimeOfDay(20);
+        ClearCompletedQuestDatabase();
     }
 
     public void AcceptQuestTamarawQuestControl()
@@ -95,6 +110,7 @@ public class QuestController : MonoBehaviour
 
 
         TimeController.instance.SetTimeOfDay(10);
+        ClearCompletedQuestDatabase();
     }
 
     public void AcceptQuestEagleQuestControl()
@@ -108,6 +124,7 @@ public class QuestController : MonoBehaviour
         PlayerLocationManager.instance.SetCurrentLocationActive();
 
         TimeController.instance.SetTimeOfDay(10);
+        ClearCompletedQuestDatabase();
     }
 
     public void AcceptQuestSwampLevel()
@@ -164,9 +181,58 @@ public class QuestController : MonoBehaviour
         ClearCompletedQuestDatabase();
     }
 
+    public void AcceptQuestBeachPushDugong()
+    {
+        ClearAllQuest();
+        ClockManager.instance.DisableClock();
+        quest = (QuestNew)questManager.AddComponent(System.Type.GetType("QuestInspectDugong"));
+
+        TransferPlayer(beachLocation);
+        PlayerLocationManager.currentLocation = "River";
+        PlayerLocationManager.instance.SetCurrentLocationActive();
+
+        TimeController.instance.SetTimeOfDay(10);
+
+        ClearCompletedQuestDatabase();
+    }
+
+    public void AcceptQuestForestHunters()
+    {
+        ClearAllQuest();
+        ClockManager.instance.DisableClock();
+        quest = (QuestNew)questManager.AddComponent(System.Type.GetType("QuestCollectKeys"));
+
+        TransferPlayer(hunterRespawnPoint);
+        PlayerLocationManager.currentLocation = "Rainforest";
+        PlayerLocationManager.instance.SetCurrentLocationActive();
+
+        TimeController.instance.SetTimeOfDay(20);
+
+        ClearCompletedQuestDatabase();
+    }
+
+    public void AcceptQuestVillageChicken()
+    {
+        ClearAllQuest();
+        ClockManager.instance.DisableClock();
+        quest = (QuestNew)questManager.AddComponent(System.Type.GetType("QuestFeedChicken"));
+
+        TransferPlayer(villageRespawnPoint);
+        PlayerLocationManager.currentLocation = "Village";
+        PlayerLocationManager.instance.SetCurrentLocationActive();
+
+        TimeController.instance.SetTimeOfDay(10);
+
+        ClearCompletedQuestDatabase();
+
+        Task.instance.tasksCompeleted.Add("QuestPhotoChicken");
+    }
+
     public void ClearCompletedQuestDatabase()
     {
         Task.instance.tasksCompeleted.Clear();
+        AddNecessaryTask();
+        Inventory.instance.EnableToolBarItems();
     }
 
     public void ClearAllQuest()

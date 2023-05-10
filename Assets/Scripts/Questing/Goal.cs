@@ -35,6 +35,7 @@ public class Goal
     {
         Debug.Log("Goal Completed");
 
+        SoundManager.instance.PlaySoundFromClips(11);
         goalCompleted = true; //on top if single goal only
 
         quest.CheckGoals();
