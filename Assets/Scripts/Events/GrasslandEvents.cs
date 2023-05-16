@@ -50,6 +50,8 @@ public class GrasslandEvents : MonoBehaviour
             //}
         }
 
+        SoundManager.instance.PlayRelaxingMusic();
+
     }
 
     public void GrasslandQuestAcceptCheck(string questName)

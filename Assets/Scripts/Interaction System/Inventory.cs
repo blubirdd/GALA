@@ -215,6 +215,12 @@ public class Inventory : MonoBehaviour, IDataPersistence
             {
                 container[i].amount -= 1;
 
+                if (container[i].amount <= 0 && container[i].item.displayQuantity)
+                {
+                    //remove item
+                    Remove(item);
+                }
+
                 Debug.Log(container[i].amount);
                 if (OnItemChangedCallback != null)
                 {

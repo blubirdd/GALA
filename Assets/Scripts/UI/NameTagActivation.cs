@@ -6,7 +6,7 @@ using DG.Tweening;
 public class NameTagActivation : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private GameObject _nameUICanvas;
+    public GameObject _nameUICanvas;
 
     [Header("Animation")]
     [SerializeField] private float scaleDuration = 1.5f;

@@ -16,11 +16,13 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 814d45da7f8595c439aa93b823917f05, type: 3}
   isDefaultItem: 0
   isUsable: 1
+  displayQuantity: 1
   displayDiscovery: 1
   isThrowable: 0
   isAimable: 0
   isFirable: 0
   isAnimalFood: 1
   isCustomQuestItem: 0
+  isCustomPopup: 0
   itemDescription: Can be used to feed to herbivore animals
   equipSlot: 0

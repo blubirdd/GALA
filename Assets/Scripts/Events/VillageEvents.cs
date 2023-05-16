@@ -39,6 +39,8 @@ public class VillageEvents : MonoBehaviour
                 Destroy(item);
             }
         }
+
+        SoundManager.instance.PlayVillageMusic();
     }
 
     public void VillageQuestAcceptCheck(string questName) 

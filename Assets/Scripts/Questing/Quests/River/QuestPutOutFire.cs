@@ -71,6 +71,8 @@ public class QuestPutOutFire : QuestNew
 
         HintUI.instance.FireQuestHint();
 
+        SoundManager.instance.PlayLookingForClues();
+
     }
 
     private void GetGoalsList()
@@ -131,7 +133,11 @@ public class QuestPutOutFire : QuestNew
         //    ClockManager.instance.clockui.gameObject.SetActive(false);
         //}
 
+        SoundManager.instance.PlayRelaxingMusic();
+
         yield return new WaitForSeconds(8f);
         AcceptQuest("QuestTalkDayTent");
+
+       
     }
 }

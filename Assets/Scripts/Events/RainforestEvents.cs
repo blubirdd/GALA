@@ -75,11 +75,12 @@ public class RainforestEvents : MonoBehaviour
             endingTimeline.SetActive(true);
             UIManager.instance.DisablePlayerMovement();
             quizCanvas.SetActive(false);
+
             scoreText.text = "Total score for " + Player.playerName+ ": "+Inventory.instance.naturePoints.ToString();
             StartCoroutine(WaitForTimeline());
             IEnumerator WaitForTimeline()
             {
-                yield return new WaitForSeconds(10f);
+                yield return new WaitForSeconds(7f);
                 endingCanvas.SetActive(true);
             }
 

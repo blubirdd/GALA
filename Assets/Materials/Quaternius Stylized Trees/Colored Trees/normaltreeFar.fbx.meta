@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: e40346b5ce7d66042a30c8d6a46c338a
+guid: 3c1e55507e539d949886c74d554fbee7
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NormalTree_Bark
+    second: {fileID: 2100000, guid: 9c1cacbea422bc543aecd37b411a747e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NormalTree_Leaves
+    second: {fileID: 2100000, guid: f6ed1262dddcad14f9e5539ba2a057f9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

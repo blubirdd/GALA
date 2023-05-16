@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BookUI : MonoBehaviour
@@ -18,7 +19,6 @@ public class BookUI : MonoBehaviour
     public Transform aquaticCategory;
 
     private string _animalGroup;
-
 
 
     void Start()

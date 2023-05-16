@@ -11,7 +11,9 @@ public class Item : ScriptableObject
     public Sprite icon = null;
     public bool isDefaultItem = false;
     public bool isUsable = false;
-    
+    [Header("Inventory Settings")]
+    public bool displayQuantity = false;
+
     [Header("Discovery Settings")]
     public bool displayDiscovery = true;
 

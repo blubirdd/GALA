@@ -27,7 +27,7 @@ public class InventorySlot : MonoBehaviour
     public GameObject itemNamePanel;
     public TextMeshProUGUI itemNameText;
 
-    public bool displayItemCount = false;
+    //public bool displayItemCount = false;
 
     //public void AddItem(Item newItem)
     //{
@@ -47,13 +47,17 @@ public class InventorySlot : MonoBehaviour
         icon.sprite = item.icon;
         icon.enabled = true;
 
-        if (displayItemCount)
+        ////if (displayItemCount)
+        ////{
+        //    textAmount.enabled = true;
+        ////}
+
+        if (item.displayQuantity)
         {
             textAmount.enabled = true;
+            textAmount.SetText(amount.ToString());
         }
 
-
-        textAmount.SetText(amount.ToString());
         itemNamePanel.SetActive(true);
         itemNameText.SetText(item.name);
     }

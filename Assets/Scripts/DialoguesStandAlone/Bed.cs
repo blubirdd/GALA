@@ -16,6 +16,8 @@ public class Bed : MonoBehaviour, IDataPersistence
     [SerializeField] private GameObject quests;
     [SerializeField] private string questType;
 
+    public GameObject skipIntroButton;
+
     // Start is called before the first frame update
 
     // waypoint
@@ -24,12 +26,34 @@ public class Bed : MonoBehaviour, IDataPersistence
     {
         if (triggerStartDialogue)
         {
+            skipIntroButton.SetActive(true);
             UIManager.instance.DisablePlayerMovement();
             eagleCutscene.SetActive(true);
             StartCoroutine(WaitForDialogueToTrigger());
+
+        }
+
+        else
+        {
+            skipIntroButton.SetActive(false);
         }
 
        // waypointMarker = GetComponent<WaypointMarker>();
+
+    }
+
+    public void SkipIntro()
+    {
+        StopAllCoroutines();
+        eagleCutscene.SetActive(false);
+        _dialogue.TriggerDialogue();
+        triggerStartDialogue = false;
+        skipIntroButton.SetActive(false);
+        StartCoroutine(AcceptQuest());
+
+
+        CinemachineManager.instance._cams[0].SetActive(true);
+        CinemachineManager.instance._cams[7].SetActive(false);
 
     }
 
@@ -38,6 +62,7 @@ public class Bed : MonoBehaviour, IDataPersistence
         //wait for cutscene
         yield return new WaitForSeconds(10.5f);
 
+        skipIntroButton.SetActive(false);
         _dialogue.TriggerDialogue();
         triggerStartDialogue = false;
 

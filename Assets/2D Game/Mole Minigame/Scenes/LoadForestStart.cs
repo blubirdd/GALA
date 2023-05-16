@@ -15,6 +15,7 @@ public class LoadForestStart : MonoBehaviour
         }
 
         SwampEvents.fromMoleGame = true;
-        SceneManager.LoadScene("ForestStart");
+        //SceneManager.LoadScene("ForestStart");
+        SceneManager.LoadScene("StoryMode");
     }
 }

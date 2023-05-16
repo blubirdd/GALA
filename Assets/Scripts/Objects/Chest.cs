@@ -10,10 +10,13 @@ public class Chest : MonoBehaviour, IInteractable
         public Sprite icon { get; set; }
 
 
-    public Animator animator;
+    private Animator animator;
+    private NameTagActivation _activation;
 
     void Start()
     {
+        _activation = GetComponent<NameTagActivation>();
+        animator = GetComponent<Animator>();
         InteractionPrompt = _prompt;
         icon = _icon;
     }
@@ -23,8 +26,17 @@ public class Chest : MonoBehaviour, IInteractable
        animator.SetBool("open", true);
        Debug.Log("Chest Opened");
 
-       //disable interaction
-       gameObject.layer = default;
+        ParticleManager.instance.SpawnChestOpenParticle(transform.position);
+        //SoundManager.instance.PlaySoundFromClips(13);
+        //disable interaction
+
+        if(_activation != null)
+        {
+            _activation._nameUICanvas.SetActive(false);
+
+        }
+
+        gameObject.layer = default;
 
        return true;
     }

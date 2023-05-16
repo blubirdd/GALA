@@ -27,6 +27,7 @@ public class SoundManager : MonoBehaviour, IDataPersistence
 
     [Header("Music")]
     public float musicVolume = 0.8f;
+    public AudioClip[] musics;
 
     [Header("Music")]
     public float SFXVolume = 1f;
@@ -35,7 +36,22 @@ public class SoundManager : MonoBehaviour, IDataPersistence
     public AudioClip[] sounds;
 
     //MUSIC
+    public void PlayRelaxingMusic()
+    {
+        musicSource.clip = musics[0];
+        musicSource.Play();
+    }
+    public void PlayLookingForClues()
+    {
+        musicSource.clip = musics[1];
+        musicSource.Play();
+    }
 
+    public void PlayVillageMusic()
+    {
+        musicSource.clip = musics[2];
+        musicSource.Play();
+    }
 
     public void UpdateSFXVolume(float volume)
     {
@@ -98,6 +114,10 @@ public class SoundManager : MonoBehaviour, IDataPersistence
             case 12:
                 //water
                 audioSource.PlayOneShot(sounds[12], 1f);
+                break;
+            case 13:
+                //treasure chest
+                audioSource.PlayOneShot(sounds[13], 1f);
                 break;
             default:
                 Debug.LogError("No sound sound");

@@ -50,9 +50,11 @@ public class MainMenu : MonoBehaviour, IDataPersistence
         else
         {
             tempPlayerName = nameInputField.text;
+
             Debug.Log(Player.playerName);
         }
 
+        PlayerPrefs.SetString("name", tempPlayerName);
     }
     public void StartGame()
     {
@@ -65,7 +67,9 @@ public class MainMenu : MonoBehaviour, IDataPersistence
 
         DataPersistenceManager.instance.SaveGame();
         //load the scene with the load game from DatapersistenceManager.
-        SceneManager.LoadSceneAsync("StoryMode");
+
+        SceneManager.LoadSceneAsync("CharacterSelect");
+        //SceneManager.LoadSceneAsync("StoryMode");
         //SceneManager.LoadSceneAsync("ForestStart");
         //SceneManager.LoadSceneAsync("GALA Demo");
     }
@@ -95,19 +99,25 @@ public class MainMenu : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        if(data.playerName != "")
+        //if(data.playerName != "")
+        //{
+        //    Debug.Log("true");
+        //    playernameObject.SetActive(true);
+        //    playerNameUI.text = data.playerName;
+        //}
+
+        if (PlayerPrefs.GetString("name") != "")
         {
-            Debug.Log("true");
             playernameObject.SetActive(true);
-            playerNameUI.text = data.playerName;
+            playerNameUI.text = PlayerPrefs.GetString("name");
         }
     }
 
     public void SaveData(GameData data)
     {
-        if(tempPlayerName != "")
-        {
-            data.playerName = tempPlayerName;
-        }
+        //if(tempPlayerName != "")
+        //{
+        //    data.playerName = tempPlayerName;
+        //}
     }
 }

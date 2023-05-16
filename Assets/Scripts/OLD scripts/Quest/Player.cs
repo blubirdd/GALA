@@ -18,6 +18,8 @@ public class Player : MonoBehaviour, IDataPersistence
         }
 
         instance = this;
+
+       playerName = PlayerPrefs.GetString("name");
     }
     #endregion
     public static string playerName;
@@ -27,6 +29,7 @@ public class Player : MonoBehaviour, IDataPersistence
     public int riverQuizScore;
     public int swampQuizScore;
     public int rainForestQuizScore;
+    public int galaQuizScore;
 
     [Header("Game Scores")]
     public int eggGameScore;
@@ -43,9 +46,11 @@ public class Player : MonoBehaviour, IDataPersistence
     public Transform swampVillageRespawnPoint;
     public Transform hunterVillageRespawnPoint;
     public Transform swampLakeRespawnPoint;
+
     private void Start()
     {
         Hunter.OnHunterHasSpottedPlayer += ShowPlayerCaughtUI;
+        Debug.Log("Player name is " + playerName);
     }
     public void EnablePlayerDiedUI()
     {
@@ -101,18 +106,30 @@ public class Player : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        playerName = data.playerName;
+        //playerName = data.playerName;
 
         eggGameScore = data.eggGameScore;
         moleGameScore = data.moleGameScore;
+
+        villageQuizScore = data.villageQuizScore;
+        grasslandQuizScore = data.grasslandQuizScore;
+        riverQuizScore = data.riverQuizScore;
+        swampQuizScore = data.swampQuizScore;
+        rainForestQuizScore = data.rainForestQuizScore;
 
     }
 
     public void SaveData(GameData data)
     {
-        data.playerName = playerName;
+        //data.playerName = playerName;
 
         data.eggGameScore = eggGameScore;
         data.moleGameScore = moleGameScore;
+
+        data.villageQuizScore = villageQuizScore;
+        data.grasslandQuizScore = grasslandQuizScore;
+        data.riverQuizScore = riverQuizScore;
+        data.swampQuizScore = swampQuizScore;
+        data.rainForestQuizScore = rainForestQuizScore;
     }
 }

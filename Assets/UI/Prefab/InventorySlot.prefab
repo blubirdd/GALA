@@ -63,7 +63,7 @@ MonoBehaviour:
   inventoryUI: {fileID: 0}
   itemNamePanel: {fileID: 8330546243556940440}
   itemNameText: {fileID: 7233259757487846862}
-  displayItemCount: 0
+  displayItemCount: 1
 --- !u!1 &1112416655815308237
 GameObject:
   m_ObjectHideFlags: 0

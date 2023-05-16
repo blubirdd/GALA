@@ -111,6 +111,36 @@ public class QuizManager : MonoBehaviour
             if (character != null)
             {
                 TalkEvents.CharacterApproach(character);
+
+                if(character.name == "Village Quiz")
+                {
+                    Player.instance.villageQuizScore = score;
+                    BookOthers.instance.UpdateVillageQuizScore();
+                }
+
+                if (character.name == "Grassland Quiz")
+                {
+                    Player.instance.grasslandQuizScore = score;
+                    BookOthers.instance.UpdateGrasslandQuizScore();
+                }
+
+                if (character.name == "River Quiz")
+                {
+                    Player.instance.riverQuizScore = score;
+                    BookOthers.instance.UpdateRiverlandQuizScore();
+                }
+
+                if (character.name == "Swamp Quiz")
+                {
+                    Player.instance.swampQuizScore = score;
+                    BookOthers.instance.UpdatSwampQuizScore();
+                }
+
+                if (character.name == "Gala Quiz")
+                {
+                    Player.instance.galaQuizScore = score;
+                    BookOthers.instance.UpdateGalaQuizScore();
+                }
             }
         }
     }
