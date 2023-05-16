@@ -23,6 +23,10 @@ TagManager:
   - Water Trigger
   - Meat
   - DropArea
+  - ground
+  - nextLine
+  - finishLine
+  - spike
   layers:
   - Default
   - TransparentFX
