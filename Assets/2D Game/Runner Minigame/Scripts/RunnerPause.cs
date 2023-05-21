@@ -22,8 +22,6 @@ public class RunnerPause : MonoBehaviour
     #endregion
 
 
-    public GameObject hitPrefab;
-
     public void PauseGame()
     {
         Time.timeScale = 0;
