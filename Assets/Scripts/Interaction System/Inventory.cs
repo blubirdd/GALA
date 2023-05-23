@@ -50,6 +50,9 @@ public class Inventory : MonoBehaviour, IDataPersistence
     public int goldCoins;
     public int naturePoints;
 
+    public Item coins;
+    public Item seeds;
+
     [Header("New Discovery")]
     public ItemDiscovery itemDiscovery;
     [Header("Newspaper Discovery")]
@@ -75,6 +78,11 @@ public class Inventory : MonoBehaviour, IDataPersistence
             {
                 item.SetActive(false);
             }
+        }
+
+        if(Player.instance.chickenGameScore > 0)
+        {
+            Add(seeds, Player.instance.chickenGameScore, false);
         }
     }
 
@@ -184,6 +192,25 @@ public class Inventory : MonoBehaviour, IDataPersistence
         }
 
     }
+
+    public void RemovePoints(int points)
+    {
+        if(naturePoints > 0)
+        naturePoints = +points;
+    }
+
+    public void AddCoins(int coins)
+    {
+        goldCoins += coins;
+    }
+
+    public void RemoveCoins(int coins)
+    {
+        if(goldCoins >0)
+        goldCoins -= coins;
+    }
+
+
     //public void Remove(Item item)
     //{
 
@@ -287,6 +314,7 @@ public class Inventory : MonoBehaviour, IDataPersistence
             Add(database.getItem[keyValuePair.Value.ID], keyValuePair.Value.amount, false);
         }
 
+        goldCoins = data.coins;
         this.naturePoints = data.naturePoints; 
 
     }
@@ -302,6 +330,7 @@ public class Inventory : MonoBehaviour, IDataPersistence
             data.itemsCollected.Add(container[i].ID, container[i]);
         }
 
+        data.coins = goldCoins;
         data.naturePoints = this.naturePoints;
 
     }
@@ -316,5 +345,7 @@ public class Inventory : MonoBehaviour, IDataPersistence
         {
             OnItemChangedCallback.Invoke();
         }
+
+        GamesUnlockManager.instance.UnlockAll();
     }
 }

@@ -34,7 +34,7 @@ public class Player : MonoBehaviour, IDataPersistence
     [Header("Game Scores")]
     public int eggGameScore;
     public int moleGameScore;
-
+    public int chickenGameScore;
 
     [Header("UI Canvases")]
     public GameObject playerDiedCanvas;
@@ -47,10 +47,27 @@ public class Player : MonoBehaviour, IDataPersistence
     public Transform hunterVillageRespawnPoint;
     public Transform swampLakeRespawnPoint;
 
+    public static bool isfromChickenGame;
+
     private void Start()
     {
         Hunter.OnHunterHasSpottedPlayer += ShowPlayerCaughtUI;
         Debug.Log("Player name is " + playerName);
+
+        if (isfromChickenGame)
+        {
+            ThirdPersonController.instance.gameObject.SetActive(false);
+            ThirdPersonController.instance.gameObject.transform.position = QuestController.instance.villageRespawnPoint.transform.position;
+            ThirdPersonController.instance.gameObject.SetActive(true);
+
+            PlayerLocationManager.currentLocation = "Village";
+            PlayerLocationManager.instance.SetCurrentLocationActive();
+
+            ThirdPersonController.canMove = true;
+
+            Task.instance.tasksCompeleted.Add("QuestPhotoChicken");
+            isfromChickenGame = false;
+        }
     }
     public void EnablePlayerDiedUI()
     {
@@ -126,6 +143,7 @@ public class Player : MonoBehaviour, IDataPersistence
         data.eggGameScore = eggGameScore;
         data.moleGameScore = moleGameScore;
 
+        data.chickenGameScore = 0;
         data.villageQuizScore = villageQuizScore;
         data.grasslandQuizScore = grasslandQuizScore;
         data.riverQuizScore = riverQuizScore;

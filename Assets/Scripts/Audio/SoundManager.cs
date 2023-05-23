@@ -53,6 +53,30 @@ public class SoundManager : MonoBehaviour, IDataPersistence
         musicSource.Play();
     }
 
+    public void PlayBeachMusic()
+    {
+        musicSource.clip = musics[3];
+        musicSource.Play();
+    }
+
+    public void PlayWetlandsMusic()
+    {
+        musicSource.clip = musics[6];
+        musicSource.Play();
+    }
+
+    public void PlayForestMusic()
+    {
+        musicSource.clip = musics[0];
+        musicSource.Play();
+    }
+
+    public void PlayLastLevelMusic()
+    {
+        musicSource.clip = musics[8];
+        musicSource.Play();
+    }
+
     public void UpdateSFXVolume(float volume)
     {
         if (SFXVolume != volume)

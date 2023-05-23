@@ -66,6 +66,7 @@ public class RiverEvents : MonoBehaviour
             swampBridgeWall.SetActive(false);
         }
 
+        SoundManager.instance.PlayBeachMusic();
     }
 
     public void RiverQuestAcceptCheck(string questName)

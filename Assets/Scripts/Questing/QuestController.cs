@@ -209,6 +209,8 @@ public class QuestController : MonoBehaviour
         TimeController.instance.SetTimeOfDay(20);
 
         ClearCompletedQuestDatabase();
+
+        SoundManager.instance.PlayLastLevelMusic();
     }
 
     public void AcceptQuestVillageChicken()

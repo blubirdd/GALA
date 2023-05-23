@@ -35,6 +35,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CharacterSelect.unity
     guid: 2d73238a1e123394392c209e181d83fe
+  - enabled: 1
+    path: Assets/2D Game/Runner Minigame/Scenes/Runner.unity
+    guid: 41cac223fa8d44947b90419eca164993
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: b70fd9029e039b44d8d9deb549fe18d7,
       type: 2}

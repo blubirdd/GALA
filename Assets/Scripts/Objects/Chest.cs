@@ -29,8 +29,13 @@ public class Chest : MonoBehaviour, IInteractable
         ParticleManager.instance.SpawnChestOpenParticle(transform.position);
         //SoundManager.instance.PlaySoundFromClips(13);
         //disable interaction
+        int numCoins = Random.Range(1, 11);
 
-        if(_activation != null)
+        Inventory.instance.AddCoins(numCoins);
+
+        Inventory.instance.coins.value = numCoins;
+        PopupWindow.instance.AddToQueue(Inventory.instance.coins);
+        if (_activation != null)
         {
             _activation._nameUICanvas.SetActive(false);
 

@@ -23,6 +23,8 @@ public class RainforestEvents : MonoBehaviour
     {
         GameEvents.instance.onQuestAcceptedForSave += RainforestQuestAcceptCheck;
         GameEvents.instance.onQuestCompleted += RainforestQuestCompleteCheck;
+
+        SoundManager.instance.PlayForestMusic();
     }
 
     

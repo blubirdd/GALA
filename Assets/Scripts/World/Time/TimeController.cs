@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.Rendering;
 
 public class TimeController : MonoBehaviour, IDataPersistence
 {
@@ -116,10 +117,26 @@ public class TimeController : MonoBehaviour, IDataPersistence
 
       if(hour >= 19)
       {
+            //turn to night
+            sunLight.gameObject.SetActive(false);
+
+            RenderSettings.skybox = nightSkyboxMaterial;
+
+            RenderSettings.ambientMode = AmbientMode.Flat; // Set the ambient mode to Flat
+            RenderSettings.ambientLight = nightAmbientLight; // Set the ambient light color to black or any other desired color
+
+            RenderSettings.fogColor = nightFogColor;
+            
             StartCoroutine(SetActiveForFewSeconds(sleepToNightCanvas));
       }
       if(hour <=10)
       {
+            //turn to day
+            sunLight.gameObject.SetActive(true);
+
+            RenderSettings.skybox = daySkyboxMaterial;
+            RenderSettings.ambientMode = AmbientMode.Skybox;
+            RenderSettings.fogColor = dayFogColor;
             StartCoroutine(SetActiveForFewSeconds(sleeptoDayCanvas));
       }
     }

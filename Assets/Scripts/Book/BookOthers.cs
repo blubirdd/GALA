@@ -36,27 +36,46 @@ public class BookOthers : MonoBehaviour
 
     public void UpdateVillageQuizScore()
     {
-        villageQuizScoreText.text = Player.instance.villageQuizScore.ToString();
+        if(Player.instance.villageQuizScore != 0)
+        {
+            villageQuizScoreText.text = "Village Quiz: " + Player.instance.villageQuizScore.ToString() + "/5";
+        }
+       
     }
 
     public void UpdateGrasslandQuizScore()
     {
-        grasslandQuizScoreText.text = Player.instance.grasslandQuizScore.ToString();
+        if(Player.instance.grasslandQuizScore != 0)
+        {
+            grasslandQuizScoreText.text = "Grassland Quiz: " + Player.instance.grasslandQuizScore.ToString() + "/5";
+        }
     }
 
     public void UpdateRiverlandQuizScore()
     {
-        riverQuizScoreText.text = Player.instance.riverQuizScore.ToString();
+        if(Player.instance.riverQuizScore != 0)
+        {
+            riverQuizScoreText.text = "River Quiz: " + Player.instance.riverQuizScore.ToString() + "/5";
+        }
+      
     }
 
     public void UpdatSwampQuizScore()
     {
-        swampQuizScoreText.text = Player.instance.swampQuizScore.ToString();
+        if(Player.instance.swampQuizScore != 0)
+        {
+            swampQuizScoreText.text = "Wetlands Quiz: " + Player.instance.swampQuizScore.ToString() + "/5";
+        }
+
     }
 
     public void UpdateGalaQuizScore()
     {
-        galaQuizScoreText.text = Player.instance.galaQuizScore.ToString();
+        if(Player.instance.galaQuizScore != 0)
+        {
+            galaQuizScoreText.text = "Forest Quiz: " + Player.instance.galaQuizScore.ToString() + "/5";
+        }
+       
     }
 
     private void OnEnable()

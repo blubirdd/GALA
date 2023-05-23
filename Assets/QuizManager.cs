@@ -101,7 +101,14 @@ public class QuizManager : MonoBehaviour
 
         if (score <= requiredScore)
         {
-            finishButton.SetActive(false);
+            finishButton.SetActive(true);
+
+            int incorrectAnswers = requiredScore - score;
+            int coinsToDeduct = incorrectAnswers;
+            int pointsToDeduct = incorrectAnswers;
+
+            Inventory.instance.RemoveCoins(coinsToDeduct);
+            Inventory.instance.RemovePoints((pointsToDeduct) * 5);
         }
 
         else
@@ -112,36 +119,48 @@ public class QuizManager : MonoBehaviour
             {
                 TalkEvents.CharacterApproach(character);
 
-                if(character.name == "Village Quiz")
+                if (character.npcName == "Village Quiz")
                 {
                     Player.instance.villageQuizScore = score;
                     BookOthers.instance.UpdateVillageQuizScore();
+
+                    GamesUnlockManager.instance.UnlockLevel2();
+                    Debug.Log("UpdaTed Village Score");
                 }
 
-                if (character.name == "Grassland Quiz")
+                if (character.npcName == "Grassland Quiz")
                 {
                     Player.instance.grasslandQuizScore = score;
                     BookOthers.instance.UpdateGrasslandQuizScore();
+                    GamesUnlockManager.instance.UnlockLevel3();
+                    GamesUnlockManager.instance.UnlockLevel4();
                 }
 
-                if (character.name == "River Quiz")
+                if (character.npcName == "River Quiz")
                 {
                     Player.instance.riverQuizScore = score;
                     BookOthers.instance.UpdateRiverlandQuizScore();
+
+                    GamesUnlockManager.instance.UnlockLevel5();
                 }
 
-                if (character.name == "Swamp Quiz")
+                if (character.npcName == "Swamp Quiz")
                 {
                     Player.instance.swampQuizScore = score;
                     BookOthers.instance.UpdatSwampQuizScore();
+
+                    GamesUnlockManager.instance.UnlockLevel6();
                 }
 
-                if (character.name == "Gala Quiz")
+                if (character.npcName == "Gala Quiz")
                 {
                     Player.instance.galaQuizScore = score;
                     BookOthers.instance.UpdateGalaQuizScore();
+
+                    
                 }
             }
+
         }
     }
 

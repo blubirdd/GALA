@@ -7,6 +7,20 @@ public class MiniGameSceneManager : MonoBehaviour
 {
     public void LoadSnakeMiniGame()
     {
-        SceneManager.LoadScene("Egg Game");
+        DataPersistenceManager.instance.SaveGame();
+        SceneManager.LoadSceneAsync("Egg Game");
+    }
+
+    public void LoadWhackMiniGame()
+    {
+        DataPersistenceManager.instance.SaveGame();
+        SceneManager.LoadSceneAsync("Mole Minigame");
+    }
+
+    public void LoadChickenMiniGame()
+    {
+        Player.isfromChickenGame = true;
+        DataPersistenceManager.instance.SaveGame();
+        SceneManager.LoadSceneAsync("Runner");
     }
 }

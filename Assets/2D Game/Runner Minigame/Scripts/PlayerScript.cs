@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
-public class PlayerScript : MonoBehaviour
+public class PlayerScript : MonoBehaviour, IDataPersistence
 {
     public float jumpForce;
     float score;
@@ -14,12 +15,21 @@ public class PlayerScript : MonoBehaviour
 
     public TextMeshProUGUI scoreTxt;
 
+    Animator animator;
+
+    public AudioSource music;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         score = 0;
+
+        animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        animator.SetFloat("AnimSpeed", 1f);
+    }
     void Update()
     {
         if (Input.touchCount > 0)
@@ -34,7 +44,7 @@ public class PlayerScript : MonoBehaviour
         }
         if (isAlive)
         {
-            score += Time.deltaTime * 4;
+            score += Time.deltaTime * 1;
             scoreTxt.text = "Score: " + score.ToString("F");
         }
     }
@@ -58,7 +68,23 @@ public class PlayerScript : MonoBehaviour
 
     void GameOver()
     {
+        music.Stop();
         isAlive = false;
         RunnerGameManager.instance.GameOver();
+    }
+
+    public void LoadData(GameData data)
+    {
+       
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.chickenGameScore = Mathf.RoundToInt(score);
+    }
+
+    public void GotoStory()
+    {
+        SceneManager.LoadSceneAsync("StoryMode");
     }
 }

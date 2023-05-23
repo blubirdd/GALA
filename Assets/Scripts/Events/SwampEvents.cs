@@ -151,6 +151,7 @@ public class SwampEvents : MonoBehaviour
             }
         }
 
+        SoundManager.instance.PlayWetlandsMusic();
     }
 
     private void OnEnable()

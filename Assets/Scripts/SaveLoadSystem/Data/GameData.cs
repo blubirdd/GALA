@@ -13,6 +13,10 @@ public class GameData
 
     public bool triggerStartDialogue;
     public Vector3 playerPosition;
+
+
+    //point system
+    public int coins;
     public int naturePoints;
 
     //play name
@@ -39,6 +43,7 @@ public class GameData
     //2D minigames
     public int eggGameScore;
     public int moleGameScore;
+    public int chickenGameScore;
 
     public bool hasBackpack;
 
@@ -68,6 +73,9 @@ public class GameData
         //start game
         triggerStartDialogue = true;
 
+
+        //pointing system
+        this.coins = 0;
         this.naturePoints = 0;
 
 
@@ -97,6 +105,7 @@ public class GameData
         //2D Minigame
         eggGameScore = 0;
         moleGameScore = 0;
+        chickenGameScore = 0;
         //gameLevel = 1;
 
         hasBackpack = false;

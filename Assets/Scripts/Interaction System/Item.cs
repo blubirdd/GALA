@@ -31,6 +31,8 @@ public class Item : ScriptableObject
     [TextArea(3, 10)]
     public string itemDescription;
 
+    public bool isCoin;
+    public int value;
   
     public virtual void Use()
     {

@@ -25,3 +25,5 @@ MonoBehaviour:
   isCustomQuestItem: 0
   isCustomPopup: 1
   itemDescription: Picked up coins
+  isCoin: 1
+  value: 6

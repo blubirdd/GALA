@@ -76,7 +76,15 @@ public class PopupWindow : MonoBehaviour
 
             else if (item.isCustomPopup)
             {
-                popupText.text = item.itemDescription;
+                if (item.isCoin)
+                {
+                    popupText.text = item.itemDescription + ": " + "<color=#F7DC6F> " + item.value +"</color>";
+                }
+                else
+                {
+                    popupText.text = item.itemDescription;
+
+                }
             }
         }
 
