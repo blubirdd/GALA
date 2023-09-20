@@ -13,12 +13,17 @@ public class Chest : MonoBehaviour, IInteractable
     private Animator animator;
     private NameTagActivation _activation;
 
+
+    
+
     void Start()
     {
         _activation = GetComponent<NameTagActivation>();
         animator = GetComponent<Animator>();
         InteractionPrompt = _prompt;
         icon = _icon;
+
+       
     }
     public bool Interact(Interactor interactor)
     {
@@ -37,8 +42,9 @@ public class Chest : MonoBehaviour, IInteractable
         PopupWindow.instance.AddToQueue(Inventory.instance.coins);
         if (_activation != null)
         {
-            _activation._nameUICanvas.SetActive(false);
-
+            //_activation._nameUICanvas.SetActive(false);
+            Destroy(_activation._nameUICanvas);
+            Debug.Log("deactivate nameui");
         }
 
         gameObject.layer = default;

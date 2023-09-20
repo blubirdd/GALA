@@ -20,7 +20,7 @@ public class QuestCleanBeachTrash : QuestNew
         questDescription = "Collect and get rid of \ntrash on the beach";
 
         goalDescription[0] = "Collect and get rid of \ntrash on the beach";
-        requiredAmount[0] = 5;
+        requiredAmount[0] = 9;
 
 
 

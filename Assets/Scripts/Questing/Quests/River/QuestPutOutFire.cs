@@ -25,7 +25,7 @@ public class QuestPutOutFire : QuestNew
         questDescription = "Grab a water from the river and \n put out the fire";
 
         goalDescription[0] = "Put out the fire using the bucket";
-        requiredAmount[0] = 3;
+        requiredAmount[0] = 7;
 
         reward = 10;
 

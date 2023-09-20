@@ -138,20 +138,25 @@ public class Hunter : MonoBehaviour
         
     }
 
+    public bool drawLine;
     void OnDrawGizmos()
     {
-        Vector3 startPosition = pathHolder.GetChild(0).position;
-        Vector3 previousPosition = startPosition;
-
-        foreach (Transform waypoint in pathHolder)
+        if (drawLine)
         {
-            Gizmos.DrawSphere(waypoint.position, .3f);
-            Gizmos.DrawLine(previousPosition, waypoint.position);
-            previousPosition = waypoint.position;
-        }
-        Gizmos.DrawLine(previousPosition, startPosition);
+            Vector3 startPosition = pathHolder.GetChild(0).position;
+            Vector3 previousPosition = startPosition;
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, transform.forward * viewDistance);
+            foreach (Transform waypoint in pathHolder)
+            {
+                Gizmos.DrawSphere(waypoint.position, .3f);
+                Gizmos.DrawLine(previousPosition, waypoint.position);
+                previousPosition = waypoint.position;
+            }
+            Gizmos.DrawLine(previousPosition, startPosition);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(transform.position, transform.forward * viewDistance);
+        }
+
     }
 }

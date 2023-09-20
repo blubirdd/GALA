@@ -25,7 +25,7 @@ public class QuestCollectContaminatedBarrel : QuestNew
         requiredAmount[0] = 1;
 
         goalDescription[1] = "Get rid of the source of water pollution";
-        requiredAmount[1] = 3;
+        requiredAmount[1] = 8;
 
         reward = 10;
 

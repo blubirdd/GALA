@@ -13,6 +13,7 @@ public class NameTagActivation : MonoBehaviour
 
     void Start()
     {
+        if(_nameUICanvas != null)
         _nameUICanvas.SetActive(false);
     }
 
@@ -20,9 +21,13 @@ public class NameTagActivation : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            _nameUICanvas.SetActive(true);
-            _nameUICanvas.transform.localScale = Vector3.zero;
-            _nameUICanvas.transform.DOScale(Vector3.one, scaleDuration).SetEase(Ease.OutBack);
+            if(_nameUICanvas != null)
+            {
+                _nameUICanvas.SetActive(true);
+                _nameUICanvas.transform.localScale = Vector3.zero;
+                _nameUICanvas.transform.DOScale(Vector3.one, scaleDuration).SetEase(Ease.OutBack);
+            }
+
         }
     }
 
@@ -30,10 +35,14 @@ public class NameTagActivation : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            _nameUICanvas.transform.DOScale(Vector3.zero, scaleDuration).SetEase(Ease.InBack).OnComplete(() => {
-                // set to false
-                _nameUICanvas.SetActive(false);
-            });
+            if (_nameUICanvas != null)
+            {
+                _nameUICanvas.transform.DOScale(Vector3.zero, scaleDuration).SetEase(Ease.InBack).OnComplete(() => {
+                    // set to false
+                    _nameUICanvas.SetActive(false);
+                });
+            }
+
            
         }
     }

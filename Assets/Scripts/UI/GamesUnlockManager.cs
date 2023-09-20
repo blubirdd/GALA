@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GamesUnlockManager : MonoBehaviour
 {
@@ -44,6 +45,13 @@ public class GamesUnlockManager : MonoBehaviour
     [Header("Level 6 Button")]
     public GameObject level6Lock;
     public GameObject level6Icon;
+
+    public Button level1;
+    public Button level2;
+    public Button level3;
+    public Button level4;
+    public Button level5;
+    public Button level6;
 
     // Start is called before the first frame update
     void Start()
@@ -93,35 +101,47 @@ public class GamesUnlockManager : MonoBehaviour
     {
         level1Icon.SetActive(true);
         level1Lock.SetActive(false);
+
+        level1.interactable = true;
     }
 
     public void UnlockLevel2()
     {
         level2Icon.SetActive(true);
         level2Lock.SetActive(false);
+
+        level2.interactable = true;
     }
 
     public void UnlockLevel3()
     {
         level3Icon.SetActive(true);
         level3Lock.SetActive(false);
+
+        level3.interactable = true;
     }
 
     public void UnlockLevel4()
     {
         level4Icon.SetActive(true);
         level5Lock.SetActive(false);
+
+        level4.interactable = true;
     }
 
     public void UnlockLevel5()
     {
         level5Icon.SetActive(true);
         level5Lock.SetActive(false);
+
+        level5.interactable = true;
     }
     public void UnlockLevel6()
     {
         level6Icon.SetActive(true);
         level6Lock.SetActive(false);
+
+        level6.interactable = true;
     }
 
     // Update is called once per frame

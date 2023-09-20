@@ -59,18 +59,24 @@ public class BirdMovement : MonoBehaviour
         }
     }
 
+    public bool drawLine = false;
+
     void OnDrawGizmos()
     {
-        Vector3 startPosition = locations[0].position;
-        Vector3 previousPosition = startPosition;
-
-        foreach (Transform waypoint in locations)
+        if (drawLine)
         {
-            Gizmos.DrawSphere(waypoint.position, .3f);
-            Gizmos.DrawLine(previousPosition, waypoint.position);
-            previousPosition = waypoint.position;
+            Vector3 startPosition = locations[0].position;
+            Vector3 previousPosition = startPosition;
+
+            foreach (Transform waypoint in locations)
+            {
+                Gizmos.DrawSphere(waypoint.position, .3f);
+                Gizmos.DrawLine(previousPosition, waypoint.position);
+                previousPosition = waypoint.position;
+            }
+            Gizmos.DrawLine(previousPosition, startPosition);
         }
-        Gizmos.DrawLine(previousPosition, startPosition);
+
     }
 
 }
