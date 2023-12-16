@@ -1,9 +1,11 @@
-# GALA
-A Philippine Wildlife Adventure
+# GALA: A Philippine Wildlife Adventure
+
 
 GALA is an immersive role-playing game that invites players to step into the shoes of a young adventurer on the fictional island of GALA. This island is a sanctuary where all of the Philippines' native animals converge in harmonious coexistence. As the young protagonist, players embark on a quest to explore the island.
 
+Learn more about the game on this [website](https://gala-game.vercel.app/) <br /> <br />
 You can download and get a copy of the game by clicking this [link](https://drive.google.com/file/d/19mnxsKh4OX0bZ3mc7wk50hOsEG-h1sco/view?usp=sharing).
+
 
 ## Screenshots
 <div>
